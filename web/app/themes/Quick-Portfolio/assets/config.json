@@ -13,7 +13,7 @@
     "src/**/*.php"
   ],
   "publicPath": "/app/themes/Quick-Portfolio",
-  "devUrl": "https://olivier.dev",
+  "devUrl": "http://olivier.dev",
   "proxyUrl": "https://localhost:3000",
   "cacheBusting": "[name]_[hash:8]"
 }

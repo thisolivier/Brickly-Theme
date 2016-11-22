@@ -35,7 +35,7 @@ if (config.enabled.watcher) {
 const webpackConfig = {
   context: config.paths.assets,
   entry: config.entry,
-  devtool: (config.enabled.sourceMaps ? '#source-map' : undefined),
+  devtool: (config.enabled.sourceMaps ? '#eval' : undefined),
   output: {
     path: config.paths.dist,
     publicPath: config.publicPath,
@@ -162,7 +162,22 @@ const webpackConfig = {
     new webpack.LoaderOptionsPlugin({
       minimize: config.enabled.minify,
       debug: config.enabled.watcher,
-      stats: { colors: true },
+      stats: {
+        colors: true,
+        hash: false,
+        version: false,
+        timings: false,
+        assets: false,
+        chunks: false,
+        modules: false,
+        reasons: false,
+        children: false,
+        source: false,
+        errors: false,
+        errorDetails: false,
+        warnings: false,
+        publicPath: false
+      },
       postcss: [
         autoprefixer({
           browsers: [

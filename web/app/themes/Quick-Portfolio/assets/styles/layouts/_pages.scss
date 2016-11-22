@@ -1,0 +1,24 @@
+.home {
+
+  .main{
+    display:flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    align-content: flex-end;
+    margin:0;
+    padding:0;
+    *{
+      flex-basis: auto;
+    }
+  }
+
+  article {
+    display: inline-block;
+    column-span: 1;
+    width: 64.5%;
+    &:nth-child(odd){
+
+    }
+  }
+
+}

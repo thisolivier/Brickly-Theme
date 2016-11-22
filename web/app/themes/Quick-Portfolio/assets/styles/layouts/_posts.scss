@@ -1,0 +1,5 @@
+.entry-content{
+  p:not(:first-child){
+    display:none;
+  }
+}
