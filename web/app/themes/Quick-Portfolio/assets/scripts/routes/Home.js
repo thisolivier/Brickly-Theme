@@ -1,21 +1,23 @@
 export default {
   init() {
-    function logger(printMe) {
-      const i = this.index.log;
-      this.index.log += 1;
-      let nowTime = new Date();
-      nowTime = `${nowTime.getMinutes()}.${nowTime.getSeconds()}`;
-      const prefix = `## Captain's log, stardate ${i}:${nowTime} ->`;
-      if (printMe) {
-        console.log(`${prefix} ${printMe} ##`);
-      } else {
-        console.log(`${prefix} Space is vast and empty (-__-) ##`);
+    class Logger {
+      static log(printMe) {
+        this.log = !this.log ? 1 : this.log += 1;
+        let nowTime = new Date();
+        nowTime = `${nowTime.getMinutes()}.${nowTime.getSeconds()}`;
+        const prefix = `## Captain's log, stardate ${this.log}:${nowTime} ->`;
+        if (printMe) {
+          console.log(`${prefix} ${printMe} ##`);
+        } else {
+          console.log(`${prefix} Space is vast and empty (-__-) ##`);
+        }
       }
     }
 
+
     class ChimneyStack {
       constructor() {
-        this.index = { log: 0, brick: 1 };
+        this.index = { brick: 1 };
         this.append = [];
         this.pattern = { open: ['b', 's'], repeat: ['s', 'b'] };
         this.brickSizes = { b: 'big_brick', s: 'small_brick' };
@@ -39,20 +41,23 @@ export default {
           virgin: this.index.brick,
           full: () => {
             const newbie = this.$articles.eq(0);
-            this.$articles = this.$articles.splice(0, 1);
             this.index.brick = 0;
-            return newbie;
+            if (newbie.length === 1) {
+              this.$articles = this.$articles.splice(0, 1);
+              return newbie;
+            }
+            return kiln.hollow();
           },
           hollow: () => this.elementCreator(element),
         };
-        return (((element === 'b') && (Math.random() > 0.3)) || !kiln.virgin ?
+        return (((element === 'b') && (Math.random() > 0.3)) || kiln.virgin ?
           kiln.full() : kiln.hollow()
         );
       }
     }
 
     const chim = new ChimneyStack();
-    logger.call(chim, chim.usePattern('open'));
+    Logger.log(chim.usePattern('open'));
 
     /* THE PLAN
 
