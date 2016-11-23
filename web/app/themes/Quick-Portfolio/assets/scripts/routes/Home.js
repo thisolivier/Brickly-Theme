@@ -7,14 +7,18 @@ export default {
         this.index = !this.index ? 1 : this.index += 1;
         // const pad = number => (number <= 99 ? (`000${number}`).slice(-2) : number);
         const indexAPI = this.index;
-        let nowTime = new Date();
-        nowTime = `${nowTime.getMilliseconds()}`;
-        const prefix = `# Captain's log, stardate ${indexAPI}.${nowTime} ->`;
-        if (printMe) {
-          console.log(`${prefix} \n## ${printMe}`);
+        const nowTime = new Date();
+        const prefix = `# Captain's log, stardate ${indexAPI}.${nowTime.getMilliseconds()} ->`;
+        if (printMe === 'begin') {
+          Logger.print(prefix, 'Our destination is the great, unexplored mass of the galaxy.');
+        } else if (printMe) {
+          Logger.print(prefix, printMe);
         } else {
-          console.log(`${prefix} \n## Space is vast and empty (-__-)`);
+          Logger.print(prefix, 'Space is vast and empty (-__-)');
         }
+      }
+      static print(prefix, printMe) {
+        console.log(`${prefix} \n## ${printMe}`);
       }
     }
 
@@ -25,6 +29,7 @@ export default {
         this.pattern = { open: ['b', 's'], repeat: ['s', 'b'] };
         this.brickClass = { b: 'big_brick', s: 'small_brick' };
         this.$articles = $('main').children('article').detach();
+        Logger.log('begin');
       }
 
       conductor() {
@@ -49,7 +54,7 @@ export default {
 
       divHollow(template) {
         const newbie = document.createElement('div');
-        newbie.addClass(this.brickClass[template]);
+        $(newbie).addClass(this.brickClass[template]);
         newbie.setAttribute('aria-hidden', 'true');
         return newbie;
       }
@@ -79,17 +84,6 @@ export default {
 
     const chim = new ChimneyStack();
     Logger.log(chim.conductor());
-
-    /* THE PLAN
-    YES      create template empty elements, big (Be) and small (Ba)
-    YES      find articles, store number
-    YES      enable debugging and test articles have been found
-    NA      pattern now = BaBaBaBaBa...n(articles)
-    YES      Create pattern ref = SeBa,BoSe,SeBo,BoSe
-    YES      Create new object, Store BeSe then begin adding elements according to the pattern,
-    YES      If element is Bo, .33 probability of becoming Ba,
-    YES      If element is Ba, use next article instead of template element
-    */
   },
   finalize() {
     // JavaScript to be fired on the home page, after the init JS
