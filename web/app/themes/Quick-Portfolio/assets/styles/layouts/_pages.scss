@@ -1,23 +1,37 @@
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
 .home {
-
-  .main{
+  main{
+    $percent: 40;
+    position:relative;
     display:flex;
+    height: 100vw;
+    flex: 0 0 relate($percent, 100);
     flex-flow: row wrap;
-    align-items: flex-end;
+    justify-content: space-between;
     align-content: flex-end;
-    margin:0;
-    padding:0;
-    *{
-      flex-basis: auto;
+
+    .brick{
+      position:relative;
+      height: relate($percent, 20.7);
+      overflow: hidden;
+      margin-top: relate($percent, 4.6);
+      background-color: black;
+      color: white;
+      border-radius: 0.5em;
     }
-  }
 
-  article {
-    display: inline-block;
-    column-span: 1;
-    width: 64.5%;
-    &:nth-child(odd){
+    .big_brick{
+      width: 65.5%;
+      @extend .brick;
+    }
 
+    .small_brick{
+      width: 30.9%;
+      @extend .brick;
     }
   }
 

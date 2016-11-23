@@ -13,7 +13,7 @@ export default {
         const nowTime = new Date();
         const prefix = `## Captain's log, stardate ${indexAPI}.${nowTime.getMilliseconds()} ->`;
         if (printMe === 'begin') {
-          Logger.print(prefix, 'Our destination is the great, unexplored mass of the galaxy.');
+          Logger.print(prefix, 'Our destination is the great, unexplored mass of the galaxy (o__o)');
         } else if (printMe) {
           Logger.print(prefix, printMe);
         } else {
@@ -31,7 +31,7 @@ export default {
       constructor() {
         this.index = { brick: 1, articles: 1 };
         this.append = [];
-        this.pattern = { open: ['b', 's'], repeat: ['s', 'b'] };
+        this.pattern = { open: ['b', 's'], repeat: ['s', 'b', 'b', 's'] };
         this.brickClass = { b: 'big_brick', s: 'small_brick' };
         // Finds my articles, stores them and removes them from the DOM
         this.$articles = $('main').children('article').detach();
@@ -63,7 +63,7 @@ export default {
       // Creates an empty div (brick) with class approprite to the pattern
       divHollow(template) {
         const newbie = document.createElement('div');
-        $(newbie).addClass(this.brickClass[template]);
+        $(newbie).html('&nbsp').addClass(this.brickClass[template]);
         newbie.setAttribute('aria-hidden', 'true');
         return newbie;
       }
