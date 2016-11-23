@@ -8,7 +8,7 @@ export default {
         // const pad = number => (number <= 99 ? (`000${number}`).slice(-2) : number);
         const indexAPI = this.index;
         const nowTime = new Date();
-        const prefix = `# Captain's log, stardate ${indexAPI}.${nowTime.getMilliseconds()} ->`;
+        const prefix = `## Captain's log, stardate ${indexAPI}.${nowTime.getMilliseconds()} ->`;
         if (printMe === 'begin') {
           Logger.print(prefix, 'Our destination is the great, unexplored mass of the galaxy.');
         } else if (printMe) {
@@ -18,7 +18,7 @@ export default {
         }
       }
       static print(prefix, printMe) {
-        console.log(`${prefix} \n## ${printMe}`);
+        console.log(`${prefix} ${printMe}`);
       }
     }
 
