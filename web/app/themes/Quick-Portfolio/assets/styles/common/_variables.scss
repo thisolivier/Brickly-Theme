@@ -8,3 +8,10 @@ $brand-primary:         #27ae60;
 
 // Font Awesome | see: http://fontawesome.io/get-started/
 $fa-font-path:          '~font-awesome/fonts';
+
+// Chimney Variables
+$chim-percent: 40;
+$brick-big: 65;
+$brick-small: 31;
+$brick-gap: 100 - ($brick-big + $brick-small);
+$brick-height: 0.35 * $brick-big;

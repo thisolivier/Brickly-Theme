@@ -5,32 +5,30 @@ html, body{
 
 .home {
   main{
-    $percent: 40;
     position:relative;
     display:flex;
-    height: 100vw;
-    flex: 0 0 relate($percent, 100);
+    flex: 0 0 relate($chim-percent, 100);
     flex-flow: row wrap;
     justify-content: space-between;
     align-content: flex-end;
 
     .brick{
       position:relative;
-      height: relate($percent, 20.7);
+      height: relate($chim-percent, $brick-height);
       overflow: hidden;
-      margin-top: relate($percent, 4.6);
+      margin-top: relate($chim-percent, $brick-gap);
       background-color: black;
       color: white;
       border-radius: 0.5em;
     }
 
     .big_brick{
-      width: 65.5%;
+      width: $brick-big * 1%;
       @extend .brick;
     }
 
     .small_brick{
-      width: 30.9%;
+      width: $brick-small * 1%;
       @extend .brick;
     }
   }
