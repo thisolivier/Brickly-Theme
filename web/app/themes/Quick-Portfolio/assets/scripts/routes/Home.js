@@ -42,7 +42,7 @@ export default {
       conductor() {
         this.usePattern('open');
         let emergencyStop = 0;
-        while (this.append.length < 13) {
+        while (this.index.articles || this.append.length < 13) {
           this.usePattern('repeat');
           if (emergencyStop > 15) { Logger.log('Emergency stop'); break; }
           emergencyStop += 1;
