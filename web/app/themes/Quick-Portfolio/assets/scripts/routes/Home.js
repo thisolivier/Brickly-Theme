@@ -53,7 +53,6 @@ export default {
 
       // Is passed a section of the pattern, and works though its items
       usePattern(key) {
-        Logger.log(`We are on the ${key} set`);
         for (const current of this.pattern[key]) {
           const newbie = (key === 'open') || (!this.index.articles) ?
             this.divHollow(current) : this.divBespoke(current);
