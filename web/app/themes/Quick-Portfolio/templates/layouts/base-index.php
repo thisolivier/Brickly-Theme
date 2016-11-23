@@ -22,6 +22,10 @@
           </aside>
         <?php endif; ?>
       </div>
+      <div class="background container" aria-hidden="true">
+        <img src="<?= get_template_directory(); ?>/dist/images/sky-holding.gif" class="sky">
+        <img src="city-holding.gif" class="land">
+      </div>
     </div>
     <?php
       do_action('get_footer');

@@ -4,11 +4,16 @@ html, body{
 }
 
 .home {
+  .content.row{
+    padding-left: 50%
+  }
+
   main{
-    position:relative;
-    display:flex;
+    position: relative;
+    display: flex;
     flex: 0 0 relate($chim-percent, 100);
     flex-flow: row wrap;
+    padding-top: 10vw;
     justify-content: space-between;
     align-content: flex-end;
 
