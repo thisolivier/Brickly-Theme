@@ -74,9 +74,9 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
+    "animejs": "^1.1.1",
     "bootstrap": "github:twbs/bootstrap#v4-dev",
     "font-awesome": "^4.6.3",
-    "jquery": "1.12.4 - 3",
-    "anime.js": "github:juliangarnier/anime",
+    "jquery": "1.12.4 - 3"
   }
 }

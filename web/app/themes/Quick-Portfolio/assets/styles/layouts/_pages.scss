@@ -26,17 +26,15 @@ html, body{
         background-color: black;
         color: white;
         border-radius: 0.5em;
-        opacity:0;
+        // opacity:0;
       }
 
       .big_brick {
         width: $brick-big * 1%;
-        @extend .brick;
       }
 
       .small_brick{
         width: $brick-small * 1%;
-        @extend .brick;
       }
     } // main
   } // .content.row

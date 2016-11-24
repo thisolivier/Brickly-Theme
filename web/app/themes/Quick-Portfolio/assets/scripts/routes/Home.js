@@ -1,31 +1,9 @@
 // jshint max-len:0
+import anime from 'animejs';
+import Logger from '../util/logger';
 
 export default {
   init() {
-    class Logger {
-      // Just a logging script which makes things readable,
-      // tracks the number of entries its making,
-      // and the time my script is taking to run.
-      static log(printMe) {
-        this.index = !this.index ? 1 : this.index += 1;
-        // const pad = number => (number <= 99 ? (`000${number}`).slice(-2) : number);
-        const indexAPI = this.index;
-        const nowTime = new Date();
-        const prefix = `## Captain's log, stardate ${indexAPI}.${nowTime.getMilliseconds()} ->`;
-        if (printMe === 'begin') {
-          Logger.print(prefix, 'Our destination is the great, unexplored mass of the galaxy (o__o)');
-        } else if (printMe) {
-          Logger.print(prefix, printMe);
-        } else {
-          Logger.print(prefix, 'Space is vast and empty (-__-)');
-        }
-      }
-      // This is iscolated incase I later change the formatting, or use a logging plugin
-      static print(prefix, printMe) {
-        console.log(`${prefix} ${printMe}`);
-      }
-    }
-
     class ChimneyStack {
       // The script which modified the posts so they can be laid out like a brick wall
       constructor() {
@@ -35,10 +13,9 @@ export default {
           open: ['b', 's'],
           repeat: ['s', 'b', 'b', 's'],
         };
-        this.brickClass = { 
-          b: 'big_brick', 
-          s: 'small_brick', 
-          all: 'brick',
+        this.brickClass = {
+          b: 'big_brick brick',
+          s: 'small_brick brick',
         };
         // Finds my articles, stores them and removes them from the DOM
         this.$articles = $('main').children('article').detach();
@@ -106,23 +83,25 @@ export default {
     Logger.log(chim.conductor());
   },
   finalize() {
-    anime({
-      targets: 'brick',
-      delay: function(el, index){
-      	return (Math.random() + 0.8) * index * 100;
-      },
+    /* eslint-disable object-shorthand, no-unused-vars */
+    Logger.log(toString(anime.easings));
+    const animateBrick = anime({
+      targets: '.brick',
+      delay: function (el, index) { return ((Math.random() + 0.8) * index * -200) + 2000; },
       direction: 'reverse',
-      translateY: '100vw',
-      rotate: function(el, index){
-       return anime.random(5, 500);
+      translateY: {
+        value: '-100vw',
+        duration: 1200,
+        easing: 'easeInExpo',
       },
-      
-      begin: function(){
-      	// Make bricks opaque
+      rotate: {
+        value: function () { return anime.random(5, 180); },
+        duration: 1000,
       },
-      complete: function(){
-      	// Render site title
+      complete: function () {
+        Logger.log('We finished the animation');
       },
     });
+    /* eslint-enable object-shorthand, no-unused-vars */
   },
 };
