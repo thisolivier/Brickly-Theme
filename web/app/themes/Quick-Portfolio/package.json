@@ -77,7 +77,6 @@
     "bootstrap": "github:twbs/bootstrap#v4-dev",
     "font-awesome": "^4.6.3",
     "jquery": "1.12.4 - 3",
-    "jquery-bridget": "^2.0.1",
-    "masonry-layout": "^4.1.1"
+    "anime.js": "github:juliangarnier/anime",
   }
 }
