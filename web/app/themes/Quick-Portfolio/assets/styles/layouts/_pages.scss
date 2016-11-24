@@ -1,41 +1,60 @@
 html, body{
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 .home {
   .content.row{
-    padding-left: 50%
-  }
+    padding-left: 50%;
 
-  main{
-    position: relative;
-    display: flex;
-    flex: 0 0 relate($chim-percent, 100);
-    flex-flow: row wrap;
-    padding-top: 10vw;
-    justify-content: space-between;
-    align-content: flex-end;
+    main {
+      position: relative;
+      display: flex;
+      z-index: 100;
+      flex: 0 0 relate($chim-percent, 100);
+      flex-flow: row wrap;
+      padding-top: 10vw;
+      justify-content: space-between;
+      align-content: flex-end;
 
-    .brick{
-      position:relative;
-      height: relate($chim-percent, $brick-height);
-      overflow: hidden;
-      margin-top: relate($chim-percent, $brick-gap);
-      background-color: black;
-      color: white;
-      border-radius: 0.5em;
+      .brick {
+        position:relative;
+        height: relate($chim-percent, $brick-height);
+        overflow: hidden;
+        margin-top: relate($chim-percent, $brick-gap);
+        background-color: black;
+        color: white;
+        border-radius: 0.5em;
+      }
+
+      .big_brick {
+        width: $brick-big * 1%;
+        @extend .brick;
+      }
+
+      .small_brick{
+        width: $brick-small * 1%;
+        @extend .brick;
+      }
+    } // main
+  } // .content.row
+
+  .background.container {
+    position: fixed;
+    top:0;
+    left:0;
+    height: 100vw;
+    width: 100vw;
+    z-index: 10;
+    .sky{
+      height:60vw;
+      margin-bottom:-5vw;
     }
 
-    .big_brick{
-      width: $brick-big * 1%;
-      @extend .brick;
+    .land{
+      height:10vw;
     }
-
-    .small_brick{
-      width: $brick-small * 1%;
-      @extend .brick;
-    }
-  }
+  } // .background.container
 
 }
