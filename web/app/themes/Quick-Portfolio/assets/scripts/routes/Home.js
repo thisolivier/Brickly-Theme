@@ -31,8 +31,15 @@ export default {
       constructor() {
         this.index = { brick: 1, articles: 1 };
         this.append = [];
-        this.pattern = { open: ['b', 's'], repeat: ['s', 'b', 'b', 's'] };
-        this.brickClass = { b: 'big_brick', s: 'small_brick' };
+        this.pattern = {
+          open: ['b', 's'],
+          repeat: ['s', 'b', 'b', 's'],
+        };
+        this.brickClass = { 
+          b: 'big_brick', 
+          s: 'small_brick', 
+          all: 'brick',
+        };
         // Finds my articles, stores them and removes them from the DOM
         this.$articles = $('main').children('article').detach();
         Logger.log('begin');
@@ -99,6 +106,23 @@ export default {
     Logger.log(chim.conductor());
   },
   finalize() {
-    // JavaScript to be fired on the home page, after the init JS
+    anime({
+      targets: 'brick',
+      delay: function(el, index){
+      	return (Math.random() + 0.8) * index * 100;
+      },
+      direction: 'reverse',
+      translateY: '100vw',
+      rotate: function(el, index){
+       return anime.random(5, 500);
+      },
+      
+      begin: function(){
+      	// Make bricks opaque
+      },
+      complete: function(){
+      	// Render site title
+      },
+    });
   },
 };
