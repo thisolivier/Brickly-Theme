@@ -86,6 +86,9 @@ export default {
     Logger.log('Final scripts running');
 
     class BrickAnimation {
+      // The methods in here seem to be working,
+      // except the animations are not being applied to the elements
+      // I'm trying to call the animate function on the window
       constructor() {
         this.elements = [];
       }
@@ -130,6 +133,6 @@ export default {
       }
     } /* BrickAnimation */
     const myAnimation = new BrickAnimation();
-    myAnimation.animate();
+    myAnimation.animate.call(window);
   },
 };
