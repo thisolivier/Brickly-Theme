@@ -83,25 +83,53 @@ export default {
     Logger.log(chim.conductor());
   },
   finalize() {
-    /* eslint-disable object-shorthand, no-unused-vars */
-    Logger.log(toString(anime.easings));
-    const animateBrick = anime({
-      targets: '.brick',
-      delay: function (el, index) { return ((Math.random() + 0.8) * index * -200) + 2000; },
-      direction: 'reverse',
-      translateY: {
-        value: '-100vw',
-        duration: 1200,
-        easing: 'easeInExpo',
-      },
-      rotate: {
-        value: function () { return anime.random(5, 180); },
-        duration: 1000,
-      },
-      complete: function () {
-        Logger.log('We finished the animation');
-      },
-    });
-    /* eslint-enable object-shorthand, no-unused-vars */
+    Logger.log('Final scripts running');
+
+    class BrickAnimation {
+      constructor() {
+        this.elements = [];
+      }
+
+      randomDelay(el, index) {
+        const key = 'delay';
+        const value = ((-200 * index * (Math.random() + 0.8)) + 2000);
+        return this.storeProperty(index, key, value);
+      }
+
+      storeProperty(index, key, value) {
+        Logger.log(`The index is ${index}`);
+        if (typeof this.elements[index] === 'undefined') {
+          this.elements[index] = { [key]: value };
+        } else if (typeof (this.elements[index].key) !== typeof (value)) {
+          this.elements[index].key = value;
+        }
+        return this.elements[index].key;
+      }
+
+      animate() {
+        /* eslint-disable object-shorthand, no-unused-vars */
+        anime({
+          targets: '.brick',
+          direction: 'reverse',
+          translateY: {
+            value: '-100vw',
+            delay: (el, index) => this.randomDelay(el, index),
+            duration: 1200,
+            easing: 'easeInExpo',
+          },
+          rotate: {
+            value: function () { return anime.random(5, 180); },
+            duration: 1000,
+            delay: (el, index) => this.randomDelay(el, index),
+          },
+          complete: function () {
+            Logger.log('We finished the animation');
+          },
+        });
+        /* eslint-enable object-shorthand, no-unused-vars */
+      }
+    } /* BrickAnimation */
+    const myAnimation = new BrickAnimation();
+    myAnimation.animate();
   },
 };
