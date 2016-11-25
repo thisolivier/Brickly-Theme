@@ -14,7 +14,7 @@ html, body{
       z-index: 100;
       flex: 0 0 relate($chim-percent, 100);
       flex-flow: row wrap;
-      padding-top: 10vw;
+      padding: $main-padding-top 0 0;
       justify-content: space-between;
       align-content: flex-end;
 
@@ -26,6 +26,7 @@ html, body{
         background-color: black;
         color: white;
         border-radius: 0.5em;
+        z-index:100;
       }
 
       .big_brick {
@@ -34,6 +35,46 @@ html, body{
 
       .small_brick{
         width: $brick-small * 1%;
+      }
+
+      article {
+        padding: 0.8em;
+        header {
+          position:relative;
+          h2{
+            margin-top:0;
+          }
+          time {
+            display:none;
+          }
+          .tags {
+            text-overflow: ellipsis;
+            a {
+              display: inline-block;
+              margin-right: 0.5em;
+              padding: 0 0.5em;
+              border-radius: 0.2em;
+              @extend .btn-primary;
+            }
+          }
+        }
+        .entry-content{
+          display: none;
+          opacity: 0;
+        }
+      } // article
+
+      &:after{
+        content: "";
+        position: absolute;
+        top: $main-padding-top;
+        bottom: 0;
+        left: relate($chim-percent, $brick-gap*0.4);
+        right: relate($chim-percent, $brick-gap*0.4);
+        margin-top: relate($chim-percent, $brick-gap*1.4);
+        background-color: white;
+        z-index: 30;
+        border-radius: 0.5em;
       }
     } // main
   } // .content.row
