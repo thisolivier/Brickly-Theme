@@ -18,13 +18,22 @@ $brick-height: 0.35 * $brick-big;
 $main-padding-top: 10vw;
 
 // Bootstrap Overrides
+  // Options
+  $enable-shadows: false;
+  $enable-transitions: true;
 
-$btn-primary-color: black;
-$btn-primary-bg: white;
-$btn-padding-x: 0.05em;
-$btn-padding-y: 0.1em;
-$btn-border-radius: 0.2em;
+  // Fonts
+  $headings-font-family: 'branding', Helvetica, Arial, sans-serif;
+  $headings-font-weight: 600;
+  $headings-line-height: 1;
 
-.btn-primary {
-  margin-right: 0.5em;
-}
+  // Buttons
+  $btn-primary-color: black;
+  $btn-primary-bg: white;
+  $btn-padding-x: 0.1em;
+  $btn-padding-y: 0;
+  $btn-border-radius: 0.2em;
+
+  .btn-primary {
+    margin-right: 0.5em;
+  }
