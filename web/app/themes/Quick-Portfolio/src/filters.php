@@ -53,3 +53,12 @@ add_filter('template_include', function ($main) {
     }
     return ((new Template(new Wrapper($main)))->layout());
 }, 109);
+
+/**
+ * Adds class to tags
+ */
+add_filter('the_tags',function($html){
+ $postid = get_the_ID();
+ $html = str_replace('<a','<a class="btn btn-primary"',$html);
+ return $html;
+});

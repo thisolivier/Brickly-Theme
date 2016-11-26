@@ -16,3 +16,15 @@ $brick-small: 31;
 $brick-gap: 100 - ($brick-big + $brick-small);
 $brick-height: 0.35 * $brick-big;
 $main-padding-top: 10vw;
+
+// Bootstrap Overrides
+
+$btn-primary-color: black;
+$btn-primary-bg: white;
+$btn-padding-x: 0.05em;
+$btn-padding-y: 0.1em;
+$btn-border-radius: 0.2em;
+
+.btn-primary {
+  margin-right: 0.5em;
+}
