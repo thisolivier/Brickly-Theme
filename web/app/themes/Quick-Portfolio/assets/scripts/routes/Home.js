@@ -1,5 +1,7 @@
 // jshint max-len:0
 import anime from 'animejs';
+import Ellipsis from 'ftellipsis';
+import 'jquery';
 import Logger from '../util/logger';
 
 export default {
@@ -83,6 +85,16 @@ export default {
     Logger.log(chim.conductor());
   },
   finalize() {
+    class EllipsisJS {
+      static go(index, element) {
+        const ellipsis = new Ellipsis(element);
+
+        ellipsis.calc();
+        ellipsis.set();
+      }
+    }
+    $('.tags').each(function (index) { EllipsisJS.go(index, this); });
+
     /* eslint-disable object-shorthand, no-unused-vars */
     Logger.log(toString(anime.easings));
     const animateBrick = anime({

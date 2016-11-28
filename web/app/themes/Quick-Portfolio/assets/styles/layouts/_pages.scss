@@ -21,7 +21,7 @@ html, body{
       .brick {
         position:relative;
         height: relate($chim-percent, $brick-height);
-        overflow: hidden;
+        // overflow: hidden;
         margin-top: relate($chim-percent, $brick-gap);
         background-color: black;
         color: white;
@@ -39,17 +39,26 @@ html, body{
 
       article {
         padding: 0.8em;
+
         header {
           position:relative;
+          max-height: 100%;
+          text-overflow: ellipsis;
           h2{
-            margin-top:0;
+            margin:0 0 0.2em;
+            font-size: 1.8rem;
           }
           time {
             display:none;
           }
           .tags {
             text-overflow: ellipsis;
-            line-height: 1.85;
+            line-height: 1.6em;
+            height: 3.5em;
+            overflow-y: hidden;
+            a {
+              font-size: 0.9em;
+            }
           }
         }
         .entry-content{
@@ -73,20 +82,25 @@ html, body{
     } // main
   } // .content.row
 
-  .background.container {
+  .backgroundLanscape {
     position: fixed;
     top:0;
     left:0;
-    height: 100vw;
+    height: 100vh;
     width: 100vw;
     z-index: 10;
+    .sky-and-land{
+      width:100%;
+    }
     .sky{
-      height:60vw;
-      margin-bottom:-5vw;
+      height:70%;
+      margin-bottom:-5vh;
+      @extend .sky-and-land;
     }
 
     .land{
-      height:10vw;
+      height:35%;
+      @extend .sky-and-land;
     }
   } // .background.container
 
