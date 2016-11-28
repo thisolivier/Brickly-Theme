@@ -85,6 +85,51 @@ export default {
     Logger.log(chim.conductor());
   },
   finalize() {
+    class BackgroundLanscape {
+      constructor(targetClass) {
+        Logger.log('begin', 'the distant background');
+        this.target = $(targetClass);
+        this.target = {
+          parent: this.target,
+          sky: this.target.find('.sky'),
+          land: this.target.find('.land'),
+        };
+        this.getHeightInPercent = function () {
+          return parseFloat($(this).css('height')) / parseFloat($(this).parent().css('height'));
+        };
+        this.proportions = {
+          sky: this.getHeightInPercent.call(this.target.sky),
+          land: this.getHeightInPercent.call(this.target.land),
+        };
+        Logger.log(`The sky percent is ${this.proportions.sky}`);
+        Logger.log(`The land percent is ${this.proportions.land}`);
+      }
+
+      addListener() {
+        window.addEventListener('scroll', this.adjust());
+      }
+
+      adjust() {
+        const scrollPercent = window.scrollTop / (this.scrollHeight - this.clientHeight);
+        const skyMargin = -5;
+
+        let newSkyMargin = -10;
+        let newSky = this.proportions.sky - 20;
+        let newLand = this.proportions.sky + 20 + (newSkyMargin * -1) + skyMargin;
+
+        newSky = `${newSky * scrollPercent}%`;
+        newLand = `${newLand * scrollPercent}%`;
+        newSkyMargin = `${newSkyMargin * scrollPercent}vh`;
+
+        this.target.sky.css('height', newSky);
+        this.target.sky.css('margin-bottom', newSkyMargin);
+        this.target.land.css('height', newLand);
+      }
+    }
+    const horizon = new BackgroundLanscape('.backgroundLanscape');
+    horizon.addListener();
+    Logger.log();
+
     class EllipsisJS {
       static go(index, element) {
         const ellipsis = new Ellipsis(element);
@@ -96,7 +141,6 @@ export default {
     $('.tags').each(function (index) { EllipsisJS.go(index, this); });
 
     /* eslint-disable object-shorthand, no-unused-vars */
-    Logger.log(toString(anime.easings));
     const animateBrick = anime({
       targets: '.brick',
       delay: function (el, index) { return ((Math.random() + 0.8) * index * -200) + 2000; },
