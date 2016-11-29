@@ -106,21 +106,17 @@ export default {
       adjust(window) {
         const clientHeight = window.innerHeight;
         const scrollHeight = $('#heightDefined').height();
-        const scrollPercent = (100 * $(window).scrollTop()) /
+        const scrollPercent = $(window).scrollTop() /
           (scrollHeight - clientHeight);
-        Logger.log(`Proportions of sky and land are ${this.proportions.sky} and ${this.proportions.land}`);
-        const skyMargin = -5;
+        const skyMargin = 0.1;
 
-        let newSkyMargin = -10;
-        let newSky = this.proportions.sky * -20;
-        let newLand = this.proportions.land + 20 + (newSkyMargin * -1) + skyMargin;
+        let newSkyMargin = skyMargin * scrollPercent;
+        let newLand = this.proportions.land -
+          ((0.4 - newSkyMargin) * scrollPercent);
 
-        newSky = `${newSky * scrollPercent}%`;
-        newLand = `${newLand * scrollPercent}%`;
-        newSkyMargin = `${newSkyMargin * scrollPercent}vh`;
-
-        this.target.sky.css('height', newSky);
-        this.target.sky.css('margin-bottom', newSkyMargin);
+        newSkyMargin = `${(newSkyMargin) * -100}vh`;
+        newLand = `${newLand * 100}%`;
+        this.target.sky.css('margin-top', newSkyMargin);
         this.target.land.css('height', newLand);
       }
     }

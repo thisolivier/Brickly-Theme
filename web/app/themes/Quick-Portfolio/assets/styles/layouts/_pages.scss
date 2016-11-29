@@ -94,12 +94,12 @@ html, body{
     }
     .sky{
       height:70%;
-      margin-bottom:-5vh;
+      margin-bottom:-10vh;
       @extend .sky-and-land;
     }
 
     .land{
-      height:35%;
+      height:90%;
       @extend .sky-and-land;
     }
   } // .background.container
