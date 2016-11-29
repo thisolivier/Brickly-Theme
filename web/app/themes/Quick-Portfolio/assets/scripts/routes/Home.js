@@ -101,8 +101,6 @@ export default {
           sky: this.getHeightInPercent.call(this.target.sky),
           land: this.getHeightInPercent.call(this.target.land),
         };
-        Logger.log(`The sky percent is ${this.proportions.sky}`);
-        Logger.log(`The land percent is ${this.proportions.land}`);
       }
 
       addListener() {
@@ -110,7 +108,11 @@ export default {
       }
 
       adjust() {
-        const scrollPercent = window.scrollTop / (this.scrollHeight - this.clientHeight);
+        const scrollPercent = window.scrollTop /
+          (this.target.parent.scrollHeight - window.clientHeight);
+        console.log(`We begin with the window.scrollTop of ${window.scrollTop} `);
+        console.log(`Next we encountered this.target.parent.scrollHeight, ${this.target.parent.scrollHeight} `);
+        console.log(`Finally, the clientHeight of window... ${window.clientHeight} `);
         const skyMargin = -5;
 
         let newSkyMargin = -10;
