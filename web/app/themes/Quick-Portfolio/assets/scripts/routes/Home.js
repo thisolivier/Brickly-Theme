@@ -113,7 +113,6 @@ export default {
         let newSkyMargin = skyMargin * scrollPercent;
         let newLand = this.proportions.land -
           ((0.4 - newSkyMargin) * scrollPercent);
-
         newSkyMargin = `${(newSkyMargin) * -100}vh`;
         newLand = `${newLand * 100}%`;
         this.target.sky.css('margin-top', newSkyMargin);
