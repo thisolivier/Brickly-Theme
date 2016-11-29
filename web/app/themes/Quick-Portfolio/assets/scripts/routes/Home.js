@@ -103,21 +103,17 @@ export default {
         };
       }
 
-      addListener() {
-        window.addEventListener('scroll', this.adjust());
-      }
-
-      adjust() {
-        const scrollPercent = window.scrollTop /
-          (this.target.parent.scrollHeight - window.clientHeight);
-        console.log(`We begin with the window.scrollTop of ${window.scrollTop} `);
-        console.log(`Next we encountered this.target.parent.scrollHeight, ${this.target.parent.scrollHeight} `);
-        console.log(`Finally, the clientHeight of window... ${window.clientHeight} `);
+      adjust(window) {
+        const clientHeight = window.innerHeight;
+        const scrollHeight = $('#heightDefined').height();
+        const scrollPercent = (100 * $(window).scrollTop()) /
+          (scrollHeight - clientHeight);
+        Logger.log(`Proportions of sky and land are ${this.proportions.sky} and ${this.proportions.land}`);
         const skyMargin = -5;
 
         let newSkyMargin = -10;
-        let newSky = this.proportions.sky - 20;
-        let newLand = this.proportions.sky + 20 + (newSkyMargin * -1) + skyMargin;
+        let newSky = this.proportions.sky * -20;
+        let newLand = this.proportions.land + 20 + (newSkyMargin * -1) + skyMargin;
 
         newSky = `${newSky * scrollPercent}%`;
         newLand = `${newLand * scrollPercent}%`;
@@ -129,7 +125,11 @@ export default {
       }
     }
     const horizon = new BackgroundLanscape('.backgroundLanscape');
-    horizon.addListener();
+    /* eslint-disable*/
+    $(window).scroll(function(){
+      horizon.adjust(window);
+    });
+    /* eslint-enable*/
     Logger.log();
 
     class EllipsisJS {
