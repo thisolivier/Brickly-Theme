@@ -26,8 +26,11 @@ vendor/*
 # Node Package Manager
 node_modules
 npm-debug.log
-*/npm-debug.log.*
+npm-debug.log.*
 
 # Vagrant
 bin
 .vagrant
+
+#OSX
+.DS_Store

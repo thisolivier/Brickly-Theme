@@ -52,9 +52,9 @@ html, body{
         a:hover {
           top:0em;
           left:0em;
-          text-shadow: 0em 0em rgba(0, 0, 0, 0.7);
+          text-shadow: 0em 0em rgba(0, 0, 0, 1);
           text-decoration: none;
-          color:inherit;
+          color:black;
         }
       }
       .backgroundCloud {
@@ -116,6 +116,9 @@ html, body{
         color: white;
         border-radius: 0.5em;
         z-index:100;
+        &.current_post{
+          z-index: 160;
+        }
       }
 
       .big_brick {
@@ -170,13 +173,21 @@ html, body{
       }
     } // main
   } // .content.row
-
-  .backgroundLanscape {
+  .fillView{
     position: fixed;
     top:0;
     left:0;
     height: 100vh;
     width: 100vw;
+  }
+
+  #backgroundPost{
+    @extend .fillView;
+    z-index: 150;
+  }
+
+  .backgroundLanscape {
+    @extend .fillView;
     z-index: 10;
     .sky-and-land{
       width:100%;

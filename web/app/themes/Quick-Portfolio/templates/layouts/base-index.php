@@ -17,6 +17,7 @@
           <?php include App\template()->main(); ?>
         </main>
       </div>
+      <canvas id="backgroundPost"></canvas>
       <div class="backgroundLanscape" aria-hidden="true">
         <img src="<?= get_template_directory_uri(); ?>/dist/images/sky-holding.gif" class="sky">
         <img src="<?= get_template_directory_uri(); ?>/dist/images/city-holding.gif" class="land">

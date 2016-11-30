@@ -95,15 +95,17 @@ export default {
           const e2 = e || window.event;
           const element = e2.target || e2.srcElement;
           if (element.tagName === 'A' && element.className === 'magicLink') {
-            LoadPost.conductor(element);
+            this.element = element;
+            this.event = event;
+            LoadPost.conductor();
             return false; // prevent default action and stop event propagation
           }
           return true;
         };
       }
-      static conductor(element) {
-        Logger.log(`We encounter ${$(element).text()}`);
-        const newPage = $(element).closest('article');
+      static conductor() {
+        Logger.log(`We encounter ${$(LoadPost.element).text()}`);
+        const newPage = $(LoadPost.element).closest('article');
         const classBig = 'current_post';
         const newFunc = () => {
           if (!newPage.hasClass(classBig)) {
@@ -151,7 +153,6 @@ export default {
       }
 
       static expandPost() {
-        Logger.log('hi');
       }
     }
     LoadPost.binder();
