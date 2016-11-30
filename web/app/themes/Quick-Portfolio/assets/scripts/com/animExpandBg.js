@@ -1,4 +1,4 @@
-// import anime from 'animejs';
+import anime from 'animejs';
 
 export default class FillCanvas {
   constructor() {
@@ -22,183 +22,180 @@ export default class FillCanvas {
         current: currentCol,
       };
     };
-  }
- /*
-  function removeAnimation(animation) {
-    var index = animations.indexOf(animation);
-    if (index > -1) animations.splice(index, 1);
+    this.Circle = function (opts) {
+      this.extend(this, opts);
+    };
+    this.Circle.prototype.draw = function () {
+      this.cxt.globalAlpha = this.opacity || 1;
+      this.cxt.beginPath();
+      this.cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+      if (this.stroke) {
+        this.cxt.strokeStyle = this.stroke.color;
+        this.cxt.lineWidth = this.stroke.width;
+        this.cxt.stroke();
+      }
+      if (this.fill) {
+        this.cxt.fillStyle = this.fill;
+        this.cxt.fill();
+      }
+      this.cxt.closePath();
+      this.cxt.globalAlpha = 1;
+    };
+    this.resizeCanvas();
+    window.addEventListener('resize', this.resizeCanvas);
+    this.addClickListeners();
+    this.handleInactiveUser();
   }
 
-  function calcPageFillRadius(x, y) {
-    var l = Math.max(x - 0, cW - x);
-    var h = Math.max(y - 0, cH - y);
+  removeAnimation(animation) {
+    const index = this.animations.indexOf(animation);
+    if (index > -1) this.animations.splice(index, 1);
+  }
+
+  calcPageFillRadius(x, y) {
+    const l = Math.max(x - 0, this.cW - x);
+    const h = Math.max(y - 0, this.cH - y);
     return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
   }
 
-  function addClickListeners() {
-    document.addEventListener("touchstart", handleEvent);
-    document.addEventListener("mousedown", handleEvent);
+  addClickListeners() {
+    document.addEventListener('touchstart', this.handleEvent);
+    document.addEventListener('mousedown', this.handleEvent);
   };
 
-  function handleEvent(e) {
-      if (e.touches) {
-        e.preventDefault();
-        e = e.touches[0];
-      }
-      var currentColor = colorPicker.current();
-      var nextColor = colorPicker.next();
-      var targetR = calcPageFillRadius(e.pageX, e.pageY);
-      var rippleSize = Math.min(200, (cW * .4));
-      var minCoverDuration = 750;
+  handleEvent(e) {
+    if (e.touches) {
+      e.preventDefault();
+      e = e.touches[0];
+    }
+    const currentColor = this.colorPicker.current();
+    const nextColor = this.colorPicker.next();
+    const targetR = this.calcPageFillRadius(e.pageX, e.pageY);
+    const rippleSize = Math.min(200, (this.cW * 0.4));
+    const minCoverDuration = 750;
 
-      var pageFill = new Circle({
+    const pageFill = new this.Circle({
+      x: e.pageX,
+      y: e.pageY,
+      r: 0,
+      fill: nextColor,
+    });
+    const fillAnimation = anime({
+      targets: pageFill,
+      r: targetR,
+      duration: Math.max(targetR / 2, minCoverDuration),
+      easing: 'easeOutQuart',
+      complete: function () {
+        this.bgColor = pageFill.fill;
+        this.removeAnimation(fillAnimation);
+      },
+    });
+
+    const ripple = new this.Circle({
+      x: e.pageX,
+      y: e.pageY,
+      r: 0,
+      fill: currentColor,
+      stroke: {
+        width: 3,
+        color: currentColor,
+      },
+      opacity: 1,
+    });
+    const rippleAnimation = anime({
+      targets: ripple,
+      r: rippleSize,
+      opacity: 0,
+      easing: 'easeOutExpo',
+      duration: 900,
+      complete: this.removeAnimation,
+    });
+
+    const particles = [];
+    for (let i = 0; i < 32; i += 1) {
+      const particle = new this.Circle({
         x: e.pageX,
         y: e.pageY,
-        r: 0,
-        fill: nextColor
-      });
-      var fillAnimation = anime({
-        targets: pageFill,
-        r: targetR,
-        duration:  Math.max(targetR / 2 , minCoverDuration ),
-        easing: "easeOutQuart",
-        complete: function(){
-          bgColor = pageFill.fill;
-          removeAnimation(fillAnimation);
-        }
-      });
-
-      var ripple = new Circle({
-        x: e.pageX,
-        y: e.pageY,
-        r: 0,
         fill: currentColor,
-        stroke: {
-          width: 3,
-          color: currentColor
-        },
-        opacity: 1
+        r: anime.random(24, 48),
       });
-      var rippleAnimation = anime({
-        targets: ripple,
-        r: rippleSize,
-        opacity: 0,
-        easing: "easeOutExpo",
-        duration: 900,
-        complete: removeAnimation
-      });
-
-      var particles = [];
-      for (var i=0; i<32; i++) {
-        var particle = new Circle({
-          x: e.pageX,
-          y: e.pageY,
-          fill: currentColor,
-          r: anime.random(24, 48)
-        })
-        particles.push(particle);
-      }
-      var particlesAnimation = anime({
-        targets: particles,
-        x: function(particle){
-          return particle.x + anime.random(rippleSize, -rippleSize);
-        },
-        y: function(particle){
-          return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
-        },
-        r: 0,
-        easing: "easeOutExpo",
-        duration: anime.random(1000,1300),
-        complete: removeAnimation
-      });
-      animations.push(fillAnimation, rippleAnimation, particlesAnimation);
+      particles.push(particle);
+    }
+    const particlesAnimation = anime({
+      targets: particles,
+      x: function (particle) {
+        return particle.x + anime.random(rippleSize, -rippleSize);
+      },
+      y: function (particle) {
+        return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
+      },
+      r: 0,
+      easing: 'easeOutExpo',
+      duration: anime.random(1000, 1300),
+      complete: this.removeAnimation,
+    });
+    this.animations.push(fillAnimation, rippleAnimation, particlesAnimation);
   }
 
-  function extend(a, b){
-    for(var key in b) {
-      if(b.hasOwnProperty(key)) {
+  extend(a, b) {
+    for (const key in b) {
+      if ({}.hasOwnProperty.call(b, key)) {
         a[key] = b[key];
       }
     }
     return a;
   }
 
-  var Circle = function(opts) {
-    extend(this, opts);
-  }
-
-  Circle.prototype.draw = function() {
-    ctx.globalAlpha = this.opacity || 1;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-    if (this.stroke) {
-      ctx.strokeStyle = this.stroke.color;
-      ctx.lineWidth = this.stroke.width;
-      ctx.stroke();
-    }
-    if (this.fill) {
-      ctx.fillStyle = this.fill;
-      ctx.fill();
-    }
-    ctx.closePath();
-    ctx.globalAlpha = 1;
-  }
-
-  var animate = anime({
-    duration: Infinity,
-    update: function() {
-      ctx.fillStyle = bgColor;
-      ctx.fillRect(0, 0, cW, cH);
-      animations.forEach(function(anim) {
-        anim.animatables.forEach(function(animatable) {
-          animatable.target.draw();
+  animate() {
+    anime({
+      duration: Infinity,
+      update() {
+        this.cxt.fillStyle = this.bgColor;
+        this.cxt.fillRect(0, 0, this.cW, this.cH);
+        this.animations.forEach(function (anim) {
+          anim.animatables.forEach(function (animatable) {
+            animatable.target.draw();
+          });
         });
-      });
-    }
-  });
+      },
+    });
+  }
 
-  var resizeCanvas = function() {
-    cW = window.innerWidth;
-    cH = window.innerHeight;
-    c.width = cW * devicePixelRatio;
-    c.height = cH * devicePixelRatio;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-  };
+  resizeCanvas() {
+    this.cW = window.innerWidth;
+    this.cH = window.innerHeight;
+    this.c.width = this.cW * devicePixelRatio;
+    this.c.height = this.cH * devicePixelRatio;
+    this.cxt.scale(devicePixelRatio, devicePixelRatio);
+  }
 
-  (function init() {
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-    addClickListeners();
-    handleInactiveUser();
-  })();
-
-  function handleInactiveUser() {
-    var inactive = setTimeout(function(){
-      fauxClick(cW/2, cH/2);
+  handleInactiveUser() {
+    const inactive = setTimeout(function () {
+      this.fauxClick(this.cW / 2, this.cH / 2);
     }, 2000);
 
-    function clearInactiveTimeout() {
+    const clearInactiveTimeout = function () {
       clearTimeout(inactive);
-      document.removeEventListener("mousedown", clearInactiveTimeout);
-      document.removeEventListener("touchstart", clearInactiveTimeout);
-    }
+      document.removeEventListener('mousedown', clearInactiveTimeout);
+      document.removeEventListener('touchstart', clearInactiveTimeout);
+    };
 
-    document.addEventListener("mousedown", clearInactiveTimeout);
-    document.addEventListener("touchstart", clearInactiveTimeout);
+    document.addEventListener('mousedown', clearInactiveTimeout);
+    document.addEventListener('touchstart', clearInactiveTimeout);
   }
 
-  function startFauxClicking() {
-    setTimeout(function(){
-      fauxClick(anime.random( cW * .2, cW * .8), anime.random(cH * .2, cH * .8));
-      startFauxClicking();
+  startFauxClicking() {
+    setTimeout(function () {
+      this.fauxClick(anime.random(this.cW * 0.2, this.cW * 0.8),
+       anime.random(this.cH * 0.2, this.cH * 0.8));
+      this.startFauxClicking();
     }, anime.random(200, 900));
   }
 
-  function fauxClick(x, y) {
-    var fauxClick = new Event("mousedown");
+  fauxClick(x, y) {
+    const fauxClick = new Event('mousedown');
     fauxClick.pageX = x;
     fauxClick.pageY = y;
     document.dispatchEvent(fauxClick);
   }
-  */
 }
