@@ -1,5 +1,6 @@
+import 'jquery';
 import anime from 'animejs';
-import Logger from '../util/logger';
+// import Logger from '../util/logger';
 
 export default class BrickAnimation {
   // The methods in here seem to be working,
@@ -8,33 +9,21 @@ export default class BrickAnimation {
 
   static animate() {
     /* eslint-disable object-shorthand, no-unused-vars, no-undef */
+    const targets = $('.brick').toArray().reverse();
+    let delayTot = 0;
     this.anime = anime({
-      targets: '.brick',
+      targets: targets,
       direction: 'reverse',
       translateY: {
         value: '-100vw',
         delay(el, index) {
-          Logger.log(`our index is index ${index}`);
           const key = 'delay';
-          const value = ((-200 * index * (Math.random() + 0.8)) + 2000);
-          /* eslint no-param-reassign: ["error", { "props": false }] */
-          el.storeProperty = { [index]: { [key]: value } };
-          return el.storeProperty[index][key];
+          const value = (300 * (Math.random() + 0.2));
+          delayTot += value;
+          return delayTot;
         },
         duration: 1200,
         easing: 'easeInExpo',
-      },
-      rotate: {
-        value: function () {
-          return anime.random(30, 360);
-        },
-        duration: 1000,
-        delay(el, index) {
-          const key = 'delay';
-          return el.storeProperty[index][key];
-        },
-      },
-      complete: function () {
       },
     });
 
