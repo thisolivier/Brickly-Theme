@@ -1,55 +1,61 @@
 import anime from 'animejs';
+import Logger from '../util/logger';
 
 export default class FillCanvas {
+  /* eslint no-param-reassign: "warn", class-methods-use-this: "warn" */
   constructor() {
     this.c = document.getElementById('backgroundPost');
-    this.ctx = this.c.getContext('2d');
+    this.cxt = this.c.getContext('2d');
     this.cH = 0;
     this.cW = 0;
     this.bgColor = 'transparent';
     this.animations = [];
     this.circles = [];
-    this.colorPicker = () => {
+    this.colorPicker = function () {
       const colors = ['white', 'black'];
-      let index = 0;
-      const nextCol = () => {
-        index = (index + 1) < colors.length - 1 ? index + 1 : 0;
-        return colors[index];
-      };
-      const currentCol = colors[index];
+      const nextIndex = this.index < (colors.length - 1) ? this.index + 1 : 0;
+      const currentCol = colors[this.index];
+      const nextCol = colors[nextIndex];
+      Logger.log(`Current color is ${this.index}, the next will be ${nextIndex}`);
+      this.index = nextIndex;
       return {
         next: nextCol,
         current: currentCol,
       };
     };
-    this.Circle = function (opts) {
-      this.extend(this, opts);
-    };
-    this.Circle.prototype.draw = function () {
-      this.cxt.globalAlpha = this.opacity || 1;
-      this.cxt.beginPath();
-      this.cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-      if (this.stroke) {
-        this.cxt.strokeStyle = this.stroke.color;
-        this.cxt.lineWidth = this.stroke.width;
-        this.cxt.stroke();
-      }
-      if (this.fill) {
-        this.cxt.fillStyle = this.fill;
-        this.cxt.fill();
-      }
-      this.cxt.closePath();
-      this.cxt.globalAlpha = 1;
-    };
+    this.colorPicker.index = 0;
+  }
+
+  init() {
+    Logger.log('begin', 'the expand function');
     this.resizeCanvas();
+    this.addCircleMethod();
     window.addEventListener('resize', this.resizeCanvas);
     this.addClickListeners();
     this.handleInactiveUser();
+    this.animate();
   }
 
-  removeAnimation(animation) {
-    const index = this.animations.indexOf(animation);
-    if (index > -1) this.animations.splice(index, 1);
+  Circle(opts) {
+    Object.assign(this, opts);
+  }
+  addCircleMethod() {
+    this.Circle.prototype.draw = function (cxt) {
+      cxt.globalAlpha = this.opacity || 1;
+      cxt.beginPath();
+      cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+      if (this.stroke) {
+        cxt.strokeStyle = this.stroke.color;
+        cxt.lineWidth = this.stroke.width;
+        cxt.stroke();
+      }
+      if (this.fill) {
+        cxt.fillStyle = this.fill;
+        cxt.fill();
+      }
+      cxt.closePath();
+      cxt.globalAlpha = 1;
+    };
   }
 
   calcPageFillRadius(x, y) {
@@ -59,21 +65,32 @@ export default class FillCanvas {
   }
 
   addClickListeners() {
-    document.addEventListener('touchstart', this.handleEvent);
-    document.addEventListener('mousedown', this.handleEvent);
-  };
+    this.c.addEventListener('touchstart',
+      (e) => { this.handleEvent(e); }
+    );
+    this.c.addEventListener('mousedown',
+      (e) => { this.handleEvent(e); }
+    );
+  }
 
   handleEvent(e) {
     if (e.touches) {
       e.preventDefault();
       e = e.touches[0];
     }
-    const currentColor = this.colorPicker.current();
-    const nextColor = this.colorPicker.next();
+    const color = this.colorPicker();
+    const currentColor = color.current;
+    const nextColor = color.next;
     const targetR = this.calcPageFillRadius(e.pageX, e.pageY);
     const rippleSize = Math.min(200, (this.cW * 0.4));
     const minCoverDuration = 750;
-
+    const removeAnimation = (animation) => {
+      const index = this.animations.indexOf(animation);
+      if (index > -1) this.animations.splice(index, 1);
+    };
+    const setBgColor = (col) => {
+      this.bgColor = col;
+    };
     const pageFill = new this.Circle({
       x: e.pageX,
       y: e.pageY,
@@ -85,9 +102,9 @@ export default class FillCanvas {
       r: targetR,
       duration: Math.max(targetR / 2, minCoverDuration),
       easing: 'easeOutQuart',
-      complete: function () {
-        this.bgColor = pageFill.fill;
-        this.removeAnimation(fillAnimation);
+      complete() {
+        setBgColor(pageFill.fill);
+        removeAnimation(fillAnimation);
       },
     });
 
@@ -108,7 +125,7 @@ export default class FillCanvas {
       opacity: 0,
       easing: 'easeOutExpo',
       duration: 900,
-      complete: this.removeAnimation,
+      complete: removeAnimation,
     });
 
     const particles = [];
@@ -123,38 +140,39 @@ export default class FillCanvas {
     }
     const particlesAnimation = anime({
       targets: particles,
-      x: function (particle) {
+      x(particle) {
         return particle.x + anime.random(rippleSize, -rippleSize);
       },
-      y: function (particle) {
+      y(particle) {
         return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
       },
       r: 0,
       easing: 'easeOutExpo',
       duration: anime.random(1000, 1300),
-      complete: this.removeAnimation,
+      complete: removeAnimation,
     });
     this.animations.push(fillAnimation, rippleAnimation, particlesAnimation);
   }
 
   extend(a, b) {
-    for (const key in b) {
-      if ({}.hasOwnProperty.call(b, key)) {
-        a[key] = b[key];
-      }
-    }
-    return a;
+    return Object.assign(a, b);
   }
 
   animate() {
+    const bgColor = () => this.bgColor;
+    const cW = this.cW;
+    const cH = this.cH;
+    const cxt = this.cxt;
+    const animations = this.animations;
+
     anime({
       duration: Infinity,
       update() {
-        this.cxt.fillStyle = this.bgColor;
-        this.cxt.fillRect(0, 0, this.cW, this.cH);
-        this.animations.forEach(function (anim) {
-          anim.animatables.forEach(function (animatable) {
-            animatable.target.draw();
+        cxt.fillStyle = bgColor;
+        cxt.fillRect(0, 0, cW, cH);
+        animations.forEach((anim) => {
+          anim.animatables.forEach((animatable) => {
+            animatable.target.draw(cxt);
           });
         });
       },
@@ -169,9 +187,17 @@ export default class FillCanvas {
     this.cxt.scale(devicePixelRatio, devicePixelRatio);
   }
 
+  fauxClick(x, y) {
+    const fauxClick = new Event('mousedown');
+    fauxClick.pageX = x;
+    fauxClick.pageY = y;
+    document.dispatchEvent(fauxClick);
+  }
+
   handleInactiveUser() {
+    const fauxClick = this.fauxClick;
     const inactive = setTimeout(function () {
-      this.fauxClick(this.cW / 2, this.cH / 2);
+      fauxClick(this.cW / 2, this.cH / 2);
     }, 2000);
 
     const clearInactiveTimeout = function () {
@@ -190,12 +216,5 @@ export default class FillCanvas {
        anime.random(this.cH * 0.2, this.cH * 0.8));
       this.startFauxClicking();
     }, anime.random(200, 900));
-  }
-
-  fauxClick(x, y) {
-    const fauxClick = new Event('mousedown');
-    fauxClick.pageX = x;
-    fauxClick.pageY = y;
-    document.dispatchEvent(fauxClick);
   }
 }

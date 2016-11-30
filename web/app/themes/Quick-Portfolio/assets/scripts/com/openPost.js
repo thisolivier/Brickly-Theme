@@ -1,6 +1,5 @@
 import anime from 'animejs';
 import Logger from '../util/logger';
-import '../com/animExpandBg';
 
 // The load post class which takes over from the natural Links
 export default class LoadPost {
@@ -68,6 +67,5 @@ export default class LoadPost {
   }
 
   static expandPost() {
-    const fillCanvas = new FillCanvas();
   }
 }

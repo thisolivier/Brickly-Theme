@@ -184,7 +184,7 @@ html, body{
   #backgroundPost{
     @extend .fillView;
     z-index: 150;
-    display:none;
+    //display:none;
   }
 
   .backgroundLanscape {
