@@ -95,19 +95,69 @@ export default {
           const e2 = e || window.event;
           const element = e2.target || e2.srcElement;
           if (element.tagName === 'A' && element.className === 'magicLink') {
-            LoadPost.conductor();
+            LoadPost.conductor(element);
             return false; // prevent default action and stop event propagation
           }
           return true;
         };
       }
-      static conductor() {
-        Logger.log('We have entered the conductor.');
+      static conductor(element) {
+        Logger.log(`We encounter ${$(element).text()}`);
+        const newPage = $(element).closest('article');
+        const classBig = 'current_post';
+        const newFunc = () => {
+          if (!newPage.hasClass(classBig)) {
+            newPage.addClass(classBig);
+            LoadPost.explodePosts();
+            LoadPost.expandPost(newPage);
+          } else {
+            newPage.removeClass(classBig);
+            LoadPost.implodePosts();
+          }
+        };
+        newFunc();
+      }
+      static explodePosts() {
+        LoadPost.myExplosion = anime({
+          easing: 'linear',
+          targets: document.querySelectorAll('.brick:not(.current_post)'),
+          translateX() {
+            const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
+              (Math.floor(Math.random() * 600) + 600);
+            return random;
+          },
+          translateY() {
+            const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
+              (Math.floor(Math.random() * 300) + 600);
+            return random;
+          },
+          rotate: {
+            value() {
+              const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
+                (Math.floor(Math.random() * 490) + 300);
+              return random;
+            },
+            easing: 'linear',
+          },
+          borderRadius: 8,
+          duration() {
+            return anime.random(300, 700); // Will set a random value from 50 to 100 to each divs
+          },
+        });
+      }
+      static implodePosts() {
+        LoadPost.myExplosion.restart();
+        LoadPost.myExplosion.pause();
+      }
+
+      static expandPost() {
+        Logger.log('hi');
       }
     }
     LoadPost.binder();
     Logger.log();
   },
+
   finalize() {
     class BackgroundLanscape {
       constructor(targetClass) {
