@@ -22,8 +22,6 @@ export default {
     /* eslint-disable*/
     $(window).scroll(function() { horizon.adjust(window); });
     /* eslint-enable*/
-
-    const myAnimation = new BrickAnimation();
-    myAnimation.animate();
+    BrickAnimation.animate();
   },
 };
