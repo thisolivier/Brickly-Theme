@@ -4,14 +4,39 @@ $main-sm-columns:       12;
 $sidebar-sm-columns:    4;
 
 // Colors
-$brand-primary:         #27ae60;
+$brand-primary:         white;
 
 // Font Awesome | see: http://fontawesome.io/get-started/
 $fa-font-path:          '~font-awesome/fonts';
 
+// Header Variables
+$header-percent: 50%;
+
 // Chimney Variables
 $chim-percent: 40;
-$brick-big: 65;
+$brick-big: 66;
 $brick-small: 31;
 $brick-gap: 100 - ($brick-big + $brick-small);
 $brick-height: 0.35 * $brick-big;
+$main-padding-top: 15vw;
+
+// Bootstrap Overrides
+  // Options
+  $enable-shadows: false;
+  $enable-transitions: true;
+
+  // Fonts
+  $headings-font-family: 'branding', Helvetica, Arial, sans-serif;
+  $headings-font-weight: bold;
+  $headings-line-height: 1;
+
+  // Buttons
+  $btn-primary-color: black;
+  $btn-primary-bg: white;
+  $btn-padding-x: 0.1em;
+  $btn-padding-y: 0;
+  $btn-border-radius: 0.2em;
+
+  .btn-primary {
+    margin-right: 0.5em;
+  }

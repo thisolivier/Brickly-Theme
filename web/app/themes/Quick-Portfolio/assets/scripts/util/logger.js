@@ -2,14 +2,14 @@
 // tracks the number of entries its making,
 // and the time my script is taking to run.
 export default class Logger {
-  static log(printMe) {
+  static log(printMe, context = 'the great unexplored mass of the galaxy') {
     this.index = !this.index ? 1 : this.index += 1;
     // const pad = number => (number <= 99 ? (`000${number}`).slice(-2) : number);
     const indexAPI = this.index;
     const nowTime = new Date();
     const prefix = `## Captain's log, stardate ${indexAPI}.${nowTime.getMilliseconds()} ->`;
     if (printMe === 'begin') {
-      Logger.print(prefix, 'Our destination is the great, unexplored mass of the galaxy (o__o)');
+      Logger.print(prefix, `Our destination is ${context} (o__o)`);
     } else if (printMe) {
       Logger.print(prefix, printMe);
     } else {
