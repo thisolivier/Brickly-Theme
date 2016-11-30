@@ -1,6 +1,8 @@
-<header class="banner">
-  <div class="container">
-    <a class="brand" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
+<header class="sitewide">
+  <div id="theCloud">
+    <h1 class="brand">
+      <a href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
+    </h1>
     <nav class="nav-primary">
       <?php
       if (has_nav_menu('primary_navigation')) :
@@ -8,5 +10,10 @@
       endif;
       ?>
     </nav>
+    <div class="backgroundCloud" aria-hidden="true">
+      <div class="ball big">&nbsp;</div>
+      <div class="ball small">&nbsp;</div>
+      <div class="ball medium">&nbsp;</div>
+    </div>
   </div>
 </header>
