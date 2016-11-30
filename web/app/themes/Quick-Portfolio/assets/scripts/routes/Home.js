@@ -83,6 +83,30 @@ export default {
 
     const chim = new ChimneyStack();
     Logger.log(chim.conductor());
+
+    // The load post class which takes over from the natural Links
+    class LoadPost {
+      constructor() {
+        Logger.log('begin', 'the exploding fortress');
+      }
+      static binder() {
+        Logger.log('We have begun binding');
+        document.onclick = function (e) {
+          const e2 = e || window.event;
+          const element = e2.target || e2.srcElement;
+          if (element.tagName === 'A' && element.className === 'magicLink') {
+            LoadPost.conductor();
+            return false; // prevent default action and stop event propagation
+          }
+          return true;
+        };
+      }
+      static conductor() {
+        Logger.log('We have entered the conductor.');
+      }
+    }
+    LoadPost.binder();
+    Logger.log();
   },
   finalize() {
     class BackgroundLanscape {
