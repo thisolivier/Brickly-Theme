@@ -11,8 +11,6 @@ export default class FillCanvas {
     this.cW = 0;
     this.animations = [];
     this.circles = [];
-    this.colors = ['black', 'rgba(0, 0, 0, 0)'];
-    this.colorPicker.index = 0;
     this.classBig = 'current_post';
     this.cloneCheck = true;
   }
@@ -51,9 +49,8 @@ export default class FillCanvas {
     }
 
     // Load variables
-    const color = this.colorPicker();
     const currentColor = 'white';
-    const nextColor = color.next;
+    const nextColor = 'black';
     const targetR = Math.sqrt(
       Math.pow(
         Math.max(e.pageX - 0, this.cW - e.pageX), 2
@@ -71,123 +68,128 @@ export default class FillCanvas {
       Logger.log(`Supplimental. Removing animation ${animation} with index of ${index}`);
       if (index > -1) this.animations.splice(index, 1);
     };
-
-    // Create page filling obj and animation
-    const pageFill = new this.Circle({
-      x: e.pageX,
-      y: e.pageY,
-      r: 0,
-      fill: nextColor,
-    });
-    const fillAnimation = anime({
-      targets: pageFill,
-      r: targetR,
-      duration: Math.max(targetR / 2, minCoverDuration),
-      easing: 'easeOutQuart',
-    });
-
-    // Create ripple obj and animation
-    const ripple = new this.Circle({
-      x: e.pageX,
-      y: e.pageY,
-      r: 0,
-      fill: currentColor,
-      stroke: {
-        width: 3,
-        color: currentColor,
-      },
-      opacity: 1,
-    });
-    const rippleAnimation = anime({
-      targets: ripple,
-      r: rippleSize,
-      opacity: {
-        value: 0,
-        delay: 400,
-        duration: 600,
-      },
-      easing: 'easeOutExpo',
-      duration: 900,
-      complete: removeAnimation,
-    });
-
-    // Create particle objects and animation
-    const particles = [];
-    for (let i = 0; i < 20; i += 1) {
-      const particle = new this.Circle({
+    const funcPageFiller = function () {
+      // Create page filling obj and animation
+      this.pageFill = new this.Circle({
         x: e.pageX,
         y: e.pageY,
-        fill: currentColor,
-        r: anime.random(30, 60),
+        r: 0,
+        fill: nextColor,
       });
-      particles.push(particle);
-    }
-    const particlesAnimation = anime({
-      targets: particles,
-      x(particle) {
-        return particle.x + anime.random(rippleSize, -rippleSize);
-      },
-      y(particle) {
-        return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
-      },
-      r: 0,
-      easing: 'easeOutExpo',
-      duration: anime.random(1000, 1300),
-      complete: removeAnimation,
-    });
+      this.fillAnimation = anime({
+        targets: this.pageFill,
+        r: targetR,
+        duration: Math.max(targetR / 2, minCoverDuration),
+        easing: 'easeOutQuart',
+      });
+    }.bind(this);
+
+    // Create ripple obj and animation
+    const funcRipple = function () {
+      this.ripple = new this.Circle({
+        x: e.pageX,
+        y: e.pageY,
+        r: 0,
+        fill: currentColor,
+        stroke: {
+          width: 3,
+          color: currentColor,
+        },
+        opacity: 1,
+      });
+      this.rippleAnimation = anime({
+        targets: this.ripple,
+        r: rippleSize,
+        opacity: {
+          value: 0,
+          delay: 400,
+          duration: 600,
+        },
+        easing: 'easeOutExpo',
+        duration: 900,
+        complete: this.removeAnimation,
+      });
+    }.bind(this);
+
+    // Create particle objects and animation
+    const funcParticles = function () {
+      this.particles = [];
+      for (let i = 0; i < 20; i += 1) {
+        const particle = new this.Circle({
+          x: e.pageX,
+          y: e.pageY,
+          fill: currentColor,
+          r: anime.random(30, 60),
+        });
+        this.particles.push(particle);
+      }
+      this.particlesAnimation = anime({
+        targets: this.particles,
+        x(particle) {
+          return particle.x + anime.random(rippleSize, -rippleSize);
+        },
+        y(particle) {
+          return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
+        },
+        r: 0,
+        easing: 'easeOutExpo',
+        duration: anime.random(1000, 1300),
+        complete: this.removeAnimation,
+      });
+    }.bind(this);
 
     // Create brick animation and add method for returning bricks
-    const bricks = document.querySelectorAll('.brick:not(.current_post)');
-    for (const brick of bricks) {
-      brick.draw = this.clonePost(newPage);
-    }
+    const funcBricksplosion = () => {
+      this.bricks = document.querySelectorAll('.brick:not(.current_post)');
+      for (const brick of this.bricks) {
+        brick.draw = this.clonePost(newPage);
+      }
+      this.brickAnimation = anime({
+        targets: this.bricks,
+        rotate: 500,
+        translateX() {
+          const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
+            (Math.floor(Math.random() * 600) + 600);
+          return random;
+        },
+        translateY() {
+          const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
+            (Math.floor(Math.random() * 300) + 600);
+          return random;
+        },
+        duration() {
+          return anime.random(500, 900); // Will set a random value from 50 to 100 to each divs
+        },
+        easing: 'linear',
+        complete: this.removeAnimation,
+      });
+    };
 
-    const brickAnimation = anime({
-      targets: bricks,
-      rotate: 500,
-      translateX() {
-        const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
-          (Math.floor(Math.random() * 600) + 600);
-        return random;
-      },
-      translateY() {
-        const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
-          (Math.floor(Math.random() * 300) + 600);
-        return random;
-      },
-      duration() {
-        return anime.random(500, 900); // Will set a random value from 50 to 100 to each divs
-      },
-      easing: 'linear',
-      complete: removeAnimation,
-    });
-    Logger.log('On the launchpad');
     // Change the class, and enque the animations
+    Logger.log('On the launchpad');
     if (!newPage.hasClass(this.classBig)) {
+      funcPageFiller();
+      funcRipple();
+      funcParticles();
+      funcBricksplosion();
       newPage.addClass(this.classBig);
       this.clonePost(newPage);
-      this.animations.push(brickAnimation, fillAnimation, rippleAnimation, particlesAnimation);
+      this.animations.push(
+        this.brickAnimation,
+        this.fillAnimation,
+        this.rippleAnimation,
+        this.particlesAnimation
+      );
     } else {
       Logger.log('We.re getting outta here');
+      funcRipple();
+      funcParticles();
       newPage.removeClass(this.classBig);
-      removeAnimation(fillAnimation);
-      removeAnimation(brickAnimation);
-      this.animations.push(fillAnimation, rippleAnimation, particlesAnimation);
+      removeAnimation(this.fillAnimation);
+      removeAnimation(this.brickAnimation);
+      this.animations.push(this.rippleAnimation, this.particlesAnimation);
     }
   } // handleEvent
-
-  colorPicker() {
-    const colors = this.colors;
-    const nextIndex = this.index < (colors.length - 1) ? this.index + 1 : 0;
-    const currentCol = colors[this.index];
-    const nextCol = colors[nextIndex];
-    Logger.log(`Current color is ${this.index}, the next will be ${nextIndex}`);
-    this.index = nextIndex;
-    return {
-      next: nextCol,
-      current: currentCol,
-    };
-  }
 
   Circle(opts) {
     Object.assign(this, opts);
