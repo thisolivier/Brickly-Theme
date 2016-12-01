@@ -12,7 +12,6 @@ export default class LoadPost {
         LoadPost.element = element;
         LoadPost.event = event;
         LoadPost.conductor();
-        return false; // prevent default action and stop event propagation
       }
       return true;
     };
@@ -66,6 +65,7 @@ export default class LoadPost {
     LoadPost.myExplosion.pause();
   }
 
-  static expandPost() {
+  static expandPost(brick) {
+    $(brick).css('z-index', 200);
   }
 }

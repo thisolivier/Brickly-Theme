@@ -6,23 +6,13 @@ export default class FillCanvas {
   constructor() {
     this.c = document.getElementById('backgroundPost');
     this.cxt = this.c.getContext('2d');
+    this.toBind = $('.magicLink');
     this.cH = 0;
     this.cW = 0;
-    this.bgColor = 'transparent';
+    this.bgColor = 'rgba(0, 0, 0, 0)';
     this.animations = [];
     this.circles = [];
-    this.colorPicker = function () {
-      const colors = ['white', 'black'];
-      const nextIndex = this.index < (colors.length - 1) ? this.index + 1 : 0;
-      const currentCol = colors[this.index];
-      const nextCol = colors[nextIndex];
-      Logger.log(`Current color is ${this.index}, the next will be ${nextIndex}`);
-      this.index = nextIndex;
-      return {
-        next: nextCol,
-        current: currentCol,
-      };
-    };
+    this.colors = ['black', 'rgba(0, 0, 0, 0)'];
     this.colorPicker.index = 0;
   }
 
@@ -36,41 +26,17 @@ export default class FillCanvas {
     this.animate();
   }
 
-  Circle(opts) {
-    Object.assign(this, opts);
-  }
-  addCircleMethod() {
-    this.Circle.prototype.draw = function (cxt) {
-      cxt.globalAlpha = this.opacity || 1;
-      cxt.beginPath();
-      cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-      if (this.stroke) {
-        cxt.strokeStyle = this.stroke.color;
-        cxt.lineWidth = this.stroke.width;
-        cxt.stroke();
-      }
-      if (this.fill) {
-        cxt.fillStyle = this.fill;
-        cxt.fill();
-      }
-      cxt.closePath();
-      cxt.globalAlpha = 1;
-    };
-  }
-
-  calcPageFillRadius(x, y) {
-    const l = Math.max(x - 0, this.cW - x);
-    const h = Math.max(y - 0, this.cH - y);
-    return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
-  }
-
   addClickListeners() {
-    this.c.addEventListener('touchstart',
-      (e) => { this.handleEvent(e); }
-    );
-    this.c.addEventListener('mousedown',
-      (e) => { this.handleEvent(e); }
-    );
+    const handleEvent = this.handleEvent;
+
+    $(this.toBind).each((i, x) => {
+      x.addEventListener('touchstart',
+        (e) => { handleEvent.call(this, e); }
+      );
+      x.addEventListener('mousedown',
+        (e) => { handleEvent.call(this, e); }
+      );
+    });
   }
 
   handleEvent(e) {
@@ -151,7 +117,51 @@ export default class FillCanvas {
       duration: anime.random(1000, 1300),
       complete: removeAnimation,
     });
+    $(this.c).css('z-index', 150);
     this.animations.push(fillAnimation, rippleAnimation, particlesAnimation);
+    // return false; // prevent default action and stop event propagation
+  }
+
+  colorPicker() {
+    const colors = this.colors;
+    const nextIndex = this.index < (colors.length - 1) ? this.index + 1 : 0;
+    const currentCol = colors[this.index];
+    const nextCol = colors[nextIndex];
+    Logger.log(`Current color is ${this.index}, the next will be ${nextIndex}`);
+    this.index = nextIndex;
+    return {
+      next: nextCol,
+      current: currentCol,
+    };
+  }
+
+  Circle(opts) {
+    Object.assign(this, opts);
+  }
+
+  addCircleMethod() {
+    this.Circle.prototype.draw = function (cxt) {
+      cxt.globalAlpha = this.opacity || 1;
+      cxt.beginPath();
+      cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+      if (this.stroke) {
+        cxt.strokeStyle = this.stroke.color;
+        cxt.lineWidth = this.stroke.width;
+        cxt.stroke();
+      }
+      if (this.fill) {
+        cxt.fillStyle = this.fill;
+        cxt.fill();
+      }
+      cxt.closePath();
+      cxt.globalAlpha = 1;
+    };
+  }
+
+  calcPageFillRadius(x, y) {
+    const l = Math.max(x - 0, this.cW - x);
+    const h = Math.max(y - 0, this.cH - y);
+    return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
   }
 
   extend(a, b) {
@@ -159,7 +169,7 @@ export default class FillCanvas {
   }
 
   animate() {
-    const bgColor = () => this.bgColor;
+    const bgColor = this.bgColor;
     const cW = this.cW;
     const cH = this.cH;
     const cxt = this.cxt;
