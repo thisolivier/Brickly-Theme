@@ -14,6 +14,7 @@ export default class FillCanvas {
     this.circles = [];
     this.colors = ['black', 'rgba(0, 0, 0, 0)'];
     this.colorPicker.index = 0;
+    this.zIndex = 150;
   }
 
   init() {
@@ -117,7 +118,7 @@ export default class FillCanvas {
       duration: anime.random(1000, 1300),
       complete: removeAnimation,
     });
-    $(this.c).css('z-index', 150);
+    $(this.c).css('z-index', this.zIndex);
     this.animations.push(fillAnimation, rippleAnimation, particlesAnimation);
     // return false; // prevent default action and stop event propagation
   }

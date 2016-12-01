@@ -8,7 +8,7 @@ export default class LoadPost {
     document.onclick = function (e) {
       const e2 = e || window.event;
       const element = e2.target || e2.srcElement;
-      if (element.tagName === 'A' && element.className === 'magicLink') {
+      if (element.className === 'magicLink') {
         LoadPost.element = element;
         LoadPost.event = event;
         LoadPost.conductor();
@@ -46,15 +46,7 @@ export default class LoadPost {
           (Math.floor(Math.random() * 300) + 600);
         return random;
       },
-      rotate: {
-        value() {
-          const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
-            (Math.floor(Math.random() * 490) + 300);
-          return random;
-        },
-        easing: 'linear',
-      },
-      borderRadius: 8,
+      rotate: 720,
       duration() {
         return anime.random(300, 700); // Will set a random value from 50 to 100 to each divs
       },
@@ -65,7 +57,24 @@ export default class LoadPost {
     LoadPost.myExplosion.pause();
   }
 
-  static expandPost(brick) {
-    $(brick).css('z-index', 200);
+  static expandPost($brick) {
+    Logger.log($brick[0]);
+    const currentPos = $brick[0].getBoundingClientRect();
+    const currentDim = {
+      x: currentPos.right - currentPos.left,
+      y: currentPos.bottom - currentPos.top,
+    };
+    const $clone = $brick.clone(false);
+    $clone.attr('id', 'bigBaby');
+    $clone.css({
+      height: currentDim.y,
+      width: currentDim.x,
+      display: 'block',
+      top: currentPos.top,
+      left: currentPos.left,
+      zIndex: 200,
+      positon: 'absolute',
+    });
+    $clone.appendTop('body');
   }
 }

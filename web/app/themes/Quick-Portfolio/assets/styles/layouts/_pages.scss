@@ -102,7 +102,6 @@ html, body{
     main {
       position: relative;
       display: flex;
-      z-index: 200;
       flex: 0 0 relate($chim-percent, 100);
       flex-flow: row wrap;
       padding: $main-padding-top 0 0;
@@ -116,9 +115,6 @@ html, body{
         color: white;
         border-radius: 0.5em;
         z-index:100;
-        &.current_post{
-          z-index: 160;
-        }
       }
 
       .big_brick {
@@ -184,7 +180,6 @@ html, body{
   #backgroundPost{
     @extend .fillView;
     z-index: 50;
-    //display:none;
   }
 
   .backgroundLanscape {
