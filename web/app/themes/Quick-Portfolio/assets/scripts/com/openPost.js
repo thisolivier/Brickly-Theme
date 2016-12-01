@@ -72,9 +72,11 @@ export default class LoadPost {
       display: 'block',
       top: currentPos.top,
       left: currentPos.left,
-      zIndex: 200,
-      positon: 'absolute',
+      zIndex: 300,
+      position: 'fixed',
+      margin: 0,
     });
-    $clone.appendTop('body');
+    $clone.appendTo('#heightDefined');
+    $('main').css('z-index', 50);
   }
 }
