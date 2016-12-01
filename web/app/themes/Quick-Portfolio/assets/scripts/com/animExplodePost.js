@@ -6,18 +6,21 @@ export default class FillCanvas {
   constructor() {
     this.c = document.getElementById('backgroundPost');
     this.cxt = this.c.getContext('2d');
-    this.toBind = $('.magicLink');
     this.cH = 0;
     this.cW = 0;
-    this.animations = [];
-    this.circles = [];
+
+    this.toBind = $('.magicLink');
+    this.color = { current: 'white', next: 'black' };
     this.classBig = 'current_post';
     this.cloneCheck = true;
+
+    this.animations = [];
+    this.circles = [];
   }
 
   init() {
     Logger.log('begin', 'the expand function');
-    this.resizeCanvas(); // Fix me?
+    this.resizeCanvas(); // Fix me, scoping errors
     this.addMethods(); // Adds methods on bricks and circles to be called when animating
     window.addEventListener('resize', this.resizeCanvas);
     this.addClickListeners(this.toBind); // Adds triggers - animations will add to queue.
@@ -47,10 +50,10 @@ export default class FillCanvas {
       e.preventDefault();
       e = e.touches[0];
     }
-
     // Load variables
-    const currentColor = 'white';
-    const nextColor = 'black';
+    const e2 = e || window.event;
+    const element = e2.target || e2.srcElement;
+    const newPage = $(element).closest('article');
     const targetR = Math.sqrt(
       Math.pow(
         Math.max(e.pageX - 0, this.cW - e.pageX), 2
@@ -60,27 +63,21 @@ export default class FillCanvas {
     );
     const rippleSize = Math.min(200, (this.cW * 0.4));
     const minCoverDuration = 750;
-    const e2 = e || window.event;
-    const element = e2.target || e2.srcElement;
-    const newPage = $(element).closest('article');
-    const removeAnimation = (animation) => {
-      const index = this.animations.indexOf(animation); // indexOf works on what?
-      Logger.log(`Supplimental. Removing animation ${animation} with index of ${index}`);
-      if (index > -1) this.animations.splice(index, 1);
-    };
-    const funcPageFiller = function () {
+
+    // Create radial BG animation
+    const funcBgFiller = function () {
       // Create page filling obj and animation
       this.pageFill = new this.Circle({
         x: e.pageX,
         y: e.pageY,
         r: 0,
-        fill: nextColor,
+        fill: this.color.next,
       });
-      this.fillAnimation = anime({
+      this.animBg = anime({
         targets: this.pageFill,
         r: targetR,
         duration: Math.max(targetR / 2, minCoverDuration),
-        easing: 'easeOutQuart',
+        easing: 'easeInQuart',
       });
     }.bind(this);
 
@@ -90,14 +87,14 @@ export default class FillCanvas {
         x: e.pageX,
         y: e.pageY,
         r: 0,
-        fill: currentColor,
+        fill: this.color.current,
         stroke: {
           width: 3,
-          color: currentColor,
+          color: this.color.current,
         },
         opacity: 1,
       });
-      this.rippleAnimation = anime({
+      this.animRipple = anime({
         targets: this.ripple,
         r: rippleSize,
         opacity: {
@@ -118,12 +115,12 @@ export default class FillCanvas {
         const particle = new this.Circle({
           x: e.pageX,
           y: e.pageY,
-          fill: currentColor,
+          fill: this.color.current,
           r: anime.random(30, 60),
         });
         this.particles.push(particle);
       }
-      this.particlesAnimation = anime({
+      this.animPartl = anime({
         targets: this.particles,
         x(particle) {
           return particle.x + anime.random(rippleSize, -rippleSize);
@@ -138,58 +135,56 @@ export default class FillCanvas {
       });
     }.bind(this);
 
-    // Create brick animation and add method for returning bricks
-    const funcBricksplosion = () => {
+    // Create brick animation
+    const funcBricksplosion = function () {
       this.bricks = document.querySelectorAll('.brick:not(.current_post)');
-      for (const brick of this.bricks) {
-        brick.draw = this.clonePost(newPage);
-      }
-      this.brickAnimation = anime({
+      this.animBrick = anime({
         targets: this.bricks,
-        rotate: 500,
+        rotate() {
+          anime.random(100, 560);
+        },
         translateX() {
-          const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
-            (Math.floor(Math.random() * 600) + 600);
-          return random;
+          return anime.random(targetR, -targetR);
         },
         translateY() {
-          const random = (Math.floor(Math.random() * 2) ? -1 : 1) *
-            (Math.floor(Math.random() * 300) + 600);
-          return random;
+          return anime.random(targetR * 1.15, -targetR * 1.15);
         },
-        duration() {
-          return anime.random(500, 900); // Will set a random value from 50 to 100 to each divs
-        },
-        easing: 'linear',
+        duration: 1000,
+        easing: 'easeOutQuint',
         complete: this.removeAnimation,
       });
-    };
+    }.bind(this);
 
     // Change the class, and enque the animations
     Logger.log('On the launchpad');
-    if (!newPage.hasClass(this.classBig)) {
-      funcPageFiller();
+    if (!newPage.is('#bigBaby')) {
+      Logger.log(newPage.attr('id'));
+      funcBgFiller();
       funcRipple();
       funcParticles();
       funcBricksplosion();
-      newPage.addClass(this.classBig);
       this.clonePost(newPage);
       this.animations.push(
-        this.brickAnimation,
-        this.fillAnimation,
-        this.rippleAnimation,
-        this.particlesAnimation
+        this.animBrick,
+        this.animBg,
+        this.animRipple,
+        this.animPartl
       );
     } else {
-      Logger.log('We.re getting outta here');
       funcRipple();
       funcParticles();
-      newPage.removeClass(this.classBig);
-      removeAnimation(this.fillAnimation);
-      removeAnimation(this.brickAnimation);
-      this.animations.push(this.rippleAnimation, this.particlesAnimation);
+      // newPage.removeClass(this.classBig);
+      Logger.log(`We have one to chop off, it's ${this.animBg}`);
+      this.removeAnimation(this.animBg);
+      this.removeAnimation(this.animBrick);
+      this.animations.push(this.animRipple, this.animPartl);
     }
   } // handleEvent
+
+  removeAnimation(animation) {
+    const index = () => this.animations.indexOf(animation);
+    if (index > -1) this.animations.splice(index, 1);
+  }
 
   Circle(opts) {
     Object.assign(this, opts);
@@ -253,7 +248,7 @@ export default class FillCanvas {
       };
       const $clone = $brick.clone(true, true);
       $clone.attr('id', 'bigBaby');
-      this.addClickListeners($clone);
+      this.addClickListeners($clone.find('.magicLink'));
       $clone.css({
         width: currentDim.x,
         top: currentPos.top,
