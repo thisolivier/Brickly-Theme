@@ -3,8 +3,7 @@ import 'jquery';
 import ChimneyStack from '../com/chimney';
 import BrickAnimation from '../com/animBrickFall';
 import BackgroundLanscape from '../com/parallaxBg';
-import OpenPost from '../com/openPost';
-import FillCanvas from '../com/animExpandBg';
+import FillCanvas from '../com/animExplodePost';
 
 export default {
   init() {
@@ -14,10 +13,8 @@ export default {
 
   finalize() {
     BrickAnimation.animate();
-    OpenPost.binder();
-
-    const fillCanvas = new FillCanvas();
-    fillCanvas.init();
+    const animator = new FillCanvas();
+    animator.init();
 
     const horizon = new BackgroundLanscape('.backgroundLanscape');
     /* eslint-disable*/
