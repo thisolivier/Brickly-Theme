@@ -18,11 +18,11 @@ export default class BrickAnimation {
         value: '-100vw',
         delay(el, index) {
           const key = 'delay';
-          const value = (150 * (Math.random() + 0.1));
+          const value = (190 * (Math.random() + 0.1));
           delayTot += value;
           return delayTot;
         },
-        duration: 600,
+        duration: 1100,
         easing: 'easeInExpo',
       },
     });

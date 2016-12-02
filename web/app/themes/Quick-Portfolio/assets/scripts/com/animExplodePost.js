@@ -77,7 +77,7 @@ export default class FillCanvas {
         targets: this.pageFill,
         r: targetR,
         duration: Math.max(targetR / 2, minCoverDuration),
-        easing: 'easeInQuart',
+        easing: 'easeInCubic',
       });
     }.bind(this);
 
@@ -99,11 +99,11 @@ export default class FillCanvas {
         r: rippleSize,
         opacity: {
           value: 0,
-          delay: 400,
-          duration: 600,
+          delay: 200,
+          duration: 500,
         },
         easing: 'easeOutExpo',
-        duration: 900,
+        duration: 700,
         complete: this.removeAnimation,
       });
     }.bind(this);
@@ -116,7 +116,7 @@ export default class FillCanvas {
           x: e.pageX,
           y: e.pageY,
           fill: this.color.current,
-          r: anime.random(30, 60),
+          r: anime.random(10, 20),
         });
         this.particles.push(particle);
       }
@@ -126,11 +126,16 @@ export default class FillCanvas {
           return particle.x + anime.random(rippleSize, -rippleSize);
         },
         y(particle) {
-          return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
+          return particle.y + anime.random(rippleSize, -rippleSize);
         },
-        r: 0,
-        easing: 'easeOutExpo',
-        duration: anime.random(1000, 1300),
+        r: {
+          value: 0,
+          delay: 400,
+          duration: 400,
+          easing: 'easeOutCubic',
+        },
+        easing: 'easeInOutQuart',
+        duration: anime.random(600, 800),
         complete: this.removeAnimation,
       });
     }.bind(this);
@@ -140,17 +145,18 @@ export default class FillCanvas {
       this.bricks = document.querySelectorAll('.brick:not(.current_post)');
       this.animBrick = anime({
         targets: this.bricks,
-        rotate() {
-          anime.random(100, 560);
-        },
         translateX() {
-          return anime.random(targetR, -targetR);
+          return anime.random(targetR, -targetR) * 2;
         },
         translateY() {
-          return anime.random(targetR * 1.15, -targetR * 1.15);
+          return anime.random(targetR * 1.15, -targetR * 1.15) * 2;
         },
-        duration: 1000,
-        easing: 'easeOutQuint',
+        rotate() {
+          return anime.random(200, 500);
+        },
+        duration: 600,
+        easing: 'easeInOutQuint',
+        delay: 200,
         complete: this.removeAnimation,
       });
     }.bind(this);
@@ -161,14 +167,12 @@ export default class FillCanvas {
       Logger.log(newPage.attr('id'));
       funcBgFiller();
       funcRipple();
-      funcParticles();
       funcBricksplosion();
       this.clonePost(newPage);
       this.animations.push(
         this.animBrick,
         this.animBg,
         this.animRipple,
-        this.animPartl
       );
     } else {
       funcRipple();
@@ -239,6 +243,19 @@ export default class FillCanvas {
   }
 
   clonePost($brick) {
+    const funcBigPostAnim = function (clone) {
+      this.animBigPost = anime({
+        targets: clone[0],
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '50%',
+        duration: 700,
+        delay: 500,
+        easing: 'easeInOutSine',
+      });
+    }.bind(this);
+
     if (this.cloneCheck) {
       this.cloneCheck = false;
       const currentPos = $brick[0].getBoundingClientRect();
@@ -247,16 +264,29 @@ export default class FillCanvas {
         y: currentPos.bottom - currentPos.top,
       };
       const $clone = $brick.clone(true, true);
+      let percent = (currentDim.x / window.innerWidth) * 100;
+      percent = `${percent}%`;
       $clone.attr('id', 'bigBaby');
       this.addClickListeners($clone.find('.magicLink'));
+
       $clone.css({
-        width: currentDim.x,
+        width: percent,
         top: currentPos.top,
         left: currentPos.left,
         transition: 'all 2s',
       });
       $clone.appendTo('#heightDefined');
       $('main').css('z-index', 50);
+      funcBigPostAnim($clone);
+      $('#parent').hover(() => {
+        const a = $($clone).find('.magicLink').first();
+        a.css('position', 'relative').animate({ left: $(this).width() - a.width() });
+      }, () => {
+        $(this).find('a').first().animate({ left: 0 });
+      });
+      this.animations.push(
+        this.animBigPost,
+      );
     }
   }
 }
