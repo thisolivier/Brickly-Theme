@@ -136,7 +136,7 @@ export default class FillCanvas {
         },
         easing: 'easeInOutQuart',
         duration: anime.random(600, 800),
-        complete: this.removeAnimation,
+        complete: this.removeAnimation(this.animBrick),
       });
     }.bind(this);
 
@@ -157,7 +157,7 @@ export default class FillCanvas {
         duration: 600,
         easing: 'easeInOutQuint',
         delay: 200,
-        complete: this.removeAnimation,
+        complete: this.removeAnimation(this.animBrick),
       });
     }.bind(this);
 
@@ -186,8 +186,10 @@ export default class FillCanvas {
   } // handleEvent
 
   removeAnimation(animation) {
+    Logger.log(`Animation is ${animation}`);
     const index = () => this.animations.indexOf(animation);
     if (index > -1) this.animations.splice(index, 1);
+    Logger.log(`Index is ${index}`);
   }
 
   Circle(opts) {
@@ -243,7 +245,7 @@ export default class FillCanvas {
   }
 
   clonePost($brick) {
-    const funcBigPostAnim = function (clone) {
+    const funcPostAnimations = function (clone) {
       this.animBigPost = anime({
         targets: clone[0],
         top: 0,
@@ -253,6 +255,13 @@ export default class FillCanvas {
         duration: 700,
         delay: 500,
         easing: 'easeInOutSine',
+        begin: this.funcSortSizing,
+      });
+      const a = $(clone).find('.magicLink').first();
+      a.css('position', 'relative');
+      this.funcSortSizing = clone2 => anime({
+        targets: a,
+        left: $(clone2).width() - a.width(),
       });
     }.bind(this);
 
@@ -268,22 +277,18 @@ export default class FillCanvas {
       percent = `${percent}%`;
       $clone.attr('id', 'bigBaby');
       this.addClickListeners($clone.find('.magicLink'));
-
+      Logger.log(`Our percent is ${percent}`);
       $clone.css({
         width: percent,
+        backgroundColor: 'transparent',
         top: currentPos.top,
         left: currentPos.left,
         transition: 'all 2s',
+        zIndex: 90,
       });
       $clone.appendTo('#heightDefined');
       $('main').css('z-index', 50);
-      funcBigPostAnim($clone);
-      $('#parent').hover(() => {
-        const a = $($clone).find('.magicLink').first();
-        a.css('position', 'relative').animate({ left: $(this).width() - a.width() });
-      }, () => {
-        $(this).find('a').first().animate({ left: 0 });
-      });
+      funcPostAnimations($clone);
       this.animations.push(
         this.animBigPost,
       );
