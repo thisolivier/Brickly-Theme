@@ -3,10 +3,6 @@ import anime from 'animejs';
 // import Logger from '../util/logger';
 
 export default class BrickAnimation {
-  // The methods in here seem to be working,
-  // except the animations are not being applied to the elements
-  // I'm trying to call the animate function on the window
-
   static animate() {
     /* eslint-disable object-shorthand, no-unused-vars, no-undef */
     const targets = $('.brick').toArray().reverse();
@@ -15,18 +11,24 @@ export default class BrickAnimation {
       targets: targets,
       direction: 'reverse',
       translateY: {
-        value: '-100vw',
+        value(el) {
+          return (el.getBoundingClientRect().bottom * -1);
+        },
         delay(el, index) {
           const key = 'delay';
-          const value = (190 * (Math.random() + 0.1));
+          const value = (
+            (el.getBoundingClientRect().bottom * 0.2) +
+            (el.getBoundingClientRect().bottom * ((Math.random() * 0.1) - 0.05))
+          );
           delayTot += value;
-          return delayTot;
+          return (delayTot);
         },
-        duration: 1100,
-        easing: 'easeInExpo',
+        duration(el, index) {
+          return (el.getBoundingClientRect().bottom) * 0.9;
+        },
+        easing: 'easeInQuart',
       },
     });
-
     /* eslint-enable object-shorthand, no-unused-vars, no-undef */
   }
 }
