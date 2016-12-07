@@ -17,21 +17,26 @@ html, body{
 
     header {
       flex: 1 0 30%;
-      z-index: 100;
       &.sitewide{
         padding-top: $main-padding-top/1.5;
       }
     }
-    #theCloud{
-      display:inline-block;
+    #theCloud {
+      display: inline-block;
       text-align: center;
       background-color: white;
-      padding:1.6em;
+      padding: 1.6em;
       align-self: flex-start;
       border-radius: 9999px;
-      position:relative;
-      min-width:80%;
-      max-width: auto;
+      position: relative;
+      min-width: 80%;
+      z-index: 120;
+      transition: transform 0.5s ease-out;
+
+      &.shrink {
+        transform-origin: left top;
+        transform: scale(0.7);
+      }
 
       .brand {
         display:inline-block;
@@ -40,10 +45,11 @@ html, body{
 
         a {
           display: block;
-          z-index:30;
-          color:black;
+          z-index: 30;
+          color: black;
           text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.2);
-          position:relative;
+          position: relative;
+          opacity: 1;
           top: -0.1em;
           left: -0.1em;
           transition: all 0.5s;
@@ -58,8 +64,6 @@ html, body{
         }
       }
       .backgroundCloud {
-        z-index:20;
-
         .ball{
           display:block;
           position:absolute;
@@ -67,6 +71,7 @@ html, body{
           right:0;
           width:100%;
           min-width: 1em;
+          pointer-events: none;
 
           &:first-child{ max-width: 1.45em; }
           &:nth-child(2){ max-width: 16rem; }
@@ -151,6 +156,7 @@ html, body{
         h2{
           margin:0 0 0.2em;
           font-size: 1.8rem;
+          cursor: pointer;
         }
         time {
           display:none;
@@ -166,17 +172,30 @@ html, body{
         }
       }
 
-      .entry-content{
+      .entry-content {
         display: none;
         opacity: 0;
       }
     } // article
-    #bigBaby{
-      margin: 0;
-      transition: all 2s;
-      zIndex: 300;
+    #bigBaby {
       position: fixed;
       display: block;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      transition: all 2s;
+      z-index: 100;
+      background-color: transparent;
+
+      &.invisible {
+        opacity: 0;
+        transform-origin: top center;
+        transform: scale(0.8);
+        transition: all 2s;
+      }
     }
   } // .content.row
   .fillView{

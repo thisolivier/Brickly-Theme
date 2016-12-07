@@ -243,50 +243,37 @@ export default class FillCanvas {
   }
 
   clonePost($brick) {
-    const funcBigPostAnim = function (clone) {
-      this.animBigPost = anime({
-        targets: clone[0],
-        top: 0,
-        left: 0,
-        right: 0,
-        width: '50%',
-        duration: 700,
-        delay: 500,
-        easing: 'easeInOutSine',
-      });
-    }.bind(this);
-
     if (this.cloneCheck) {
       this.cloneCheck = false;
-      const currentPos = $brick[0].getBoundingClientRect();
-      const currentDim = {
-        x: currentPos.right - currentPos.left,
-        y: currentPos.bottom - currentPos.top,
-      };
       const $clone = $brick.clone(true, true);
-      let percent = (currentDim.x / window.innerWidth) * 100;
-      percent = `${percent}%`;
+      const $cloud = $('#theCloud');
+      const $cloudLink = $cloud.find('a');
+      const makeVisible = function () {
+        $clone.removeClass('invisible');
+      };
+      const funcHideChange = function () {
+        this.animHideChange = anime({
+          targets: $cloudLink[0],
+          opacity: 0,
+          duration: 500,
+          complete() {
+            $cloud.addClass('shrink');
+            $cloudLink.html('Home');
+            makeVisible();
+          },
+        });
+      }.bind(this);
       $clone.attr('id', 'bigBaby');
-      this.addClickListeners($clone.find('.magicLink'));
+      $clone.addClass('invisible');
 
-      $clone.css({
-        width: percent,
-        top: currentPos.top,
-        left: currentPos.left,
-        transition: 'all 2s',
-      });
-      $clone.appendTo('#heightDefined');
+      funcHideChange();
       $('main').css('z-index', 50);
-      funcBigPostAnim($clone);
-      $('#parent').hover(() => {
-        const a = $($clone).find('.magicLink').first();
-        a.css('position', 'relative').animate({ left: $(this).width() - a.width() });
-      }, () => {
-        $(this).find('a').first().animate({ left: 0 });
-      });
-      this.animations.push(
-        this.animBigPost,
-      );
+      /* eslint prefer-arrow-callback: "warn" */
+      this.addClickListeners($clone);
+      this.addClickListeners($cloudLink);
+      $clone.appendTo('#heightDefined');
+      this.animations.push(this.animHideChange);
     }
   }
+
 }
