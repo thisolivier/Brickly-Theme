@@ -248,64 +248,14 @@ export default class FillCanvas {
   }
 
   clonePost($brick) {
-    const funcSortSizing = function (clone) {
-      const a = $(clone).find('.magicLink');
-      const aWidth = a.width();
-      const cloWidth = $(clone).width();
-      Logger.log(`Far and few, far and few are the lands a with ${aWidth}, and a clone width ${cloWidth}`);
-      this.animTypography = anime({
-        targets: a[0],
-        translateX: '50vw',
-        marginLeft: -aWidth / 2,
-        duration: 2000,
-        delay: 1000,
-        easing: 'easeInCubic',
-      });
-    }.bind(this);
-    const funcPostAnimations = function (clone) {
-      this.animBigPost = anime({
-        targets: clone,
-        top: 0,
-        left: 0,
-        right: 0,
-        width: '50%',
-        duration: 600,
-        delay: 500,
-        easing: 'easeInOutSine',
-
-      });
-    }.bind(this);
-
     if (this.cloneCheck) {
       this.cloneCheck = false;
-      const currentPos = $brick[0].getBoundingClientRect();
-      const currentDim = {
-        x: currentPos.right - currentPos.left,
-        y: currentPos.bottom - currentPos.top,
-      };
       const $clone = $brick.clone(true, true);
-      let percent = (currentDim.x / window.innerWidth) * 100;
-      percent = `${percent}%`;
       $clone.attr('id', 'bigBaby');
       this.addClickListeners($clone.find('.magicLink'));
       this.addClickListeners(document.getElementById('backgroundPost'));
-      Logger.log(`Our percent is ${percent}`);
-      $clone.css({
-        width: percent,
-        backgroundColor: 'transparent',
-        top: currentPos.top,
-        left: currentPos.left,
-        transition: 'all 2s',
-        zIndex: 90,
-      });
       $clone.appendTo('#heightDefined');
       $('main').css('z-index', 50);
-      funcPostAnimations($clone[0]);
-      funcSortSizing($clone[0]);
-      this.animations.push(
-        this.animBigPost,
-        this.animTypography,
-      );
     }
   }
 }

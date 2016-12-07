@@ -8,25 +8,23 @@ export default class BrickAnimation {
     const targets = $('.brick').toArray().reverse();
     let delayTot = 0;
     this.anime = anime({
-      targets: targets,
       direction: 'reverse',
-      translateY: {
-        value(el) {
-          return (el.getBoundingClientRect().bottom * -1);
-        },
-        delay(el, index) {
-          const key = 'delay';
-          const value = (
-            (el.getBoundingClientRect().bottom * 0.2) +
-            (el.getBoundingClientRect().bottom * ((Math.random() * 0.1) - 0.05))
-          );
-          delayTot += value;
-          return (delayTot);
-        },
-        duration(el, index) {
-          return (el.getBoundingClientRect().bottom) * 0.9;
-        },
-        easing: 'easeInQuart',
+      easing: 'easeOutQuart',
+      targets: targets,
+      translateY(el) {
+        return (el.getBoundingClientRect().bottom * -1);
+      },
+      delay(el, index) {
+        const key = 'delay';
+        const value = (
+          (el.getBoundingClientRect().bottom * 0.1) +
+          (el.getBoundingClientRect().bottom * ((Math.random() * 0.2) - 0.05))
+        );
+        delayTot += value;
+        return (delayTot);
+      },
+      duration(el, index) {
+        return (10 + ((el.getBoundingClientRect().bottom) * 0.9));
       },
     });
     /* eslint-enable object-shorthand, no-unused-vars, no-undef */
