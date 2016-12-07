@@ -8,7 +8,7 @@ html, body{
 .home {
   .wrap{
     padding: 0 10%;
-    // overflow-x: hidden;
+    overflow-x: hidden;
   }
   .content.row{
     margin: 0;
@@ -208,6 +208,7 @@ html, body{
   #backgroundPost{
     @extend .fillView;
     z-index: 50;
+    max-width: 100vw;
   }
 
   .backgroundLanscape {

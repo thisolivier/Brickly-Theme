@@ -20,7 +20,7 @@ export default class FillCanvas {
 
   init() {
     Logger.log('begin', 'the expand function');
-    this.resizeCanvas(); // Fix me, scoping errors
+    this.resizeCanvas.apply(this); // Fix me, scoping errors
     this.addMethods(); // Adds methods on bricks and circles to be called when animating
     window.addEventListener('resize', this.resizeCanvas);
     this.addClickListeners(this.toBind); // Adds triggers - animations will add to queue.
@@ -68,15 +68,15 @@ export default class FillCanvas {
     const minCoverDuration = 750;
 
     // Create radial BG animation
-    const funcBgFiller = function () {
+    const funcBgBlack = function () {
       // Create page filling obj and animation
       this.pageFill = new this.Circle({
         x: e.pageX,
         y: e.pageY,
         r: 0,
-        fill: this.color.next,
+        fill: 'black',
       });
-      this.animBg = anime({
+      this.animBgBlack = anime({
         targets: this.pageFill,
         r: targetR,
         duration: Math.max(targetR / 2, minCoverDuration),
@@ -166,25 +166,23 @@ export default class FillCanvas {
 
     // Change the class, and enque the animations
 
-    if ($(element).is('#backgroundPost')) {
+    if ($(element).is('#bigBaby')) {
       Logger.log(`Our new page will be ${newPage.attr('id')}`);
-      Logger.log('background post');
       funcRipple();
       funcParticles();
       this.animations.push(this.animRipple, this.animPartl);
-    } else if ($(element).is('#closeDown')) {
       this.removeAnimation(this.animBg);
       this.removeAnimation(this.animBrick);
     } else {
       Logger.log(`Our new page is ${newPage.attr('class')}`);
-      funcBgFiller();
+      funcBgBlack();
       funcRipple();
       funcBricksplosion();
       this.clonePost(newPage);
       this.animations.push(
-        this.animBrick,
-        this.animBg,
+        this.animBgBlack,
         this.animRipple,
+        this.animBrick,
       );
     }
   } // handleEvent
@@ -241,10 +239,9 @@ export default class FillCanvas {
   resizeCanvas() {
     this.cW = window.innerWidth;
     this.cH = window.innerHeight;
-    const cxt = this.cxt;
-    $(this.c).width = this.cW * window.devicePixelRatio;
-    $(this.c).height = this.cH * window.devicePixelRatio;
-    cxt.scale(window.devicePixelRatio, window.devicePixelRatio);
+    this.cxt.scale(devicePixelRatio, devicePixelRatio);
+    $(this.c).width = this.cW * devicePixelRatio;
+    $(this.c).height = this.cH * devicePixelRatio;
   }
 
   clonePost($brick) {
@@ -253,7 +250,7 @@ export default class FillCanvas {
       const $clone = $brick.clone(true, true);
       $clone.attr('id', 'bigBaby');
       this.addClickListeners($clone.find('.magicLink'));
-      this.addClickListeners(document.getElementById('backgroundPost'));
+      this.addClickListeners($clone);
       $clone.appendTo('#heightDefined');
       $('main').css('z-index', 50);
     }

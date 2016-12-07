@@ -12,7 +12,7 @@ export default class BrickAnimation {
       easing: 'easeOutQuart',
       targets: targets,
       translateY(el) {
-        return (el.getBoundingClientRect().bottom * -1);
+        return (el.getBoundingClientRect().bottom * -2);
       },
       delay(el, index) {
         const key = 'delay';
