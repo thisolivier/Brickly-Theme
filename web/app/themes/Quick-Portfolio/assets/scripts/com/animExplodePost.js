@@ -104,7 +104,7 @@ export default class FillCanvas {
         },
         easing: 'easeOutExpo',
         duration: 700,
-        complete: this.removeAnimation,
+        complete: this.removeAnimation(this.animRipple),
       });
     }.bind(this);
 
@@ -120,7 +120,7 @@ export default class FillCanvas {
         });
         this.particles.push(particle);
       }
-      this.animPartl = anime({
+      this.animParticles = anime({
         targets: this.particles,
         x(particle) {
           return particle.x + anime.random(rippleSize, -rippleSize);
@@ -136,7 +136,7 @@ export default class FillCanvas {
         },
         easing: 'easeInOutQuart',
         duration: anime.random(600, 800),
-        complete: this.removeAnimation(this.animBrick),
+        complete: this.removeAnimation(this.animParticles),
       });
     }.bind(this);
 
@@ -181,13 +181,12 @@ export default class FillCanvas {
       Logger.log(`We have one to chop off, it's ${this.animBg}`);
       this.removeAnimation(this.animBg);
       this.removeAnimation(this.animBrick);
-      this.animations.push(this.animRipple, this.animPartl);
+      this.animations.push(this.animRipple, this.animParticles);
     }
   } // handleEvent
 
   removeAnimation(animation) {
-    Logger.log(`Animation is ${animation}`);
-    const index = () => this.animations.indexOf(animation);
+    const index = this.animations.indexOf(animation);
     if (index > -1) this.animations.splice(index, 1);
     Logger.log(`Index is ${index}`);
   }
