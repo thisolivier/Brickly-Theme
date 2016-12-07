@@ -248,11 +248,34 @@ export default class FillCanvas {
     if (this.cloneCheck) {
       this.cloneCheck = false;
       const $clone = $brick.clone(true, true);
+      const $cloud = $('#theCloud');
+      const $cloudLink = $cloud.find('a');
+      const makeVisible = function () {
+        $clone.removeClass('invisible');
+      };
+      const funcHideChange = function () {
+        this.animHideChange = anime({
+          targets: $cloudLink[0],
+          opacity: 0,
+          duration: 500,
+          complete() {
+            $cloud.addClass('shrink');
+            $cloudLink.html('Home');
+            makeVisible();
+          },
+        });
+      }.bind(this);
       $clone.attr('id', 'bigBaby');
-      this.addClickListeners($clone.find('.magicLink'));
-      this.addClickListeners($clone);
-      $clone.appendTo('#heightDefined');
+      $clone.addClass('invisible');
+
+      funcHideChange();
       $('main').css('z-index', 50);
+      /* eslint prefer-arrow-callback: "warn" */
+      this.addClickListeners($clone);
+      this.addClickListeners($cloudLink);
+      $clone.appendTo('#heightDefined');
+      this.animations.push(this.animHideChange);
     }
   }
+
 }
