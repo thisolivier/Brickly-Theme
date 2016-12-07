@@ -1,5 +1,23 @@
-.entry-content{
-  p:not(:first-child){
-    display:none;
+.home article#bigBaby, .post article{
+  font-size: 1.2em;
+  .sectionBase{
+    max-width: 30em;
+  }
+  header {
+    @extend .sectionBase;
+    display: inline-block;
+    h2 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+  }
+  .entry-content{
+    @extend .sectionBase;
+    h2 {
+      font-size: 1.8em;
+    }
+    p{
+      text-align: left;
+    }
   }
 }

@@ -36,6 +36,7 @@ html, body{
       &.shrink {
         transform-origin: left top;
         transform: scale(0.7);
+        min-width: 60%;
       }
 
       .brand {
@@ -174,27 +175,31 @@ html, body{
 
       .entry-content {
         display: none;
-        opacity: 0;
       }
     } // article
     #bigBaby {
-      position: fixed;
+      position: absolute;
       display: block;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       margin: 0;
+      padding-top: 10vw;
       text-align: center;
-      transition: all 2s;
       z-index: 100;
       background-color: transparent;
+      transform-origin: bottom, center;
+      transition: opacity .5s ease-in, transform 1s ease;
 
       &.invisible {
         opacity: 0;
-        transform-origin: top center;
-        transform: scale(0.8);
-        transition: all 2s;
+        transform: scale(0.9);
+      }
+
+      .entry-content {
+        display:inline-block;
+        opacity: 1;
       }
     }
   } // .content.row

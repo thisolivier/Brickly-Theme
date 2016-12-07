@@ -2,7 +2,7 @@
   <header>
     <h2 class="entry-title"><a class="magicLink"><?php the_title(); ?></a></h2>
     <?php get_template_part('partials/entry-meta'); ?>
-  </header>
+  </header><br>
   <div class="entry-content">
     <?php the_content(); ?>
   </div>

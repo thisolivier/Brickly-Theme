@@ -13,7 +13,6 @@ export default class FillCanvas {
     this.color = { current: 'white', next: 'black' };
     this.classBig = 'current_post';
     this.cloneCheck = true;
-
     this.animations = [];
     this.circles = [];
   }
@@ -245,30 +244,37 @@ export default class FillCanvas {
   clonePost($brick) {
     if (this.cloneCheck) {
       this.cloneCheck = false;
-      const $clone = $brick.clone(true, true);
+      const $clone = $brick.clone(false);
       const $cloud = $('#theCloud');
       const $cloudLink = $cloud.find('a');
       const makeVisible = function () {
         $clone.removeClass('invisible');
       };
+      const funcHideReveal = function () {
+        this.animHideReveal = anime({
+          targets: $cloudLink[0],
+          opacity: 100,
+          duration: 500,
+        });
+      }.bind(this);
+      /* eslint object-shorthand: "warn" */
       const funcHideChange = function () {
         this.animHideChange = anime({
           targets: $cloudLink[0],
           opacity: 0,
-          duration: 500,
-          complete() {
+          duration: 700,
+          delay: 400,
+          complete: function () {
             $cloud.addClass('shrink');
             $cloudLink.html('Home');
             makeVisible();
+            funcHideReveal();
           },
         });
       }.bind(this);
-      $clone.attr('id', 'bigBaby');
-      $clone.addClass('invisible');
-
+      $clone.removeAttr('style').addClass('invisible').attr('id', 'bigBaby');
       funcHideChange();
       $('main').css('z-index', 50);
-      /* eslint prefer-arrow-callback: "warn" */
       this.addClickListeners($clone);
       this.addClickListeners($cloudLink);
       $clone.appendTo('#heightDefined');
