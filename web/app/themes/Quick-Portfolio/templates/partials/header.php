@@ -1,7 +1,7 @@
 <header class="sitewide">
   <div id="theCloud">
     <h1 class="brand">
-      <a href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
+      <a id="cloudLink" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
     </h1>
     <nav class="nav-primary">
       <?php

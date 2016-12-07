@@ -162,25 +162,29 @@ export default class FillCanvas {
 
     // Change the class, and enque the animations
     Logger.log('On the launchpad');
-    if (!newPage.is('#bigBaby')) {
+    if (newPage.is('#bigBaby')) {
+      funcRipple();
+      funcParticles();
+      // newPage.removeClass(this.classBig);
+      Logger.log(`We have one to chop off, it's ${this.animBg}`);
+      this.removeAnimation(this.animBg)
+        .removeAnimation(this.animBrick)
+        .animations.push(this.animRipple, this.animPartl);
+    } else if ($(element).is('#cloudLink')) {
+      e.preventDefault();
+      alert('tits');
+      this.closePost();
+    } else {
       Logger.log(newPage.attr('id'));
       funcBgFiller();
       funcRipple();
       funcBricksplosion();
-      this.clonePost(newPage);
+      this.openPost(newPage);
       this.animations.push(
         this.animBrick,
         this.animBg,
         this.animRipple,
       );
-    } else {
-      funcRipple();
-      funcParticles();
-      // newPage.removeClass(this.classBig);
-      Logger.log(`We have one to chop off, it's ${this.animBg}`);
-      this.removeAnimation(this.animBg);
-      this.removeAnimation(this.animBrick);
-      this.animations.push(this.animRipple, this.animPartl);
     }
   } // handleEvent
 
@@ -240,8 +244,13 @@ export default class FillCanvas {
     this.c.height = this.cH * window.devicePixelRatio;
     this.cxt.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
-
-  clonePost($brick) {
+  closePost() {
+    const $close = $('#bigBaby');
+    $close.css('opacity', 0).remove();
+    this.animBg.reset();
+    this.animBg.pause();
+  }
+  openPost($brick) {
     if (this.cloneCheck) {
       this.cloneCheck = false;
       const $clone = $brick.clone(false);
