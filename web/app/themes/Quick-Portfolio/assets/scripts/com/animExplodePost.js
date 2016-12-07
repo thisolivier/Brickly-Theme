@@ -38,8 +38,11 @@ export default class FillCanvas {
       );
     };
     if (toBind instanceof jQuery) {
+      // If we have a jquery object, bind each of the elements within it
+      // pass the 'addListeners' function the index and the object itself
       $(toBind).each((i, x) => bind(i, x));
     } else {
+      // Pass the 'addListeners' function an index of 0 and the object itself
       bind(0, toBind);
     }
   }
@@ -162,9 +165,18 @@ export default class FillCanvas {
     }.bind(this);
 
     // Change the class, and enque the animations
-    Logger.log('On the launchpad');
-    if (!newPage.is('#bigBaby')) {
-      Logger.log(newPage.attr('id'));
+
+    if ($(element).is('#backgroundPost')) {
+      Logger.log(`Our new page will be ${newPage.attr('id')}`);
+      Logger.log('background post');
+      funcRipple();
+      funcParticles();
+      this.animations.push(this.animRipple, this.animPartl);
+    } else if ($(element).is('#closeDown')) {
+      this.removeAnimation(this.animBg);
+      this.removeAnimation(this.animBrick);
+    } else {
+      Logger.log(`Our new page is ${newPage.attr('class')}`);
       funcBgFiller();
       funcRipple();
       funcBricksplosion();
@@ -174,21 +186,12 @@ export default class FillCanvas {
         this.animBg,
         this.animRipple,
       );
-    } else {
-      funcRipple();
-      funcParticles();
-      // newPage.removeClass(this.classBig);
-      Logger.log(`We have one to chop off, it's ${this.animBg}`);
-      this.removeAnimation(this.animBg);
-      this.removeAnimation(this.animBrick);
-      this.animations.push(this.animRipple, this.animParticles);
     }
   } // handleEvent
 
   removeAnimation(animation) {
     const index = this.animations.indexOf(animation);
     if (index > -1) this.animations.splice(index, 1);
-    Logger.log(`Index is ${index}`);
   }
 
   Circle(opts) {
@@ -238,29 +241,38 @@ export default class FillCanvas {
   resizeCanvas() {
     this.cW = window.innerWidth;
     this.cH = window.innerHeight;
-    this.c.width = this.cW * window.devicePixelRatio;
-    this.c.height = this.cH * window.devicePixelRatio;
-    this.cxt.scale(window.devicePixelRatio, window.devicePixelRatio);
+    const cxt = this.cxt;
+    $(this.c).width = this.cW * window.devicePixelRatio;
+    $(this.c).height = this.cH * window.devicePixelRatio;
+    cxt.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
 
   clonePost($brick) {
+    const funcSortSizing = function (clone) {
+      const a = $(clone).find('.magicLink');
+      const aWidth = a.width();
+      const cloWidth = $(clone).width();
+      Logger.log(`Far and few, far and few are the lands a with ${aWidth}, and a clone width ${cloWidth}`);
+      this.animTypography = anime({
+        targets: a[0],
+        translateX: '50vw',
+        marginLeft: -aWidth / 2,
+        duration: 2000,
+        delay: 1000,
+        easing: 'easeInCubic',
+      });
+    }.bind(this);
     const funcPostAnimations = function (clone) {
       this.animBigPost = anime({
-        targets: clone[0],
+        targets: clone,
         top: 0,
         left: 0,
         right: 0,
         width: '50%',
-        duration: 700,
+        duration: 600,
         delay: 500,
         easing: 'easeInOutSine',
-        begin: this.funcSortSizing,
-      });
-      const a = $(clone).find('.magicLink').first();
-      a.css('position', 'relative');
-      this.funcSortSizing = clone2 => anime({
-        targets: a,
-        left: $(clone2).width() - a.width(),
+
       });
     }.bind(this);
 
@@ -276,6 +288,7 @@ export default class FillCanvas {
       percent = `${percent}%`;
       $clone.attr('id', 'bigBaby');
       this.addClickListeners($clone.find('.magicLink'));
+      this.addClickListeners(document.getElementById('backgroundPost'));
       Logger.log(`Our percent is ${percent}`);
       $clone.css({
         width: percent,
@@ -287,9 +300,11 @@ export default class FillCanvas {
       });
       $clone.appendTo('#heightDefined');
       $('main').css('z-index', 50);
-      funcPostAnimations($clone);
+      funcPostAnimations($clone[0]);
+      funcSortSizing($clone[0]);
       this.animations.push(
         this.animBigPost,
+        this.animTypography,
       );
     }
   }

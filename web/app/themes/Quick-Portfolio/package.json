@@ -74,7 +74,7 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
-    "animejs": "^1.1.1",
+    "animejs": "github:thisolivier/anime#playback",
     "bootstrap": "github:twbs/bootstrap#v4-dev",
     "font-awesome": "^4.6.3",
     "ftellipsis": "^0.2.3",
