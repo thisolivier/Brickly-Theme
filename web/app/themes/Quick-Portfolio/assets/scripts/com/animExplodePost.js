@@ -29,15 +29,13 @@ export default class FillCanvas {
   addClickListeners(toBind) {
     const handleEvent = this.handleEvent;
     const bind = (i, x) => {
-      x.addEventListener('touchstart',
-        (e) => {
-          handleEvent.call(this, e, true);
-        }
+      x.addEventListener(
+        'touchstart',
+        e => handleEvent.call(this, e)
       );
-      x.addEventListener('click',
-        (e) => {
-          handleEvent.call(this, e, true);
-        }
+      x.addEventListener(
+        'click',
+        e => handleEvent.call(this, e)
       );
     };
     if (toBind instanceof jQuery) {
@@ -48,14 +46,14 @@ export default class FillCanvas {
   }
 
   handleEvent(e) {
+    e.preventDefault();
     // Correct the event
     if (e.touches) {
-      e.preventDefault();
       e = e.touches[0];
+    } else {
+      e = e || window.event;
     }
-    // Load variables
-    const e2 = e || window.event;
-    const element = e2.target || e2.srcElement;
+    const element = e.target || e.srcElement;
     const newPage = $(element).closest('article');
     const targetR = Math.sqrt(
       Math.pow(
@@ -174,10 +172,9 @@ export default class FillCanvas {
       this.removeAnimation(this.animBg);
       this.removeAnimation(this.animBrick);
       this.animations.push(this.animRipple, this.animPartl);
-      return false;
     } else if ($(element).is('#cloudLink')) {
+      e.stopPropagation();
       this.closePost();
-      return false;
     }
     Logger.log(newPage.attr('id'));
     funcBgFiller();
@@ -189,7 +186,6 @@ export default class FillCanvas {
       this.animBg,
       this.animRipple,
     );
-    return false;
   } // handleEvent
 
   removeAnimation(animation) {
