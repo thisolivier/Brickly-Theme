@@ -30,10 +30,14 @@ export default class FillCanvas {
     const handleEvent = this.handleEvent;
     const bind = (i, x) => {
       x.addEventListener('touchstart',
-        (e) => { handleEvent.call(this, e); }
+        (e) => {
+          handleEvent.call(this, e, true);
+        }
       );
-      x.addEventListener('mousedown',
-        (e) => { handleEvent.call(this, e); }
+      x.addEventListener('click',
+        (e) => {
+          handleEvent.call(this, e, true);
+        }
       );
     };
     if (toBind instanceof jQuery) {
@@ -167,25 +171,25 @@ export default class FillCanvas {
       funcParticles();
       // newPage.removeClass(this.classBig);
       Logger.log(`We have one to chop off, it's ${this.animBg}`);
-      this.removeAnimation(this.animBg)
-        .removeAnimation(this.animBrick)
-        .animations.push(this.animRipple, this.animPartl);
+      this.removeAnimation(this.animBg);
+      this.removeAnimation(this.animBrick);
+      this.animations.push(this.animRipple, this.animPartl);
+      return false;
     } else if ($(element).is('#cloudLink')) {
-      e.preventDefault();
-      alert('tits');
       this.closePost();
-    } else {
-      Logger.log(newPage.attr('id'));
-      funcBgFiller();
-      funcRipple();
-      funcBricksplosion();
-      this.openPost(newPage);
-      this.animations.push(
-        this.animBrick,
-        this.animBg,
-        this.animRipple,
-      );
+      return false;
     }
+    Logger.log(newPage.attr('id'));
+    funcBgFiller();
+    funcRipple();
+    funcBricksplosion();
+    this.openPost(newPage);
+    this.animations.push(
+      this.animBrick,
+      this.animBg,
+      this.animRipple,
+    );
+    return false;
   } // handleEvent
 
   removeAnimation(animation) {
@@ -247,7 +251,7 @@ export default class FillCanvas {
   closePost() {
     const $close = $('#bigBaby');
     $close.css('opacity', 0).remove();
-    this.animBg.reset();
+    this.animBg.seek(0);
     this.animBg.pause();
   }
   openPost($brick) {
