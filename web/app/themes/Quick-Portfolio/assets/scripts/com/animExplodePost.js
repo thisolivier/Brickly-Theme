@@ -14,7 +14,6 @@ export default class FillCanvas {
     this.$cloudLink = $('#cloudLink');
     this.originalCloudText = $('#cloudLink').html();
     this.color = { current: 'white', next: 'black' };
-    this.classBig = 'current_post';
     this.cloneCheck = true;
     this.animations = [];
     this.circles = [];
@@ -27,6 +26,32 @@ export default class FillCanvas {
     window.addEventListener('resize', this.resizeCanvas);
     this.addClickListeners(this.$toBind); // Adds triggers - animations will add to queue.
     this.animate(); // Begins animation engine - implaments queue.
+  }
+
+  resizeCanvas() {
+    this.cW = window.innerWidth;
+    this.cH = window.innerHeight;
+    $(this.c).attr('width', `${this.cW * window.devicePixelRatio}px`);
+    $(this.c).attr('height', `${this.cH * window.devicePixelRatio}px`);
+    $(this.cxt).css('transform', `scale(${window.devicePixelRatio})`);
+  }
+
+  Circle(opts) {
+    Object.assign(this, opts);
+  }
+
+  addMethods() {
+    this.Circle.prototype.draw = function (cxt) {
+      cxt.globalAlpha = this.opacity || 1;
+      cxt.beginPath();
+      cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+      if (this.fill) {
+        cxt.fillStyle = this.fill;
+        cxt.fill();
+      }
+      cxt.closePath();
+      cxt.globalAlpha = 1;
+    };
   }
 
   addClickListeners(toBind) {
@@ -49,13 +74,15 @@ export default class FillCanvas {
   }
 
   handleEvent(e) {
+    // Stop natural click event
     e.preventDefault();
-    // Correct the event
+    // Correct the event if it's a tap
     if (e.touches) {
       e = e.touches[0];
     } else {
       e = e || window.event;
     }
+    // Fix for IE < 9
     const element = e.target || e.srcElement;
     const newPage = $(element).closest('article');
     const targetR = Math.sqrt(
@@ -67,7 +94,8 @@ export default class FillCanvas {
     );
     const rippleSize = Math.min(200, (this.cW * 0.4));
     const minCoverDuration = 750;
-
+    Logger.log(e.pageX);
+    Logger.log(e.pageY);
     // Create radial BG animation
     const funcBgFiller = function () {
       // Create page filling obj and animation
@@ -170,8 +198,8 @@ export default class FillCanvas {
     if (newPage.is('#bigBaby')) {
       funcRipple();
       funcParticles();
-      // newPage.removeClass(this.classBig);
-      Logger.log(`We have one to chop off, it's ${this.animBg}`);
+      Logger.log(e.pageX);
+      Logger.log(e.pageY);
       this.removeAnimation(this.animBg);
       this.removeAnimation(this.animBrick);
       this.animations.push(this.animRipple, this.animPartl);
@@ -190,29 +218,6 @@ export default class FillCanvas {
       );
     }
   } // handleEvent
-
-  removeAnimation(animation) {
-    const index = () => this.animations.indexOf(animation);
-    if (index > -1) this.animations.splice(index, 1);
-  }
-
-  Circle(opts) {
-    Object.assign(this, opts);
-  }
-
-  addMethods() {
-    this.Circle.prototype.draw = function (cxt) {
-      cxt.globalAlpha = this.opacity || 1;
-      cxt.beginPath();
-      cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-      if (this.fill) {
-        cxt.fillStyle = this.fill;
-        cxt.fill();
-      }
-      cxt.closePath();
-      cxt.globalAlpha = 1;
-    };
-  }
 
   extend(a, b) {
     return Object.assign(a, b);
@@ -240,12 +245,9 @@ export default class FillCanvas {
     });
   }
 
-  resizeCanvas() {
-    this.cW = window.innerWidth;
-    this.cH = window.innerHeight;
-    this.c.width = this.cW * window.devicePixelRatio;
-    this.c.height = this.cH * window.devicePixelRatio;
-    this.cxt.scale(window.devicePixelRatio, window.devicePixelRatio);
+  removeAnimation(animation) {
+    const index = () => this.animations.indexOf(animation);
+    if (index > -1) this.animations.splice(index, 1);
   }
 
   openPost($brick) {
@@ -267,6 +269,7 @@ export default class FillCanvas {
     this.animBg.seek(0);
     this.animBg.pause();
   }
+
   /* eslint object-shorthand: "warn" */
   funcCloudVisible() {
     this.animHideReveal = anime({
