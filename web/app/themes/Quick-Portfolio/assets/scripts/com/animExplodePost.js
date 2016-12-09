@@ -9,7 +9,10 @@ export default class FillCanvas {
     this.cH = 0;
     this.cW = 0;
 
-    this.toBind = $('.magicLink');
+    this.$toBind = $('.magicLink');
+    this.$cloud = $('#theCloud');
+    this.$cloudLink = $('#cloudLink');
+    this.originalCloudText = $('#cloudLink').html();
     this.color = { current: 'white', next: 'black' };
     this.classBig = 'current_post';
     this.cloneCheck = true;
@@ -22,7 +25,7 @@ export default class FillCanvas {
     this.resizeCanvas(); // Fix me, scoping errors
     this.addMethods(); // Adds methods on bricks and circles to be called when animating
     window.addEventListener('resize', this.resizeCanvas);
-    this.addClickListeners(this.toBind); // Adds triggers - animations will add to queue.
+    this.addClickListeners(this.$toBind); // Adds triggers - animations will add to queue.
     this.animate(); // Begins animation engine - implaments queue.
   }
 
@@ -173,19 +176,19 @@ export default class FillCanvas {
       this.removeAnimation(this.animBrick);
       this.animations.push(this.animRipple, this.animPartl);
     } else if ($(element).is('#cloudLink')) {
-      e.stopPropagation();
       this.closePost();
+    } else {
+      Logger.log(newPage.attr('id'));
+      funcBgFiller();
+      funcRipple();
+      funcBricksplosion();
+      this.openPost(newPage);
+      this.animations.push(
+        this.animBrick,
+        this.animBg,
+        this.animRipple,
+      );
     }
-    Logger.log(newPage.attr('id'));
-    funcBgFiller();
-    funcRipple();
-    funcBricksplosion();
-    this.openPost(newPage);
-    this.animations.push(
-      this.animBrick,
-      this.animBg,
-      this.animRipple,
-    );
   } // handleEvent
 
   removeAnimation(animation) {
@@ -244,51 +247,62 @@ export default class FillCanvas {
     this.c.height = this.cH * window.devicePixelRatio;
     this.cxt.scale(window.devicePixelRatio, window.devicePixelRatio);
   }
-  closePost() {
-    const $close = $('#bigBaby');
-    $close.css('opacity', 0).remove();
-    this.animBg.seek(0);
-    this.animBg.pause();
-  }
+
   openPost($brick) {
     if (this.cloneCheck) {
       this.cloneCheck = false;
-      const $clone = $brick.clone(false);
-      const $cloud = $('#theCloud');
-      const $cloudLink = $cloud.find('a');
-      const makeVisible = function () {
-        $clone.removeClass('invisible');
-      };
-      const funcHideReveal = function () {
-        this.animHideReveal = anime({
-          targets: $cloudLink[0],
-          opacity: 100,
-          duration: 500,
-        });
-      }.bind(this);
-      /* eslint object-shorthand: "warn" */
-      const funcHideChange = function () {
-        this.animHideChange = anime({
-          targets: $cloudLink[0],
-          opacity: 0,
-          duration: 700,
-          delay: 400,
-          complete: function () {
-            $cloud.addClass('shrink');
-            $cloudLink.html('Home');
-            makeVisible();
-            funcHideReveal();
-          },
-        });
-      }.bind(this);
-      $clone.removeAttr('style').addClass('invisible').attr('id', 'bigBaby');
-      funcHideChange();
+      this.$clone = $brick.clone(false);
+      this.$clone.removeAttr('style').addClass('invisible').attr('id', 'bigBaby');
+      this.funcCloudHideChange('Home');
       $('main').css('z-index', 50);
-      this.addClickListeners($clone);
-      this.addClickListeners($cloudLink);
-      $clone.appendTo('#heightDefined');
+      this.addClickListeners(this.$clone);
+      this.addClickListeners(this.$cloudLink);
+      this.$clone.appendTo('#heightDefined');
       this.animations.push(this.animHideChange);
     }
   }
 
+  closePost() {
+    this.funcCloudHideChange();
+    this.animBg.seek(0);
+    this.animBg.pause();
+  }
+  /* eslint object-shorthand: "warn" */
+  funcCloudVisible() {
+    this.animHideReveal = anime({
+      targets: this.$cloudLink[0],
+      opacity: 1,
+      easing: 'easeInQuad',
+      duration: 1000,
+      delay: 100,
+    });
+  }
+
+  funcCloudScale() {
+    this.animHideReveal = anime({
+      targets: this.$cloud[0],
+      scale: 0.7,
+      'min-width': '60%',
+      duration: 1000,
+      delay: 400,
+      easing: 'easeInOutQuad',
+    });
+  }
+
+  funcCloudHideChange(newLink = this.originalCloudText) {
+    this.animHideChange = anime({
+      targets: this.$cloudLink[0],
+      opacity: 0,
+      easing: 'easeOutQuint',
+      duration: 1000,
+      begin: function () {
+        this.funcCloudScale();
+        this.$clone.toggleClass('invisible');
+      }.bind(this),
+      complete: function () {
+        this.$cloudLink.html(newLink);
+        this.funcCloudVisible();
+      }.bind(this),
+    });
+  }
 }
