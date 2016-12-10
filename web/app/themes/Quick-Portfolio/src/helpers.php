@@ -62,3 +62,19 @@ function title()
     }
     return get_the_title();
 }
+
+function portfolio_meta()
+{
+  $buffer = "";
+  $format = '<%1$s class="postLink %2$s"><a href="%3$s">%4$s</a></%1$s>';
+  $values[0] = '<span class="postIntro">' + get_post_meta(get_the_ID(), 'intro', true) + '</span>';
+  $values[1] = sprintf($format, 'h3', 'viewSite', get_post_meta(get_the_ID(), 'site', true), 'View Site');
+  $values[2] = sprintf($format, 'h3', 'repo', get_post_meta(get_the_ID(), 'repo', true), 'Inspect Code');
+
+  foreach($values as $current){
+    if ($current){
+      $buffer = $buffer . $current;
+    }
+  }
+  return ($buffer . template_part('partials/sidebar'));
+}

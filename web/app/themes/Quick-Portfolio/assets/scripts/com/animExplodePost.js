@@ -111,6 +111,7 @@ export default class FillCanvas {
         duration: Math.max(targetR / 2, minCoverDuration),
         easing: 'easeInCubic',
       });
+      this.animations.push(this.animBg);
     }.bind(this);
 
     // Create ripple obj and animation
@@ -136,8 +137,9 @@ export default class FillCanvas {
         },
         easing: 'easeOutExpo',
         duration: 700,
-        complete: this.removeAnimation,
+        complete: this.removeAnimation(this.animRipple),
       });
+      this.animations.push(this.animRipple);
     }.bind(this);
 
     // Create particle objects and animation
@@ -168,29 +170,31 @@ export default class FillCanvas {
         },
         easing: 'easeInOutQuart',
         duration: anime.random(600, 800),
-        complete: this.removeAnimation,
+        complete: this.removeAnimation(this.animPartl),
       });
+      this.animations.push(this.animPartl);
     }.bind(this);
 
     // Create brick animation
     const funcBricksplosion = function () {
-      this.bricks = document.querySelectorAll('.brick:not(.current_post)');
+      this.bricks = document.querySelectorAll('.brick');
       this.animBrick = anime({
         targets: this.bricks,
         translateX() {
-          return anime.random(targetR, -targetR) * 2;
+          return anime.random(targetR, -targetR) * 3;
         },
         translateY() {
-          return anime.random(targetR * 1.15, -targetR * 1.15) * 2;
+          return anime.random(targetR * 1.15, -targetR * 1.15) * 3;
         },
         rotate() {
           return anime.random(200, 500);
         },
-        duration: 600,
-        easing: 'easeInOutQuint',
-        delay: 200,
-        complete: this.removeAnimation,
+        duration: 2000,
+        delay: 150,
+        easing: 'easeOutCubic',
+        complete: this.removeAnimation(this.animBrick),
       });
+      this.animations.push(this.animBrick);
     }.bind(this);
 
     // Change the class, and enque the animations
@@ -198,11 +202,6 @@ export default class FillCanvas {
     if (newPage.is('#bigBaby')) {
       funcRipple();
       funcParticles();
-      Logger.log(e.pageX);
-      Logger.log(e.pageY);
-      this.removeAnimation(this.animBg);
-      this.removeAnimation(this.animBrick);
-      this.animations.push(this.animRipple, this.animPartl);
     } else if ($(element).is('#cloudLink')) {
       this.closePost();
     } else {
@@ -211,33 +210,19 @@ export default class FillCanvas {
       funcRipple();
       funcBricksplosion();
       this.openPost(newPage);
-      this.animations.push(
-        this.animBrick,
-        this.animBg,
-        this.animRipple,
-      );
     }
-  } // handleEvent
-
-  extend(a, b) {
-    return Object.assign(a, b);
-  }
+  } // handleEvent()
 
   animate() {
-    const cW = this.cW;
-    const cH = this.cH;
-    const cxt = this.cxt;
-    const animations = this.animations;
-
     anime({
       duration: Infinity,
-      update() {
-        cxt.fillStyle = 'transparent';
-        cxt.fillRect(0, 0, cW, cH);
-        animations.forEach((anim) => {
+      update: () => {
+        this.cxt.fillStyle = 'transparent';
+        this.cxt.fillRect(0, 0, this.cW, this.cH);
+        this.animations.forEach((anim) => {
           anim.animatables.forEach((animatable) => {
             if (typeof animatable.target.draw !== 'undefined') {
-              animatable.target.draw(cxt);
+              animatable.target.draw(this.cxt);
             }
           });
         });
@@ -255,43 +240,29 @@ export default class FillCanvas {
       this.cloneCheck = false;
       this.$clone = $brick.clone(false);
       this.$clone.removeAttr('style').addClass('invisible').attr('id', 'bigBaby');
-      this.funcCloudHideChange('Home');
+      this.funcCloudHideChange(this.$clone.find('.magicLink').first().html());
+      this.$clone.find('header').first().detach();
       $('main').css('z-index', 50);
       this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');
-      this.animations.push(this.animHideChange);
     }
   }
 
   closePost() {
-    this.funcCloudHideChange();
-    this.animBg.seek(0);
+    // this.funcCloudHideChange();
+    // There's no way to access the drawn circle
+    // after it's been thrown up,
+    // Hence playback controls won't work.
+    // Test on the original in codepen
+    this.removeAnimation(this.animBg);
+    this.animBg.restart();
     this.animBg.pause();
+    this.animations.push(this.animBg);
+    // this.animBg.pause();
   }
 
   /* eslint object-shorthand: "warn" */
-  funcCloudVisible() {
-    this.animHideReveal = anime({
-      targets: this.$cloudLink[0],
-      opacity: 1,
-      easing: 'easeInQuad',
-      duration: 1000,
-      delay: 100,
-    });
-  }
-
-  funcCloudScale() {
-    this.animHideReveal = anime({
-      targets: this.$cloud[0],
-      scale: 0.7,
-      'min-width': '60%',
-      duration: 1000,
-      delay: 400,
-      easing: 'easeInOutQuad',
-    });
-  }
-
   funcCloudHideChange(newLink = this.originalCloudText) {
     this.animHideChange = anime({
       targets: this.$cloudLink[0],
@@ -305,7 +276,38 @@ export default class FillCanvas {
       complete: function () {
         this.$cloudLink.html(newLink);
         this.funcCloudVisible();
+        this.removeAnimation(this.animHideChange);
       }.bind(this),
     });
+    this.animations.push(this.animHideChange);
+  }
+
+  funcCloudVisible() {
+    this.animCloudVis = anime({
+      targets: this.$cloudLink[0],
+      opacity: 1,
+      easing: 'easeInQuad',
+      duration: 1000,
+      delay: 100,
+      complete: this.removeAnimation(this.animCloudVis),
+    });
+    this.animations.push(this.animCloudVis);
+  }
+
+  funcCloudScale() {
+    this.animScale = anime({
+      targets: this.$cloud[0],
+      scale: 0.7,
+      'min-width': '130%',
+      duration: 1000,
+      delay: 400,
+      easing: 'easeInOutQuad',
+      complete: this.removeAnimation(this.animCloudScale),
+    });
+    this.animations.push(this.animScale);
+  }
+
+  extend(a, b) {
+    return Object.assign(a, b);
   }
 }
