@@ -6,7 +6,6 @@
   height: auto;
   z-index: 100;
   margin: 0;
-  padding-top: $main-padding-top;
 
   flex-flow: row wrap-reverse;
   justify-content: center;
@@ -26,12 +25,68 @@
   }
 
   .post-meta {
-    flex: 0 0 13em;
+    flex: 1 1 20%;
+    min-width: 12em;
+    padding-right:2em;
+
+    .widget, .postLink{
+      display: block;
+      position:relative;
+      float:right;
+      clear: both;
+      width:auto;
+      font-size: 1.75rem;
+      font-weight: bolder;
+      line-height: 1;
+
+      padding: 0.3em 2.2em 0.3em 1.2em;
+      margin-bottom:0.25em;
+
+      background-color: white;
+      border-radius: 0.6em;
+      text-align: right;
+
+
+      h3:not(.postLink), a{
+        margin:0;
+        font-family: $headings-font-family;
+        font-size: inherit;
+        font-weight: inherit;
+        color:black;
+        text-transform: uppercase;
+      }
+      &.viewSite{
+        background-color: $link-1;
+      }
+      &.repo{
+        background-color: $link-2;
+      }
+      &.widget_ssba_widget{
+        background-color: $link-3;
+      }
+      &.wpforms-widget{
+        background-color: $link-4;
+      }
+
+
+      div{
+        display:none;
+      }
+      &:after{
+        display: block;
+        position: absolute;
+        right: 0.5em;
+        top: 50%;
+        margin-top: -0.5em;
+        content: '\25C9';
+        color: black;
+      }
+    }
   }
 
   .entry-content{
     display: flex;
-    flex: 1 1 auto;
+    flex: 2 2 60%;
     min-width: 20em;
     h2 {
       font-size: 1.8em;
