@@ -70,11 +70,11 @@ function portfolio_meta()
   $values[0] = '<span class="postIntro">' + get_post_meta(get_the_ID(), 'intro', true) + '</span>';
   $values[1] = sprintf($format, 'h3', 'viewSite', get_post_meta(get_the_ID(), 'site', true), 'View Site');
   $values[2] = sprintf($format, 'h3', 'repo', get_post_meta(get_the_ID(), 'repo', true), 'Inspect Code');
-
+  $values[3] = get_template_part('partials/sidebar');
   foreach($values as $current){
     if ($current){
       $buffer = $buffer . $current;
     }
   }
-  return ($buffer . template_part('partials/sidebar'));
+  return ($buffer);
 }

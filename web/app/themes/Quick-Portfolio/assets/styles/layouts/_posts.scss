@@ -1,21 +1,42 @@
-.home article#bigBaby, .post article{
+#bigBaby, .post article{
+
   font-size: 1.2em;
-  .sectionBase{
-    max-width: 30em;
+  display: flex;
+  width: 100%;
+  height: auto;
+  z-index: 100;
+  margin: 0;
+  padding-top: $main-padding-top;
+
+  flex-flow: row wrap-reverse;
+  justify-content: center;
+  align-items: baseline;
+  align-content: flex-start;
+
+  background-color: transparent;
+  opacity: 100;
+  transform: scale(1);
+  transform-origin: bottom, center;
+  transition: opacity .5s ease-out .5s, transform 1s ease-out .5s;
+
+  &.invisible {
+    transition: opacity .5s ease-out .5s, transform 1s ease .5s;
+    opacity: 0;
+    transform: scale(0.95);
   }
-  header {
-    @extend .sectionBase;
-    display: inline-block;
-    h2 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
-    }
+
+  .post-meta {
+    flex: 0 0 13em;
   }
+
   .entry-content{
-    @extend .sectionBase;
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 20em;
     h2 {
       font-size: 1.8em;
     }
+
     p{
       text-align: left;
     }

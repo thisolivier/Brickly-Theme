@@ -242,7 +242,11 @@ export default class FillCanvas {
       this.$clone.removeAttr('style').addClass('invisible').attr('id', 'bigBaby');
       this.funcCloudHideChange(this.$clone.find('.magicLink').first().html());
       this.$clone.find('header').first().detach();
-      $('main').css('z-index', 50);
+      $('main').css({
+        'z-index': 50,
+        height: 0,
+        overflow: 'hidden',
+      });
       this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');

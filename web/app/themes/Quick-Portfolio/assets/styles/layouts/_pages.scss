@@ -12,12 +12,12 @@ html, body{
   }
   .content.row{
     margin: 0;
-    justify-content: space-between;;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-flow: row wrap;
 
     header {
-      flex: 1 0 30%;
+      flex: 1 1 30%;
       &.sitewide{
         padding-top: $main-padding-top/1.5;
       }
@@ -106,7 +106,7 @@ html, body{
       position: relative;
       display: flex;
       z-index:200;
-      flex: 0 0 relate($chim-percent, 100);
+      flex: 0 2 relate($chim-percent, 100);
       flex-flow: row wrap;
       padding: $main-padding-top 0 0;
       justify-content: space-between;
@@ -151,7 +151,6 @@ html, body{
       header {
         position:relative;
         max-height: 100%;
-        text-overflow: ellipsis;
         h2{
           margin:0 0 0.2em;
           font-size: 1.8rem;
@@ -161,7 +160,6 @@ html, body{
           display:none;
         }
         .tags {
-          text-overflow: ellipsis;
           line-height: 1.6em;
           height: 3.5em;
           overflow-y: hidden;
@@ -169,40 +167,11 @@ html, body{
             font-size: 0.9em;
           }
         }
-      }
-
+      } // header
       .entry-content {
         display: none;
       }
     } // article
-    #bigBaby {
-      position: absolute;
-      display: block;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      padding-top: 10vw;
-      text-align: center;
-      z-index: 100;
-      background-color: transparent;
-      opacity: 100;
-      transform: scale(1);
-      transform-origin: bottom, center;
-      transition: opacity .5s ease-out .5s, transform 1s ease-out .5s;
-
-      &.invisible {
-        transition: opacity .5s ease-out .5s, transform 1s ease .5s;
-        opacity: 0;
-        transform: scale(0.95);
-      }
-
-      .entry-content {
-        display:inline-block;
-        opacity: 1;
-      }
-    }
   } // .content.row
   .fillView{
     position: fixed;
