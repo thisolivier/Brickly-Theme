@@ -119,6 +119,9 @@
 
       @include medium {
         flex: 0 0 relate($chim-percent, 120);
+        &.hidden {
+          display: none;
+        }
       }
 
       @include small {

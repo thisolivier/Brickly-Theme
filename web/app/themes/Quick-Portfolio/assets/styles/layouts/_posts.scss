@@ -54,10 +54,16 @@
       font-size: 1.2em;
       line-height: 1.2;
       @include medium{
+        font-size: 1.5em;
         flex: 1 0 100%;
+        text-align: center;
+        margin: 1.3em 0 1.6em;
+        padding: 0 2em;
       }
       @include small{
         flex: 1 0 100%;
+        font-size: 1.2em;
+        margin: 1em 0 1.3em;
       }
     }
 
@@ -77,6 +83,7 @@
       background-color: white;
       border-radius: 0.7em;
       text-align: right;
+      cursor: pointer;
 
         @include medium{
           flex: 1 0 10em;
