@@ -74,34 +74,33 @@ export default class FillCanvas {
   }
 
   handleEvent(e) {
-    // Stop natural click event
-    e.preventDefault();
     // Correct the event if it's a tap
+    let e2 = e;
     if (e.touches) {
-      e = e.touches[0];
+      e2 = e.touches[0];
     } else {
-      e = e || window.event;
+      e2 = e || window.event;
     }
     // Fix for IE < 9
     const element = e.target || e.srcElement;
     const newPage = $(element).closest('article');
     const targetR = Math.sqrt(
       Math.pow(
-        Math.max(e.pageX - 0, this.cW - e.pageX), 2
+        Math.max(e2.pageX - 0, this.cW - e2.pageX), 2
       ) + Math.pow(
-        Math.max(e.pageY - 0, this.cH - e.pageY), 2
+        Math.max(e2.pageY - 0, this.cH - e2.pageY), 2
       )
     );
     const rippleSize = Math.min(200, (this.cW * 0.4));
     const minCoverDuration = 750;
-    Logger.log(e.pageX);
-    Logger.log(e.pageY);
+    Logger.log(e2.pageX);
+    Logger.log(e2.pageY);
     // Create radial BG animation
     const funcBgFiller = function () {
       // Create page filling obj and animation
       this.pageFill = new this.Circle({
-        x: e.pageX,
-        y: e.pageY,
+        x: e2.pageX,
+        y: e2.pageY,
         r: 0,
         fill: this.color.next,
       });
@@ -117,8 +116,8 @@ export default class FillCanvas {
     // Create ripple obj and animation
     const funcRipple = function () {
       this.ripple = new this.Circle({
-        x: e.pageX,
-        y: e.pageY,
+        x: e2.pageX,
+        y: e2.pageY,
         r: 0,
         fill: this.color.current,
         stroke: {
@@ -147,8 +146,8 @@ export default class FillCanvas {
       this.particles = [];
       for (let i = 0; i < 20; i += 1) {
         const particle = new this.Circle({
-          x: e.pageX,
-          y: e.pageY,
+          x: e2.pageX,
+          y: e2.pageY,
           fill: this.color.current,
           r: anime.random(10, 20),
         });
@@ -203,9 +202,11 @@ export default class FillCanvas {
       funcRipple();
       funcParticles();
     } else if ($(element).is('#cloudLink')) {
+      e.preventDefault();
       this.closePost();
     } else {
       Logger.log(newPage.attr('id'));
+      e.preventDefault();
       funcBgFiller();
       funcRipple();
       funcBricksplosion();
