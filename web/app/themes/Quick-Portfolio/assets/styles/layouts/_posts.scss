@@ -25,8 +25,8 @@
   }
 
   .post-meta {
-    flex: 1 0 12em;
-    min-width: 12em;
+    flex: 1 0 14em;
+    min-width: 14em;
     padding-right:2em;
     text-align: right;
 
@@ -149,13 +149,13 @@
 
   .entry-content{
     display: flex;
-    flex: 2 0 20em;
+    flex: 4 0 20em;
     min-width: 20em;
     flex-flow: row wrap;
 
     section{
       margin-right: 1rem;
-      flex: 2 0 10em;
+      flex: 1 0 12em;
       h2 {
         font-size: 1.8em;
       }
