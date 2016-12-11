@@ -301,8 +301,8 @@ export default class FillCanvas {
   funcCloudScale() {
     this.animScale = anime({
       targets: this.$cloud[0],
-      scale: 0.7,
-      'min-width': '130%',
+      scale: 0.85,
+      'min-width': '120%',
       duration: 1000,
       delay: 400,
       easing: 'easeInOutQuad',

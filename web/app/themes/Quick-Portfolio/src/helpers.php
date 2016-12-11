@@ -65,16 +65,14 @@ function title()
 
 function portfolio_meta()
 {
-  $buffer = "";
   $format = '<%1$s class="postLink %2$s"><a href="%3$s">%4$s</a></%1$s>';
   $values[0] = '<span class="postIntro">' . get_post_meta(get_the_ID(), 'intro', true) . '</span>';
   $values[1] = sprintf($format, 'div', 'viewSite', get_post_meta(get_the_ID(), 'site', true), 'View Site');
-  $values[2] = sprintf($format, 'div', 'repo', get_post_meta(get_the_ID(), 'repo', true), 'Inspect Code');
-  $values[3] = get_template_part('partials/sidebar');
+  $values[2] = sprintf($format, 'div', 'repo', get_post_meta(get_the_ID(), 'repo', true), 'Repository');
   foreach($values as $current){
     if ($current){
-      $buffer = $buffer . $current;
+      echo $current;
     }
   }
-  return ($buffer);
+  get_template_part('partials/sidebar');
 }

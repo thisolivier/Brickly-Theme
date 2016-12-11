@@ -28,6 +28,16 @@
     flex: 1 1 20%;
     min-width: 12em;
     padding-right:2em;
+    text-align: right;
+
+    .postIntro {
+      display: block;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      font-family: $headings-font-family;
+      font-size: 1.2em;
+      line-height: 1.2;
+    }
 
     .widget, .postLink{
       display: block;
@@ -36,14 +46,14 @@
       clear: both;
       width:auto;
       font-size: 1.75rem;
-      font-weight: bolder;
+      font-weight: 700;
       line-height: 1;
 
       padding: 0.3em 2.2em 0.3em 1.2em;
-      margin-bottom:0.25em;
+      margin-bottom:0.5rem;
 
       background-color: white;
-      border-radius: 0.6em;
+      border-radius: 0.7em;
       text-align: right;
 
 
@@ -67,8 +77,6 @@
       &.wpforms-widget{
         background-color: $link-4;
       }
-
-
       div{
         display:none;
       }
@@ -78,9 +86,64 @@
         right: 0.5em;
         top: 50%;
         margin-top: -0.5em;
-        content: '\25C9';
+        content: '\25CF';
+        width:1em;
+        height:1em;
         color: black;
+        background-color: white;
+        border-radius: 1000px;
+        border-color: black;
+        border-style: solid;
+        border-width: 0;
+        overflow: hidden;
+        text-align: left;
+        transform: rotate(180deg);
       }
+      &:hover:after{
+        animation-name: blink;
+        animation-duration: 3s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in-out;
+      }
+
+      @keyframes blink {
+        0% {
+          border-width: 0 0 0 0;
+        }
+        6% {
+          border-width: 0 0 0.8em 0;
+        }
+        15% {
+          border-width: 0 0 1em 0;
+        }
+        25% {
+          border-width: 0 0 1em 0;
+        }
+        40% {
+          border-width: 0 0 0 0;
+        }
+        43% {
+          border-width: 0 0 0 0;
+        }
+        48% {
+          border-width: 0 0 0.8em 0;
+        }
+        65% {
+          border-width: 0 0 1em 0;
+        }
+        90% {
+          border-width: 0 0 1em 0;
+        }
+        100% {
+          border-width: 0 0 0 0;
+        }
+      }
+    }
+    .tags {
+      clear:both;
+      float:right;
+      display: block;
+      margin: 1em 0 0 10%;
     }
   }
 
@@ -88,12 +151,15 @@
     display: flex;
     flex: 2 2 60%;
     min-width: 20em;
-    h2 {
-      font-size: 1.8em;
-    }
 
-    p{
-      text-align: left;
+    section{
+      margin-right: 1rem;
+      h2 {
+        font-size: 1.8em;
+      }
+      p{
+        text-align: left;
+      }
     }
   }
 }
