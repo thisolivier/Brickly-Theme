@@ -14,6 +14,7 @@
       <div class="ball big">&nbsp;</div>
       <div class="ball small">&nbsp;</div>
       <div class="ball medium">&nbsp;</div>
+      <!-- <div class="ball small">&nbsp;</div> -->
     </div>
   </div>
 </header>

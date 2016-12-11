@@ -247,7 +247,7 @@ export default class FillCanvas {
         'z-index': 50,
         height: 0,
         overflow: 'hidden',
-      });
+      }).addClass('hidden');
       this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');

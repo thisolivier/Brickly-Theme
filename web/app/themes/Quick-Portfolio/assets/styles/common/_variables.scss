@@ -3,8 +3,14 @@ $enable-flex:           true;
 $main-sm-columns:       12;
 $sidebar-sm-columns:    4;
 
+// Breakpoints
+$small-width: 35em;
+$medium-width: 55em;
+$large-width: 75em;
+
 // Colors
-$brand-primary:         white;
+$brand-primary:         rgba(255, 255, 255, 1);
+$brand-secondary:       rgba(0, 0, 0, 1);
 $link-1: rgb(62, 160, 183); // blue
 $link-2: rgb(0, 196, 150); // green
 $link-3: rgb(232, 176, 7); // yellow

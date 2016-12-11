@@ -4,3 +4,87 @@
 @function relate ($base, $toFix) {
   @return ($toFix * $base * 0.01vw);
 }
+
+$small-width: 30em;
+$medium-width: 100.8em;
+$large-width: 200em;
+
+@mixin small {
+  @media (max-width: #{$small-width}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (max-width: #{$medium-width}) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media (min-width: #{$large-width}) {
+    @content;
+  }
+}
+
+// Animations of eyesAfter and eyesAfterHover
+@mixin eye($side){
+    $opside: if($side=='left', 'right', 'left');
+    display: block;
+    position: absolute;
+    #{$side}: 0.5em;
+    top: 50%;
+    margin-top: -0.5em;
+    content: '\25CF';
+    width:1em;
+    height:1em;
+    color: black;
+    background-color: white;
+    border-radius: 1000px;
+    border-color: black;
+    border-style: solid;
+    border-width: 0;
+    overflow: hidden;
+    text-align: #{$opside};
+    transform: rotate(180deg);
+  }
+  @mixin eyeHover{
+    animation-name: blink;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-delay: 0.1s;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes blink {
+    0% {
+      border-width: 0 0 0 0;
+    }
+    10% {
+      border-width: 0 0 0.8em 0;
+    }
+    15% {
+      border-width: 0 0 1em 0;
+    }
+    25% {
+      border-width: 0 0 1em 0;
+    }
+    40% {
+      border-width: 0 0 0 0;
+    }
+    43% {
+      border-width: 0 0 0 0;
+    }
+    50% {
+      border-width: 0 0 0.8em 0;
+    }
+    65% {
+      border-width: 0 0 1em 0;
+    }
+    90% {
+      border-width: 0 0 1em 0;
+    }
+    100% {
+      border-width: 0 0 0 0;
+    }
+  }

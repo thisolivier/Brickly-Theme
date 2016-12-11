@@ -16,10 +16,14 @@
   opacity: 100;
   transform: scale(1);
   transform-origin: bottom, center;
-  transition: opacity .5s ease-out .5s, transform 1s ease-out .5s;
+  transition:
+    opacity .5s ease-out .5s,
+    transform 1s ease-out .5s;
 
   &.invisible {
-    transition: opacity .5s ease-out .5s, transform 1s ease .5s;
+    transition:
+      opacity .5s ease-out .5s,
+      transform 1s ease .5s;
     opacity: 0;
     transform: scale(0.95);
   }
@@ -27,8 +31,20 @@
   .post-meta {
     flex: 1 0 14em;
     min-width: 14em;
-    padding-right:2em;
+    padding-right: 2em;
     text-align: right;
+
+    @include medium{
+      flex: 1 0 100%;
+      display: flex;
+      flex-flow: row wrap;
+      align-content: space-between;
+      padding-right: 0;
+    }
+
+    @include small{
+      display:block;
+    }
 
     .postIntro {
       display: block;
@@ -37,24 +53,48 @@
       font-family: $headings-font-family;
       font-size: 1.2em;
       line-height: 1.2;
+      @include medium{
+        flex: 1 0 100%;
+      }
+      @include small{
+        flex: 1 0 100%;
+      }
     }
 
     .widget, .postLink{
       display: block;
-      position:relative;
-      float:right;
+      position: relative;
+      float: right;
       clear: both;
-      width:auto;
+      width: auto;
       font-size: 1.75rem;
       font-weight: 700;
       line-height: 1;
 
       padding: 0.3em 2.2em 0.3em 1.2em;
-      margin-bottom:0.5rem;
+      margin-bottom: 0.5rem;
 
       background-color: white;
       border-radius: 0.7em;
       text-align: right;
+
+        @include medium{
+          flex: 1 0 10em;
+          min-width: 10em;
+          text-align: center;
+          padding: 0.3em 2.2em 0.3em 2.2em;
+          margin-right:0.25em;
+          &:before{
+            @include eye('left');
+          }
+          &:hover:before{
+            @include eyeHover;
+          }
+        }
+        @include small{
+          width:100%;
+          margin-right:0;
+        }
 
 
       h3:not(.postLink), a{
@@ -80,78 +120,31 @@
       div{
         display:none;
       }
+
       &:after{
-        display: block;
-        position: absolute;
-        right: 0.5em;
-        top: 50%;
-        margin-top: -0.5em;
-        content: '\25CF';
-        width:1em;
-        height:1em;
-        color: black;
-        background-color: white;
-        border-radius: 1000px;
-        border-color: black;
-        border-style: solid;
-        border-width: 0;
-        overflow: hidden;
-        text-align: left;
-        transform: rotate(180deg);
+        @include eye('right');
       }
       &:hover:after{
-        animation-name: blink;
-        animation-duration: 3s;
-        animation-iteration-count: 1;
-        animation-delay: 0.1s;
-        animation-timing-function: ease-in-out;
+        @include eyeHover;
       }
 
-      @keyframes blink {
-        0% {
-          border-width: 0 0 0 0;
-        }
-        10% {
-          border-width: 0 0 0.8em 0;
-        }
-        15% {
-          border-width: 0 0 1em 0;
-        }
-        25% {
-          border-width: 0 0 1em 0;
-        }
-        40% {
-          border-width: 0 0 0 0;
-        }
-        43% {
-          border-width: 0 0 0 0;
-        }
-        50% {
-          border-width: 0 0 0.8em 0;
-        }
-        65% {
-          border-width: 0 0 1em 0;
-        }
-        90% {
-          border-width: 0 0 1em 0;
-        }
-        100% {
-          border-width: 0 0 0 0;
-        }
+      a:hover{
+        text-decoration: none;
       }
+
     }
     .tags {
-      clear:both;
-      float:right;
       display: block;
+      float:right;
+      clear:both;
       margin: 1em 0 0 10%;
     }
   }
 
-  .entry-content{
-    display: flex;
+  .entry-content {
     flex: 4 0 20em;
     min-width: 20em;
+    display: flex;
     flex-flow: row wrap;
 
     section{
