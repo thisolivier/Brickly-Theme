@@ -17,7 +17,7 @@ html, body{
     flex-flow: row wrap;
 
     header {
-      flex: 1 1 30%;
+      flex: 1 0 30%;
       &.sitewide{
         padding-top: $main-padding-top/1.5;
       }
@@ -106,7 +106,7 @@ html, body{
       position: relative;
       display: flex;
       z-index:200;
-      flex: 0 2 relate($chim-percent, 100);
+      flex: 0 0 relate($chim-percent, 100);
       flex-flow: row wrap;
       padding: $main-padding-top 0 0;
       justify-content: space-between;

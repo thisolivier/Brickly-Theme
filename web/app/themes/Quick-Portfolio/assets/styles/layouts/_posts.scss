@@ -2,12 +2,12 @@
 
   font-size: 1.2em;
   display: flex;
+  flex-flow: row wrap;
   width: 100%;
   height: auto;
   z-index: 100;
   margin: 0;
 
-  flex-flow: row wrap-reverse;
   justify-content: center;
   align-items: baseline;
   align-content: flex-start;
@@ -25,7 +25,7 @@
   }
 
   .post-meta {
-    flex: 1 1 20%;
+    flex: 1 0 12em;
     min-width: 12em;
     padding-right:2em;
     text-align: right;
@@ -149,11 +149,13 @@
 
   .entry-content{
     display: flex;
-    flex: 2 2 60%;
+    flex: 2 0 20em;
     min-width: 20em;
+    flex-flow: row wrap;
 
     section{
       margin-right: 1rem;
+      flex: 2 0 10em;
       h2 {
         font-size: 1.8em;
       }
