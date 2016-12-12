@@ -2,6 +2,11 @@
   .wrap{
     padding: 0 10%;
     overflow: hidden;
+
+    @include tiny {
+      padding: 0 5%;
+      overflow: visible;
+    }
   }
   .content.row{
     margin: 0;

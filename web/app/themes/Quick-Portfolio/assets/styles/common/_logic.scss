@@ -5,9 +5,12 @@
   @return ($toFix * $base * 0.01vw);
 }
 
-$small-width: 30em;
-$medium-width: 100.8em;
-$large-width: 200em;
+// Responsive media queries
+@mixin tiny {
+  @media (max-width: #{$tiny-width}) {
+    @content;
+  }
+}
 
 @mixin small {
   @media (max-width: #{$small-width}) {
