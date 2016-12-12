@@ -131,7 +131,6 @@
       }
 
       &.hidden {
-        z-index: 50;
         height: 0;
         overflow: hidden;
         @include medium {

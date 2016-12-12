@@ -18,7 +18,6 @@ export default class FillCanvas {
     this.cloneCheck = true;
     this.animations = [];
     this.circles = [];
-    this.animScale = 0;
 
     $('.backgroundLanscape').css('opacity', 1);
   }
@@ -244,10 +243,10 @@ export default class FillCanvas {
     if (this.cloneCheck) {
       this.cloneCheck = false;
       this.$clone = $brick.clone(false);
-      this.$main.addClass('hidden');
       this.$clone.addClass('invisible');
       this.funcCloudTextChange(this.$clone.find('.magicLink').first().html());
       this.funcCloudScale();
+      this.$main.css('z-index', 50);
       this.$clone.removeAttr('style')
         .attr('id', 'bigBaby')
         .find('header')
@@ -262,24 +261,16 @@ export default class FillCanvas {
 
   closePost() {
     this.funcCloudTextChange();
-    $('.brick').each(function () {
-      $(this).removeAttr('style');
-    });
-    this.$clone.detach();
     this.cloneCheck = true;
-    this.$main.removeClass('hidden');
-    this.removeAnimation(this.animScale);
-    this.animScale.seek(0);
-    this.animScale.pause();
-    this.animScale = 0;
-    this.removeAnimation(this.animBrick);
-    this.animBrick.seek(0);
-    this.animBrick.pause();
+    this.$clone.detach();
+    this.$main.removeClass('hidden').removeAttr('style');
     this.removeAnimation(this.animBg);
-    this.animBg.seek(0);
-    this.animBg.pause();
-    this.animate();
-    $('.backgroundLanscape').css('opacity', 1);
+    this.removeAnimation(this.animScale);
+    this.removeAnimation(this.animBrick);
+    this.animBg.revert();
+    this.animScale.revert();
+    this.animBrick.revert();
+    this.animations.push(this.animScale, this.animBrick, this.animBg);
   }
 
   /* eslint object-shorthand: "warn" */
@@ -321,6 +312,7 @@ export default class FillCanvas {
       easing: 'easeInOutQuad',
       complete: function () {
         this.removeAnimation(this.animCloudScale);
+        this.$main.addClass('hidden');
         this.$clone.removeClass('invisible');
       }.bind(this),
     });
