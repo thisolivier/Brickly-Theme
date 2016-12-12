@@ -23,6 +23,7 @@ export default class BackgroundLanscape {
     const skyMargin = 0.1;
 
     let newSkyMargin = skyMargin * scrollPercent;
+    // Gaaar this isn't working!
     let newLand = this.proportions.land -
       ((0.4 - newSkyMargin) * scrollPercent);
     newSkyMargin = `${(newSkyMargin) * -100}vh`;

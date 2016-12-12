@@ -59,14 +59,15 @@ export default class FillCanvas {
 
   addClickListeners(toBind) {
     const handleEvent = this.handleEvent;
+    this.handle = e => handleEvent.call(this, e);
     const bind = (i, x) => {
       x.addEventListener(
         'touchstart',
-        e => handleEvent.call(this, e)
+        this.handle
       );
       x.addEventListener(
         'click',
-        e => handleEvent.call(this, e)
+        this.handle
       );
     };
     if (toBind instanceof jQuery) {
@@ -271,6 +272,7 @@ export default class FillCanvas {
     this.animScale.revert();
     this.animBrick.revert();
     this.animations.push(this.animScale, this.animBrick, this.animBg);
+    this.$cloudLink[0].removeEventListener('click', this.handle);
   }
 
   /* eslint object-shorthand: "warn" */
@@ -312,7 +314,9 @@ export default class FillCanvas {
       easing: 'easeInOutQuad',
       complete: function () {
         this.removeAnimation(this.animCloudScale);
-        this.$main.addClass('hidden');
+        if (this.$cloudLink.html() !== this.originalCloudText) {
+          this.$main.addClass('hidden');
+        }
         this.$clone.removeClass('invisible');
       }.bind(this),
     });
