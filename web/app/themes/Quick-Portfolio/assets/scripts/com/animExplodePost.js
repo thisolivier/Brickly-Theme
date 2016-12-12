@@ -217,29 +217,6 @@ export default class FillCanvas {
     }
   } // handleEvent()
 
-  animate() {
-    anime({
-      duration: Infinity,
-      update: () => {
-        this.cxt.fillStyle = 'transparent';
-        this.cxt.clearRect(0, 0, this.cW, this.cH);
-        this.cxt.fillRect(0, 0, this.cW, this.cH);
-        this.animations.forEach((anim) => {
-          anim.animatables.forEach((animatable) => {
-            if (typeof animatable.target.draw !== 'undefined') {
-              animatable.target.draw(this.cxt);
-            }
-          });
-        });
-      },
-    });
-  }
-
-  removeAnimation(animation) {
-    const index = () => this.animations.indexOf(animation);
-    if (index > -1) this.animations.splice(index, 1);
-  }
-
   openPost($brick) {
     if (this.cloneCheck) {
       this.cloneCheck = false;
@@ -276,6 +253,25 @@ export default class FillCanvas {
   }
 
   /* eslint object-shorthand: "warn" */
+  funcCloudScale() {
+    this.animScale = anime({
+      targets: this.$cloud[0],
+      scale: 0.85,
+      'min-width': '120%',
+      duration: 1000,
+      delay: 400,
+      easing: 'easeInOutQuad',
+      complete: function () {
+        this.removeAnimation(this.animCloudScale);
+        if (this.$cloudLink.html() !== this.originalCloudText) {
+          this.$main.addClass('hidden');
+        }
+        this.$clone.removeClass('invisible');
+      }.bind(this),
+    });
+    this.animations.push(this.animScale);
+  }
+
   funcCloudTextChange(newLink = this.originalCloudText) {
     this.animHideChange = anime({
       targets: this.$cloudLink[0],
@@ -304,23 +300,27 @@ export default class FillCanvas {
     this.animations.push(this.animCloudVis);
   }
 
-  funcCloudScale() {
-    this.animScale = anime({
-      targets: this.$cloud[0],
-      scale: 0.85,
-      'min-width': '120%',
-      duration: 1000,
-      delay: 400,
-      easing: 'easeInOutQuad',
-      complete: function () {
-        this.removeAnimation(this.animCloudScale);
-        if (this.$cloudLink.html() !== this.originalCloudText) {
-          this.$main.addClass('hidden');
-        }
-        this.$clone.removeClass('invisible');
-      }.bind(this),
+  animate() {
+    anime({
+      duration: Infinity,
+      update: () => {
+        this.cxt.fillStyle = 'transparent';
+        this.cxt.clearRect(0, 0, this.cW, this.cH);
+        this.cxt.fillRect(0, 0, this.cW, this.cH);
+        this.animations.forEach((anim) => {
+          anim.animatables.forEach((animatable) => {
+            if (typeof animatable.target.draw !== 'undefined') {
+              animatable.target.draw(this.cxt);
+            }
+          });
+        });
+      },
     });
-    this.animations.push(this.animScale);
+  } // animate()
+
+  removeAnimation(animation) {
+    const index = () => this.animations.indexOf(animation);
+    if (index > -1) this.animations.splice(index, 1);
   }
 
   extend(a, b) {
