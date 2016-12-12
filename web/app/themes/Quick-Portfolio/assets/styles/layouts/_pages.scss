@@ -228,16 +228,16 @@
     @extend .fillView;
     z-index: 10;
     .sky-and-land{
-      width:100%;
+      width:100vw;
     }
     .sky{
-      height:70%;
+      height:70vh;
       margin-bottom:-10vh;
       @extend .sky-and-land;
     }
 
     .land{
-      height:90%;
+      height:90vh;
       @extend .sky-and-land;
     }
   } // .background.container
