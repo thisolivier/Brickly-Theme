@@ -244,9 +244,11 @@ export default class FillCanvas {
     if (this.cloneCheck) {
       this.cloneCheck = false;
       this.$clone = $brick.clone(false);
+      this.$main.addClass('hidden');
+      this.$clone.addClass('invisible');
       this.funcCloudTextChange(this.$clone.find('.magicLink').first().html());
+      this.funcCloudScale();
       this.$clone.removeAttr('style')
-        .addClass('invisible')
         .attr('id', 'bigBaby')
         .find('header')
         .first()
@@ -254,6 +256,7 @@ export default class FillCanvas {
       this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');
+      this.$clone.removeClass('invisible');
     }
   }
 
@@ -262,6 +265,13 @@ export default class FillCanvas {
     $('.brick').each(function () {
       $(this).removeAttr('style');
     });
+    this.$clone.detach();
+    this.cloneCheck = true;
+    this.$main.removeClass('hidden');
+    this.removeAnimation(this.animScale);
+    this.animScale.seek(0);
+    this.animScale.pause();
+    this.animScale = 0;
     this.removeAnimation(this.animBrick);
     this.animBrick.seek(0);
     this.animBrick.pause();
@@ -279,21 +289,8 @@ export default class FillCanvas {
       opacity: 0,
       easing: 'easeOutQuint',
       duration: 1000,
-      begin: function () {
-        if (this.animScale === 0) {
-          this.funcCloudScale();
-        } else {
-          this.$clone.detach();
-          this.cloneCheck = true;
-          this.removeAnimation(this.animScale);
-          this.animScale.seek(0);
-          this.animScale.pause();
-          this.animScale = 0;
-        }
-        this.$main.toggleClass('hidden');
-        this.$clone.toggleClass('invisible');
-      }.bind(this),
       complete: function () {
+        this.$clone.removeClass('invisible');
         this.$cloudLink.html(newLink);
         this.funcTextVisible();
         this.removeAnimation(this.animHideChange);
@@ -309,9 +306,7 @@ export default class FillCanvas {
       easing: 'easeInQuad',
       duration: 1000,
       delay: 100,
-      complete: function () {
-        this.removeAnimation(this.animCloudVis);
-      }.bind(this),
+      complete: this.removeAnimation(this.animCloudVis),
     });
     this.animations.push(this.animCloudVis);
   }
@@ -324,7 +319,10 @@ export default class FillCanvas {
       duration: 1000,
       delay: 400,
       easing: 'easeInOutQuad',
-      complete: this.removeAnimation(this.animCloudScale),
+      complete: function () {
+        this.removeAnimation(this.animCloudScale);
+        this.$clone.removeClass('invisible');
+      }.bind(this),
     });
     this.animations.push(this.animScale);
   }

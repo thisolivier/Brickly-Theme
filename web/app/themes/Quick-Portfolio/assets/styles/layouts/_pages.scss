@@ -124,13 +124,19 @@
 
       @include medium {
         flex: 0 0 relate($chim-percent, 120);
-        &.hidden {
-          display: none;
-        }
       }
 
       @include small {
         flex: 0 0 80%;
+      }
+
+      &.hidden {
+        z-index: 50;
+        height: 0;
+        overflow: hidden;
+        @include medium {
+          display: none;
+        };
       }
 
       &:after{
@@ -144,16 +150,6 @@
         background-color: white;
         z-index: 80;
         border-radius: 0.5em;
-      }
-    }
-
-    &.hidden{
-      z-index: 50;
-      height: 0;
-      overflow: 'hidden';
-
-      @include medium{
-        display:none;
       }
     }
 
