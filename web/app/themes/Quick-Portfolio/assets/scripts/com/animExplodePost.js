@@ -12,11 +12,15 @@ export default class FillCanvas {
     this.$toBind = $('.magicLink');
     this.$cloud = $('#theCloud');
     this.$cloudLink = $('#cloudLink');
+    this.$main = $('main');
     this.originalCloudText = $('#cloudLink').html();
     this.color = { current: 'white', next: 'black' };
     this.cloneCheck = true;
     this.animations = [];
     this.circles = [];
+    this.animScale = 0;
+
+    $('.backgroundLanscape').css('opacity', 1);
   }
 
   init() {
@@ -191,7 +195,6 @@ export default class FillCanvas {
         duration: 2000,
         delay: 150,
         easing: 'easeOutCubic',
-        complete: this.removeAnimation(this.animBrick),
       });
       this.animations.push(this.animBrick);
     }.bind(this);
@@ -219,6 +222,7 @@ export default class FillCanvas {
       duration: Infinity,
       update: () => {
         this.cxt.fillStyle = 'transparent';
+        this.cxt.clearRect(0, 0, this.cW, this.cH);
         this.cxt.fillRect(0, 0, this.cW, this.cH);
         this.animations.forEach((anim) => {
           anim.animatables.forEach((animatable) => {
@@ -240,14 +244,13 @@ export default class FillCanvas {
     if (this.cloneCheck) {
       this.cloneCheck = false;
       this.$clone = $brick.clone(false);
-      this.$clone.removeAttr('style').addClass('invisible').attr('id', 'bigBaby');
-      this.funcCloudHideChange(this.$clone.find('.magicLink').first().html());
-      this.$clone.find('header').first().detach();
-      $('main').css({
-        'z-index': 50,
-        height: 0,
-        overflow: 'hidden',
-      }).addClass('hidden');
+      this.funcCloudTextChange(this.$clone.find('.magicLink').first().html());
+      this.$clone.removeAttr('style')
+        .addClass('invisible')
+        .attr('id', 'bigBaby')
+        .find('header')
+        .first()
+        .detach();
       this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');
@@ -255,46 +258,60 @@ export default class FillCanvas {
   }
 
   closePost() {
-    // this.funcCloudHideChange();
-    // There's no way to access the drawn circle
-    // after it's been thrown up,
-    // Hence playback controls won't work.
-    // Test on the original in codepen
+    this.funcCloudTextChange();
+    $('.brick').each(function () {
+      $(this).removeAttr('style');
+    });
+    this.removeAnimation(this.animBrick);
+    this.animBrick.seek(0);
+    this.animBrick.pause();
     this.removeAnimation(this.animBg);
-    this.animBg.restart();
+    this.animBg.seek(0);
     this.animBg.pause();
-    this.animations.push(this.animBg);
-    // this.animBg.pause();
+    this.animate();
+    $('.backgroundLanscape').css('opacity', 1);
   }
 
   /* eslint object-shorthand: "warn" */
-  funcCloudHideChange(newLink = this.originalCloudText) {
+  funcCloudTextChange(newLink = this.originalCloudText) {
     this.animHideChange = anime({
       targets: this.$cloudLink[0],
       opacity: 0,
       easing: 'easeOutQuint',
       duration: 1000,
       begin: function () {
-        this.funcCloudScale();
+        if (this.animScale === 0) {
+          this.funcCloudScale();
+        } else {
+          this.$clone.detach();
+          this.cloneCheck = true;
+          this.removeAnimation(this.animScale);
+          this.animScale.seek(0);
+          this.animScale.pause();
+          this.animScale = 0;
+        }
+        this.$main.toggleClass('hidden');
         this.$clone.toggleClass('invisible');
       }.bind(this),
       complete: function () {
         this.$cloudLink.html(newLink);
-        this.funcCloudVisible();
+        this.funcTextVisible();
         this.removeAnimation(this.animHideChange);
       }.bind(this),
     });
     this.animations.push(this.animHideChange);
   }
 
-  funcCloudVisible() {
+  funcTextVisible() {
     this.animCloudVis = anime({
       targets: this.$cloudLink[0],
       opacity: 1,
       easing: 'easeInQuad',
       duration: 1000,
       delay: 100,
-      complete: this.removeAnimation(this.animCloudVis),
+      complete: function () {
+        this.removeAnimation(this.animCloudVis);
+      }.bind(this),
     });
     this.animations.push(this.animCloudVis);
   }

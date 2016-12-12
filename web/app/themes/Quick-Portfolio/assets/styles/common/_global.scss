@@ -3,6 +3,8 @@ html, body{
   width: 100%;
   position: relative;
   scroll-behavior: smooth;
+  background-color: black;
+  font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
