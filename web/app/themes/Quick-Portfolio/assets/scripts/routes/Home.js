@@ -9,16 +9,20 @@ export default {
   init() {
     const chim = new ChimneyStack();
     chim.conductor();
+    $('.widget').click(function () {
+      $(this).children('.widget-content').slideToggle({
+        duration: 1000,
+      });
+    });
   },
 
   finalize() {
-    BrickAnimation.animate();
     const animator = new FillCanvas();
-    animator.init();
-
     const horizon = new BackgroundLanscape('.backgroundLanscape');
     /* eslint-disable*/
     $(window).scroll(function() { horizon.adjust(window); });
     /* eslint-enable*/
+    BrickAnimation.animate();
+    animator.init();
   },
 };

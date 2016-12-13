@@ -73,9 +73,9 @@ add_action('after_setup_theme', function () {
 add_action('widgets_init', function () {
     $config = [
         'before_widget' => '<div class="widget %1$s %2$s">',
-        'after_widget'  => '</div>',
         'before_title'  => '<h3>',
-        'after_title'   => '</h3>'
+        'after_title'   => '</h3><div class="widget-content">',
+        'after_widget'  => '</div></div>',
     ];
     register_sidebar([
         'name'          => __('Post Meta', 'sage'),

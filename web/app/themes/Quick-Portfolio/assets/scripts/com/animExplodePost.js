@@ -1,5 +1,5 @@
 import anime from 'animejs';
-import Logger from '../util/logger';
+// import Logger from '../util/logger';
 
 export default class FillCanvas {
   /* eslint no-param-reassign: "warn", class-methods-use-this: "warn" */
@@ -23,7 +23,6 @@ export default class FillCanvas {
   }
 
   init() {
-    Logger.log('begin', 'the expand function');
     this.resizeCanvas(); // Fix me, scoping errors
     this.addMethods(); // Adds methods on bricks and circles to be called when animating
     window.addEventListener('resize', this.resizeCanvas);
@@ -85,6 +84,7 @@ export default class FillCanvas {
     } else {
       e2 = e || window.event;
     }
+
     // Fix for IE < 9
     const element = e.target || e.srcElement;
     const newPage = $(element).closest('article');
@@ -97,8 +97,7 @@ export default class FillCanvas {
     );
     const rippleSize = Math.min(200, (this.cW * 0.4));
     const minCoverDuration = 750;
-    Logger.log(e2.pageX);
-    Logger.log(e2.pageY);
+
     // Create radial BG animation
     const funcBgFiller = function () {
       // Create page filling obj and animation
@@ -200,7 +199,6 @@ export default class FillCanvas {
     }.bind(this);
 
     // Change the class, and enque the animations
-    Logger.log('On the launchpad');
     if (newPage.is('#bigBaby')) {
       funcRipple();
       funcParticles();
@@ -208,7 +206,6 @@ export default class FillCanvas {
       e.preventDefault();
       this.closePost();
     } else {
-      Logger.log(newPage.attr('id'));
       e.preventDefault();
       funcBgFiller();
       funcRipple();
@@ -220,7 +217,7 @@ export default class FillCanvas {
   openPost($brick) {
     if (this.cloneCheck) {
       this.cloneCheck = false;
-      this.$clone = $brick.clone(false);
+      this.$clone = $brick.clone(true, true);
       this.$clone.addClass('invisible');
       this.funcCloudTextChange(this.$clone.find('.magicLink').first().html());
       this.funcCloudScale();
@@ -230,7 +227,7 @@ export default class FillCanvas {
         .find('header')
         .first()
         .detach();
-      this.addClickListeners(this.$clone);
+      // this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');
       this.$clone.removeClass('invisible');

@@ -80,7 +80,6 @@
       position: relative;
       float: right;
       clear: both;
-      width: auto;
       font-size: 1.75rem;
       font-weight: 700;
       line-height: 1;
@@ -92,9 +91,11 @@
       border-radius: 0.7em;
       text-align: right;
       cursor: pointer;
+      transition: width 0.5s;
 
         @include medium{
           flex: 1 0 10em;
+          align-self: flex-start;
           min-width: 10em;
           text-align: center;
           padding: 0.3em 2.2em 0.3em 2.2em;
@@ -111,7 +112,6 @@
           margin-right:0;
         }
 
-
       h3:not(.postLink), a{
         margin:0;
         font-family: $headings-font-family;
@@ -126,14 +126,63 @@
       &.repo{
         background-color: $link-2;
       }
-      &.widget_ssba_widget{
+      &.widget:nth-child(4){
         background-color: $link-3;
       }
-      &.wpforms-widget{
+      &.widget:nth-child(5){
         background-color: $link-4;
       }
-      div{
+      .widget-content{
         display:none;
+        margin-left: -0.5em;
+        margin-right: -0.5em;
+        .ssba img{
+          width: 0.8rem !important;
+          display: inline-block !important;
+          padding: 0.25em;
+          border: 0;
+          box-shadow: none;
+          vertical-align: middle;
+          border-radius: 0 0.5em 0.5em 0;
+        }
+        form.wpforms-form{
+          color: black;
+          button{
+            @extend .btn;
+            @extend .btn-lg;
+            @extend .btn-block;
+            background-color: $brand-primary;
+          }
+          .wpforms-required-label{
+            display: none;
+          }
+          .wpforms-field-row-block{
+            @extend .form-group;
+            @extend .input-group-lg;
+            font-family: $headings-font-family;
+            font-weight: 600;
+          }
+          input[type=date],
+          input[type=datetime],
+          input[type=datetime-local],
+          input[type=email],
+          input[type=month],
+          input[type=number],
+          input[type=password],
+          input[type=range],
+          input[type=search],
+          input[type=tel],
+          input[type=text],
+          input[type=time],
+          input[type=url],
+          input[type=week],
+          select,
+          textarea{
+            @extend .form-control;
+            margin-top:0;
+            font-size: 0.8em;
+          }
+        }
       }
 
       &:after{
