@@ -216,7 +216,7 @@ export default class FillCanvas {
         .find('header')
         .first()
         .detach();
-      // this.addClickListeners(this.$clone);
+      this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');
       this.$clone.removeClass('invisible');

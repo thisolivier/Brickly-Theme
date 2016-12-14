@@ -164,9 +164,14 @@
       @include medium {
         height: relate($chim-percent, $brick-height*1.2);
       }
-
       @include small {
         height: relate($chim-percent, $brick-height*1.5);
+      }
+      @include tiny {
+        height: relate($chim-percent, $brick-height*2);
+      }
+      @include large{
+        font-size: 1.3em;
       }
 
       &.big_brick {
@@ -177,15 +182,19 @@
         width: $brick-small * 1%;
       }
 
-      @include large{
-        font-size: 1.3em;
-      }
+
     }
 
     article {
       padding: 0.8em;
       z-index: 100;
       overflow-y: hidden;
+      @include medium{
+        padding: 0.7em;
+      }
+      @include tiny{
+        padding: 0.5em;
+      }
 
       header {
         position:relative;
@@ -194,8 +203,20 @@
 
         h2{
           margin:0 0 0.2em;
-          font-size: 1.8rem;
+          font-size: 1.6rem;
           cursor: pointer;
+          @include medium{
+            font-size: 1.5rem;
+          }
+          @include small{
+              font-size: 1.3rem;
+          }
+          @include tiny{
+              font-size: 1.1rem;
+          }
+          @mixin huge {
+            font-size: 1.8rem;
+          }
         }
         time {
           display:none;
@@ -206,6 +227,9 @@
           overflow-y: hidden;
           a {
             font-size: 0.9em;
+          }
+          @include tiny{
+              font-size: 0.9rem;
           }
         } // tags
       } // header
@@ -223,7 +247,7 @@
   #backgroundPost{
     @extend .fillView;
     z-index: 50;
-    //overflow: hidden;
+    overflow: hidden;
   }
 
   .backgroundLanscape {
