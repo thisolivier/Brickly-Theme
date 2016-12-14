@@ -1,6 +1,6 @@
 export default class BackgroundLanscape {
-  constructor(targetClass) {
-    this.target = $(targetClass);
+  constructor() {
+    this.target = $('.backgroundLanscape');
     this.heightDefined = $('#heightDefined');
     this.target = {
       parent: this.target,

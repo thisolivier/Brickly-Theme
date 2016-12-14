@@ -18,11 +18,9 @@ export default {
 
   finalize() {
     const animator = new FillCanvas();
-    const horizon = new BackgroundLanscape('.backgroundLanscape');
-    /* eslint-disable*/
-    horizon.init();
-    /* eslint-enable*/
+    const horizon = new BackgroundLanscape();
     BrickAnimation.animate();
+    horizon.init();
     animator.init();
   },
 };
