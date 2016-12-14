@@ -4,3 +4,102 @@
 .banner .nav a {
   @extend .nav-link;
 }
+
+header {
+  flex: 1 0 30%;
+  &.sitewide{
+    padding-top: $main-padding-top/1.5;
+    @include medium{
+      flex: 1 0 100%;
+    }
+  }
+}
+#theCloud {
+  display: inline-block;
+  text-align: center;
+  background-color: white;
+  padding: 1.6em;
+  align-self: flex-start;
+  border-radius: 9999px;
+  position: relative;
+  min-width: 80%;
+  z-index: 120;
+  transform-origin: left top;
+  .single-post &{
+    transform: scale(0.8);
+    transform-origin: 0 0;
+  }
+  @include medium{
+    min-width: 100% !important;
+    transform: scale(1) !important;
+  }
+
+  &.shrink {
+  }
+
+  .brand {
+    display:inline-block;
+    margin:0 0.3em 0.1em 0.1em;
+    font-size: 3em;
+
+    a {
+      display: block;
+      z-index: 30;
+      color: black;
+      text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.2);
+      position: relative;
+      top: -0.1em;
+      left: -0.1em;
+      transition: top .5s, left .5s, text-shadow .5s;
+    }
+
+    a:hover {
+      top:0em;
+      left:0em;
+      text-shadow: 0em 0em rgba(0, 0, 0, 1);
+      text-decoration: none;
+      color:black;
+    }
+  }
+  .backgroundCloud {
+    .ball{
+      display:block;
+      position:absolute;
+      top: -0.9em;
+      right:0;
+      width:100%;
+      min-width: 1em;
+      pointer-events: none;
+
+      &:first-child{ max-width: 1.45em; }
+      &:nth-child(2){ max-width: 16rem; }
+      &:nth-child(3){ max-width: 23rem; }
+      &:nth-child(4){
+        max-width: 43rem;
+        margin-right: -0.2em;
+      }
+
+      &.big {
+        font-size: 10em;
+      }
+      &.medium {
+        font-size: 7.8em;
+      }
+      &.small {
+        font-size: 6em;
+      }
+
+      &:after{
+        position: absolute;
+        left: 0.25em;
+        bottom: 0;
+        display: block;
+        width: 1em;
+        height: 1em;
+        background-color: white;
+        border-radius: 9999px;
+        content: " ";
+      }
+    }
+  }
+}

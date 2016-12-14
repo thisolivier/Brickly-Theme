@@ -7,6 +7,9 @@ import FillCanvas from '../com/animExplodePost';
 
 export default {
   init() {
+    window.onpopstate = function popState(event) {
+      alert(`location: ${document.location} , state: ${JSON.stringify(event.state)}`);
+    };
     const chim = new ChimneyStack();
     chim.conductor();
     $('.widget h3').click(function () {

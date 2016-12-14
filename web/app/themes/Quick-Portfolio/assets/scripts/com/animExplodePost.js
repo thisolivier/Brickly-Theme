@@ -136,7 +136,6 @@ export default class FillCanvas {
           y: pageY,
           r: 0,
           fill: this.color.current,
-          stroke: { width: 3, color: this.color.current },
           opacity: 1,
         });
         this.animRipple = anime({
@@ -205,6 +204,7 @@ export default class FillCanvas {
 
   openPost($brick) {
     if (this.cloneCheck) {
+      history.pushState({ loading: 'page' }, 'NEW PAGE', 'aaaagh.html');
       this.cloneCheck = false;
       this.$clone = $brick.clone(true, true);
       this.$clone.addClass('invisible');

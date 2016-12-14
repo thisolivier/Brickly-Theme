@@ -1,7 +1,9 @@
 <header class="sitewide">
   <div id="theCloud">
     <h1 class="brand">
-      <a id="cloudLink" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
+      <a id="cloudLink" href="<?= esc_url(home_url('/')); ?>">
+        <?php if( is_home() ) {bloginfo('name');} else {wp_title('');} ?>
+      </a>
     </h1>
     <nav class="nav-primary">
       <?php

@@ -1,5 +1,4 @@
-#bigBaby, .post article{
-
+#bigBaby, .post article, .single-post article{
   font-size: 1.2em;
   display: flex;
   flex-flow: row wrap;
@@ -12,6 +11,7 @@
   align-items: baseline;
   align-content: flex-start;
 
+  color: $brand-primary;
   background-color: transparent;
   opacity: 100;
   transform: scale(1);
