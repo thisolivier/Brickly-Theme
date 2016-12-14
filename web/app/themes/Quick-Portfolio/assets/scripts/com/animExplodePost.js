@@ -92,120 +92,113 @@ export default class FillCanvas {
       Math.pow(Math.max(pageX - 0, this.cW - pageX), 2) +
       Math.pow(Math.max(pageY - 0, this.cH - pageY), 2)
     );
+    const aniFunt = {
+      brickSplosion: () => {
+        this.bricks = document.querySelectorAll('.brick');
+        this.animBrick = anime({
+          targets: this.bricks,
+          translateX() {
+            return anime.random(targetR, -targetR) * 3;
+          },
+          translateY() {
+            return anime.random(targetR * 1.15, -targetR * 1.15) * 3;
+          },
+          rotate() {
+            return anime.random(200, 500);
+          },
+          duration: 2000,
+          delay: 150,
+          easing: 'easeOutCubic',
+        });
+        this.animations.push(this.animBrick);
+      },
 
-
-    // Create radial BG animation
-    const funcBgFiller = function () {
-      // Create page filling obj and animation
-      this.pageFill = new this.Circle({
-        x: pageX,
-        y: pageY,
-        r: 0,
-        fill: this.color.next,
-      });
-      this.animBg = anime({
-        targets: this.pageFill,
-        r: targetR,
-        duration: Math.max(targetR / 2, minCoverDuration),
-        easing: 'easeInCubic',
-      });
-      this.animations.push(this.animBg);
-    }.bind(this);
-
-    // Create ripple obj and animation
-    const funcRipple = function () {
-      this.ripple = new this.Circle({
-        x: pageX,
-        y: pageY,
-        r: 0,
-        fill: this.color.current,
-        stroke: {
-          width: 3,
-          color: this.color.current,
-        },
-        opacity: 1,
-      });
-      this.animRipple = anime({
-        targets: this.ripple,
-        r: rippleSize,
-        opacity: {
-          value: 0,
-          delay: 200,
-          duration: 500,
-        },
-        easing: 'easeOutExpo',
-        duration: 700,
-        complete: this.removeAnimation(this.animRipple),
-      });
-      this.animations.push(this.animRipple);
-    }.bind(this);
-
-    // Create particle objects and animation
-    const funcParticles = function () {
-      this.particles = [];
-      for (let i = 0; i < 20; i += 1) {
-        const particle = new this.Circle({
+      blackBg: () => {
+        // Create page filling obj and animation
+        this.pageFill = new this.Circle({
           x: pageX,
           y: pageY,
-          fill: this.color.current,
-          r: anime.random(10, 20),
+          r: 0,
+          fill: this.color.next,
         });
-        this.particles.push(particle);
-      }
-      this.animPartl = anime({
-        targets: this.particles,
-        x(particle) {
-          return particle.x + anime.random(rippleSize, -rippleSize);
-        },
-        y(particle) {
-          return particle.y + anime.random(rippleSize, -rippleSize);
-        },
-        r: {
-          value: 0,
-          delay: 400,
-          duration: 400,
-          easing: 'easeOutCubic',
-        },
-        easing: 'easeInOutQuart',
-        duration: anime.random(600, 800),
-        complete: this.removeAnimation(this.animPartl),
-      });
-      this.animations.push(this.animPartl);
-    }.bind(this);
+        this.animBg = anime({
+          targets: this.pageFill,
+          r: targetR,
+          duration: Math.max(targetR / 2, minCoverDuration),
+          easing: 'easeInCubic',
+        });
+        this.animations.push(this.animBg);
+      },
 
-    // Create brick animation
-    const funcBricksplosion = function () {
-      this.bricks = document.querySelectorAll('.brick');
-      this.animBrick = anime({
-        targets: this.bricks,
-        translateX() {
-          return anime.random(targetR, -targetR) * 3;
-        },
-        translateY() {
-          return anime.random(targetR * 1.15, -targetR * 1.15) * 3;
-        },
-        rotate() {
-          return anime.random(200, 500);
-        },
-        duration: 2000,
-        delay: 150,
-        easing: 'easeOutCubic',
-      });
-      this.animations.push(this.animBrick);
-    }.bind(this);
+      ripple: () => {
+        this.ripple = new this.Circle({
+          x: pageX,
+          y: pageY,
+          r: 0,
+          fill: this.color.current,
+          stroke: { width: 3, color: this.color.current },
+          opacity: 1,
+        });
+        this.animRipple = anime({
+          targets: this.ripple,
+          r: rippleSize,
+          opacity: {
+            value: 0,
+            delay: 200,
+            duration: 500,
+          },
+          easing: 'easeOutExpo',
+          duration: 700,
+          complete: this.removeAnimation(this.animRipple),
+        });
+        this.animations.push(this.animRipple);
+      },
+
+      particles: () => {
+        this.particles = [];
+        for (let i = 0; i < 20; i += 1) {
+          const particle = new this.Circle({
+            x: pageX,
+            y: pageY,
+            fill: this.color.current,
+            r: anime.random(10, 20),
+          });
+          this.particles.push(particle);
+        }
+        this.animPartl = anime({
+          targets: this.particles,
+          x(particle) {
+            return particle.x + anime.random(rippleSize, -rippleSize);
+          },
+          y(particle) {
+            return particle.y + anime.random(rippleSize, -rippleSize);
+          },
+          r: {
+            value: 0,
+            delay: 400,
+            duration: 400,
+            easing: 'easeOutCubic',
+          },
+          easing: 'easeInOutQuart',
+          duration: anime.random(600, 800),
+          complete: this.removeAnimation(this.animPartl),
+        });
+        this.animations.push(this.animPartl);
+      },
+    };
 
     // Change the class, and enque the animations
     if (newPage.is('#bigBaby')) {
-      funcRipple();
-      funcParticles();
+      aniFunt.ripple();
+      aniFunt.particles();
     } else if ($(element).is('#cloudLink')) {
       e.preventDefault();
       this.closePost();
     } else {
       e.preventDefault();
-      funcBgFiller();
-      funcRipple();
-      funcBricksplosion();
+      aniFunt.blackBg();
+      aniFunt.ripple();
+      aniFunt.brickSplosion();
       this.openPost(newPage);
     }
   } // handleEvent()
