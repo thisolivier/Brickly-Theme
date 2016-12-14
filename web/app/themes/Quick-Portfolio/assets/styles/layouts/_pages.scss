@@ -216,14 +216,14 @@
   } // .content.row
   .fillView{
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
   }
 
   #backgroundPost{
     @extend .fillView;
     z-index: 50;
-    overflow: hidden;
+    //overflow: hidden;
   }
 
   .backgroundLanscape {

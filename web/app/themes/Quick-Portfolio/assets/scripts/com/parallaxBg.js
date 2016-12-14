@@ -1,13 +1,11 @@
 export default class BackgroundLanscape {
   constructor(targetClass) {
     this.target = $(targetClass);
+    this.heightDefined = $('#heightDefined');
     this.target = {
       parent: this.target,
       sky: this.target.find('.sky'),
       land: this.target.find('.land'),
-    };
-    this.getHeightInPercent = function () {
-      return parseFloat($(this).css('height')) / parseFloat($(this).parent().css('height'));
     };
     this.proportions = {
       sky: this.getHeightInPercent.call(this.target.sky),
@@ -15,11 +13,19 @@ export default class BackgroundLanscape {
     };
   }
 
+  init() {
+    $(window).scroll(() => this.adjust(window));
+  }
+
+  getHeightInPercent() {
+    return parseFloat($(this).css('height')) / parseFloat($(this).parent().css('height'));
+  }
+
   adjust(window) {
     const clientHeight = window.innerHeight;
-    const scrollHeight = $('#heightDefined').height();
+    const totalHeight = this.heightDefined.height();
     const scrollPercent = $(window).scrollTop() /
-      (scrollHeight - clientHeight);
+      (totalHeight - clientHeight);
     const skyMargin = 0.1;
 
     let newSkyMargin = skyMargin * scrollPercent;

@@ -25,6 +25,12 @@
 }
 
 @mixin large {
+  @media (min-width: #{$medium-width}) {
+    @content;
+  }
+}
+
+@mixin huge {
   @media (min-width: #{$large-width}) {
     @content;
   }

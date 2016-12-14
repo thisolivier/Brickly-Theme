@@ -9,8 +9,8 @@ export default {
   init() {
     const chim = new ChimneyStack();
     chim.conductor();
-    $('.widget').click(function () {
-      $(this).children('.widget-content').slideToggle({
+    $('.widget h3').click(function () {
+      $(this).next('.widget-content').slideToggle({
         duration: 1000,
       });
     });
@@ -20,7 +20,7 @@ export default {
     const animator = new FillCanvas();
     const horizon = new BackgroundLanscape('.backgroundLanscape');
     /* eslint-disable*/
-    $(window).scroll(function() { horizon.adjust(window); });
+    horizon.init();
     /* eslint-enable*/
     BrickAnimation.animate();
     animator.init();

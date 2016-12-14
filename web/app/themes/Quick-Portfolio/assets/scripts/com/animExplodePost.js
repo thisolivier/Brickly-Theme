@@ -23,7 +23,7 @@ export default class FillCanvas {
   }
 
   init() {
-    this.resizeCanvas(); // Fix me, scoping errors
+    this.resizeCanvas();
     this.addMethods(); // Adds methods on bricks and circles to be called when animating
     window.addEventListener('resize', this.resizeCanvas);
     this.addClickListeners(this.$toBind); // Adds triggers - animations will add to queue.
@@ -78,32 +78,28 @@ export default class FillCanvas {
 
   handleEvent(e) {
     // Correct the event if it's a tap
-    let e2 = e;
-    if (e.touches) {
-      e2 = e.touches[0];
-    } else {
-      e2 = e || window.event;
-    }
+    const e2 = e.touches ? e.touches[0] : e || window.event;
 
     // Fix for IE < 9
     const element = e.target || e.srcElement;
+
+    const pageX = e2.pageX;
+    const pageY = e2.pageY - $(window).scrollTop();
     const newPage = $(element).closest('article');
-    const targetR = Math.sqrt(
-      Math.pow(
-        Math.max(e2.pageX - 0, this.cW - e2.pageX), 2
-      ) + Math.pow(
-        Math.max(e2.pageY - 0, this.cH - e2.pageY), 2
-      )
-    );
     const rippleSize = Math.min(200, (this.cW * 0.4));
     const minCoverDuration = 750;
+    const targetR = Math.sqrt(
+      Math.pow(Math.max(pageX - 0, this.cW - pageX), 2) +
+      Math.pow(Math.max(pageY - 0, this.cH - pageY), 2)
+    );
+
 
     // Create radial BG animation
     const funcBgFiller = function () {
       // Create page filling obj and animation
       this.pageFill = new this.Circle({
-        x: e2.pageX,
-        y: e2.pageY,
+        x: pageX,
+        y: pageY,
         r: 0,
         fill: this.color.next,
       });
@@ -119,8 +115,8 @@ export default class FillCanvas {
     // Create ripple obj and animation
     const funcRipple = function () {
       this.ripple = new this.Circle({
-        x: e2.pageX,
-        y: e2.pageY,
+        x: pageX,
+        y: pageY,
         r: 0,
         fill: this.color.current,
         stroke: {
@@ -149,8 +145,8 @@ export default class FillCanvas {
       this.particles = [];
       for (let i = 0; i < 20; i += 1) {
         const particle = new this.Circle({
-          x: e2.pageX,
-          y: e2.pageY,
+          x: pageX,
+          y: pageY,
           fill: this.color.current,
           r: anime.random(10, 20),
         });
@@ -301,9 +297,7 @@ export default class FillCanvas {
     anime({
       duration: Infinity,
       update: () => {
-        this.cxt.fillStyle = 'transparent';
         this.cxt.clearRect(0, 0, this.cW, this.cH);
-        this.cxt.fillRect(0, 0, this.cW, this.cH);
         this.animations.forEach((anim) => {
           anim.animatables.forEach((animatable) => {
             if (typeof animatable.target.draw !== 'undefined') {
