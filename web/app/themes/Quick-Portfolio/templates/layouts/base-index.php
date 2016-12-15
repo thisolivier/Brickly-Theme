@@ -13,8 +13,9 @@
           do_action('get_header');
           get_template_part('partials/header');
         ?>
-        <main class="main">
+        <main class="main hidden">
           <?php include App\template()->main(); ?>
+          <div class="mortar" aria-hidden="true">&nbsp</div>
         </main>
       </div>
       <canvas id="backgroundPost"></canvas>

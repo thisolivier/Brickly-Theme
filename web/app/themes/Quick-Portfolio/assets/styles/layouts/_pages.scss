@@ -42,7 +42,7 @@
       };
     }
 
-    &:after{
+    .mortar{
       content: "";
       position: absolute;
       top: $main-padding-top;
@@ -51,9 +51,11 @@
       right: relate($chim-percent, $brick-gap*0.4);
       margin-top: relate($chim-percent, $brick-gap*1.4);
       background-color: white;
+      opacity:0;
       z-index: 80;
       border-radius: 0.5em;
     }
+    
   }
 
   .brick {

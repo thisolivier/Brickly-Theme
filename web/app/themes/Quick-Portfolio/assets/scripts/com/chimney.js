@@ -68,7 +68,7 @@ export default class ChimneyStack {
     // If this is a chance for an article, have think,
     // If we're a virgin, or if the odds are good, insert an article.
     // Failing any of that, make a hollow brick.
-    return ((element === 'b') && (virgin || (Math.random() > 0.35)) ?
+    return ((element === 'b') && (virgin || (Math.random() > 0.25)) ?
       kiln.full() : kiln.hollow()
     );
   }

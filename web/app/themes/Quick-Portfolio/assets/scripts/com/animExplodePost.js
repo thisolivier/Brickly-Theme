@@ -1,5 +1,5 @@
 import anime from 'animejs';
-// import Logger from '../util/logger';
+import Logger from '../util/logger';
 
 export default class FillCanvas {
   /* eslint no-param-reassign: "warn", class-methods-use-this: "warn" */
@@ -14,6 +14,7 @@ export default class FillCanvas {
     this.$cloudLink = $('#cloudLink');
     this.$main = $('main');
     this.originalCloudText = $('#cloudLink').html();
+    this.originalTitle = $(document).find('title').text();
     this.color = { current: 'white', next: 'black' };
     this.cloneCheck = true;
     this.animations = [];
@@ -35,7 +36,6 @@ export default class FillCanvas {
     this.cH = window.innerHeight;
     $(this.c).attr('width', `${this.cW * window.devicePixelRatio}px`);
     $(this.c).attr('height', `${this.cH * window.devicePixelRatio}px`);
-    $(this.cxt).css('transform', `scale(${window.devicePixelRatio})`);
   }
 
   Circle(opts) {
@@ -204,7 +204,7 @@ export default class FillCanvas {
 
   openPost($brick) {
     if (this.cloneCheck) {
-      history.pushState({ loading: 'page' }, 'NEW PAGE', 'aaaagh.html');
+      this.movePageState($brick);
       this.cloneCheck = false;
       this.$clone = $brick.clone(true, true);
       this.$clone.addClass('invisible');
@@ -223,8 +223,19 @@ export default class FillCanvas {
     }
   }
 
+  primeBackButton($brick) {
+    const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
+    const locationURL = $brick.find('h2 .magicLink')[0];
+    Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
+    history.pushState({ loading: 'page' }, newTitle, locationURL);
+    window.onpopstate = function popState() {
+      this.closePost();
+    };
+  }
+
   closePost() {
     this.funcCloudTextChange();
+    history.pushState({ loading: 'home' }, this.originalTitle, '');
     this.cloneCheck = true;
     this.$clone.detach();
     this.$main.removeClass('hidden').removeAttr('style');
