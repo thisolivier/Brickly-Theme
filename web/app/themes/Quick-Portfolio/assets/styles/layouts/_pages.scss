@@ -73,6 +73,12 @@
     border-radius: 0.5em;
     z-index:100;
 
+    &:hover{
+      .shadow{
+        height:1em;
+      }
+    }
+
     @include medium {
       height: relate($chim-percent, $brick-height*1.2);
     }
@@ -96,11 +102,13 @@
   }
 
   article {
-    padding: 0.8em;
+    padding: 0.8em 0.7em 0.6em 0.8em;
     z-index: 100;
     overflow-y: hidden;
+    display: block;
+    transform-origin: bottom center;
     @include medium{
-      padding: 0.7em;
+      padding: 0.7em 0.6em 0.5em 0.7em;
     }
     @include tiny{
       padding: 0.5em;
@@ -114,15 +122,17 @@
       .shadow {
         position: absolute;
         bottom: 0;
-        width:100%;
-        height:1em;
-        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 4%,rgba(0,0,0,0.48) 70%,rgba(0,0,0,1) 100%);
+        width: 100%;
+        height: 60%;
+        pointer-events: none;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 4%,rgba(0,0,0,0.48) 69%,rgba(0,0,0,1) 92%,rgba(0,0,0,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+        transition: height 0.4s;
       }
 
       h2{
         margin:0 0 0.2em;
-        font-size: 1.6rem;
+        font-size: 1.7rem;
         cursor: pointer;
         @include medium{
           font-size: 1.5rem;
@@ -134,7 +144,11 @@
             font-size: 1.1rem;
         }
         @mixin huge {
-          font-size: 1.8rem;
+          font-size: 1.9rem;
+        }
+        a:hover{
+          color: inherit;
+          text-decoration: none;
         }
       }
       time {
@@ -149,7 +163,7 @@
           font-size: 0.9em;
         }
         @include large{
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         @include huge{
             font-size: 1rem;

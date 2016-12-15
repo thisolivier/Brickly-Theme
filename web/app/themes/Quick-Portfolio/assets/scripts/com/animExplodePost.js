@@ -204,18 +204,17 @@ export default class FillCanvas {
 
   openPost($brick) {
     if (this.cloneCheck) {
-      this.movePageState($brick);
+      this.primeBackButton($brick);
       this.cloneCheck = false;
       this.$clone = $brick.clone(true, true);
       this.$clone.addClass('invisible');
       this.funcCloudTextChange(this.$clone.find('.magicLink').first().html());
       this.funcCloudScale();
       this.$main.css('z-index', 50);
-      this.$clone.removeAttr('style')
-        .attr('id', 'bigBaby')
-        .find('header')
-        .first()
+      this.$clone.removeAttr('style').attr('id', 'bigBaby')
+        .find('header').first()
         .detach();
+      this.$clone.find('.shadow').first().detach();
       this.addClickListeners(this.$clone);
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');
