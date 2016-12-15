@@ -70,7 +70,7 @@
     margin-top: relate($chim-percent, $brick-gap);
     background-color: black;
     color: white;
-    border-radius: 0.5em;
+    border-radius: 1vw;
     z-index:100;
 
     &:hover{
@@ -99,6 +99,17 @@
     &.small_brick{
       width: $brick-small * 1%;
     }
+
+    .shadow {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60%;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 4%,rgba(0,0,0,0.48) 69%,rgba(0,0,0,1) 92%,rgba(0,0,0,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+      transition: height 0.4s;
+    }
   }
 
   article {
@@ -106,6 +117,7 @@
     z-index: 100;
     overflow-y: hidden;
     transform-origin: bottom center;
+
     @include medium{
       padding: 0.7em 0.6em 0.5em 0.7em;
     }
@@ -118,32 +130,21 @@
       max-height: 100%;
       overflow-y: hidden;
 
-      .shadow {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 60%;
-        pointer-events: none;
-        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 4%,rgba(0,0,0,0.48) 69%,rgba(0,0,0,1) 92%,rgba(0,0,0,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
-        transition: height 0.4s;
-      }
-
       h2{
         margin:0 0 0.2em;
-        font-size: 1.7rem;
+        font-size: 1.5em;
         cursor: pointer;
         @include medium{
-          font-size: 1.5rem;
+          font-size: 1.3em;
         }
         @include small{
-            font-size: 1.3rem;
+            font-size: 1.1em;
         }
         @include tiny{
-            font-size: 1.1rem;
+            font-size: 0.9em;
         }
-        @mixin huge {
-          font-size: 1.9rem;
+        @include huge {
+          font-size: 1.7em;
         }
         a:hover{
           color: inherit;
@@ -162,13 +163,13 @@
           font-size: 0.9em;
         }
         @include large{
-            font-size: 0.95rem;
+            font-size: 0.95em;
         }
         @include huge{
-            font-size: 1rem;
+            font-size: 1em;
         }
         @include tiny{
-            font-size: 0.9rem;
+            font-size: 0.9em;
         }
       } // tags
     } // header
