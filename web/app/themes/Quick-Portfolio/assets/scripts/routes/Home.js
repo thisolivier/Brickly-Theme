@@ -19,7 +19,8 @@ export default {
   finalize() {
     const animator = new FillCanvas();
     const horizon = new BackgroundLanscape();
-    BrickAnimation.animBrickFall();
+    const makeWall = new BrickAnimation();
+    makeWall.init();
     horizon.init();
     animator.init();
   },

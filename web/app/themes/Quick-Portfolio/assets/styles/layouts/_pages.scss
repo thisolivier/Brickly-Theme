@@ -47,15 +47,21 @@
       position: absolute;
       top: $main-padding-top;
       bottom: 0;
+      opacity: 1;
       left: relate($chim-percent, $brick-gap*0.4);
       right: relate($chim-percent, $brick-gap*0.4);
       margin-top: relate($chim-percent, $brick-gap*1.4);
       background-color: white;
-      opacity:0;
       z-index: 80;
       border-radius: 0.5em;
+      transition-delay: 4s;
+      transition: top 4s;
+
+      &.pre_setup{
+        top: 1500px;
+        opacity: 0;
+      }
     }
-    
   }
 
   .brick {
@@ -105,6 +111,15 @@
       max-height: 100%;
       overflow-y: hidden;
 
+      .shadow {
+        position: absolute;
+        bottom: 0;
+        width:100%;
+        height:1em;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 4%,rgba(0,0,0,0.48) 70%,rgba(0,0,0,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+      }
+
       h2{
         margin:0 0 0.2em;
         font-size: 1.6rem;
@@ -129,8 +144,15 @@
         line-height: 1.6em;
         height: 3.5em;
         overflow-y: hidden;
+        position: relative;
         a {
           font-size: 0.9em;
+        }
+        @include large{
+            font-size: 0.9rem;
+        }
+        @include huge{
+            font-size: 1rem;
         }
         @include tiny{
             font-size: 0.9rem;

@@ -3,19 +3,19 @@ import anime from 'animejs';
 // import Logger from '../util/logger';
 
 export default class BrickAnimation {
-  static makeMainVisible() {
-    $('main.main, .mortar').removeClass('hidden');
-  }
-  static animBrickFall() {
+  init() {
     let delayTot = 0;
+    const makeMortar = function () {
+      $('.mortar').removeClass('pre_setup');
+    };
     this.anime = anime({
       direction: 'reverse',
-      easing: 'easeOutQuart',
+      easing: 'easeInQuint',
       targets: $('.brick').toArray().reverse(),
-      translateY: el => el.getBoundingClientRect().bottom * -0.7,
+      translateY() { return `-${anime.random(600, 700)}px`; },
       opacity: {
         value: [1, 0],
-        easing: 'easeOutExpo',
+        easing: 'easeInExpo',
       },
       delay(el) {
         const value = (
@@ -24,10 +24,13 @@ export default class BrickAnimation {
         delayTot += value;
         return (delayTot);
       },
-      duration(el) {
-        return (anime.random(1, 4) + ((el.getBoundingClientRect().bottom) * 0.5));
+      duration() {
+        return (anime.random(600, 700));
       },
-      begin: BrickAnimation.makeMainVisible(),
+      begin() {
+        $('main.main').removeClass('hidden');
+        makeMortar();
+      },
     });
   }
 }

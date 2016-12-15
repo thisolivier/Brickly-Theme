@@ -6,6 +6,7 @@
       </a>
     </h2>
     <?php get_template_part('partials/entry-meta'); ?>
+    <div class="shadow" aria-hidden="true">&nbsp</div>
   </header><br>
   <div class="post-meta">
     <?= \App\portfolio_meta(); ?>
