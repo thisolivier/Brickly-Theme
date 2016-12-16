@@ -26,9 +26,9 @@ export default class BackgroundLanscape {
     const totalHeight = this.heightDefined.height();
     const scrollTop = $(window).scrollTop();
     const heightOffset = totalHeight - clientHeight;
+    const scrollPercent = scrollTop / heightOffset;
 
     if (heightOffset - scrollTop >= 0) {
-      const scrollPercent = scrollTop / heightOffset;
       const skyMargin = 0.1;
       let newSkyMargin = skyMargin * scrollPercent;
       let newLand = (this.proportions.land + 0.4) -
@@ -39,10 +39,10 @@ export default class BackgroundLanscape {
       this.target.sky.css('margin-top', newSkyMargin);
       this.target.land.css('height', newLand);
     }
-    if (heightOffset - scrollTop <= 300) {
-      const proportions = (scrollTop / clientHeight) * 1;
-      const newTop = Math.pow(100, proportions);
-      $('footer.content-info').first().css('top', -newTop);
+    if (scrollPercent >= 0.1) {
+      const proportions = ($('#heightDefined').height() - clientHeight) / (scrollTop * 0.7);
+      const newTop = Math.exp(proportions) - 400;
+      if (newTop <= 500 && newTop >= -500) $('footer.content-info').first().css('top', newTop);
     }
   } // adjust(window)
 }
