@@ -75,12 +75,6 @@
     border-radius: 1vw;
     z-index:100;
 
-    &:hover{
-      .shadow{
-        height:1em;
-      }
-    }
-
     @include medium {
       height: relate($chim-percent, $brick-height*1.2);
     }
@@ -96,12 +90,30 @@
 
     &.big_brick {
       width: $brick-big * 1%;
+      overflow:hidden;
     }
 
     &.small_brick{
       width: $brick-small * 1%;
     }
+  }
 
+  article {
+    padding: 0.8em 0.7em 0.6em 0.8em;
+    z-index: 100;
+    overflow-y: hidden;
+    transform-origin: center;
+    transition: transform 0.4s;
+
+    &:hover{
+      transform: scale(1.1);
+      & &.main{
+        background-color: red;
+      }
+      .shadow{
+        height:1em;
+      }
+    }
     .shadow {
       position: absolute;
       bottom: 0;
@@ -112,13 +124,6 @@
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
       transition: height 0.4s;
     }
-  }
-
-  article {
-    padding: 0.8em 0.7em 0.6em 0.8em;
-    z-index: 100;
-    overflow-y: hidden;
-    transform-origin: bottom center;
 
     @include medium{
       padding: 0.7em 0.6em 0.5em 0.7em;
@@ -180,6 +185,7 @@
     }
   } // article
 } // .content.row
+
 .fillView{
   position: fixed;
   top: 0;
@@ -195,12 +201,25 @@
 .backgroundLanscape {
   @extend .fillView;
   z-index: 10;
+  &.hidden {
+    .sky {
+      top: -10em;
+      opacity: 0;
+    }
+    .land {
+      top: 10em;
+      opacity: 0;
+    }
+  }
   .sky-and-land{
     width:100vw;
+    position: relative;
+    transition: opacity 2s, top 2s;
   }
   .sky{
     height:70vh;
     margin-bottom:-10vh;
+    transition-delay: 1s;
     @extend .sky-and-land;
   }
 

@@ -3,25 +3,49 @@ footer.content-info{
   position: relative;
   padding-top: 5em;
   background-color: black;
+  $padding: 2em;
+  padding: 5em 0 4em $padding;
 
   .container{
     position: relative;
     display: flex;
     flex-flow: row wrap;
-    align-items: flex-start;
-    justify-content: flex-end;
-    break-inside: avoid;
-    margin-right: -2em;
+    align-items: baseline;
 
-    .widget{
+    .element{
       flex: 1 0 15em;
       width: 15em;
-      color: white;
       max-width: 33.3%;
-      break-inside: avoid;
-      padding-right:2em;
-      &:nth-child(4){
+      order:2;
+    }
 
+    .widget:not(.column) {
+      @extend .element;
+      color: $brand-primary;
+      padding-right: $padding;
+    }
+    .sidebar-wrapper {
+      @extend .element;
+      display: flex;
+      flex-flow: row wrap;
+      background-color: $brand-primary;
+      color: $brand-secondary;
+      padding-left: $padding/2;
+      margin: 2em 0;
+      border-radius: 0.5em;
+
+      @include large{
+        order:1;
+        position: relative;
+        top:-20em;
+
+      };
+
+      .widget{
+        color: inherit;
+        padding-right: $padding/2;
+        flex: 1 1 15em;
+        max-width: auto;
       }
     }
   }

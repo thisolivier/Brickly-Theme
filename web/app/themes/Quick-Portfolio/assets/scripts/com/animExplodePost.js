@@ -19,8 +19,6 @@ export default class FillCanvas {
     this.cloneCheck = true;
     this.animations = [];
     this.circles = [];
-
-    $('.backgroundLanscape').css('opacity', 1);
   }
 
   init() {

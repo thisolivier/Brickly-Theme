@@ -77,12 +77,23 @@ add_action('widgets_init', function () {
         'after_title'   => '</h3><div class="widget-content">',
         'after_widget'  => '</div></div>',
     ];
+
     register_sidebar([
-        'name'          => __('Post Meta', 'sage'),
-        'id'            => 'sidebar-primary'
+        'name' => __('Footer', 'sage'),
+        'id' => 'site-footer',
+        'description' => 'Main footer area, will arrange into columns breaking into rows.',
+    ] + $config);
+
+    $config['before_widget'] = '<div class="widget column %1$s %2$s">';
+
+    register_sidebar([
+        'name' => __('Post Meta', 'sage'),
+        'id' => 'sidebar-primary',
+        'description' => 'Sidebar appears on posts, intended to be used with custom post attributes info, repo, and site.',
     ] + $config);
     register_sidebar([
-        'name'          => __('Footer', 'sage'),
-        'id'            => 'sidebar-footer'
+        'name' => __('Footer Sidebar', 'sage'),
+        'id' => 'sidebar-footer',
+        'description' => 'Adds to the right of the footer, displays a column on a contrasting background.',
     ] + $config);
 });
