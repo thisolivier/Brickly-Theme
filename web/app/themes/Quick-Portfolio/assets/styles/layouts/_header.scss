@@ -59,6 +59,9 @@ header {
       top: -0.1em;
       left: -0.1em;
       transition: top .5s, left .5s, text-shadow .5s;
+      @include huge{
+        font-size: 1.2em;
+      };
     }
 
     a:hover {

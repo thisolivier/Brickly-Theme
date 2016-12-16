@@ -3,4 +3,26 @@ footer.content-info{
   position: relative;
   padding-top: 5em;
   background-color: black;
+
+  .container{
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: flex-end;
+    break-inside: avoid;
+    margin-right: -2em;
+
+    .widget{
+      flex: 1 0 15em;
+      width: 15em;
+      color: white;
+      max-width: 33.3%;
+      break-inside: avoid;
+      padding-right:2em;
+      &:nth-child(4){
+
+      }
+    }
+  }
 }
