@@ -26,7 +26,7 @@ export default class BackgroundLanscape {
 
   init() {
     this.adjust(window);
-    $(this.target).removeClass('hidden');
+    $('.backgroundLanscape').first().removeClass('hidden');
     $(window).scroll(() => this.adjust(window));
   }
 

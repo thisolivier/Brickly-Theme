@@ -90,8 +90,10 @@ export default class FillCanvas {
       Math.pow(Math.max(pageX - 0, this.cW - pageX), 2) +
       Math.pow(Math.max(pageY - 0, this.cH - pageY), 2)
     );
+    const resetPrime = () => $('article').removeAttr('style').addClass('transitions');
     const aniFunt = {
       brickSplosion: () => {
+        $('article').removeClass('transitions');
         this.bricks = document.querySelectorAll('.brick');
         this.animBrick = anime({
           targets: this.bricks,
@@ -107,6 +109,7 @@ export default class FillCanvas {
           duration: 2000,
           delay: 150,
           easing: 'easeOutCubic',
+          complete: resetPrime,
         });
         this.animations.push(this.animBrick);
       },
@@ -232,7 +235,7 @@ export default class FillCanvas {
 
   closePost() {
     this.funcCloudTextChange();
-    history.pushState({ loading: 'home' }, this.originalTitle, '');
+    history.pushState({ loading: 'home' }, this.originalTitle, '/');
     this.cloneCheck = true;
     this.$clone.detach();
     this.$main.removeClass('hidden').removeAttr('style');

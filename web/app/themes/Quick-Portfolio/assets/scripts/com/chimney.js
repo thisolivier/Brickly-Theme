@@ -6,12 +6,14 @@ export default class ChimneyStack {
     this.index = { brick: 1, articles: 1 };
     this.append = [];
     this.pattern = {
-      open: ['b', 's'],
-      repeat: ['s', 'b', 'b', 's'],
+      open: ['bl', 'sr'],
+      repeat: ['sl', 'br', 'bl', 'sr'],
     };
     this.brickClass = {
-      b: 'big_brick brick',
-      s: 'small_brick brick',
+      br: 'big_brick brick right',
+      bl: 'big_brick brick left',
+      sr: 'small_brick brick right',
+      sl: 'small_brick brick left',
     };
     // Finds my articles, stores them and removes them from the DOM
     this.$articles = $('main').children('article').detach();
@@ -68,7 +70,7 @@ export default class ChimneyStack {
     // If this is a chance for an article, have think,
     // If we're a virgin, or if the odds are good, insert an article.
     // Failing any of that, make a hollow brick.
-    return ((element === 'b') && (virgin || (Math.random() > 0.25)) ?
+    return ((element.includes('b')) && (virgin || (Math.random() > 0.25)) ?
       kiln.full() : kiln.hollow()
     );
   }

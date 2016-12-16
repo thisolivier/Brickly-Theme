@@ -9,21 +9,16 @@ export default class BrickAnimation {
       $('.mortar').removeClass('pre_setup');
     };
     const removeStyles = () => {
-      $('.brick').removeAttr('style');
+      $('.brick').removeAttr('style').addClass('transitions');
     };
     this.anime = anime({
       direction: 'reverse',
       easing: 'easeInQuint',
       targets: $('.brick').toArray().reverse(),
       translateY() { return `-${anime.random(600, 700)}px`; },
-      opacity: {
-        value: [1, 0],
-        easing: 'easeInExpo',
-      },
-      delay(el) {
-        const value = (
-          (el.getBoundingClientRect().bottom * anime.random(0.1, 0.13))
-        );
+      opacity: [1, 0],
+      delay() {
+        const value = 100;
         delayTot += value;
         return (delayTot);
       },
