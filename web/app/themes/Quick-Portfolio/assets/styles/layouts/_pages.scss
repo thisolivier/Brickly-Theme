@@ -12,6 +12,7 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-flow: row wrap;
+  margin-bottom: -25rem;
 
   @include medium {
     justify-content: space-around;
@@ -25,6 +26,7 @@
     flex-flow: row wrap;
     padding: $main-padding-top 0 0;
     justify-content: space-between;
+    padding-bottom: 20rem;
 
     @include medium {
       flex: 0 0 relate($chim-percent, 120);
