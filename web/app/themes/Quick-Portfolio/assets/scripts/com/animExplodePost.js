@@ -239,6 +239,7 @@ export default class FillCanvas {
     this.cloneCheck = true;
     this.$clone.detach();
     this.$main.removeClass('hidden').removeAttr('style');
+    $('article').removeClass('transitions');
     this.removeAnimation(this.animBg);
     this.removeAnimation(this.animScale);
     this.removeAnimation(this.animBrick);
