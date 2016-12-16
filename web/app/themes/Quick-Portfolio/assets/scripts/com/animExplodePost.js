@@ -94,17 +94,20 @@ export default class FillCanvas {
     const aniFunt = {
       brickSplosion: () => {
         $('article').removeClass('transitions');
-        this.bricks = document.querySelectorAll('.brick');
+        this.bricks = document.querySelectorAll('.brick, .mortar');
         this.animBrick = anime({
           targets: this.bricks,
-          translateX() {
-            return anime.random(targetR, -targetR) * 3;
+          translateX(el) {
+            if ($(el).is('.brick')) return anime.random(targetR, -targetR) * 3;
+            return 0;
           },
-          translateY() {
-            return anime.random(targetR * 1.15, -targetR * 1.15) * 3;
+          translateY(el) {
+            if ($(el).is('.brick')) return anime.random(targetR * 1.15, -targetR * 1.15) * 3;
+            return '100vw';
           },
-          rotate() {
-            return anime.random(200, 500);
+          rotate(el) {
+            if ($(el).is('.brick')) return anime.random(200, 500);
+            return 0;
           },
           duration: 2000,
           delay: 150,

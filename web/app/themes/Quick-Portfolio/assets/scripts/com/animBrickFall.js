@@ -10,6 +10,7 @@ export default class BrickAnimation {
     };
     const removeStyles = () => {
       $('.brick').removeAttr('style').addClass('transitions');
+      $('.mortar').removeClass('transitions');
     };
     this.anime = anime({
       direction: 'reverse',

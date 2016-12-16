@@ -15,7 +15,7 @@
         ?>
         <main class="main hidden">
           <?php include App\template()->main(); ?>
-          <div class="mortar pre_setup" aria-hidden="true">&nbsp</div>
+          <div class="mortar pre_setup transitions" aria-hidden="true">&nbsp</div>
         </main>
       </div>
       <canvas id="backgroundPost"></canvas>
