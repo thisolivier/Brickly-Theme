@@ -1,6 +1,44 @@
 import anime from 'animejs';
 import Logger from '../util/logger';
 
+class PostControllers {
+  openPost($brick) {
+    if (this.cloneCheck) {
+      this.primeBackButton($brick);
+      this.cloneCheck = false;
+      this.$clone = $brick.clone(true, true);
+      this.$clone.addClass('invisible');
+      this.funcCloudTextChange(this.$clone.find('.magicLink').first().html());
+      this.funcCloudScale();
+      this.$main.css('z-index', 50);
+      this.$clone.removeAttr('style').attr('id', 'bigBaby')
+        .find('header').first()
+        .detach();
+      this.$clone.find('.shadow').first().detach();
+      this.addClickListeners(this.$clone);
+      this.addClickListeners(this.$cloudLink);
+      this.$clone.appendTo('#heightDefined');
+      this.$clone.removeClass('invisible');
+    }
+  }
+  closePost() {
+    this.funcCloudTextChange();
+    history.pushState({ loading: 'home' }, this.originalTitle, '/');
+    this.cloneCheck = true;
+    this.$clone.detach();
+    this.$main.removeClass('hidden').removeAttr('style');
+    $('article').removeClass('transitions');
+    this.removeAnimation(this.animBg);
+    this.removeAnimation(this.animScale);
+    this.removeAnimation(this.animBrick);
+    this.animBg.revert();
+    this.animScale.revert();
+    this.animBrick.revert();
+    this.animations.push(this.animScale, this.animBrick, this.animBg);
+    this.$cloudLink[0].removeEventListener('click', this.handle);
+  }
+}
+
 export default class FillCanvas {
   /* eslint no-param-reassign: "warn", class-methods-use-this: "warn" */
   constructor() {
@@ -8,7 +46,9 @@ export default class FillCanvas {
     this.cxt = this.c.getContext('2d');
     this.cH = 0;
     this.cW = 0;
-
+    const postToggles = new PostControllers();
+    this.openPost = postToggles.openPost.bind(this);
+    this.closePost = postToggles.closePost.bind(this);
     this.$toBind = $('.magicLink');
     this.$cloud = $('#theCloud');
     this.$cloudLink = $('#cloudLink');
@@ -206,26 +246,6 @@ export default class FillCanvas {
     }
   } // handleEvent()
 
-  openPost($brick) {
-    if (this.cloneCheck) {
-      this.primeBackButton($brick);
-      this.cloneCheck = false;
-      this.$clone = $brick.clone(true, true);
-      this.$clone.addClass('invisible');
-      this.funcCloudTextChange(this.$clone.find('.magicLink').first().html());
-      this.funcCloudScale();
-      this.$main.css('z-index', 50);
-      this.$clone.removeAttr('style').attr('id', 'bigBaby')
-        .find('header').first()
-        .detach();
-      this.$clone.find('.shadow').first().detach();
-      this.addClickListeners(this.$clone);
-      this.addClickListeners(this.$cloudLink);
-      this.$clone.appendTo('#heightDefined');
-      this.$clone.removeClass('invisible');
-    }
-  }
-
   primeBackButton($brick) {
     const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
     const locationURL = $brick.find('h2 .magicLink')[0];
@@ -234,23 +254,6 @@ export default class FillCanvas {
     window.onpopstate = function popState() {
       this.closePost();
     };
-  }
-
-  closePost() {
-    this.funcCloudTextChange();
-    history.pushState({ loading: 'home' }, this.originalTitle, '/');
-    this.cloneCheck = true;
-    this.$clone.detach();
-    this.$main.removeClass('hidden').removeAttr('style');
-    $('article').removeClass('transitions');
-    this.removeAnimation(this.animBg);
-    this.removeAnimation(this.animScale);
-    this.removeAnimation(this.animBrick);
-    this.animBg.revert();
-    this.animScale.revert();
-    this.animBrick.revert();
-    this.animations.push(this.animScale, this.animBrick, this.animBg);
-    this.$cloudLink[0].removeEventListener('click', this.handle);
   }
 
   /* eslint object-shorthand: "warn" */

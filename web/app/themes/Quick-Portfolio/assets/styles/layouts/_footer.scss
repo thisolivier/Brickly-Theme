@@ -25,6 +25,7 @@ footer.content-info{
       padding-right: $padding;
     }
     .sidebar-wrapper {
+      marfin-right: 1em;
       @extend .element;
       display: flex;
       flex-flow: row wrap;
@@ -37,8 +38,6 @@ footer.content-info{
       @include large{
         order:1;
         position: relative;
-        top:-20em;
-
       };
 
       .widget{

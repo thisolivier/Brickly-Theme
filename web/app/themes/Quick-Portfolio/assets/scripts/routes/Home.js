@@ -3,7 +3,7 @@ import 'jquery';
 import ChimneyStack from '../com/chimney';
 import BrickAnimation from '../com/animBrickFall';
 import BackgroundLanscape from '../com/parallaxBg';
-import FillCanvas from '../com/animExplodePost';
+import FillCanvas from '../com/animOpenPosts';
 
 export default {
   init() {
