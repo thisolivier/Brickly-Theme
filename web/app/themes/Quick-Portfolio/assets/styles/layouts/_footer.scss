@@ -1,12 +1,20 @@
 footer.content-info{
   z-index: 500;
   position: relative;
-  padding-top: 5em;
   background-color: black;
   $padding: 2em;
-  padding: 5em 0 4em $padding;
+  padding: 5em 0 4em $padding*3;
+  @include medium{
+    padding: 4em 4em;
+  };
+  @include small{
+    padding: 4em 2em;
+  };
+  @include tiny{
+    padding: 2em 1em;
+  };
 
-  .container{
+  .footer-container{
     position: relative;
     display: flex;
     flex-flow: row wrap;
@@ -22,17 +30,35 @@ footer.content-info{
     .widget:not(.column) {
       @extend .element;
       color: $brand-primary;
-      padding-right: $padding;
+      padding: 1em $padding;
+      &:first-child {
+        flex: 2 0 10em;
+      }
+      & ~ .widget{
+        padding-left: 0;
+      }
     }
-    .sidebar-wrapper {
-      marfin-right: 1em;
-      @extend .element;
-      display: flex;
-      flex-flow: row wrap;
-      background-color: $brand-primary;
+
+    div.wpforms-container-full .wpforms-form button{
+      border-radius: 0.5em;
       color: $brand-secondary;
-      padding-left: $padding/2;
-      margin: 2em 0;
+      font-family: $headings-font-family;
+      font-weight: 800;
+      font-size: 1.3em;
+      text-transform: uppercase;
+      border: 0;
+    }
+
+    .sidebar-wrapper {
+      @extend .element;
+      padding: 0.25em;
+      flex: 1 0 10em;
+      display: flex;
+      align-self: stretch;
+      flex-flow: column wrap;
+      align-content: space-around;
+      background-color: white;
+      color: black;
       border-radius: 0.5em;
 
       @include large{
@@ -42,10 +68,47 @@ footer.content-info{
 
       .widget{
         color: inherit;
-        padding-right: $padding/2;
-        flex: 1 1 15em;
-        max-width: auto;
+        flex: 1 1 10em;
+        max-width: 100%;
+        padding: 1em;
+        text-align: center;
       }
-    }
-  }
+
+      h3{
+        margin-bottom: 0.6em;
+      }
+
+      ul {
+        margin-before: 0em;
+        margin-after: 0em;
+        padding-start: 0px;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 0em;
+        -webkit-padding-start: 0px;
+      }
+
+      li {
+        display: inline-block;
+        font-size: 1.1em;
+        background-color: $brand-secondary;
+        list-style: none;
+        border-radius: 0.3em;
+        margin: 0.2em 0.1em;
+        line-height: 1.4em;
+        padding: 0.1em 0.5em 0.1em 0.5em;
+        .ssbp-container &{
+          padding:0;
+          margin:0;
+
+          font-smoothing: antialiased;
+        }
+        a {
+          color: $brand-primary;
+          font-weight: $headings-font-weight;
+          font-family: $headings-font-family;
+          text-transform: uppercase;
+        }
+      }
+    } // .sidebar-wrapper
+  } // .footer-container
 }

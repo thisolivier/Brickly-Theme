@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3e31dd9ce3b55f381273741b15d7283",
-    "content-hash": "73da235ab565ca0e783de3e7daca81b7",
+    "hash": "5dabe19aacb9a2b56f41f9000b6da861",
+    "content-hash": "8cc7f6386178a8a6baf018b6a6bc788e",
     "packages": [
         {
             "name": "composer/installers",
@@ -342,6 +342,26 @@
             "time": "2016-09-01 10:05:43"
         },
         {
+            "name": "wpackagist-plugin/sharify",
+            "version": "4.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/sharify/",
+                "reference": "tags/4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/sharify.4.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/sharify/"
+        },
+        {
             "name": "wpackagist-plugin/simple-share-buttons-adder",
             "version": "6.3.4",
             "source": {
@@ -383,15 +403,15 @@
         },
         {
             "name": "wpackagist-plugin/wpforms-lite",
-            "version": "1.3.0",
+            "version": "1.3.1.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wpforms-lite/",
-                "reference": "tags/1.3.0"
+                "reference": "tags/1.3.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wpforms-lite.1.3.0.zip",
+                "url": "https://downloads.wordpress.org/plugin/wpforms-lite.1.3.1.2.zip",
                 "reference": null,
                 "shasum": null
             },
