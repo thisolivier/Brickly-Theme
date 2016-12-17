@@ -78,36 +78,36 @@ footer.content-info{
         margin-bottom: 0.6em;
       }
 
-      ul {
+      ul:not(.ssbp-list) {
         margin-before: 0em;
         margin-after: 0em;
         padding-start: 0px;
         -webkit-margin-before: 0em;
         -webkit-margin-after: 0em;
         -webkit-padding-start: 0px;
+
+        li {
+          display: inline-block;
+          font-size: 1.1em;
+          background-color: $brand-secondary;
+          list-style: none;
+          border-radius: 0.3em;
+          margin: 0.2em 0.1em;
+          line-height: 1.4em;
+          padding: 0.1em 0.5em 0.1em 0.5em;
+        }
+      }
+      .ssbp-list{
+        li{
+          margin: 0.1em 0.15em
+        }
       }
 
-      li {
-        display: inline-block;
-        font-size: 1.1em;
-        background-color: $brand-secondary;
-        list-style: none;
-        border-radius: 0.3em;
-        margin: 0.2em 0.1em;
-        line-height: 1.4em;
-        padding: 0.1em 0.5em 0.1em 0.5em;
-        .ssbp-container &{
-          padding:0;
-          margin:0;
-
-          font-smoothing: antialiased;
-        }
-        a {
-          color: $brand-primary;
-          font-weight: $headings-font-weight;
-          font-family: $headings-font-family;
-          text-transform: uppercase;
-        }
+      a {
+        color: $brand-primary;
+        font-weight: $headings-font-weight;
+        font-family: $headings-font-family;
+        text-transform: uppercase;
       }
     } // .sidebar-wrapper
   } // .footer-container
