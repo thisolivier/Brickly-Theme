@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5dabe19aacb9a2b56f41f9000b6da861",
-    "content-hash": "8cc7f6386178a8a6baf018b6a6bc788e",
+    "hash": "0157566e69cbf15f0718b00d5394e055",
+    "content-hash": "36939c8581e3c9e7a82b7ffc268ba4b6",
     "packages": [
         {
             "name": "composer/installers",
@@ -292,6 +292,17 @@
             "time": "2016-03-01 16:27:06"
         },
         {
+            "name": "thisolivier/simple-simple-share-plus",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:thisolivier/wp-plugin-simple-share-plus.git",
+                "reference": "master"
+            },
+            "type": "wordpress-plugin",
+            "time": "2016-12-17 14:22:52"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v2.4.0",
             "source": {
@@ -360,26 +371,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/sharify/"
-        },
-        {
-            "name": "wpackagist-plugin/simple-share-buttons-adder",
-            "version": "6.3.4",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/simple-share-buttons-adder/",
-                "reference": "trunk"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-share-buttons-adder.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/simple-share-buttons-adder/"
         },
         {
             "name": "wpackagist-plugin/slate-admin-theme",
@@ -504,7 +495,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "thisolivier/simple-simple-share-plus": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

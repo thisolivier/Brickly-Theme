@@ -72,8 +72,8 @@ add_action('after_setup_theme', function () {
  */
 add_action('widgets_init', function () {
     $config = [
-        'before_widget' => '<div class="widget %1$s %2$s">',
-        'before_title'  => '<h3>',
+        'before_widget' => '<div class="widget %1$s %2$s" role="region">',
+        'before_title'  => '<h3 role="sectionhead">',
         'after_title'   => '</h3><div class="widget-content">',
         'after_widget'  => '</div></div>',
     ];

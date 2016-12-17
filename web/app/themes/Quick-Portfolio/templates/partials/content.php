@@ -1,6 +1,6 @@
 <article <?php post_class(); ?>>
   <header>
-    <h2 class="entry-title">
+    <h2 class="entry-title" title="<?php the_title(); ?>">
       <a class="magicLink" href="<?= get_permalink(); ?>">
         <?php the_title(); ?>
       </a>

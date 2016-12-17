@@ -3,7 +3,7 @@ footer.content-info{
   position: relative;
   background-color: black;
   $padding: 2em;
-  padding: 5em 0 4em $padding*3;
+  padding: 5em $padding 4em $padding*3;
   @include medium{
     padding: 4em 4em;
   };
@@ -21,9 +21,9 @@ footer.content-info{
     align-items: baseline;
 
     .element{
-      flex: 1 0 15em;
+      flex: 2 1 20em;
       width: 15em;
-      max-width: 33.3%;
+      max-width: 40.3%;
       order:2;
     }
 
@@ -32,10 +32,35 @@ footer.content-info{
       color: $brand-primary;
       padding: 1em $padding;
       &:first-child {
-        flex: 2 0 10em;
+        flex: 1 1 28em;
+        padding-left: 4em;
       }
       & ~ .widget{
-        padding-left: 0;
+        // padding-left: $padding;
+      }
+      &.wpforms-widget{
+        h3 {
+          opacity: 0;
+        }
+        div.wpforms-container-full .wpforms-form .wpforms-field{
+          padding-top: 0;
+        }
+        wpforms-field-label{
+          font-family: $headings-font-family;
+          font-size: 1em;
+          margin-bottom: 0.2em;
+        }
+        div.wpforms-container-full .wpforms-form .wpforms-required-label{
+          opacity: 0;
+        }
+        @include large{
+          div.wpforms-container-full .wpforms-form .wpforms-one-half{
+            width: 49%;
+          }
+          div.wpforms-container-full .wpforms-form .wpforms-one-half{
+            margin-left: 2%;
+          }
+        }
       }
     }
 
@@ -51,15 +76,17 @@ footer.content-info{
 
     .sidebar-wrapper {
       @extend .element;
+      position:relative;
+      flex: 1 1 13em;
       padding: 0.25em;
-      flex: 1 0 10em;
-      display: flex;
-      align-self: stretch;
-      flex-flow: column wrap;
-      align-content: space-around;
+      border-radius: 0.5em;
       background-color: white;
       color: black;
-      border-radius: 0.5em;
+      display: flex;
+      align-self: stretch;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
       @include large{
         order:1;
@@ -67,11 +94,13 @@ footer.content-info{
       };
 
       .widget{
-        color: inherit;
-        flex: 1 1 10em;
+        display: block;
         max-width: 100%;
         padding: 1em;
+        flex: 0 0 10em;
+        align-self: center;
         text-align: center;
+        color: inherit;
       }
 
       h3{
@@ -99,7 +128,13 @@ footer.content-info{
       }
       .ssbp-list{
         li{
-          margin: 0.1em 0.15em
+          margin: 0em 0.1em
+        }
+        .ssbp-btn{
+          margin: 0.2em 0.1em !important;
+          &:before{
+            font-size: 1.5em !important;
+          }
         }
       }
 
