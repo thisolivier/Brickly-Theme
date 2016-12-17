@@ -26,7 +26,15 @@ footer.content-info{
       max-width: 40.3%;
       order:2;
     }
-
+    .subheading{
+      font-style: italic;
+      font-family: $headings-font-family;
+      font-weight: light;
+      font-size: 1.3em;
+      .n{
+        display: none;
+      }
+    }
     .widget:not(.column) {
       @extend .element;
       color: $brand-primary;
@@ -46,8 +54,7 @@ footer.content-info{
           padding-top: 0;
         }
         wpforms-field-label{
-          font-family: $headings-font-family;
-          font-size: 1em;
+          @extend .subheading;
           margin-bottom: 0.2em;
         }
         div.wpforms-container-full .wpforms-form .wpforms-required-label{
