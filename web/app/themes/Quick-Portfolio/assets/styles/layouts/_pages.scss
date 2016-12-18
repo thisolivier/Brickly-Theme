@@ -36,15 +36,29 @@
       flex: 0 0 80%;
     }
 
-    &.hidden {
+    &.invisible {
       opacity:0;
       overflow: hidden;
-      @include medium {
-        display: none;
-      };
     }
 
-    .mortar{
+    .open-post &, .single &{
+      overflow-y: scroll;
+    }
+
+    .brick header {
+      transition: opacity 1s linear 2s;
+    }
+
+    &.hidden {
+      height: 0;
+      padding: 0;
+      .brick header {
+        transition: opacity 1s linear 2s;
+        opacity:0;
+      }
+    }
+
+    .mortar {
       content: "";
       position: absolute;
       top: $main-padding-top;
@@ -55,14 +69,14 @@
       margin-top: relate($chim-percent, $brick-gap*1.4);
       background-color: white;
       z-index: 80;
-      border-radius: 0.5em;      
+      border-radius: 0.5em;
 
-      &.pre_setup{
+      &.pre_setup {
         top: 1500px;
         opacity: 0;
       }
 
-      &.transitions{
+      &.transitions {
         transition-delay: 4s;
         transition: top 4s;
       }
@@ -82,12 +96,13 @@
       height: relate($chim-percent, $brick-height*1.2);
     }
     @include small {
-      height: relate($chim-percent, $brick-height*1.5);
+      height: relate($chim-percent, $brick-height*1.6);
+      border-radius: 1.7vw;
     }
     @include tiny {
       height: relate($chim-percent, $brick-height*2);
     }
-    @include large{
+    @include large {
       font-size: 1.3em;
     }
 
@@ -107,7 +122,7 @@
     overflow-y: hidden;
 
     &.transitions{
-      transition: transform 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      transition: transform 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
       &.right{
         transform-origin: 0% 50%;
       }
@@ -116,12 +131,12 @@
       }
 
       &:hover{
-        transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
         &.right{
-          transform: scale(1.05) translate(0.5em, 0);
+          transform: scale(1.05) translate(0.3em, 0);
         }
         &.left{
-          transform: scale(1.05) translate(-0.5em, 0);
+          transform: scale(1.05) translate(-0.3em, 0);
         }
         .shadow{
           height:1em;
@@ -190,7 +205,7 @@
             font-size: 1em;
         }
         @include tiny{
-            font-size: 0.9em;
+            font-size: 0.8em;
         }
       } // tags
     } // header

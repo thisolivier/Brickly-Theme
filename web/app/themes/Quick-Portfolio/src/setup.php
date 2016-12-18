@@ -79,7 +79,7 @@ add_action('widgets_init', function () {
     ];
 
     register_sidebar([
-        'name' => __('Footer', 'sage'),
+        'name' => __('Footer Main', 'sage'),
         'id' => 'site-footer',
         'description' => 'Main footer area, will arrange into columns breaking into rows.',
     ] + $config);
@@ -87,7 +87,7 @@ add_action('widgets_init', function () {
     $config['before_widget'] = '<div class="widget column %1$s %2$s">';
 
     register_sidebar([
-        'name' => __('Post Meta', 'sage'),
+        'name' => __('Post Sidebar', 'sage'),
         'id' => 'sidebar-primary',
         'description' => 'Sidebar appears on posts, intended to be used with custom post attributes info, repo, and site.',
     ] + $config);

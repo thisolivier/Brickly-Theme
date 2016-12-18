@@ -27,7 +27,7 @@ export default class BrickAnimation {
         return (anime.random(700, 800));
       },
       begin() {
-        $('main.main').removeClass('hidden');
+        $('main.main').removeClass('invisible');
         makeMortar();
       },
       complete() {

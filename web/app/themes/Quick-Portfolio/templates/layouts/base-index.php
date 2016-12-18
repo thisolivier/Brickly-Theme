@@ -13,7 +13,7 @@
           do_action('get_header');
           get_template_part('partials/header');
         ?>
-        <main class="main hidden" title="Portfolio projects">
+        <main class="main invisible" title="Portfolio projects">
           <?php include App\template()->main(); ?>
           <div class="mortar pre_setup transitions" aria-hidden="true">&nbsp</div>
         </main>

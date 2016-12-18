@@ -4,11 +4,17 @@ footer.content-info{
   background-color: black;
   $padding: 2em;
   padding: 5em $padding 4em $padding*3;
+
+  .post-open &, .single & {
+    transform: none;
+    padding:0;
+  }
   @include medium{
     padding: 4em 4em;
   };
   @include small{
-    padding: 4em 2em;
+    padding: 4.5em 4em 4em 4em;
+    font-size: 0.9em;
   };
   @include tiny{
     padding: 2em 1em;
@@ -19,61 +25,142 @@ footer.content-info{
     display: flex;
     flex-flow: row wrap;
     align-items: baseline;
+    justify-content: flex-end;
+
+    .post-open &, .single & {
+      @extend .wrap;
+      background-color: $brand-primary;
+      position: inherit;
+      padding-bottom: 2em !important;
+
+      .widget:not(.column) {
+        color: $brand-secondary;
+        max-width: none;
+        order: 1;
+        align-self: center;
+        &:first-child {
+          padding-top: 4em;
+        }
+      }
+      .wpforms-widget, .column.widget_ssbp_widget{
+        display:none;
+      }
+      .sidebar-wrapper{
+        padding-top: 2em;
+        padding-right: 1em;
+      }
+
+      @include small {
+        .wpforms-widget, .column.widget_ssbp_widget{
+          display:block;
+        }
+        .sidebar-wrapper{
+          margin-top: 0;
+          padding-top: 0;
+          background-color: $brand-primary;
+          .widget {
+            color: $brand-secondary;
+            background-color: $brand-primary;
+          }
+        }
+        ul li {
+          background-color: $brand-primary;
+          a {
+            color: $brand-secondary;
+          }
+        }
+      }
+    }
 
     .element{
       flex: 2 1 20em;
       width: 15em;
-      max-width: 40.3%;
       order:2;
+      @include medium{
+        flex: 2 0 100%;
+        width: auto;
+        margin-bottom: 2em;
+      };
     }
     .subheading{
       font-style: italic;
       font-family: $headings-font-family;
-      font-weight: light;
+      font-weight: 400;
       font-size: 1.3em;
       .n{
         display: none;
+      }
+      @include small{
+        font-weight: 500;
+        margin: 0.4em 0;
+        display:block;
       }
     }
     .widget:not(.column) {
       @extend .element;
       color: $brand-primary;
-      padding: 1em $padding;
-      &:first-child {
-        flex: 1 1 28em;
-        padding-left: 4em;
+
+      @include large {
+        padding: 1em $padding;
+        &:first-child {
+          flex: 1 1 28em;
+          padding-left: 4em;
+        }
       }
-      & ~ .widget{
-        // padding-left: $padding;
+      & ~ .widget {
+        @include medium{
+          flex: 1 1 50%;
+          align-self: flex-start;
+        }
+        @include small{
+          flex: 1 1 100%;
+          .widget-content{
+            display: none;
+          }
+        }
       }
+
       &.wpforms-widget{
-        h3 {
-          opacity: 0;
+        @include large{
+          max-width: 60%;
+          h3 {
+            opacity: 0;
+          }
         }
-        div.wpforms-container-full .wpforms-form .wpforms-field{
-          padding-top: 0;
+        .wpforms-container{
+          margin-bottom: 0;
+          .wpforms-field{
+            padding-top: 0;
+          }
         }
-        wpforms-field-label{
+
+        .wpforms-field-label{
           @extend .subheading;
           margin-bottom: 0.2em;
         }
         div.wpforms-container-full .wpforms-form .wpforms-required-label{
           opacity: 0;
         }
-        @include large{
-          div.wpforms-container-full .wpforms-form .wpforms-one-half{
-            width: 49%;
-          }
-          div.wpforms-container-full .wpforms-form .wpforms-one-half{
-            margin-left: 2%;
+        div.wpforms-container-full .wpforms-form .wpforms-one-half{
+          width: 49%;
+          @include small{
+            width: 48%;
           }
         }
+        div.wpforms-container-full .wpforms-form .wpforms-one-half{
+          margin-left: 2%;
+          @include small{
+            margin-left: 4%;
+          }
+        }
+
       }
     }
 
     div.wpforms-container-full .wpforms-form button{
       border-radius: 0.5em;
       color: $brand-secondary;
+      background-color: $brand-primary;
       font-family: $headings-font-family;
       font-weight: 800;
       font-size: 1.3em;
@@ -84,20 +171,33 @@ footer.content-info{
     .sidebar-wrapper {
       @extend .element;
       position:relative;
-      flex: 1 1 13em;
-      padding: 0.25em;
+      flex: 1 0 13em;
+      padding: 0.5em;
       border-radius: 0.5em;
-      background-color: white;
-      color: black;
-      display: flex;
-      align-self: stretch;
+      background-color: $brand-primary;
+      color: $brand-secondary;
+      align-self: center;
       flex-direction: column;
       justify-content: center;
       align-items: center;
 
+      @include medium{
+        flex: 1 1 43%;
+        margin-left: 7%;
+      }
+
+      @include small{
+        flex: 1 1 100%;
+        margin-left: 0;
+        padding: 0 2em 0 0;
+        color: $brand-primary;
+        background-color: $brand-secondary;
+      }
+
       @include large{
         order:1;
         position: relative;
+        justify-content: flex-end;
       };
 
       .widget{
@@ -108,10 +208,32 @@ footer.content-info{
         align-self: center;
         text-align: center;
         color: inherit;
+
+        @include small{
+          order: 2;
+          align-self: flex-start;
+          text-align: left;
+          padding:0;
+          margin-bottom: 2em;
+          .widget-content{
+            display: none;
+          }
+          .ssbp-wrap.ssbp--centred{
+            text-align: left;
+          }
+        }
+
+        &.wpforms-widget{
+          max-width: 61%;
+        }
       }
 
       h3{
         margin-bottom: 0.6em;
+        @include small{
+          padding-bottom: 0.5rem;
+          margin-bottom: 0;
+        }
       }
 
       ul:not(.ssbp-list) {
@@ -131,6 +253,12 @@ footer.content-info{
           margin: 0.2em 0.1em;
           line-height: 1.4em;
           padding: 0.1em 0.5em 0.1em 0.5em;
+          @include small{
+            background-color: $brand-primary;
+            a {
+              color: $brand-secondary;
+            }
+          }
         }
       }
       .ssbp-list{
@@ -141,6 +269,9 @@ footer.content-info{
           margin: 0.2em 0.1em !important;
           &:before{
             font-size: 1.5em !important;
+          }
+          @include small{
+            background-color: $brand-primary;
           }
         }
       }

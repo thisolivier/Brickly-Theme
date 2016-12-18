@@ -1,3 +1,12 @@
+.single-post, .post-open{
+  .wrap{
+    overflow: visible;
+    .row{
+      margin-bottom: 0
+    }
+  }
+}
+
 #bigBaby, .post article, .single-post article{
   font-size: 1.2em;
   display: flex;
@@ -6,6 +15,7 @@
   height: auto;
   z-index: 100;
   margin: 0;
+  padding-bottom: 10em;
 
   justify-content: center;
   align-items: baseline;

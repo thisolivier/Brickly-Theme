@@ -19,6 +19,7 @@ class PostControllers {
       this.addClickListeners(this.$cloudLink);
       this.$clone.appendTo('#heightDefined');
       this.$clone.removeClass('invisible');
+      $('body').addClass('post-open');
     }
   }
   closePost() {
@@ -26,7 +27,7 @@ class PostControllers {
     history.pushState({ loading: 'home' }, this.originalTitle, '/');
     this.cloneCheck = true;
     this.$clone.detach();
-    this.$main.removeClass('hidden').removeAttr('style');
+    this.$main.removeClass('hidden invisible').removeAttr('style');
     $('article').removeClass('transitions');
     this.removeAnimation(this.animBg);
     this.removeAnimation(this.animScale);
@@ -36,6 +37,7 @@ class PostControllers {
     this.animBrick.revert();
     this.animations.push(this.animScale, this.animBrick, this.animBg);
     this.$cloudLink[0].removeEventListener('click', this.handle);
+    $('body').removeClass('post-open');
   }
 }
 
@@ -268,7 +270,7 @@ export default class FillCanvas {
       complete: function () {
         this.removeAnimation(this.animCloudScale);
         if (this.$cloudLink.html() !== this.originalCloudText) {
-          this.$main.addClass('hidden');
+          this.$main.addClass('invisible hidden');
         }
         this.$clone.removeClass('invisible');
       }.bind(this),
