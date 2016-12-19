@@ -251,18 +251,18 @@
 } // .background.container
 
 .archive {
-  .main{
-    @include medium{
-      flex: 0 0 50vw;
-    }
-    opacity:1;
-    visibility: visible !important;
-    padding: 20vw 0 10rem;
-  }
   .content.row {
     margin-bottom: 0;
+    .main{
+      @include medium{
+        flex: 0 0 50vw;
+      }
+      opacity:1;
+      visibility: visible !important;
+      padding: 20vw 0 10rem;
+    }
 
-    .post{
+    article.post{
       background-color: $brand-primary;
       width: 100%;
       h2 a{
