@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0157566e69cbf15f0718b00d5394e055",
-    "content-hash": "36939c8581e3c9e7a82b7ffc268ba4b6",
+    "hash": "184e90a6754dae712f988c15332d3f39",
+    "content-hash": "1adfb79aa23d64f4c9f4dc66b8551746",
     "packages": [
         {
             "name": "composer/installers",
@@ -292,7 +292,7 @@
             "time": "2016-03-01 16:27:06"
         },
         {
-            "name": "thisolivier/simple-simple-share-plus",
+            "name": "thisolivier/simple-share-buttons-plus",
             "version": "dev-master",
             "source": {
                 "type": "git",
@@ -300,7 +300,7 @@
                 "reference": "master"
             },
             "type": "wordpress-plugin",
-            "time": "2016-12-17 14:22:52"
+            "time": "2016-12-17 22:48:03"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -496,7 +496,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "thisolivier/simple-simple-share-plus": 20
+        "thisolivier/simple-share-buttons-plus": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
