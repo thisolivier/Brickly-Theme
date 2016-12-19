@@ -54,7 +54,6 @@
     "roots/wp-password-bcrypt": "1.0.0",
     "wpackagist-plugin/wpforms-lite": "^1.3.0",
     "wpackagist-plugin/slate-admin-theme": "^1.1.6",
-    "wpackagist-plugin/sharify": "^4.1",
     "thisolivier/simple-share-buttons-plus": "dev-master"
   },
   "require-dev": {
