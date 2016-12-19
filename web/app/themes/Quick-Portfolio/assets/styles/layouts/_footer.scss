@@ -113,6 +113,9 @@ footer.content-info{
     .widget:not(.column) {
       @extend .element;
       color: $brand-primary;
+      a{
+        color: $brand-primary;
+      }
 
       @include large {
         padding: 1em $padding;
