@@ -18,13 +18,15 @@
           <div class="mortar pre_setup transitions" aria-hidden="true">&nbsp</div>
         </main>
       </div>
+    <?php if( is_home() ): ?>
       <canvas id="backgroundPost" aria-hidden="true"></canvas>
       <div class="backgroundLanscape hidden" aria-hidden="true">
-        <img src="<?= get_template_directory_uri(); ?>/dist/images/sky-holding.gif" class="sky">
-        <img src="<?= get_template_directory_uri(); ?>/dist/images/city-holding.gif" class="land">
+        <img src="<?= get_template_directory_uri(); ?>/dist/images/sky-holding.gif" alt="" class="sky">
+        <img src="<?= get_template_directory_uri(); ?>/dist/images/city-holding.gif" alt="" class="land">
       </div>
-    </div>
-    <?php
+    <?php endif; ?>
+  </div>
+  <?php
       do_action('get_footer');
       get_template_part('partials/footer');
       wp_footer();
