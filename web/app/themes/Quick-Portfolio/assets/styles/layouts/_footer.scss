@@ -253,10 +253,28 @@ footer.content-info{
           margin: 0.2em 0.1em;
           line-height: 1.4em;
           padding: 0.1em 0.5em 0.1em 0.5em;
-          @include small{
+          &:hover{
+            background-color: lighten($brand-secondary, 10%);
+          }
+          a:hover{
+            text-decoration: none;
+          }
+          .post-open &, .single & {
             background-color: $brand-primary;
             a {
               color: $brand-secondary;
+            }
+            &:hover{
+              background-color: lighten($brand-primary, 10%);
+            }
+          }
+          @include small {
+            background-color: $brand-primary;
+            a {
+              color: $brand-secondary;
+            }
+            &:hover{
+              background-color: lighten($brand-primary, 10%);
             }
           }
         }
