@@ -67,13 +67,11 @@ function portfolio_meta()
 {
   $format = '<%1$s class="postLink %2$s"><a href="%3$s">%4$s</a></%1$s>';
   $values[0] = '<span class="postIntro entry-summary" role="sectionhead">' . get_post_meta(get_the_ID(), 'intro', true) . '</span>';
-  $values[1] = sprintf($format, 'div', 'viewSite', get_post_meta(get_the_ID(), 'site', true), 'View Site');
-  $values[2] = sprintf($format, 'div', 'repo', get_post_meta(get_the_ID(), 'repo', true), 'Repository');
+  $values[1] = sprintf($format, 'nav', 'viewSite', get_post_meta(get_the_ID(), 'site', true), 'View Site');
+  $values[2] = sprintf($format, 'nav', 'repo', get_post_meta(get_the_ID(), 'repo', true), 'Repository');
   foreach($values as $key => $current){
     if ($current){
-      if ($key = 1) echo '<nav>';
       echo $current;
-      if ($key = 2) echo '</nav>';
     }
   }
   get_template_part('partials/sidebar');

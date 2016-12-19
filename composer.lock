@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "184e90a6754dae712f988c15332d3f39",
-    "content-hash": "1adfb79aa23d64f4c9f4dc66b8551746",
+    "hash": "8b98037e25aed5185235e8131539c965",
+    "content-hash": "aa71eacec0d20c32df54ab5f38c26614",
     "packages": [
         {
             "name": "composer/installers",
@@ -351,26 +351,6 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
-        },
-        {
-            "name": "wpackagist-plugin/sharify",
-            "version": "4.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/sharify/",
-                "reference": "tags/4.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/sharify.4.1.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/sharify/"
         },
         {
             "name": "wpackagist-plugin/slate-admin-theme",
