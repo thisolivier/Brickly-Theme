@@ -1,6 +1,8 @@
 # [Brickly](http://olivier.uk/brickly-theme/)
 
-Brickly is a WordPress theme and installation for running a Brickly portfolio.
+Brickly is a WordPress theme and WordPress installation for running a Brickly portfolio.
+All required plugins are registered as dependencies of the Wordpress installation.
+The repo includes some test databases to get you started.
 
 ## Coming in v1
 
