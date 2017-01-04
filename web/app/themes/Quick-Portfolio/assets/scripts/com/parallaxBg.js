@@ -1,4 +1,4 @@
-import anime from 'animejs';
+// import anime from 'animejs';
 // import Logger from '../util/logger';
 
 export default class BackgroundLanscape {
@@ -14,14 +14,6 @@ export default class BackgroundLanscape {
       sky: this.getHeightInPercent.call(this.target.sky),
       land: this.getHeightInPercent.call(this.target.land),
     };
-    this.animation = anime({
-      targets: $('footer.content-info').first()[0],
-      translateY: '-10vw',
-      direction: 'reverse',
-      duration: 500,
-      easing: 'easeInCubic',
-      autoplay: false,
-    });
   }
 
   init() {
@@ -52,9 +44,5 @@ export default class BackgroundLanscape {
       this.target.sky.css('margin-top', newSkyMargin);
       this.target.land.css('height', newLand);
     }
-
-    const overlap = 200;
-    const percent = ((heightOffset - (scrollTop + overlap)) + 200) / 2;
-    this.animation.seek(-percent);
   } // adjust(window)
 }

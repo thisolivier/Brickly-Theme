@@ -118,28 +118,28 @@
     z-index: 100;
     overflow-y: hidden;
 
-    &.transitions{
-      transition: transform 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-      &.right{
-        transform-origin: 0% 50%;
-      }
-      &.left{
-        transform-origin: 100% 50%;
-      }
-
-      &:hover{
-        transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-        &.right{
-          transform: scale(1.05) translate(0.3em, 0);
-        }
-        &.left{
-          transform: scale(1.05) translate(-0.3em, 0);
-        }
-        .shadow{
-          height:1em;
-        }
-      }
-    }
+    // &.transitions{
+    //   transition: transform 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    //   &.right{
+    //     transform-origin: 0% 50%;
+    //   }
+    //   &.left{
+    //     transform-origin: 100% 50%;
+    //   }
+    //
+    //   &:hover{
+    //     transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    //     &.right{
+    //       transform: scale(1.05) translate(0.3em, 0);
+    //     }
+    //     &.left{
+    //       transform: scale(1.05) translate(-0.3em, 0);
+    //     }
+    //     .shadow{
+    //       height:1em;
+    //     }
+    //   }
+    // }
 
     @include medium{
       padding: 0.7em 0.6em 0.5em 0.7em;
