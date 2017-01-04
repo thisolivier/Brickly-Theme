@@ -1,8 +1,7 @@
 // import Logger from '../util/logger';
-import animations from './animOpenPostAnimations';
-import TransitionUtilities from './animOpenPostController';
+import Animations from './animOpenPostAnimations';
 
-export default class PageTransitions extends animations(TransitionUtilities) {
+export default class PageTransitions extends Animations {
   openPost($brick) {
     if (this.cloneCheck) {
       this.primeBackButton($brick);

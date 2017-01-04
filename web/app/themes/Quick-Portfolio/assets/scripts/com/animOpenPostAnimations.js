@@ -1,6 +1,7 @@
 import anime from 'animejs';
+import TransitionUtilities from './animOpenPostController';
 
-export default animations = (Parent) => class extends Parent {
+export default class Animations extends TransitionUtilities {
   /* eslint object-shorthand: "warn" */
 
   // Utility functions, included here to limit the calling of animejs
@@ -30,11 +31,11 @@ export default animations = (Parent) => class extends Parent {
     this.animBrick = anime({
       targets: this.bricks,
       translateX(el) {
-        if ($(el).is('.brick')) return anime.random(targetR, -targetR) * 3;
+        if ($(el).is('.brick')) return anime.random(this.eventInfo.targetR, -this.eventInfo.targetR) * 3;
         return 0;
       },
       translateY(el) {
-        if ($(el).is('.brick')) return anime.random(targetR * 1.15, -targetR * 1.15) * 3;
+        if ($(el).is('.brick')) return anime.random(this.eventInfo.targetR * 1.15, -this.eventInfo.targetR * 1.15) * 3;
         return '100vw';
       },
       rotate(el) {
@@ -44,22 +45,22 @@ export default animations = (Parent) => class extends Parent {
       duration: 2000,
       delay: 150,
       easing: 'easeOutCubic',
-      complete: resetPrime,
+      complete: this.eventInfo.resetAndPrime, // MOVE TO BETTER LOCATION
     });
     this.animations.push(this.animBrick);
   }
 
   blackBg() {
     this.pageFill = new this.Circle({
-      x: pageX,
-      y: pageY,
+      x: this.eventInfo.pageX,
+      y: this.eventInfo.pageY,
       r: 0,
       fill: this.color.next,
     });
     this.animBg = anime({
       targets: this.pageFill,
-      r: targetR,
-      duration: Math.max(targetR / 2, minCoverDuration),
+      r: this.eventInfo.targetR,
+      duration: Math.max(this.eventInfo.targetR / 2, this.eventInfo.minCoverDuration),
       easing: 'easeInCubic',
     });
     this.animations.push(this.animBg);
@@ -67,15 +68,15 @@ export default animations = (Parent) => class extends Parent {
 
   ripple() {
     this.ripple = new this.Circle({
-      x: pageX,
-      y: pageY,
+      x: this.eventInfo.pageX,
+      y: this.eventInfo.pageY,
       r: 0,
       fill: this.color.current,
       opacity: 1,
     });
     this.animRipple = anime({
       targets: this.ripple,
-      r: rippleSize,
+      r: this.eventInfo.rippleSize,
       opacity: {
         value: 0,
         delay: 200,
@@ -92,8 +93,8 @@ export default animations = (Parent) => class extends Parent {
     this.particles = [];
     for (let i = 0; i < 20; i += 1) {
       const particle = new this.Circle({
-        x: pageX,
-        y: pageY,
+        x: this.eventInfo.pageX,
+        y: this.eventInfo.pageY,
         fill: this.color.current,
         r: anime.random(10, 20),
       });
@@ -102,10 +103,10 @@ export default animations = (Parent) => class extends Parent {
     this.animPartl = anime({
       targets: this.particles,
       x(particle) {
-        return particle.x + anime.random(rippleSize, -rippleSize);
+        return particle.x + anime.random(this.eventInfo.rippleSize, -this.eventInfo.rippleSize);
       },
       y(particle) {
-        return particle.y + anime.random(rippleSize, -rippleSize);
+        return particle.y + anime.random(this.eventInfo.rippleSize, -this.eventInfo.rippleSize);
       },
       r: {
         value: 0,
@@ -167,4 +168,4 @@ export default animations = (Parent) => class extends Parent {
     });
     this.animations.push(this.animCloudVis);
   }
-};
+}

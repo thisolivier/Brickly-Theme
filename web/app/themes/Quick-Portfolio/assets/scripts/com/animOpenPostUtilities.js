@@ -82,24 +82,22 @@ export default class TransitionUtilities {
         Math.pow(Math.max(eventCorrected.pageX - 0, this.cW - eventCorrected.pageX), 2) +
         Math.pow(Math.max(eventCorrected.pageY - 0, this.cH - eventCorrected.pageY), 2)
       ),
-    }
-
-    // Removes old styles set by javascript, prepares for animation
-    const resetPrime = () => $('article').removeAttr('style').addClass('transitions');
+      resetAndPrime: () => $('article').removeAttr('style').addClass('transitions'),
+    };
 
     // Change the class, and enque the animations
-    if (newPage.is('#bigBaby')) {
-      aniFunt.ripple();
-      aniFunt.particles();
+    if (this.eventInfo.newPage.is('#bigBaby')) {
+      this.ripple();
+      this.particles();
     } else if ($(eventTarget).is('#cloudLink')) {
       e.preventDefault();
       this.closePost();
     } else {
       e.preventDefault();
-      aniFunt.blackBg();
-      aniFunt.ripple();
-      aniFunt.brickSplosion();
-      this.openPost(newPage);
+      this.blackBg();
+      this.ripple();
+      this.brickSplosion();
+      this.openPost(this.eventInfo.newPage);
     }
   }
 
