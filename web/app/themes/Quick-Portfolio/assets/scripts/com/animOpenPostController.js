@@ -1,7 +1,25 @@
-// import Logger from '../util/logger';
+import Logger from '../util/logger';
 import Animations from './animOpenPostAnimations';
 
 export default class PageTransitions extends Animations {
+  eventToggle(event, eventTarget) {
+    Logger.log('begin', eventTarget);
+    if (this.eventInfo.newPage.is('#bigBaby')) {
+      this.ripple();
+      this.particles();
+    } else if ($(eventTarget).is('#cloudLink')) { // CHANGE CLOUD LINK TO A CLASS FOR HOME LINKS
+      event.preventDefault();
+      this.closePost();
+    } else {
+      event.preventDefault();
+      this.blackBg();
+      this.ripple();
+      this.brickSplosion();
+      Logger.log();
+      this.openPost(this.eventInfo.newPage);
+    }
+  }
+
   openPost($brick) {
     if (this.cloneCheck) {
       this.primeBackButton($brick);

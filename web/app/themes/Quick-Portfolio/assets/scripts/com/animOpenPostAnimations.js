@@ -1,35 +1,17 @@
 import anime from 'animejs';
+import Logger from '../util/logger';
 import TransitionUtilities from './animOpenPostUtilities';
 
 export default class Animations extends TransitionUtilities {
   /* eslint object-shorthand: "warn" */
 
-  // Utility functions, included here to limit the calling of animejs
-  animate() {
-    anime({
-      duration: Infinity,
-      update: () => {
-        this.cxt.clearRect(0, 0, this.cW, this.cH);
-        this.animations.forEach((anim) => {
-          anim.animatables.forEach((animatable) => {
-            if (typeof animatable.target.draw !== 'undefined') animatable.target.draw(this.cxt);
-          });
-        });
-      },
-    });
-  }
-
-  removeAnimation(animation) {
-    const index = () => this.animations.indexOf(animation);
-    if (index > -1) this.animations.splice(index, 1);
-  }
-
   // Animations for brick explosion / load
   brickSplosion() {
-    $('article').removeClass('transitions');
     this.bricks = document.querySelectorAll('.brick, .mortar');
+    Logger.log('begin', 'the brickSplosion');
     this.animBrick = anime({
       targets: this.bricks,
+      // Here is our problem area, below
       translateX(el) {
         if ($(el).is('.brick')) return anime.random(this.eventInfo.targetR, -this.eventInfo.targetR) * 3;
         return 0;
@@ -45,7 +27,8 @@ export default class Animations extends TransitionUtilities {
       duration: 2000,
       delay: 150,
       easing: 'easeOutCubic',
-      complete: this.eventInfo.resetAndPrime, // MOVE TO BETTER LOCATION
+      begin: this.resetAndPrime('article', 'transitions', 0, 0),
+      complete: this.resetAndPrime('article', 0, 'transitions'),
     });
     this.animations.push(this.animBrick);
   }
@@ -167,5 +150,25 @@ export default class Animations extends TransitionUtilities {
       complete: this.removeAnimation(this.animCloudVis),
     });
     this.animations.push(this.animCloudVis);
+  }
+
+  // Utility functions, included here to limit the calling of animejs
+  animate() {
+    anime({
+      duration: Infinity,
+      update: () => {
+        this.cxt.clearRect(0, 0, this.cW, this.cH);
+        this.animations.forEach((anim) => {
+          anim.animatables.forEach((animatable) => {
+            if (typeof animatable.target.draw !== 'undefined') animatable.target.draw(this.cxt);
+          });
+        });
+      },
+    });
+  }
+
+  removeAnimation(animation) {
+    const index = () => this.animations.indexOf(animation);
+    if (index > -1) this.animations.splice(index, 1);
   }
 }

@@ -3,10 +3,6 @@ import Logger from '../util/logger';
 export default class TransitionUtilities {
   /* eslint no-param-reassign: "warn", class-methods-use-this: "warn" */
   constructor() {
-    this.c = document.getElementById('backgroundPost');
-    this.cxt = this.c.getContext('2d');
-    this.cH = 0;
-    this.cW = 0;
     this.$toBind = $('.magicLink');
     this.$cloud = $('#theCloud');
     this.$cloudLink = $('#cloudLink');
@@ -15,6 +11,10 @@ export default class TransitionUtilities {
     this.originalTitle = $(document).find('title').text();
     this.color = { current: 'white', next: 'black' };
     this.cloneCheck = true;
+    this.c = document.getElementById('backgroundPost');
+    this.cxt = this.c.getContext('2d');
+    this.cH = 0;
+    this.cW = 0;
     this.animations = [];
     this.circles = [];
   }
@@ -25,6 +25,56 @@ export default class TransitionUtilities {
     window.addEventListener('resize', this.resizeCanvas);
     this.addClickListeners(this.$toBind); // Adds triggers - animations will add to queue.
     this.animate(); // Begins animation engine - implaments queue.
+  }
+
+  addClickListeners(toBind) {
+    const handleEvent = this.handleEvent;
+    this.handle = e => handleEvent.call(this, e);
+    const bind = (i, x) => {
+      x.addEventListener('touchstart', this.handle);
+      x.addEventListener('click', this.handle);
+    };
+    if (toBind instanceof jQuery) {
+      $(toBind).each((i, x) => bind(i, x));
+    } else { bind(0, toBind); }
+  }
+
+  handleEvent(e) {
+    // Fix for touch events and IE 9
+    const eventCorrected = e.touches ? e.touches[0] : e || window.event;
+    const eventTarget = e.target || e.srcElement;
+
+    // Store info about the event
+    this.eventInfo = {
+      pageX: eventCorrected.pageX,
+      pageY: eventCorrected.pageY - $(window).scrollTop(),
+      newPage: $(eventTarget).closest('article'),
+      rippleSize: Math.min(200, (this.cW * 0.4)),
+      minCoverDuration: 750,
+      targetR: Math.sqrt(
+        Math.pow(Math.max(eventCorrected.pageX - 0, this.cW - eventCorrected.pageX), 2) +
+        Math.pow(Math.max(eventCorrected.pageY - 0, this.cH - eventCorrected.pageY), 2)
+      ),
+    };
+
+    // Call the controller
+    this.eventToggle(e, eventTarget);
+  }
+
+  primeBackButton($brick) {
+    const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
+    const locationURL = $brick.find('h2 .magicLink')[0];
+    Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
+    history.pushState({ loading: 'page' }, newTitle, locationURL);
+    window.onpopstate = function popState() {
+      this.closePost();
+    };
+  }
+
+  resetAndPrime(targets, classesRemove = 0, classesAdd = 0, resetStyle = 1) {
+    if (resetStyle) $(targets).removeAttr('style');
+    if (classesRemove) $(targets).removeClass(classesRemove);
+    if (classesAdd) $(targets).addClass(classesAdd);
   }
 
   resizeCanvas() {
@@ -50,68 +100,5 @@ export default class TransitionUtilities {
       cxt.closePath();
       cxt.globalAlpha = 1;
     };
-  }
-
-  addClickListeners(toBind) {
-    const handleEvent = this.handleEvent;
-    this.handle = e => handleEvent.call(this, e);
-    const bind = (i, x) => {
-      x.addEventListener('touchstart', this.handle);
-      x.addEventListener('click', this.handle);
-    };
-    if (toBind instanceof jQuery) {
-      $(toBind).each((i, x) => bind(i, x));
-    } else {
-      bind(0, toBind);
-    }
-  }
-
-  handleEvent(e) {
-    // Fix for touch events and IE 9
-    const eventCorrected = e.touches ? e.touches[0] : e || window.event;
-    const eventTarget = e.target || e.srcElement;
-
-    // Store info about the event
-    this.eventInfo = {
-      pageX: eventCorrected.pageX,
-      pageY: eventCorrected.pageY - $(window).scrollTop(),
-      newPage: $(eventTarget).closest('article'),
-      rippleSize: Math.min(200, (this.cW * 0.4)),
-      minCoverDuration: 750,
-      targetR: Math.sqrt(
-        Math.pow(Math.max(eventCorrected.pageX - 0, this.cW - eventCorrected.pageX), 2) +
-        Math.pow(Math.max(eventCorrected.pageY - 0, this.cH - eventCorrected.pageY), 2)
-      ),
-      resetAndPrime: () => $('article').removeAttr('style').addClass('transitions'),
-    };
-
-    // Change the class, and enque the animations
-    if (this.eventInfo.newPage.is('#bigBaby')) {
-      this.ripple();
-      this.particles();
-    } else if ($(eventTarget).is('#cloudLink')) {
-      e.preventDefault();
-      this.closePost();
-    } else {
-      e.preventDefault();
-      this.blackBg();
-      this.ripple();
-      this.brickSplosion();
-      this.openPost(this.eventInfo.newPage);
-    }
-  }
-
-  primeBackButton($brick) {
-    const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
-    const locationURL = $brick.find('h2 .magicLink')[0];
-    Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
-    history.pushState({ loading: 'page' }, newTitle, locationURL);
-    window.onpopstate = function popState() {
-      this.closePost();
-    };
-  }
-
-  extend(a, b) {
-    return Object.assign(a, b);
   }
 }

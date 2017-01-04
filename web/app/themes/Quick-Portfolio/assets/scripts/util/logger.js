@@ -9,11 +9,11 @@ export default class Logger {
     const nowTime = new Date();
     const prefix = `## Captain's log, stardate ${indexAPI}.${nowTime.getMilliseconds()} ->`;
     if (printMe === 'begin') {
-      Logger.print(prefix, `Our destination is ${context} (o__o)`);
+      Logger.print(prefix, `We are entering the ${context} (O __ o)`);
     } else if (printMe) {
       Logger.print(prefix, printMe);
     } else {
-      Logger.print(prefix, 'Space is vast and empty (-__-)');
+      Logger.print(prefix, 'Space is vast and empty (O __ ^)');
     }
   }
   // This is iscolated incase I later change the formatting, or use a logging plugin
