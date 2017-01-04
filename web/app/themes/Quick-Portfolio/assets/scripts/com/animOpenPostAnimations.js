@@ -1,5 +1,5 @@
 import anime from 'animejs';
-import TransitionUtilities from './animOpenPostController';
+import TransitionUtilities from './animOpenPostUtilities';
 
 export default class Animations extends TransitionUtilities {
   /* eslint object-shorthand: "warn" */
