@@ -67,11 +67,8 @@ export default class TransitionUtilities {
       const locationURL = $brick.find('h2 .magicLink')[0];
       Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
       history.pushState({ loading: newTitle }, newTitle, locationURL);
-      window.onpopstate = function popState() {
-        this.closePost();
-      };
     } else {
-      history.pushState({ loading: 'home' }, this.originalTitle, '/');
+      history.replaceState({ loading: 'home' }, this.originalTitle, '/');
     }
   }
 

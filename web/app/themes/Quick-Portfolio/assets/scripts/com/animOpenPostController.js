@@ -8,18 +8,28 @@ export default class PageTransitions extends Animations {
       this.explodeDecorative();
     } else if ($(eventTarget).is('.closePost')) { // CHANGE CLOUD LINK TO A CLASS FOR HOME LINKS
       event.preventDefault();
-      this.destroyContent();
-      this.resetAndPrime($('article'), 'transitions', 0, 0);
-      this.cloudRetract();
-      this.implodeBricks();
+      this.closePost();
     } else if (this.cloneCheck) {
       event.preventDefault();
-      const $brick = this.eventInfo.newPage;
-      this.grabContent($brick);
-      const cloudText = this.$clone.find('.magicLink').first().html();
-      this.cloudExpand(cloudText);
-      this.injectContent($brick);
+      this.openPost();
     }
+  }
+
+  openPost() {
+    const $brick = this.eventInfo.newPage;
+    this.grabContent($brick);
+    const cloudText = this.$clone.find('.magicLink').first().html();
+    this.cloudExpand(cloudText);
+    this.explodeBricks();
+    this.injectContent($brick);
+    window.onpopstate = () => this.closePost();
+  }
+
+  closePost() {
+    this.destroyContent();
+    this.resetAndPrime($('article'), 'transitions', 0, 0);
+    this.cloudRetract();
+    this.implodeBricks();
   }
 
   grabContent($brick) {
