@@ -1,23 +1,54 @@
 import anime from 'animejs';
-import Logger from '../util/logger';
 import TransitionUtilities from './animOpenPostUtilities';
 
 export default class Animations extends TransitionUtilities {
   /* eslint object-shorthand: "warn" */
 
+  // Compound animation functions
+  explodeBricks() {
+    this.blackBg();
+    this.ripple();
+    this.brickSplosion();
+  }
+
+  implodeBricks() {
+    this.removeAnimation(this.animBg);
+    this.removeAnimation(this.animBrick);
+    this.animBg.revert();
+    this.animBrick.revert();
+    this.animations.push(this.animBrick, this.animBg);
+  }
+
+  explodeDecorative() {
+    this.ripple();
+    this.particles();
+  }
+
+  cloudExpand(newText) {
+    this.cloudTextChange(newText);
+    this.cloudScale();
+  }
+
+  cloudRetract() {
+    this.cloudTextChange();
+    this.removeAnimation(this.animScale);
+    this.animScale.revert();
+    this.animations.push(this.animScale);
+  }
+
   // Animations for brick explosion / load
   brickSplosion() {
     this.bricks = document.querySelectorAll('.brick, .mortar');
-    Logger.log('begin', 'the brickSplosion');
+    const targetR = this.eventInfo.targetR;
     this.animBrick = anime({
       targets: this.bricks,
       // Here is our problem area, below
       translateX(el) {
-        if ($(el).is('.brick')) return anime.random(this.eventInfo.targetR, -this.eventInfo.targetR) * 3;
+        if ($(el).is('.brick')) return anime.random(targetR, -targetR) * 3;
         return 0;
       },
       translateY(el) {
-        if ($(el).is('.brick')) return anime.random(this.eventInfo.targetR * 1.15, -this.eventInfo.targetR * 1.15) * 3;
+        if ($(el).is('.brick')) return anime.random(targetR * 1.15, -targetR * 1.15) * 3;
         return '100vw';
       },
       rotate(el) {
@@ -83,7 +114,7 @@ export default class Animations extends TransitionUtilities {
       });
       this.particles.push(particle);
     }
-    this.animPartl = anime({
+    this.animParticles = anime({
       targets: this.particles,
       x(particle) {
         return particle.x + anime.random(this.eventInfo.rippleSize, -this.eventInfo.rippleSize);
@@ -99,13 +130,13 @@ export default class Animations extends TransitionUtilities {
       },
       easing: 'easeInOutQuart',
       duration: anime.random(600, 800),
-      complete: this.removeAnimation(this.animPartl),
+      complete: this.removeAnimation(this.animParticles),
     });
-    this.animations.push(this.animPartl);
+    this.animations.push(this.animParticles);
   }
 
   // Changes to the cloud
-  funcCloudScale() {
+  cloudScale() {
     this.animScale = anime({
       targets: this.$cloud[0],
       scale: 0.85,
@@ -116,7 +147,7 @@ export default class Animations extends TransitionUtilities {
       complete: function () {
         this.removeAnimation(this.animCloudScale);
         if (this.$cloudLink.html() !== this.originalCloudText) {
-          this.$main.addClass('invisible hidden');
+          this.$main.addClass('invisible hidden'); // MOVE TO PROPER PLACE
         }
         this.$clone.removeClass('invisible');
       }.bind(this),
@@ -124,7 +155,7 @@ export default class Animations extends TransitionUtilities {
     this.animations.push(this.animScale);
   }
 
-  funcCloudTextChange(newLink = this.originalCloudText) {
+  cloudTextChange(newLink = this.originalCloudText) {
     this.animHideChange = anime({
       targets: this.$cloudLink[0],
       opacity: 0,
@@ -132,15 +163,15 @@ export default class Animations extends TransitionUtilities {
       duration: 1000,
       complete: function () {
         this.$clone.removeClass('invisible');
-        this.$cloudLink.html(newLink);
-        this.funcCloudTextVisible();
+        this.$cloudLink.html(newLink); // MOVE TO PROPER PLACE
+        this.cloudTextVisible();
         this.removeAnimation(this.animHideChange);
       }.bind(this),
     });
     this.animations.push(this.animHideChange);
   }
 
-  funcCloudTextVisible() {
+  cloudTextVisible() {
     this.animCloudVis = anime({
       targets: this.$cloudLink[0],
       opacity: 1,

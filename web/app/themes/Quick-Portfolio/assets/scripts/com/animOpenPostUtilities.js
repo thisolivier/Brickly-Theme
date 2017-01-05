@@ -61,14 +61,18 @@ export default class TransitionUtilities {
     this.eventToggle(e, eventTarget);
   }
 
-  primeBackButton($brick) {
-    const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
-    const locationURL = $brick.find('h2 .magicLink')[0];
-    Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
-    history.pushState({ loading: 'page' }, newTitle, locationURL);
-    window.onpopstate = function popState() {
-      this.closePost();
-    };
+  setPageUrl($brick = 0) {
+    if ($brick) {
+      const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
+      const locationURL = $brick.find('h2 .magicLink')[0];
+      Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
+      history.pushState({ loading: newTitle }, newTitle, locationURL);
+      window.onpopstate = function popState() {
+        this.closePost();
+      };
+    } else {
+      history.pushState({ loading: 'home' }, this.originalTitle, '/');
+    }
   }
 
   resetAndPrime(targets, classesRemove = 0, classesAdd = 0, resetStyle = 1) {
