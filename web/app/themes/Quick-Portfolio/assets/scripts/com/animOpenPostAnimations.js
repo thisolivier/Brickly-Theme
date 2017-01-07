@@ -1,4 +1,5 @@
 import anime from 'animejs';
+import Logger from '../util/logger';
 import TransitionUtilities from './animOpenPostUtilities';
 
 export default class Animations extends TransitionUtilities {
@@ -38,6 +39,7 @@ export default class Animations extends TransitionUtilities {
 
   // Animations for brick explosion / load
   brickSplosion() {
+    Logger.log('I am exploding bricks');
     this.bricks = document.querySelectorAll('.brick, .mortar');
     const targetR = this.eventInfo.targetR;
     this.animBrick = anime({

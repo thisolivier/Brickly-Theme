@@ -1,5 +1,6 @@
 import Logger from '../util/logger';
 import Animations from './animOpenPostAnimations';
+// import varDump from '../util/varDump';
 
 export default class PageTransitions extends Animations {
   eventToggle(event, eventTarget) {
@@ -17,7 +18,9 @@ export default class PageTransitions extends Animations {
   }
 
   openPost() {
+    Logger.log('We travel deeper into the open post domain.');
     const $brick = this.eventInfo.newPage;
+
     this.grabContent($brick);
     const cloudText = this.$clone.find('.magicLink').first().html();
     this.cloudExpand(cloudText);
