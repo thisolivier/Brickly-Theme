@@ -6,6 +6,7 @@ export default class TransitionUtilities {
     this.$toBind = $('.magicLink');
     this.$cloud = $('#theCloud');
     this.$cloudLink = $('#cloudLink');
+    this.$closePost = $('.closePost');
     this.$main = $('main');
     this.originalCloudText = $('#cloudLink').html();
     this.originalTitle = $(document).find('title').text();
@@ -27,8 +28,9 @@ export default class TransitionUtilities {
     this.animate(); // Begins animation engine - implaments queue.
   }
 
-  addClickListeners(toBind) {
-    const handleEvent = this.handleEvent;
+  addClickListeners(toBind, bindFunc = this.handleEvent) {
+    Logger.log(bindFunc);
+    const handleEvent = bindFunc;
     this.handle = e => handleEvent.call(this, e);
     const bind = (i, x) => {
       x.addEventListener('touchstart', this.handle);
@@ -48,6 +50,7 @@ export default class TransitionUtilities {
     this.eventInfo = {
       pageX: eventCorrected.pageX,
       pageY: eventCorrected.pageY - $(window).scrollTop(),
+      scrollTop: $(window).scrollTop(),
       newPage: $(eventTarget).closest('article'),
       rippleSize: Math.min(200, (this.cW * 0.4)),
       minCoverDuration: 750,
@@ -57,8 +60,12 @@ export default class TransitionUtilities {
       ),
     };
 
-    // Call the controller
     this.eventToggle(e, eventTarget);
+  }
+
+  handleClose() {
+    event.preventDefault();
+    window.history.back();
   }
 
   setPageUrl($brick = 0) {
@@ -67,8 +74,6 @@ export default class TransitionUtilities {
       const locationURL = $brick.find('h2 .magicLink')[0];
       Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
       history.pushState({ loading: newTitle }, newTitle, locationURL);
-    } else {
-      history.replaceState({ loading: 'home' }, this.originalTitle, '/');
     }
   }
 

@@ -3,15 +3,16 @@ import Animations from './animOpenPostAnimations';
 
 export default class PageTransitions extends Animations {
   eventToggle(event, eventTarget) {
-    Logger.log('begin', eventTarget);
-    if (this.eventInfo.newPage.is('#pageTransition')) {
-      this.explodeDecorative();
-    } else if ($(eventTarget).is('.closePost')) { // CHANGE CLOUD LINK TO A CLASS FOR HOME LINKS
+    if ($(eventTarget).is('.closePost')) {
       event.preventDefault();
       this.closePost();
     } else if (this.cloneCheck) {
+      Logger.log('begin', 'the post opener');
       event.preventDefault();
       this.openPost();
+      Logger.log();
+    } else {
+      alert('something else');
     }
   }
 
@@ -22,6 +23,9 @@ export default class PageTransitions extends Animations {
     this.cloudExpand(cloudText);
     this.explodeBricks();
     this.injectContent($brick);
+    this.addClickListeners(this.$clone);
+    this.addClickListeners(this.$closePost, this.handleClose);
+    this.setPageUrl($brick);
     window.onpopstate = () => this.closePost();
   }
 
@@ -38,23 +42,21 @@ export default class PageTransitions extends Animations {
     this.cloneCheck = false;
   }
 
-  injectContent($brick) {
-    this.setPageUrl($brick);
+  injectContent() {
+    $('html, body').animate({ scrollTop: 0 }, 1000);
     this.$main.css('z-index', 50);
-    this.$clone.removeAttr('style').attr('id', 'pageTransition')
+    this.$clone.removeAttr('style').attr('id', 'loadedPage')
       .find('header').first()
       .detach();
     this.$clone.find('.shadow').first().detach();
-    this.addClickListeners(this.$clone);
-    this.addClickListeners(this.$cloudLink);
     this.$clone.appendTo('#heightDefined');
     this.$clone.removeClass('invisible');
     $('body').addClass('post-open');
   }
 
   destroyContent() {
-    this.setPageUrl();
-    this.$cloudLink[0].removeEventListener('click', this.handle);
+    $('html, body').animate({ scrollTop: this.eventInfo.scrollTop }, 500);
+    // this.$cloudLink[0].removeEventListener('click', this.handle);
     this.$clone.detach();
     this.cloneCheck = true;
     this.resetAndPrime(this.$main, 'hidden invisible', 0);

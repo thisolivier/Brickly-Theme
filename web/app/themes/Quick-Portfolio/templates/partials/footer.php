@@ -1,6 +1,6 @@
 <footer class="content-info" role="complementary" title="About Olivier, enquiry form, and various links">
   <div class="home">
-      <a href="/" title="Home">
+      <a href="/" title="Home" class="closePost">
         <img src="<?= get_template_directory_uri(); ?>/dist/images/icon-house.png" alt="Home">
       </a>
   </div>

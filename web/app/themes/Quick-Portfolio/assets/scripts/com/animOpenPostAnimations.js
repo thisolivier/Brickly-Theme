@@ -59,7 +59,10 @@ export default class Animations extends TransitionUtilities {
       delay: 150,
       easing: 'easeOutCubic',
       begin: this.resetAndPrime('article', 'transitions', 0, 0),
-      complete: this.resetAndPrime('article', 0, 'transitions'),
+      complete: function () {
+        this.resetAndPrime('article', 0, 'transitions');
+        this.removeAnimation(this.animBrick);
+      }.bind(this),
     });
     this.animations.push(this.animBrick);
   }
@@ -81,7 +84,7 @@ export default class Animations extends TransitionUtilities {
   }
 
   ripple() {
-    this.ripple = new this.Circle({
+    this.elemRipple = new this.Circle({
       x: this.eventInfo.pageX,
       y: this.eventInfo.pageY,
       r: 0,
@@ -89,7 +92,7 @@ export default class Animations extends TransitionUtilities {
       opacity: 1,
     });
     this.animRipple = anime({
-      targets: this.ripple,
+      targets: this.elemRipple,
       r: this.eventInfo.rippleSize,
       opacity: {
         value: 0,
@@ -104,7 +107,7 @@ export default class Animations extends TransitionUtilities {
   }
 
   particles() {
-    this.particles = [];
+    this.elemParticles = [];
     for (let i = 0; i < 20; i += 1) {
       const particle = new this.Circle({
         x: this.eventInfo.pageX,
@@ -112,10 +115,10 @@ export default class Animations extends TransitionUtilities {
         fill: this.color.current,
         r: anime.random(10, 20),
       });
-      this.particles.push(particle);
+      this.elemParticles.push(particle);
     }
     this.animParticles = anime({
-      targets: this.particles,
+      targets: this.elemParticles,
       x(particle) {
         return particle.x + anime.random(this.eventInfo.rippleSize, -this.eventInfo.rippleSize);
       },
