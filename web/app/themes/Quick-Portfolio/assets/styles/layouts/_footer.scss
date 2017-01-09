@@ -307,6 +307,7 @@ footer.content-info{
           }
           @include small{
             background-color: $brand-primary;
+            color: $brand-secondary;
           }
         }
       }

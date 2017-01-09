@@ -50,7 +50,7 @@ header {
       margin: 0 0.2em 0.1em 0.1em;
     }
 
-    a {
+    #cloudLink {
       display: block;
       z-index: 30;
       color: black;
@@ -60,16 +60,15 @@ header {
       left: -0.1em;
       transition: top .5s, left .5s, text-shadow .5s;
       @include huge{
-        font-size: 1.2em;
+        font-size: 1.32em;
       };
-    }
-
-    a:hover {
-      top:0em;
-      left:0em;
-      text-shadow: 0em 0em rgba(0, 0, 0, 1);
-      text-decoration: none;
-      color:black;
+      &:hover{
+        top:0em;
+        left:0em;
+        text-shadow: 0em 0em rgba(0, 0, 0, 1);
+        text-decoration: none;
+        color:black;
+      }
     }
   }
   .backgroundCloud {

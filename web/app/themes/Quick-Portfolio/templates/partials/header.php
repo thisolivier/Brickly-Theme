@@ -1,9 +1,9 @@
 <header class="sitewide" title="Page Title">
   <div id="theCloud">
     <h1 class="brand">
-      <a id="cloudLink" href="<?= esc_url(home_url('/')); ?>">
+      <span id="cloudLink">
         <?php if( is_home() ) {bloginfo('name');} else {wp_title('');} ?>
-      </a>
+      </span>
     </h1>
     <div class="backgroundCloud" aria-hidden="true">
       <div class="ball big">&nbsp;</div>
