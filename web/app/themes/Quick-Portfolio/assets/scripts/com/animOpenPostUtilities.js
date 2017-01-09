@@ -69,10 +69,15 @@ export default class TransitionUtilities {
       const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
       const locationURL = $brick.find('h2 .magicLink')[0];
       Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
-      history.pushState({ loading: newTitle }, newTitle, locationURL);
+      history.pushState({ loading: locationURL }, newTitle, locationURL);
       window.onpopstate = () => this.eventToggle('close');
     } else {
-      window.onpopstate = () => this.openPost2();
+      window.onpopstate = (e) => {
+        const state = e.state;
+        if (state) {
+          this.eventToggle('open');
+        }
+      };
     }
   }
 

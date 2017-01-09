@@ -1,6 +1,6 @@
 import Logger from '../util/logger';
 import Animations from './animOpenPostAnimations';
-import varDump from '../util/varDump';
+// import varDump from '../util/varDump';
 
 export default class PageTransitions extends Animations {
   eventToggle(whatToDo) {
@@ -17,6 +17,7 @@ export default class PageTransitions extends Animations {
 
   openPost() {
     const $brick = this.eventInfo.newPage;
+    this.setPageUrl($brick);
     this.grabContent($brick);
     const cloudText = this.$clone.find('.magicLink').first().html();
     this.cloudExpand(cloudText);
@@ -24,19 +25,14 @@ export default class PageTransitions extends Animations {
     this.injectContent($brick);
     this.addClickListeners(this.$clone);
     this.addClickListeners(this.$closePost, this.handleClose);
-    this.setPageUrl($brick);
-  }
-
-  openPost2() {
-    Logger.log(varDump(this.eventInfo.event));
   }
 
   closePost() {
+    this.setPageUrl();
     this.destroyContent();
     this.resetAndPrime($('article'), 'transitions', 0, 0);
     this.cloudRetract();
     this.implodeBricks();
-    this.setPageUrl();
   }
 
   grabContent($brick) {
