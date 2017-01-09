@@ -69,13 +69,16 @@ export default class TransitionUtilities {
       const newTitle = `Olivier's ${this.$clone.find('h2 .magicLink').html()}`;
       const locationURL = this.$clone.find('h2 .magicLink')[0];
       Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
-      history.pushState(JSON.stringify(eventInfo), newTitle, locationURL);
+      this.prevInfo = eventInfo;
+      history.pushState(newTitle, newTitle, locationURL);
       window.onpopstate = () => this.eventToggle('close', eventInfo);
     } else if (whatToDo === 'close') {
-      window.onpopstate = (e) => {
-        const zombieInfo = JSON.parse(e.state);
+      history.replaceState(0, this.originalTitle, '/');
+      window.onpopstate = () => {
+        const zombieInfo = this.prevInfo;
         if (zombieInfo) {
-          this.eventToggle('open', zombieInfo);
+          this.eventToggle('lazarus', zombieInfo);
+          window.onpopstate = () => this.eventToggle('close', zombieInfo);
         }
       };
     }

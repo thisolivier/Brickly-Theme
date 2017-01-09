@@ -11,6 +11,10 @@ export default class PageTransitions extends Animations {
       eventInfo.event.preventDefault();
       this.openPost(eventInfo);
       Logger.log();
+    } else if (whatToDo === 'lazarus') {
+      Logger.log('begin', 'the lazarus construction');
+      this.openPost(eventInfo);
+      Logger.log();
     }
   }
 
@@ -34,7 +38,7 @@ export default class PageTransitions extends Animations {
   }
 
   grabContent(eventInfo) {
-    this.$clone = eventInfo.newPage.clone(true, true);
+    this.$clone = $(eventInfo.newPage).clone(true, true);
     this.$clone.addClass('invisible');
     this.cloneCheck = false;
   }
