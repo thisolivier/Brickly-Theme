@@ -47,7 +47,7 @@ export default class TransitionUtilities {
     const eventTarget = e.target || e.srcElement;
 
     // Store info about the event
-    this.eventInfo = {
+    const eventInfo = {
       event,
       eventTarget,
       pageX: event.pageX,
@@ -61,21 +61,21 @@ export default class TransitionUtilities {
         Math.pow(Math.max(event.pageY - 0, this.cH - event.pageY), 2)
       ),
     };
-    this.eventToggle('open');
+    this.eventToggle('open', eventInfo);
   }
 
-  setPageUrl($brick = 0) {
-    if ($brick) {
-      const newTitle = `Olivier's ${$brick.find('h2 .magicLink').html()}`;
-      const locationURL = $brick.find('h2 .magicLink')[0];
+  setPageUrl(eventInfo, whatToDo = 'open') {
+    if (whatToDo === 'open') {
+      const newTitle = `Olivier's ${this.$clone.find('h2 .magicLink').html()}`;
+      const locationURL = this.$clone.find('h2 .magicLink')[0];
       Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
-      history.pushState({ loading: locationURL }, newTitle, locationURL);
-      window.onpopstate = () => this.eventToggle('close');
-    } else {
+      history.pushState(JSON.stringify(eventInfo), newTitle, locationURL);
+      window.onpopstate = () => this.eventToggle('close', eventInfo);
+    } else if (whatToDo === 'close') {
       window.onpopstate = (e) => {
-        const state = e.state;
-        if (state) {
-          this.eventToggle('open');
+        const zombieInfo = JSON.parse(e.state);
+        if (zombieInfo) {
+          this.eventToggle('open', zombieInfo);
         }
       };
     }

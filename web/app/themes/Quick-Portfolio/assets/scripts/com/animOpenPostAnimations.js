@@ -6,10 +6,10 @@ export default class Animations extends TransitionUtilities {
   /* eslint object-shorthand: "warn" */
 
   // Compound animation functions
-  explodeBricks() {
-    this.blackBg();
-    this.ripple();
-    this.brickSplosion();
+  explodeBricks(eventInfo) {
+    this.blackBg(eventInfo);
+    this.ripple(eventInfo);
+    this.brickSplosion(eventInfo);
   }
 
   implodeBricks() {
@@ -38,9 +38,9 @@ export default class Animations extends TransitionUtilities {
   }
 
   // Animations for brick explosion / load
-  brickSplosion() {
+  brickSplosion(eventInfo) {
     this.bricks = document.querySelectorAll('.brick, .mortar');
-    const targetR = this.eventInfo.targetR;
+    const targetR = eventInfo.targetR;
     this.animBrick = anime({
       targets: this.bricks,
       // Here is our problem area, below
@@ -68,33 +68,33 @@ export default class Animations extends TransitionUtilities {
     this.animations.push(this.animBrick);
   }
 
-  blackBg() {
+  blackBg(eventInfo) {
     this.pageFill = new this.Circle({
-      x: this.eventInfo.pageX,
-      y: this.eventInfo.pageY,
+      x: eventInfo.pageX,
+      y: eventInfo.pageY,
       r: 0,
       fill: this.color.next,
     });
     this.animBg = anime({
       targets: this.pageFill,
-      r: this.eventInfo.targetR,
-      duration: Math.max(this.eventInfo.targetR / 2, this.eventInfo.minCoverDuration),
+      r: eventInfo.targetR,
+      duration: Math.max(eventInfo.targetR / 2, eventInfo.minCoverDuration),
       easing: 'easeInCubic',
     });
     this.animations.push(this.animBg);
   }
 
-  ripple() {
+  ripple(eventInfo) {
     this.elemRipple = new this.Circle({
-      x: this.eventInfo.pageX,
-      y: this.eventInfo.pageY,
+      x: eventInfo.pageX,
+      y: eventInfo.pageY,
       r: 0,
       fill: this.color.current,
       opacity: 1,
     });
     this.animRipple = anime({
       targets: this.elemRipple,
-      r: this.eventInfo.rippleSize,
+      r: eventInfo.rippleSize,
       opacity: {
         value: 0,
         delay: 200,
@@ -107,12 +107,12 @@ export default class Animations extends TransitionUtilities {
     this.animations.push(this.animRipple);
   }
 
-  particles() {
+  particles(eventInfo) {
     this.elemParticles = [];
     for (let i = 0; i < 20; i += 1) {
       const particle = new this.Circle({
-        x: this.eventInfo.pageX,
-        y: this.eventInfo.pageY,
+        x: eventInfo.pageX,
+        y: eventInfo.pageY,
         fill: this.color.current,
         r: anime.random(10, 20),
       });
@@ -121,10 +121,10 @@ export default class Animations extends TransitionUtilities {
     this.animParticles = anime({
       targets: this.elemParticles,
       x(particle) {
-        return particle.x + anime.random(this.eventInfo.rippleSize, -this.eventInfo.rippleSize);
+        return particle.x + anime.random(eventInfo.rippleSize, -eventInfo.rippleSize);
       },
       y(particle) {
-        return particle.y + anime.random(this.eventInfo.rippleSize, -this.eventInfo.rippleSize);
+        return particle.y + anime.random(eventInfo.rippleSize, -eventInfo.rippleSize);
       },
       r: {
         value: 0,

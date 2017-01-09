@@ -3,40 +3,38 @@ import Animations from './animOpenPostAnimations';
 // import varDump from '../util/varDump';
 
 export default class PageTransitions extends Animations {
-  eventToggle(whatToDo) {
+  eventToggle(whatToDo, eventInfo) {
     if (whatToDo === 'close') {
-      event.preventDefault();
-      this.closePost();
+      this.closePost(eventInfo);
     } else if ((whatToDo === 'open') && this.cloneCheck) {
       Logger.log('begin', 'the post opener');
-      this.eventInfo.event.preventDefault();
-      this.openPost();
+      eventInfo.event.preventDefault();
+      this.openPost(eventInfo);
       Logger.log();
     }
   }
 
-  openPost() {
-    const $brick = this.eventInfo.newPage;
-    this.setPageUrl($brick);
-    this.grabContent($brick);
+  openPost(eventInfo) {
+    this.grabContent(eventInfo);
     const cloudText = this.$clone.find('.magicLink').first().html();
+    this.setPageUrl(eventInfo);
     this.cloudExpand(cloudText);
-    this.explodeBricks();
-    this.injectContent($brick);
+    this.explodeBricks(eventInfo);
+    this.injectContent();
     this.addClickListeners(this.$clone);
     this.addClickListeners(this.$closePost, this.handleClose);
   }
 
-  closePost() {
-    this.setPageUrl();
-    this.destroyContent();
+  closePost(eventInfo) {
+    this.setPageUrl(eventInfo, 'close');
+    this.destroyContent(eventInfo);
     this.resetAndPrime($('article'), 'transitions', 0, 0);
     this.cloudRetract();
     this.implodeBricks();
   }
 
-  grabContent($brick) {
-    this.$clone = $brick.clone(true, true);
+  grabContent(eventInfo) {
+    this.$clone = eventInfo.newPage.clone(true, true);
     this.$clone.addClass('invisible');
     this.cloneCheck = false;
   }
@@ -53,8 +51,8 @@ export default class PageTransitions extends Animations {
     $('body').addClass('post-open');
   }
 
-  destroyContent() {
-    $('html, body').animate({ scrollTop: this.eventInfo.scrollTop }, 500);
+  destroyContent(eventInfo) {
+    $('html, body').animate({ scrollTop: eventInfo.scrollTop }, 500);
     // this.$cloudLink[0].removeEventListener('click', this.handle);
     this.$clone.detach();
     this.cloneCheck = true;
