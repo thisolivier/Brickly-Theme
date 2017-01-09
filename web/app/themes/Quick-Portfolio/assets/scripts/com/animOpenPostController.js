@@ -1,26 +1,22 @@
 import Logger from '../util/logger';
 import Animations from './animOpenPostAnimations';
-// import varDump from '../util/varDump';
+import varDump from '../util/varDump';
 
 export default class PageTransitions extends Animations {
-  eventToggle(event, eventTarget) {
-    if ($(eventTarget).is('.closePost')) {
+  eventToggle(whatToDo) {
+    if (whatToDo === 'close') {
       event.preventDefault();
       this.closePost();
-    } else if (this.cloneCheck) {
+    } else if ((whatToDo === 'open') && this.cloneCheck) {
       Logger.log('begin', 'the post opener');
-      event.preventDefault();
+      this.eventInfo.event.preventDefault();
       this.openPost();
       Logger.log();
-    } else {
-      alert('something else');
     }
   }
 
   openPost() {
-    Logger.log('We travel deeper into the open post domain.');
     const $brick = this.eventInfo.newPage;
-
     this.grabContent($brick);
     const cloudText = this.$clone.find('.magicLink').first().html();
     this.cloudExpand(cloudText);
@@ -29,7 +25,10 @@ export default class PageTransitions extends Animations {
     this.addClickListeners(this.$clone);
     this.addClickListeners(this.$closePost, this.handleClose);
     this.setPageUrl($brick);
-    window.onpopstate = () => this.closePost();
+  }
+
+  openPost2() {
+    Logger.log(varDump(this.eventInfo.event));
   }
 
   closePost() {
@@ -37,6 +36,7 @@ export default class PageTransitions extends Animations {
     this.resetAndPrime($('article'), 'transitions', 0, 0);
     this.cloudRetract();
     this.implodeBricks();
+    this.setPageUrl();
   }
 
   grabContent($brick) {

@@ -1,4 +1,5 @@
 import Logger from '../util/logger';
+// import varDump from '../util/varDump';
 
 export default class TransitionUtilities {
   /* eslint no-param-reassign: "warn", class-methods-use-this: "warn" */
@@ -29,7 +30,6 @@ export default class TransitionUtilities {
   }
 
   addClickListeners(toBind, bindFunc = this.handleEvent) {
-    Logger.log(bindFunc);
     const handleEvent = bindFunc;
     this.handle = e => handleEvent.call(this, e);
     const bind = (i, x) => {
@@ -43,29 +43,25 @@ export default class TransitionUtilities {
 
   handleEvent(e) {
     // Fix for touch events and IE 9
-    const eventCorrected = e.touches ? e.touches[0] : e || window.event;
+    const event = e.touches ? e.touches[0] : e || window.event;
     const eventTarget = e.target || e.srcElement;
 
     // Store info about the event
     this.eventInfo = {
-      pageX: eventCorrected.pageX,
-      pageY: eventCorrected.pageY - $(window).scrollTop(),
+      event,
+      eventTarget,
+      pageX: event.pageX,
+      pageY: event.pageY - $(window).scrollTop(),
       scrollTop: $(window).scrollTop(),
       newPage: $(eventTarget).closest('article'),
       rippleSize: Math.min(200, (this.cW * 0.4)),
       minCoverDuration: 750,
       targetR: Math.sqrt(
-        Math.pow(Math.max(eventCorrected.pageX - 0, this.cW - eventCorrected.pageX), 2) +
-        Math.pow(Math.max(eventCorrected.pageY - 0, this.cH - eventCorrected.pageY), 2)
+        Math.pow(Math.max(event.pageX - 0, this.cW - event.pageX), 2) +
+        Math.pow(Math.max(event.pageY - 0, this.cH - event.pageY), 2)
       ),
     };
-
-    this.eventToggle(e, eventTarget);
-  }
-
-  handleClose() {
-    event.preventDefault();
-    window.history.back();
+    this.eventToggle('open');
   }
 
   setPageUrl($brick = 0) {
@@ -74,6 +70,9 @@ export default class TransitionUtilities {
       const locationURL = $brick.find('h2 .magicLink')[0];
       Logger.log(`Setting a new state, with the title ${newTitle}, and the location ${locationURL}`);
       history.pushState({ loading: newTitle }, newTitle, locationURL);
+      window.onpopstate = () => this.eventToggle('close');
+    } else {
+      window.onpopstate = () => this.openPost2();
     }
   }
 
