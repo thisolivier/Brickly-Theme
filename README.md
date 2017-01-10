@@ -6,14 +6,19 @@ The repo includes some test databases to get you started.
 
 ## Coming in v1
 
-This is current version 0.9.1, version 1 will separate the theme from the installation, and setup plugin dependencies as required or recommended plugins within WordPress.
+This is current version 0.9.2, version 1 will separate the theme from the installation, and setup plugin dependencies as required or recommended plugins within WordPress.
 
 Other improvements scheduled for v1.0
 * Theme options controlled through the WordPress customizer
 * Better archive pages
 * More page transitions animated (somehow)
+
+Progress
+0.9.2
 * Re-formatted javascript and css to allow easy customization of animations.
 * Bugs crushed!
+0.9.1
+* Theme released
 
 ## Coming in v2
 
