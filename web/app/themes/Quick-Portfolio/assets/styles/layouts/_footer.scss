@@ -1,8 +1,9 @@
 footer.content-info{
-  z-index: 500;
+  @extend .wrap;
   position: relative;
+  margin-top: $brick-radius*-1;
+  z-index: 500;
   background-color: $brand-secondary;
-  padding: 5em $footer-padding*3;
 
   @include medium{
     padding: 4em 4em;
@@ -21,11 +22,12 @@ footer.content-info{
 }
 
 .footer-container{
+  padding: 5em 0;
   position: relative;
   display: flex;
   flex-flow: row wrap;
   align-items: baseline;
-  justify-content: flex-end;
+  justify-content: flex-start;
 
   .sidebar-wrapper{
     display: none;
@@ -47,43 +49,31 @@ footer.content-info{
   }
 
   .widget {
-    flex: 2 1 20em;
-    width: 15em;
-    order:2;
+    flex: 1 1 50%;
+    order:1;
     color: $brand-primary;
     a{
       color: $brand-primary;
     }
-
+    @include small{
+      flex: 1 1 100%;
+    }
     @include medium{
-      flex: 2 0 100%;
       width: auto;
       margin-bottom: 2em;
     };
     @include large {
       padding: 1em $footer-padding;
-      &:first-child {
-        flex: 1 1 28em;
-      }
-    }
-    & ~ .widget {
-      @include medium{
-        flex: 1 1 50%;
-        align-self: flex-start;
-      }
-      @include small{
-        flex: 1 1 100%;
-        .widget-content{
-          display: none;
-        }
-      }
     }
 
     &.wpforms-widget{
       @include large{
-        max-width: 60%;
-        h3 {
-          opacity: 0;
+        padding: 0 5%;
+      }
+      h3 {
+        opacity: 0;
+        @include small{
+          opacity: 1;
         }
       }
       .wpforms-container{

@@ -32,6 +32,12 @@ p a{
   };
 }
 
+.widget .menu .menu-item{
+  @extend .btn;
+  margin: 0.2em;
+  padding: 0.1em 0.3em;
+  background-color: $brand-secondary;
+}
 
 .tags {
   display: block;
@@ -39,10 +45,7 @@ p a{
   clear:both;
   margin: 1em 0 0 10%;
   article header &{
-    line-height: 1.6em;
-    height: 3.5em;
-    overflow-y: hidden;
-    position: relative;
+    pointer-events: none;
   }
   @include tiny{ font-size: 0.8em; }
   @include medium{
@@ -64,14 +67,13 @@ p a{
   }
 }
 
-
-div.wpforms-container-full .wpforms-form button{
-  border-radius: 0.5em;
+.widget div.wpforms-container-full .wpforms-form button[type=submit]{
+  border-radius: 0.4em;
   color: $brand-secondary;
   background-color: $brand-primary;
   font-family: $headings-font-family;
   font-weight: 800;
-  font-size: 1.3em;
+  font-size: 1.5rem;
   text-transform: uppercase;
   border: 0;
 }

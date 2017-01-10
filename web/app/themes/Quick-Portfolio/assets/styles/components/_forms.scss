@@ -1,8 +1,8 @@
-.wpforms-required-label{
-  display: none;
-}
+div.wpforms-container{
+  .wpforms-required-label{
+    display: none;
+  }
 
-.widget-content{
   form.wpforms-form{
     color: $brand-primary;
     .wpforms-field{
@@ -14,11 +14,11 @@
         font-family: $headings-font-family;
         font-weight: bold;
         text-transform: uppercase;
+        footer &{
+          text-align: left;
+        }
         @include large{
           text-align: left;
-        };
-        @include huge{
-          text-align: right;
         };
       }
     }
