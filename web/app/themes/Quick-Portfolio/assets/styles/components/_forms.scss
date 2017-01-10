@@ -1,15 +1,65 @@
-// Search form
-.search-form {
-  @extend .form-inline;
-}
-.search-form label {
-  font-weight: normal;
-  @extend .form-group;
-}
-.search-form .search-field {
-  @extend .form-control;
-}
-.search-form .search-submit {
-  @extend .btn;
-  @extend .btn-secondary;
+.widget-content{
+  form.wpforms-form{
+    color: $brand-primary;
+    .wpforms-required-label{
+      display: none;
+    }
+    .wpforms-field{
+      padding: 0;
+      label{
+        font-size: 1.3rem;
+        margin-top: 0.5em;
+        text-align: center;
+        font-family: $headings-font-family;
+        font-weight: bold;
+        text-transform: uppercase;
+        @include large{
+          text-align: left;
+        };
+        @include huge{
+          text-align: right;
+        };
+      }
+    }
+
+    .wpforms-field-row-block{
+      @extend .form-group;
+      margin-bottom:0.2em;
+    }
+    input[type=date],
+    input[type=datetime],
+    input[type=datetime-local],
+    input[type=email],
+    input[type=month],
+    input[type=number],
+    input[type=password],
+    input[type=range],
+    input[type=search],
+    input[type=tel],
+    input[type=text],
+    input[type=time],
+    input[type=url],
+    input[type=week],
+    select,
+    textarea{
+      @extend .form-control;
+      margin-top:0;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.55rem;
+    }
+    button{
+      @extend .btn;
+      @extend .btn-lg;
+      @extend .btn-block;
+      font-family: $headings-font-family;
+      font-weight: 800;
+      background-color: $brand-secondary;
+      color: $brand-primary;
+      text-transform: uppercase;
+      margin-top:1em;
+      @include large {
+        margin-top:0.6em;
+      };
+    }
+  } // form.wpforms-form
 }

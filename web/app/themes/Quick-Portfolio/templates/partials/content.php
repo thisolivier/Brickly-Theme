@@ -7,7 +7,7 @@
     </h2>
     <?php get_template_part('partials/entry-meta'); ?>
   </header><br>
-  <?= get_template_part('partials/sidebar'); ?>
+  <?php get_template_part('partials/sidebar'); ?>
   <div class="entry-content">
     <?php the_content(); ?>
   </div>
