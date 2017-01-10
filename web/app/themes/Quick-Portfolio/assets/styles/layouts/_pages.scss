@@ -12,7 +12,6 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-flow: row wrap;
-  margin-bottom: -25rem;
 
   @include medium {
     justify-content: space-around;
@@ -26,29 +25,11 @@
     flex-flow: row wrap;
     padding: $main-padding-top 0 0;
     justify-content: space-between;
-    padding-bottom: 20rem;
-
-    @include medium {
-      flex: 0 0 relate($chim-percent, 120);
-    }
-
-    @include small {
-      flex: 0 0 80%;
-    }
 
     &.invisible {
       opacity:0;
       overflow: hidden;
     }
-
-    .open-post &, .single &{
-      overflow-y: scroll;
-    }
-
-    .brick header {
-      transition: opacity 1s linear 2s;
-    }
-
     &.hidden {
       height: 0;
       padding: 0;
@@ -57,25 +38,37 @@
         opacity:0;
       }
     }
+    .open-post &, .single &{
+      overflow-y: scroll;
+    }
+    @include medium {
+      flex: 0 0 relate($chim-percent, 120);
+    }
+    @include small {
+      flex: 0 0 80%;
+    }
+
+    .brick header {
+      transition: opacity 1s linear 2s;
+    }
 
     .mortar {
       content: "";
       position: absolute;
       top: $main-padding-top;
       bottom: 0;
-      opacity: 1;
       left: relate($chim-percent, $brick-gap*0.4);
       right: relate($chim-percent, $brick-gap*0.4);
+      opacity: 1;
+      z-index: 80;
       margin-top: relate($chim-percent, $brick-gap*1.4);
       background-color: white;
-      z-index: 80;
       border-radius: 0.5em;
 
       &.pre_setup {
         top: 1500px;
         opacity: 0;
       }
-
       &.transitions {
         transition-delay: 4s;
         transition: top 4s;
@@ -120,24 +113,11 @@
 
     // &.transitions{
     //   transition: transform 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    //   &.right{
-    //     transform-origin: 0% 50%;
-    //   }
-    //   &.left{
-    //     transform-origin: 100% 50%;
-    //   }
+    //   transform-origin: 50% 50%;
     //
     //   &:hover{
     //     transition: transform 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-    //     &.right{
-    //       transform: scale(1.05) translate(0.3em, 0);
-    //     }
-    //     &.left{
-    //       transform: scale(1.05) translate(-0.3em, 0);
-    //     }
-    //     .shadow{
-    //       height:1em;
-    //     }
+    //     transform: scale(1.05);
     //   }
     // }
 
@@ -169,18 +149,6 @@
       time {
         display:none;
       }
-      .tags {
-        line-height: 1.6em;
-        height: 3.5em;
-        overflow-y: hidden;
-        position: relative;
-        a {
-          font-size: 0.9em;
-        }
-        @include tiny{ font-size: 0.8em; }
-        @include large{ font-size: 0.95em; }
-        @include huge{ font-size: 1em; }
-      } // tags
     } // header
 
     main .entry-content {
@@ -199,86 +167,3 @@
     }
   } // article
 } // .content.row
-
-.fillView{
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-#backgroundPost{
-  @extend .fillView;
-  z-index: 50;
-  overflow: hidden;
-}
-
-.backgroundLanscape {
-  @extend .fillView;
-  z-index: 10;
-  &.hidden {
-    .sky {
-      transform: translate(0, -10vh);
-      opacity: 0;
-    }
-    .land {
-      transform: translate(0, 20em);
-      opacity: 0;
-    }
-  }
-  .sky-and-land{
-    width:100%;
-    position: relative;
-    &.transitions{
-      transition: all 2s;
-    }
-  }
-  .sky{
-    height:70vh;
-    margin-bottom:-10vh;
-    @extend .sky-and-land;
-    &.transitions{
-      transition-delay: 0.5s;
-      transition:
-        opacity 2s cubic-bezier(0.77, 0, 0.175, 1) 1s,
-        transform 2s cubic-bezier(0.77, 0, 0.175, 1) 0s;
-    }
-  }
-
-  .land{
-    height:90vh;
-    @extend .sky-and-land;
-  }
-} // .background.container
-
-.archive {
-  .content.row {
-    margin-bottom: 0;
-    .main{
-      @include medium{
-        flex: 0 0 50vw;
-      }
-      opacity:1;
-      visibility: visible !important;
-      padding: 20vw 0 10rem;
-    }
-
-    article.post{
-      background-color: $brand-primary;
-      width: 100%;
-      h2 a{
-        color: $brand-secondary;
-        &:hover{
-          color: $brand-secondary;
-        }
-      }
-      .shadow {
-        display: none;
-      }
-      .btn-primary {
-        color: $brand-primary;
-        background-color: $brand-secondary;
-        border-color: $brand-secondary;
-      }
-    }
-  }
-}

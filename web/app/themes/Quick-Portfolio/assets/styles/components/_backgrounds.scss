@@ -1,0 +1,49 @@
+.fillView{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#backgroundPost{
+  @extend .fillView;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.backgroundLanscape {
+  @extend .fillView;
+  z-index: 10;
+  &.hidden {
+    .sky {
+      transform: translate(0, -10vh);
+      opacity: 0;
+    }
+    .land {
+      transform: translate(0, 20em);
+      opacity: 0;
+    }
+  }
+  .sky-and-land{
+    width:100%;
+    position: relative;
+    &.transitions{
+      transition: all 2s;
+    }
+  }
+  .sky{
+    height:70vh;
+    margin-bottom:-10vh;
+    @extend .sky-and-land;
+    &.transitions{
+      transition-delay: 0.5s;
+      transition:
+        opacity 2s cubic-bezier(0.77, 0, 0.175, 1) 1s,
+        transform 2s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+    }
+  }
+
+  .land{
+    height:90vh;
+    @extend .sky-and-land;
+  }
+} // .background.container

@@ -1,0 +1,32 @@
+.archive {
+  .content.row {
+    margin-bottom: 0;
+    .main{
+      @include medium{
+        flex: 0 0 50vw;
+      }
+      opacity:1;
+      visibility: visible !important;
+      padding: 20vw 0 10rem;
+    }
+
+    article.post{
+      background-color: $brand-primary;
+      width: 100%;
+      h2 a{
+        color: $brand-secondary;
+        &:hover{
+          color: $brand-secondary;
+        }
+      }
+      .shadow {
+        display: none;
+      }
+      .btn-primary {
+        color: $brand-primary;
+        background-color: $brand-secondary;
+        border-color: $brand-secondary;
+      }
+    }
+  }
+}

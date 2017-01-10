@@ -1,3 +1,22 @@
+p a{
+  display: inline-block;
+  border-radius: 0.3em;
+  text-decoration: none;
+  padding: 0 0.2em;
+  transition: all 0.3s;
+  color: $brand-primary;
+  border-width: 0.1em;
+  border-style: solid;
+  border-color: $brand-primary;
+  line-height: 1.3em;
+
+  &:hover, &:visited:hover{
+    border-color: darken($brand-primary,35%);
+    color: $brand-primary;
+    text-decoration: none;
+  }
+}
+
 .post-sidebar{
   .ssba img{
     width: 2rem !important;
@@ -33,5 +52,33 @@
         padding:0.1em 0.2em;
       }
     }
+  }
+}
+
+article header{
+  .tags {
+    line-height: 1.6em;
+    height: 3.5em;
+    overflow-y: hidden;
+    position: relative;
+    a {
+      font-size: 0.9em;
+    }
+    @include tiny{ font-size: 0.8em; }
+    @include large{ font-size: 0.95em; }
+    @include huge{ font-size: 1em; }
+  }
+}
+
+.footer-container{
+  div.wpforms-container-full .wpforms-form button{
+    border-radius: 0.5em;
+    color: $brand-secondary;
+    background-color: $brand-primary;
+    font-family: $headings-font-family;
+    font-weight: 800;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    border: 0;
   }
 }
