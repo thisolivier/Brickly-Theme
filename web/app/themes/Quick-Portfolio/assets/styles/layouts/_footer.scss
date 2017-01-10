@@ -1,14 +1,13 @@
 footer.content-info{
   z-index: 500;
   position: relative;
-  background-color: black;
+  background-color: $brand-primary;
   $padding: 2em;
   padding: 5em $padding 4em $padding*3;
 
   .post-open &, .single &, .archive &{
-    transform: none;
     padding: 0;
-    margin-top: 8em;
+    margin-top: 4em;
     .home{
       display:block;
       position: absolute;
@@ -25,15 +24,17 @@ footer.content-info{
     padding: 4em 4em;
   };
   @include small{
-    padding: 4.5em 4em 4em 4em;
+    padding-top: 4.5em;
     font-size: 0.9em;
   };
   @include tiny{
     padding: 2em 1em;
   };
+
   .home{
     display:none;
   }
+
   .footer-container{
     position: relative;
     display: flex;
@@ -45,7 +46,7 @@ footer.content-info{
       @extend .wrap;
       background-color: $brand-primary;
       position: inherit;
-      padding-bottom: 2em !important;
+      padding-bottom: 2em;
 
       .widget:not(.column) {
         color: $brand-secondary;

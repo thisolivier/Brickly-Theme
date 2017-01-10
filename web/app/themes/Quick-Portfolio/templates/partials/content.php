@@ -7,10 +7,7 @@
     </h2>
     <?php get_template_part('partials/entry-meta'); ?>
   </header><br>
-  <div class="post-meta">
-    <?= \App\portfolio_meta(); ?>
-    <p class="byline tags"><?php the_tags( '','','' ); ?> </p>
-  </div>
+  <?= get_template_part('partials/sidebar'); ?>
   <div class="entry-content">
     <?php the_content(); ?>
   </div>

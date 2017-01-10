@@ -74,5 +74,4 @@ function portfolio_meta()
       echo $current;
     }
   }
-  get_template_part('partials/sidebar');
 }
