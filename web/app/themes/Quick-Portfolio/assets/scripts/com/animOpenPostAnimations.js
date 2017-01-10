@@ -10,9 +10,11 @@ export default class Animations extends TransitionUtilities {
     this.blackBg(eventInfo);
     this.ripple(eventInfo);
     this.brickSplosion(eventInfo);
+    this.scroll();
   }
 
-  implodeBricks() {
+  implodeBricks(eventInfo) {
+    this.scroll(eventInfo.scrollTop);
     this.removeAnimation(this.animBg);
     this.removeAnimation(this.animBrick);
     this.animBg.revert();
@@ -139,6 +141,17 @@ export default class Animations extends TransitionUtilities {
     this.animations.push(this.animParticles);
   }
 
+  scroll(position = 0) {
+    this.animScrollTop = anime({
+      targets: 'body',
+      scrollTop: position,
+      easing: 'easeInOutSine',
+      duration: 1400,
+      complete: this.removeAnimation(this.animScrollTop),
+    });
+    this.animations.push(this.animScrollTop);
+  }
+
   // Changes to the cloud
   cloudScale() {
     this.animScale = anime({
@@ -167,7 +180,7 @@ export default class Animations extends TransitionUtilities {
       duration: 1000,
       complete: function () {
         this.$clone.removeClass('invisible');
-        this.$cloudLink.html(newLink); // MOVE TO PROPER PLACE
+        this.$cloudLink.html(newLink);
         this.cloudTextVisible();
         this.removeAnimation(this.animHideChange);
       }.bind(this),

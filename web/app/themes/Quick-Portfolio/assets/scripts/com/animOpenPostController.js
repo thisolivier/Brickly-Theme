@@ -34,7 +34,7 @@ export default class PageTransitions extends Animations {
     this.destroyContent(eventInfo);
     this.resetAndPrime($('article'), 'transitions', 0, 0);
     this.cloudRetract();
-    this.implodeBricks();
+    this.implodeBricks(eventInfo);
   }
 
   grabContent(eventInfo) {
@@ -44,7 +44,6 @@ export default class PageTransitions extends Animations {
   }
 
   injectContent() {
-    $('html, body').animate({ scrollTop: 0 }, 1000);
     this.$main.css('z-index', 50);
     this.$clone.removeAttr('style').attr('id', 'loadedPage')
       .find('header').first()
@@ -55,8 +54,8 @@ export default class PageTransitions extends Animations {
     $('body').addClass('post-open');
   }
 
-  destroyContent(eventInfo) {
-    $('html, body').animate({ scrollTop: eventInfo.scrollTop }, 500);
+  destroyContent() {
+    // $('html, body').animate({ scrollTop: eventInfo.scrollTop }, 500);
     // this.$cloudLink[0].removeEventListener('click', this.handle);
     this.$clone.detach();
     this.cloneCheck = true;
