@@ -2,7 +2,7 @@ footer.content-info{
   z-index: 500;
   position: relative;
   background-color: $brand-secondary;
-  padding: 5em $footer-padding 4em $footer-padding*3;
+  padding: 5em $footer-padding*3;
 
   @include medium{
     padding: 4em 4em;
@@ -64,7 +64,6 @@ footer.content-info{
       padding: 1em $footer-padding;
       &:first-child {
         flex: 1 1 28em;
-        padding-left: 4em;
       }
     }
     & ~ .widget {

@@ -1,84 +1,77 @@
 p a{
   display: inline-block;
-  border-radius: 0.3em;
-  text-decoration: none;
   padding: 0 0.2em;
-  transition: all 0.3s;
-  color: $brand-primary;
+  text-decoration: none;
+  line-height: 1.3em;
+  color: inherit;
   border-width: 0.1em;
   border-style: solid;
   border-color: $brand-primary;
-  line-height: 1.3em;
+  border-radius: $btn-border-radius;
+  transition: all 0.3s;
 
   &:hover, &:visited:hover{
     border-color: darken($brand-primary,35%);
-    color: $brand-primary;
+    color: inherit;
     text-decoration: none;
   }
 }
 
-.post-sidebar{
-  .ssba img{
-    width: 2rem !important;
-    display: inline !important;
-    margin: 0.2em;
-    color: $brand-primary;
-    border: 0;
-    box-shadow: none;
-    vertical-align: middle;
-    border-radius: 0em 0.5em 0.5em 0;
-    @include medium{
-      border-radius: 0em 0em 0.5rem 0.5rem;
-    };
-  }
 
-  .tags {
-    display: block;
-    float:right;
-    clear:both;
-    margin: 1em 0 0 10%;
-    @include medium{
-      display: inline-block;
-      text-align: center;
-      width:100%;
-      margin: 1em 0.3em;
-    };
-    .btn{
-      @include medium{
-        display: inline-block;
-        margin: 0.25em;
-        font-size: 1em;
-        border-radius: 0.4em;
-        padding:0.1em 0.2em;
-      }
-    }
-  }
+.ssba img{
+  width: 2rem !important;
+  display: inline !important;
+  margin: 0.2em;
+  color: $brand-primary;
+  border: 0;
+  box-shadow: none;
+  vertical-align: middle;
+  border-radius: 0em 0.5em 0.5em 0;
+  @include medium{
+    border-radius: 0em 0em 0.5rem 0.5rem;
+  };
 }
 
-article header{
-  .tags {
+
+.tags {
+  display: block;
+  float:right;
+  clear:both;
+  margin: 1em 0 0 10%;
+  article header &{
     line-height: 1.6em;
     height: 3.5em;
     overflow-y: hidden;
     position: relative;
-    a {
-      font-size: 0.9em;
+  }
+  @include tiny{ font-size: 0.8em; }
+  @include medium{
+    display: inline-block;
+    text-align: center;
+    width:100%;
+    margin: 1em 0.3em;
+  };
+  @include large{ font-size: 0.95em; }
+  @include huge{ font-size: 1em; }
+  .btn{
+    @include medium{
+      display: inline-block;
+      margin: 0.25em;
+      font-size: 1em;
+      border-radius: 0.4em;
+      padding:0.1em 0.2em;
     }
-    @include tiny{ font-size: 0.8em; }
-    @include large{ font-size: 0.95em; }
-    @include huge{ font-size: 1em; }
   }
 }
 
-.footer-container{
-  div.wpforms-container-full .wpforms-form button{
-    border-radius: 0.5em;
-    color: $brand-secondary;
-    background-color: $brand-primary;
-    font-family: $headings-font-family;
-    font-weight: 800;
-    font-size: 1.3em;
-    text-transform: uppercase;
-    border: 0;
-  }
+
+div.wpforms-container-full .wpforms-form button{
+  border-radius: 0.5em;
+  color: $brand-secondary;
+  background-color: $brand-primary;
+  font-family: $headings-font-family;
+  font-weight: 800;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  border: 0;
 }

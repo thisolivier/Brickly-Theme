@@ -39,6 +39,7 @@
       display:flex;
       position:relative;
       flex: 1 0 13em;
+      order: 2;
       align-self: center;
       flex-direction: column;
       justify-content: center;
@@ -51,7 +52,6 @@
         margin-top: 0;
         margin-left: 0;
         padding: 0 $footer-padding 0 0;
-        background-color: $brand-primary;
       }
 
       h3{
@@ -67,6 +67,15 @@
         font-weight: $headings-font-weight;
         font-family: $headings-font-family;
         text-transform: uppercase;
+      }
+
+      .menu{
+        list-style: none;
+        padding-start: 0;
+        -webkit-padding-start: 0;
+        .menu-item{
+          background-color: $brand-secondary;
+        }
       }
 
       .widget{
