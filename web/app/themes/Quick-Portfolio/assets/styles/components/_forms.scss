@@ -1,9 +1,10 @@
+.wpforms-required-label{
+  display: none;
+}
+
 .widget-content{
   form.wpforms-form{
     color: $brand-primary;
-    .wpforms-required-label{
-      display: none;
-    }
     .wpforms-field{
       padding: 0;
       label{

@@ -1,0 +1,95 @@
+.post-open, .single, .archive{
+
+  footer.content-info{
+    padding: 0;
+    margin-top: 4em;
+    .home{
+      display:block;
+      position: absolute;
+      top: -3em;
+      left: 15vw;
+      height: 3em;
+      img{
+       height: 100%;
+       width: auto;
+      }
+    }
+  }
+
+  .footer-container{
+    @extend .wrap;
+    position: inherit;
+    padding-bottom: $footer-padding;
+    background-color: $brand-primary;
+
+    .widget:not(.column) {
+      color: $brand-secondary;
+      max-width: none;
+      order: 1;
+      align-self: center;
+      &:first-child {
+        padding-top: 4em;
+      }
+    }
+    .wpforms-widget {
+      display:none;
+    }
+
+    .sidebar-wrapper {
+      display:flex;
+      position:relative;
+      flex: 1 0 13em;
+      align-self: center;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 2em;
+      padding-right: 1em;
+
+      @include small{
+        flex: 1 1 100%;
+        margin-top: 0;
+        margin-left: 0;
+        padding: 0 $footer-padding 0 0;
+        background-color: $brand-primary;
+      }
+
+      h3{
+        margin-bottom: 0.6em;
+        @include small{
+          padding-bottom: 0.5rem;
+          margin-bottom: 0;
+        }
+      }
+
+      a {
+        color: $brand-primary;
+        font-weight: $headings-font-weight;
+        font-family: $headings-font-family;
+        text-transform: uppercase;
+      }
+
+      .widget{
+        display: block;
+        max-width: 100%;
+        padding: 1em;
+        flex: 0 0 10em;
+        align-self: center;
+        text-align: center;
+        color: inherit;
+
+        @include small{
+          order: 2;
+          align-self: flex-start;
+          text-align: left;
+          padding:0;
+          margin-bottom: 2em;
+        }
+
+        .widget-content{
+          display: none;
+        }
+      }
+    } // .sidebar-wrapper
+  } // .footer-container
+}
