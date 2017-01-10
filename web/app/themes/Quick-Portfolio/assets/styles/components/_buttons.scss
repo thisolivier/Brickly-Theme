@@ -44,25 +44,30 @@ p a{
   float:right;
   clear:both;
   margin: 1em 0 0 10%;
+  .btn{
+    font-size: 1em;
+  }
   article header &{
     pointer-events: none;
   }
-  @include tiny{ font-size: 0.8em; }
-  @include medium{
-    display: inline-block;
-    text-align: center;
-    width:100%;
-    margin: 1em 0.3em;
-  };
-  @include large{ font-size: 0.95em; }
-  @include huge{ font-size: 1em; }
-  .btn{
+  .post-meta &{
+    @include tiny{ font-size: 0.8em; }
     @include medium{
       display: inline-block;
-      margin: 0.25em;
-      font-size: 1em;
-      border-radius: 0.4em;
-      padding:0.1em 0.2em;
+      text-align: center;
+      width:100%;
+      margin: 1em 0.3em;
+    };
+    @include large{ font-size: 0.95em; }
+    @include huge{ font-size: 1em; }
+    .btn{
+      @include medium{
+        display: inline-block;
+        margin: 0.25em;
+        font-size: 1em;
+        border-radius: 0.4em;
+        padding:0.1em 0.2em;
+      }
     }
   }
 }
