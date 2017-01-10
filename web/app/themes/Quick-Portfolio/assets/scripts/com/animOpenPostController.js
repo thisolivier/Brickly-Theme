@@ -26,7 +26,7 @@ export default class PageTransitions extends Animations {
     this.explodeBricks(eventInfo);
     this.injectContent();
     this.addClickListeners(this.$clone);
-    this.addClickListeners(this.$closePost, this.handleClose);
+    this.addClickListeners(this.$closePost, 'close', eventInfo);
   }
 
   closePost(eventInfo) {

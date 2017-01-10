@@ -29,9 +29,15 @@ export default class TransitionUtilities {
     this.animate(); // Begins animation engine - implaments queue.
   }
 
-  addClickListeners(toBind, bindFunc = this.handleEvent) {
-    const handleEvent = bindFunc;
-    this.handle = e => handleEvent.call(this, e);
+  addClickListeners(toBind, whatToBind = 'open') {
+    if (whatToBind === 'open') {
+      this.handle = e => this.handleEvent.call(this, e);
+    } else if (whatToBind === 'close') {
+      this.handle = function (e) {
+        e.preventDefault();
+        window.history.back();
+      };
+    }
     const bind = (i, x) => {
       x.addEventListener('touchstart', this.handle);
       x.addEventListener('click', this.handle);
