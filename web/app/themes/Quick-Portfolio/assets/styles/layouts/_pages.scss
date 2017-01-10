@@ -42,9 +42,6 @@
       overflow-y: scroll;
     }
     @include medium {
-      flex: 0 0 relate($chim-percent, 120);
-    }
-    @include small {
       flex: 0 0 80%;
     }
 
@@ -88,17 +85,11 @@
     z-index:100;
 
     @include medium {
-      height: relate($chim-percent, $brick-height*1.2);
-    }
-    @include small {
       height: relate($chim-percent, $brick-height*1.6);
       border-radius: 1.7vw;
     }
     @include tiny {
       height: relate($chim-percent, $brick-height*2);
-    }
-    @include large {
-      font-size: 1.3em;
     }
 
     &.small_brick{
@@ -135,11 +126,11 @@
       display:flex;
       flex-flow: column nowrap;
       justify-content: space-around;
-      @include tiny{ font-size: 0.7em; }
+      @include medium{ font-size: 1.1em; }
       @include small{ font-size: 0.8em; }
-      @include medium{ font-size: 0.85em; }
-      @include large{ font-size: 0.7em; }
-      @include huge { font-size: 1em; }
+      @include tiny{ font-size: 0.7em; }
+      @include large{ font-size: 1.1em; }
+      @include huge { font-size: 1.2em; }
 
       h2{
         font-size: 1.7em;
@@ -164,8 +155,8 @@
           margin:0;
           padding:0;
           height: 100%;
-          column-width: 10em;
-          webkit-column-width: 10em;
+          column-width: 20em;
+          webkit-column-width: 20em;
           position: absolute;
         }
       }
