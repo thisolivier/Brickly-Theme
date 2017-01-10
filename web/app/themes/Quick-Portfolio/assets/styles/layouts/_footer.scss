@@ -49,7 +49,7 @@ footer.content-info{
   }
 
   .widget {
-    flex: 1 1 50%;
+    flex: 1 0 300px;
     order:1;
     color: $brand-primary;
     a{
@@ -67,6 +67,7 @@ footer.content-info{
     }
 
     &.wpforms-widget{
+      padding-left: 2%;
       @include large{
         padding: 0 5%;
       }
