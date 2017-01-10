@@ -30,7 +30,7 @@ export default class BackgroundLanscape {
     const clientHeight = window.innerHeight;
     const totalHeight = this.heightDefined.height();
     const scrollTop = $(window).scrollTop();
-    const heightOffset = totalHeight - clientHeight;
+    const heightOffset = totalHeight - (clientHeight / 2);
     const scrollPercent = scrollTop / heightOffset;
 
     if (heightOffset - scrollTop >= 0) {
