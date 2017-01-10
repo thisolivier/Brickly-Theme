@@ -28,6 +28,9 @@
       align-self: center;
       &:first-child {
         padding-top: 4em;
+        @include large{
+          padding-left: 4em;
+        };
       }
     }
     .wpforms-widget {
