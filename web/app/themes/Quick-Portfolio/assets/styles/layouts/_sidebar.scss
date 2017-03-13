@@ -77,7 +77,7 @@
         margin-right:0;
       }
 
-    h3:not(.postLink), a{
+    h3:not(.postLink), a:not(.ssbp-btn){
       margin:0;
       font-family: $headings-font-family;
       font-size: inherit;
