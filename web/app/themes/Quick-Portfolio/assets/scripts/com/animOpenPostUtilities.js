@@ -13,6 +13,7 @@ export default class TransitionUtilities {
     this.originalTitle = $(document).find('title').text();
     this.color = { current: 'white', next: 'black' };
     this.cloneCheck = true;
+    this.resizeTimer = 0;
     this.c = document.getElementById('backgroundPost');
     this.cxt = this.c.getContext('2d');
     this.cH = 0;
@@ -24,7 +25,7 @@ export default class TransitionUtilities {
   init() {
     this.resizeCanvas();
     this.addMethods(); // Adds methods on bricks and circles to be called when animating
-    window.addEventListener('resize', this.resizeCanvas);
+    window.addEventListener('resize', this.resizeCanvas.bind(this));
     this.addClickListeners(this.$toBind); // Adds triggers - animations will add to queue.
     this.animate(); // Begins animation engine - implaments queue.
   }
@@ -97,10 +98,13 @@ export default class TransitionUtilities {
   }
 
   resizeCanvas() {
-    this.cW = window.innerWidth;
-    this.cH = window.innerHeight;
-    $(this.c).attr('width', `${this.cW * window.devicePixelRatio}px`);
-    $(this.c).attr('height', `${this.cH * window.devicePixelRatio}px`);
+    clearTimeout(this.resizeTimer);
+    this.resizeTimer = setTimeout(() => {
+      this.cW = window.innerWidth;
+      this.cH = window.innerHeight;
+      $(this.c).attr('width', `${this.cW * window.devicePixelRatio}px`);
+      $(this.c).attr('height', `${this.cH * window.devicePixelRatio}px`);
+    }, 250);
   }
 
   Circle(opts) {

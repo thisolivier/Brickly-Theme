@@ -79,7 +79,7 @@ export default class Animations extends TransitionUtilities {
     });
     this.animBg = anime({
       targets: this.pageFill,
-      r: eventInfo.targetR,
+      r: eventInfo.targetR * 1.5,
       duration: Math.max(eventInfo.targetR / 2, eventInfo.minCoverDuration),
       easing: 'easeInCubic',
     });

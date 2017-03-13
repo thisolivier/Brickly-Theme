@@ -37,18 +37,22 @@
 }
 
 // Animations of eyesAfter and eyesAfterHover
+$pupil-size: 0.7;
 @mixin eye($side){
     $opside: if($side=='left', 'right', 'left');
+    content: '\25CF';
     display: block;
     position: absolute;
+    font-size: #{$pupil-size}em;
     #{$side}: 0.5em;
     top: 50%;
-    margin-top: -0.5em;
-    content: '\25CF';
-    width:1em;
-    height:1em;
-    color: black;
-    background-color: white;
+    margin-top: -0.72em;
+    width: #{1/$pupil-size}em;
+    height: #{1/$pupil-size}em;
+    max-height: #{1/$pupil-size}em;
+    line-height: #{$pupil-size * 2}em;
+    color: $black;
+    background-color: $white;
     border-radius: 1000px;
     border-color: black;
     border-style: solid;
@@ -56,6 +60,7 @@
     overflow: hidden;
     text-align: #{$opside};
     transform: rotate(180deg);
+    box-sizing: border-box;
   }
   @mixin eyeHover{
     animation-name: blink;
@@ -70,13 +75,13 @@
       border-width: 0 0 0 0;
     }
     10% {
-      border-width: 0 0 0.8em 0;
+      border-width: 0 0 #{0.8/$pupil-size}em 0;
     }
     15% {
-      border-width: 0 0 1em 0;
+      border-width: 0 0 #{1/$pupil-size}em 0;
     }
     25% {
-      border-width: 0 0 1em 0;
+      border-width: 0 0 #{1/$pupil-size}em 0;
     }
     40% {
       border-width: 0 0 0 0;
@@ -85,13 +90,13 @@
       border-width: 0 0 0 0;
     }
     50% {
-      border-width: 0 0 0.8em 0;
+      border-width: 0 0 #{0.8/$pupil-size}em 0;
     }
     65% {
-      border-width: 0 0 1em 0;
+      border-width: 0 0 #{1/$pupil-size}em 0;
     }
     90% {
-      border-width: 0 0 1em 0;
+      border-width: 0 0 #{0.8/$pupil-size}em 0;
     }
     100% {
       border-width: 0 0 0 0;
