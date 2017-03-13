@@ -55,7 +55,8 @@
     "wpackagist-plugin/wpforms-lite": "^1.3.0",
     "wpackagist-plugin/slate-admin-theme": "^1.1.6",
     "thisolivier/simple-share-buttons-plus": "dev-master",
-    "wpackagist-plugin/wpclef": "^2.6"
+    "wpackagist-plugin/authy-two-factor-authentication": "^3.0",
+    "wpackagist-plugin/backwpup": "^3.3"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
