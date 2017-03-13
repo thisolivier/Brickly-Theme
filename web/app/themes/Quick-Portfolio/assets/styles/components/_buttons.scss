@@ -39,6 +39,14 @@ p a{
   background-color: $brand-secondary;
 }
 
+.ssbp--theme-4 .ssbp-list li, .ssbp-wrap .ssbp-list li:first-of-type{
+  margin-left: 4px;
+}
+
+.ssbp-list{
+  padding-right: 4px;
+}
+
 .tags {
   display: block;
   float:right;
@@ -46,6 +54,9 @@ p a{
   margin: 1em 0 0 10%;
   .btn{
     font-size: 1em;
+  }
+  .post-sidebar &{
+    line-height: 1.7;
   }
   article header &{
     pointer-events: none;
