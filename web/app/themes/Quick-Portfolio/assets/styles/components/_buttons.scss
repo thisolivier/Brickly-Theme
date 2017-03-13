@@ -60,7 +60,7 @@ p a{
   article header &{
     pointer-events: none;
   }
-  .post-meta &{
+  .post-sidebar &{
     @include tiny{ font-size: 0.8em; }
     @include medium{
       display: inline-block;
@@ -68,6 +68,7 @@ p a{
       text-align: center;
       width:100%;
       margin: 1em 0.3em;
+
     };
     @include large{ font-size: 0.95em; }
     @include huge{ font-size: 1em; }
