@@ -4,7 +4,7 @@ import Logger from '../util/logger';
 export default class TransitionUtilities {
   /* eslint no-param-reassign: "warn", class-methods-use-this: "warn" */
   constructor() {
-    this.$toBind = $('.magicLink');
+    this.$toBind = $('.big_brick.post');
     this.$cloud = $('#theCloud');
     this.$cloudLink = $('#cloudLink');
     this.$closePost = $('.closePost');

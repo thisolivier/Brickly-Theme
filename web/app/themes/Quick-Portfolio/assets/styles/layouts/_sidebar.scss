@@ -91,10 +91,10 @@
     &.repo{
       background-color: $link-2;
     }
-    &.widget:nth-child(4){
+    &.widget:nth-last-child(3){
       background-color: $link-3;
     }
-    &.widget:nth-child(5){
+    &.widget:nth-last-child(2){
       background-color: $link-4;
     }
 
