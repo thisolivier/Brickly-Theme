@@ -1,0 +1,31 @@
+{
+  "name": "bickly-wordpress-theme",
+  "version": "1.0.0",
+  "description": "Shooting shit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thisolivier/JS-React-Doodles.git"
+  },
+  "author": "Olivier Butler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thisolivier/JS-React-Doodles/issues"
+  },
+  "homepage": "https://github.com/thisolivier/JS-React-Doodles#readme",
+  "dependencies": {
+    "create-react-app": "^2.0.2"
+  },
+  "main": "entryPoint.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wordpress",
+    "theme",
+    "react",
+    "headless",
+    "javascript",
+    "spa"
+  ]
+}
