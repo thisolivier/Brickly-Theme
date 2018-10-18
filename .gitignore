@@ -1,0 +1,7 @@
+node_modules/*
+react_app_built/*
+node_modules
+react_app_built
+
+.DS_Store
+.Trashes
