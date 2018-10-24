@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Background from './coBackground';
+import Footer from './coFooter';
+import HeaderCloud from './coHeaderCloud';
+import TowerOfBricks from './coTowerOfBricks';
+import Post from './coPost'
+import Page from './coPage'
+
 
 class App extends Component {
 
@@ -9,7 +15,7 @@ class App extends Component {
     //     this.setState({
     //         dataPayload: "Beans"
     //     })
-    //     let dataURL = "http://olivier.test/wp-json/wp/v2/posts";
+    //     let dataURL = WORDPRESS.url.api + "/posts";
     //     fetch(dataURL)
     //     .then(res => res.json())
     //     .then(res => {
@@ -22,13 +28,16 @@ class App extends Component {
     render() {
         return(
             <div id="page-inner">
-                <h1>Boo</h1>
-                <div id="content">
-                    I love WordPress
-                </div>
+                <HeaderCloud />
                 <div>
-                    <Route path="/" component={Background} />
+                    <Switch>
+                        <Route path="/pages/:page" component={Page} />
+                        <Route path="/posts/:id" component={Post} />
+                        <Route path="/" component={TowerOfBricks} />
+                    </Switch>
                 </div>
+                <Footer />
+                <Background />
             </div>
         )
     }
