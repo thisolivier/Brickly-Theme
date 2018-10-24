@@ -52,12 +52,9 @@ class Console extends Component {
 
 }
 
-
-// React Router
-
 render(
     <BrowserRouter>
       <App />
     </BrowserRouter>,
-    el
+    document.getElementById('page')
 );
