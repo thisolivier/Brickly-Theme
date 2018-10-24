@@ -31,8 +31,8 @@ class App extends Component {
                 <HeaderCloud />
                 <div>
                     <Switch>
-                        <Route path="/pages/:page" component={Page} />
-                        <Route path="/posts/:id" component={Post} />
+                        <Route path="/page/:pageTitle" component={Page} />
+                        <Route path="/post/:id" component={Post} />
                         <Route path="/" component={TowerOfBricks} />
                     </Switch>
                 </div>
