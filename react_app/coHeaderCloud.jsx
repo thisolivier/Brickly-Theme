@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Route from 'react-router-dom';
+
 
 const HeaderCloud = () => (
 
@@ -16,7 +17,7 @@ const HeaderCloud = () => (
             <div class="ball medium">&nbsp;</div>
             </div>
         </div>
-        <Route path="/" component={} />
+        <Route path="/" component={GenericSidebar} />
     </header>
     
 );
