@@ -55,18 +55,9 @@ class Console extends Component {
 
 // React Router
 
-const routes = (
-
-   <BrowserRouter>
-
-       <Route path="/" component={App} />
-
-   </BrowserRouter>
-
-);
-
-render( // Replaces DOM #page element with the root React component
-
-   (routes), document.getElementById('page') // rendering the route
-
+render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+    el
 );
