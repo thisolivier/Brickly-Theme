@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Background from './coBackground';
 
 class App extends Component {
 
@@ -19,12 +20,14 @@ class App extends Component {
     // }
 
     render() {
-
         return(
             <div id="page-inner">
                 <h1>Boo</h1>
                 <div id="content">
-                I love WordPress
+                    I love WordPress
+                </div>
+                <div>
+                    <Route path="/" component={Background} />
                 </div>
             </div>
         )
