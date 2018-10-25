@@ -60,6 +60,8 @@ function submitForm( $data ) {
     add_post_meta($id, '_from', "{$first_name} {$last_name}", true);
     add_post_meta($id, '_from_email', $email, true);
     add_post_meta($id, '_subject', $message, false);
+
+    // You should send a response!
   }
 
 add_action( 'rest_api_init', function () {
