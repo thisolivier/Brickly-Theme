@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import GenericSidebar from './coGenericSidebar';
+import GenericSidebar from './GenericSidebar';
 
 
 const HeaderCloud = () => (
