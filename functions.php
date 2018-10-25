@@ -35,8 +35,28 @@ function empty_theme_scripts() {
             'name' => get_post_meta(98, 'name', true),
             'telephone' => get_post_meta(98, 'telephone', true),
             'email' => get_post_meta(98, 'email', true),
+
         ),
         'category' => array_map("extractCategoryInfo", $categories)
     ) ) ) );
 }
 add_action( 'wp_enqueue_scripts', 'empty_theme_scripts' );
+
+function submitForm( $data ) {
+    $form_post = array(
+        'post_title'    => 'Randomish Titleish',
+        'post_content'  => 'Client IP:(Client IP:)',
+        'post_status'   => 'publish',
+        'post_author'   => 1,
+        'post_type' => 'post'
+    );
+      
+    $id = wp_insert_post( $form_post );
+  }
+
+add_action( 'rest_api_init', function () {
+  register_rest_route( 'brickly/v1', '/enquiry', array(
+    'methods' => 'GET',
+    'callback' => 'submitForm',
+  ) );
+} );
