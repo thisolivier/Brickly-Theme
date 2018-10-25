@@ -43,20 +43,28 @@ function empty_theme_scripts() {
 add_action( 'wp_enqueue_scripts', 'empty_theme_scripts' );
 
 function submitForm( $data ) {
+    $first_name = sanitize_text_field( trim( $data['first_name'] ) );
+    $last_name = sanitize_text_field( trim( $data['last_name'] ) );
+    $email = sanitize_email( trim( $data['email'] ) );
+    $message = sanitize_text_field( trim( $data['message'] ) );
+
     $form_post = array(
-        'post_title'    => 'Randomish Titleish',
-        'post_content'  => 'Client IP:(Client IP:)',
+        'post_title'    => "Enquiry form from {$first_name}",
+        'post_content'  => 'Hello this is the wordpress content field',
         'post_status'   => 'publish',
         'post_author'   => 1,
-        'post_type' => 'post'
+        'post_type' => 'flamingo_inbound'
     );
       
     $id = wp_insert_post( $form_post );
+    add_post_meta($id, '_from', "{$first_name} {$last_name}", true);
+    add_post_meta($id, '_from_email', $email, true);
+    add_post_meta($id, '_subject', $message, false);
   }
 
 add_action( 'rest_api_init', function () {
   register_rest_route( 'brickly/v1', '/enquiry', array(
-    'methods' => 'GET',
-    'callback' => 'submitForm',
+    'methods' => 'POST',
+    'callback' => 'submitForm'
   ) );
 } );
