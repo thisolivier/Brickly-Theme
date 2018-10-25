@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Background from './coBackground';
-import Footer from './coFooter';
-import HeaderCloud from './coHeaderCloud';
-import TowerOfBricks from './coTowerOfBricks';
-import Post from './coPost'
-import Page from './coPage'
+
+import Background from './components/Background';
+import Footer from './components/Footer';
+import HeaderCloud from './HeaderCloud';
+import TowerOfBricks from './components/TowerOfBricks';
+import Post from './components/Post'
+import Page from './components/Page'
 
 
 class App extends Component {
