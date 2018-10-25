@@ -5,17 +5,17 @@ import GenericSidebar from './GenericSidebar';
 
 const HeaderCloud = () => (
 
-    <header class="sitewide" title="Page Title">
+    <header className="sitewide" title="Page Title">
         <div id="theCloud">
-            <h1 class="brand">
+            <h1 className="brand">
                 <span id="cloudLink">
-                    {WORDPRESS.site_name}
+                    {WORDPRESS.site.name}
                 </span>
             </h1>
-            <div class="backgroundCloud" aria-hidden="true">
-            <div class="ball big">&nbsp;</div>
-            <div class="ball small">&nbsp;</div>
-            <div class="ball medium">&nbsp;</div>
+            <div className="backgroundCloud" aria-hidden="true">
+            <div className="ball big">&nbsp;</div>
+            <div className="ball small">&nbsp;</div>
+            <div className="ball medium">&nbsp;</div>
             </div>
         </div>
         <Route path="/" component={GenericSidebar} />

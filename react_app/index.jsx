@@ -16,7 +16,7 @@ class App extends Component {
     //     this.setState({
     //         dataPayload: "Beans"
     //     })
-    //     let dataURL = WORDPRESS.url.api + "/posts";
+    //     let dataURL = WORDPRESS.site.url.api + "/posts";
     //     fetch(dataURL)
     //     .then(res => res.json())
     //     .then(res => {
