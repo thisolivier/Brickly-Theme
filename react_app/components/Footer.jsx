@@ -12,7 +12,6 @@ class Footer extends Component {
             </div>
             <div className="content">
                 {WORDPRESS.author.content}
-                
             </div>
             <EnquiryForm />
         </footer>
