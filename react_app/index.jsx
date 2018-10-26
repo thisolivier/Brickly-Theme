@@ -10,6 +10,8 @@ import Post from './components/Post'
 import Page from './components/Page'
 import OutLinks from './components/OutLinks'
 
+require('./style.scss');
+
 
 class App extends Component {
 

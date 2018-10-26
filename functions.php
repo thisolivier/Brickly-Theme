@@ -10,11 +10,11 @@ function extractCategoryInfo($category) {
 
 function getMenuInfo($menuLocationString) {
     if ( is_string($menuLocationString) && ($locations = get_nav_menu_locations()) && isset($locations[$menuLocationString]) ) {
-        $menu = get_term( $locations[$theme_location], 'nav_menu' );
+        $menu = get_term( $locations[$menuLocationString], 'nav_menu' );
         $menu_items = array_map(function($menuItem){
             return array(
-                'destination' => $menu_item->url,
-                'title' => $menu_item->title
+                'destination' => $menuItem->url,
+                'title' => $menuItem->title
             );
         }, wp_get_nav_menu_items($menu->term_id));
     }
@@ -22,8 +22,8 @@ function getMenuInfo($menuLocationString) {
 
 function brickly_scriptsAndStyles() {
 	// Load our main stylesheet.
-	wp_enqueue_style( 'react-style', get_stylesheet_directory_uri() . '/dist/style.css');
-	wp_enqueue_style( 'empty-theme-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'react-style', get_stylesheet_directory_uri() . '/react_app_built/style.css');
+	wp_enqueue_style( 'wordpress-required-style', get_stylesheet_uri() );
 
     wp_enqueue_script( 'react-app', get_stylesheet_directory_uri() . '/react_app_built/app.js' , array(), '1.0', true );
 
@@ -31,7 +31,6 @@ function brickly_scriptsAndStyles() {
     $path = trailingslashit( parse_url( $url, PHP_URL_PATH ) );
     $authorPost = get_post(98);
     $categories = array_values(get_categories());
-    $outLinks = getMenuInfo();
 
     wp_scripts()->add_data( 'react-app', 'data', sprintf( 'var WORDPRESS = %s;', wp_json_encode( array(
         'site' => array(
@@ -48,9 +47,9 @@ function brickly_scriptsAndStyles() {
             'name' => get_post_meta(98, 'name', true),
             'telephone' => get_post_meta(98, 'telephone', true),
             'email' => get_post_meta(98, 'email', true),
-
         ),
-        'category' => array_map("extractCategoryInfo", $categories)
+        'category' => array_map("extractCategoryInfo", $categories),
+        'outlinks' => getMenuInfo('outlinks'),
     ) ) ) );
 }
 add_action( 'wp_enqueue_scripts', 'brickly_scriptsAndStyles' );
@@ -84,6 +83,18 @@ add_action( 'rest_api_init', function () {
   ) );
 } );
 
+add_theme_support( 'menus' );
+
 add_action( 'init', function () {
-    register_nav_menu('outlinks', __('Links to other sites'));
+    register_nav_menu('outlinks', 'Links to other sites');
 } );
+
+// REMOVE WP EMOJI
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
+// REMOVE oEmbed
+remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+add_filter( 'tiny_mce_plugins', 'disable_embeds_tiny_mce_plugin' );

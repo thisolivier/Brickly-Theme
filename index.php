@@ -14,14 +14,9 @@
         <title>Celestial</title>
         <?php wp_head(); ?>
     </head>
-    <body <?php body_class(); ?>>
-        <div id="page" class="hfeed site">
-            <div id="content">
-                <div class="loader-gif">
-                    <img src="<?php echo home_url() ?>/wp-content/themes/celestial/dist/images/loading-icon.gif" alt="Loader">
-                </div>
-            </div>
+    <body>
+        <div id="page">
             <?php wp_footer(); ?>
-        </div>			
+        </div>
     </body>
 </html>
