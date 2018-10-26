@@ -6,9 +6,9 @@ import Background from './components/Background';
 import Footer from './components/Footer';
 import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
+import GenericSidebar from './components/GenericSidebar'
 import Post from './components/Post'
 import Page from './components/Page'
-import OutLinks from './components/OutLinks'
 
 require('./style.scss');
 
@@ -33,7 +33,7 @@ class App extends Component {
         return(
             <div id="page-inner">
                 <HeaderCloud />
-                <OutLinks />
+                <Route path="/" componet={GenericSidebar} />
                 <div>
                     <Switch>
                         <Route path="/page/:pageTitle" component={Page} />

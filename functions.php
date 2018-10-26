@@ -11,13 +11,16 @@ function extractCategoryInfo($category) {
 function getMenuInfo($menuLocationString) {
     if ( is_string($menuLocationString) && ($locations = get_nav_menu_locations()) && isset($locations[$menuLocationString]) ) {
         $menu = get_term( $locations[$menuLocationString], 'nav_menu' );
-        $menu_items = array_map(function($menuItem){
-            return array(
-                'destination' => $menuItem->url,
-                'title' => $menuItem->title
-            );
-        }, wp_get_nav_menu_items($menu->term_id));
+        return(
+            array_map(function($menuItem){
+                return array(
+                    'destination' => $menuItem->url,
+                    'title' => $menuItem->title
+                );
+            }, wp_get_nav_menu_items($menu->term_id))
+        );
     }
+    return array();
 }
 
 function brickly_scriptsAndStyles() {
@@ -48,7 +51,7 @@ function brickly_scriptsAndStyles() {
             'telephone' => get_post_meta(98, 'telephone', true),
             'email' => get_post_meta(98, 'email', true),
         ),
-        'category' => array_map("extractCategoryInfo", $categories),
+        'category' => array_map('extractCategoryInfo', $categories),
         'outlinks' => getMenuInfo('outlinks'),
     ) ) ) );
 }

@@ -1,7 +1,9 @@
 import React from 'react';
 
-const OutLinks = (links) => (
-    <a href="">Link here</a>
+const OutLinks = () => (
+    <div className="outlinks">
+        {WORDPRESS.outlinks.map((link, index) => <a href={link.destination} key={index}>{link.title} </a>)}
+    </div>
 );
 
 export default OutLinks
