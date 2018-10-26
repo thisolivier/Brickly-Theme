@@ -15,20 +15,6 @@ require('./style.scss');
 
 class App extends Component {
 
-    // componentDidMount() {
-    //     this.setState({
-    //         dataPayload: "Beans"
-    //     })
-    //     let dataURL = WORDPRESS.site.url.api + "/posts";
-    //     fetch(dataURL)
-    //     .then(res => res.json())
-    //     .then(res => {
-    //         this.setState({
-    //             dataPayload: res
-    //         })
-    //     })
-    // }
-
     render() {
         return(
             <div id="page-inner">
