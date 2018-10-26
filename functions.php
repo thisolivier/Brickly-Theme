@@ -8,7 +8,19 @@ function extractCategoryInfo($category) {
     );
 }
 
-function empty_theme_scripts() {
+function getMenuInfo($menuLocationString) {
+    if ( is_string($menuLocationString) && ($locations = get_nav_menu_locations()) && isset($locations[$menuLocationString]) ) {
+        $menu = get_term( $locations[$theme_location], 'nav_menu' );
+        $menu_items = array_map(function($menuItem){
+            return array(
+                'destination' => $menu_item->url,
+                'title' => $menu_item->title
+            );
+        }, wp_get_nav_menu_items($menu->term_id));
+    }
+}
+
+function brickly_scriptsAndStyles() {
 	// Load our main stylesheet.
 	wp_enqueue_style( 'react-style', get_stylesheet_directory_uri() . '/dist/style.css');
 	wp_enqueue_style( 'empty-theme-style', get_stylesheet_uri() );
@@ -19,6 +31,7 @@ function empty_theme_scripts() {
     $path = trailingslashit( parse_url( $url, PHP_URL_PATH ) );
     $authorPost = get_post(98);
     $categories = array_values(get_categories());
+    $outLinks = getMenuInfo();
 
     wp_scripts()->add_data( 'react-app', 'data', sprintf( 'var WORDPRESS = %s;', wp_json_encode( array(
         'site' => array(
@@ -40,9 +53,9 @@ function empty_theme_scripts() {
         'category' => array_map("extractCategoryInfo", $categories)
     ) ) ) );
 }
-add_action( 'wp_enqueue_scripts', 'empty_theme_scripts' );
+add_action( 'wp_enqueue_scripts', 'brickly_scriptsAndStyles' );
 
-function submitForm( $data ) {
+function handleEnquiryFormSubmission( $data ) {
     $first_name = sanitize_text_field( trim( $data['first_name'] ) );
     $last_name = sanitize_text_field( trim( $data['last_name'] ) );
     $email = sanitize_email( trim( $data['email'] ) );
@@ -67,6 +80,10 @@ function submitForm( $data ) {
 add_action( 'rest_api_init', function () {
   register_rest_route( 'brickly/v1', '/enquiry', array(
     'methods' => 'POST',
-    'callback' => 'submitForm'
+    'callback' => 'handleEnquiryFormSubmission'
   ) );
+} );
+
+add_action( 'init', function () {
+    register_nav_menu('outlinks', __('Links to other sites'));
 } );

@@ -15,7 +15,6 @@ class EnquiryForm extends React.Component {
             body: data,
         });
         event.target.reset()
-
     }
 
     render() {

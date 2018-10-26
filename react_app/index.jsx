@@ -8,6 +8,7 @@ import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
 import Post from './components/Post'
 import Page from './components/Page'
+import OutLinks from './components/OutLinks'
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
         return(
             <div id="page-inner">
                 <HeaderCloud />
+                <OutLinks />
                 <div>
                     <Switch>
                         <Route path="/page/:pageTitle" component={Page} />
