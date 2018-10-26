@@ -8,7 +8,7 @@ import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
 import GenericSidebar from './components/GenericSidebar'
 import Post from './components/Post'
-import Page from './components/Page'
+import Category from './components/Category'
 
 require('./style.scss');
 
@@ -22,7 +22,7 @@ class App extends Component {
                 <Route path="/" componet={GenericSidebar} />
                 <div>
                     <Switch>
-                        <Route path="/page/:pageTitle" component={Page} />
+                        <Route path="/c/:pageTitle" component={Category} />
                         <Route path="/post/:id" component={Post} />
                         <Route path="/" component={TowerOfBricks} />
                     </Switch>

@@ -5,6 +5,7 @@ function extractCategoryInfo($category) {
         'description' => $category->description,
         'count' => $category->count,
         'id' => $category->term_id,
+        'slug' => $category->slug,
     );
 }
 
