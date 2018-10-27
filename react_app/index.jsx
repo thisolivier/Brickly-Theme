@@ -22,7 +22,7 @@ class App extends Component {
                 <Route path="/" componet={GenericSidebar} />
                 <div>
                     <Switch>
-                        <Route path="/c/:pageTitle" component={Category} />
+                        <Route path="/c/:categorySlug" component={Category} />
                         <Route path="/post/:id" component={Post} />
                         <Route path="/" component={TowerOfBricks} />
                     </Switch>
