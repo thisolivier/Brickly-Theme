@@ -28,4 +28,4 @@ For the animation framework, I think using the canvas is going to be the right c
 
 ## To Install
 
-Build the theme by installing Node 6+ on your machine, and running `$ npm install` in the theme directory. Author info can be added by making a page and setting the ID in the wordpress `functions.php`, wherethe data is injected.
+Build the theme by installing Node 6+ on your machine, and running `$ npm install` in the theme directory, then `$ npm run build` to build the theme/app into `./react_app_built`, or `$ npm run watch` to use Webpack to watch for changes. Author info can be added by making a page and setting the ID in the wordpress `functions.php`, wherethe data is injected.
