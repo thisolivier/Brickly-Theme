@@ -24,6 +24,31 @@ function getMenuInfo($menuLocationString) {
     return array();
 }
 
+function getPosts() {
+    global $post;
+    $args = array(
+        'posts_per_page' => 200, 
+        'post_type' => 'post',
+    );
+    $wordpressPosts = get_posts($args);
+    $formattedPosts = array();
+    foreach ( $wordpressPosts as $post ) : 
+        if ( ! empty($post) && is_a($post, 'WP_Post') ) {
+            $formattedPosts[(string) $post->ID] = array(
+                'title' => $post->post_title,
+                'byLine' => get_post_meta(get_the_ID(), 'intro', true),
+                'tags' => get_the_tags( '','','' ),
+                'repo' => get_post_meta(get_the_ID(), 'repo', true),
+                'liveSite' => get_post_meta(get_the_ID(), 'site', true),
+                'content' => $post->post_content,
+                'image' => wp_get_attachment_link(),
+                'date' => $post->post_date
+            );
+        }
+    endforeach;
+    return $formattedPosts;
+}
+
 function brickly_scriptsAndStyles() {
 	// Load our main stylesheet.
 	wp_enqueue_style( 'react-style', get_stylesheet_directory_uri() . '/react_app_built/style.css');
@@ -54,6 +79,7 @@ function brickly_scriptsAndStyles() {
         ),
         'category' => array_map('extractCategoryInfo', $categories),
         'outlinks' => getMenuInfo('outlinks'),
+        'posts' => getPosts(),
     ) ) ) );
 }
 add_action( 'wp_enqueue_scripts', 'brickly_scriptsAndStyles' );
