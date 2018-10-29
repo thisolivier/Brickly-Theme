@@ -4,11 +4,8 @@ import { stringify } from 'querystring';
 
 class Category extends React.Component {
 
-
     render(){
-        var currentCategory = WORDPRESS.category.find((thing)=>(
-            thing['slug'] == this.props.match.params['categorySlug'])
-        )
+        var currentCategory = WORDPRESS.category[this.props.match.params['categorySlug']]
         return (
             <div>
                 <h1>{currentCategory.name}</h1>

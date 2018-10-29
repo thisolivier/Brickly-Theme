@@ -6,9 +6,9 @@ class TowerOfBricks extends Component {
     render() {
         return(
             <div>
-                {WORDPRESS.category.map((nameDescriptionCountId, index) => 
+                {Object.keys(WORDPRESS.category).map((slug, index) => 
                 <div className="brick" key={index}>
-                    <h2><Link to={"/c/"+nameDescriptionCountId.slug}>{nameDescriptionCountId.name}</Link></h2>
+                    <h2><Link to={"/c/"+slug}>{WORDPRESS.category[slug].name}</Link></h2>
                 </div>
                 )}
             </div>

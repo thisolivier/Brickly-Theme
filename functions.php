@@ -2,15 +2,15 @@
 
 function getCategories() {
     $wordpressCategories = get_categories();
-    $formattedCategories = [];
-    array_walk($wordpressCategories, function(&$category, $key){
+    $formattedCategories = array();
+    foreach ($wordpressCategories as $category) {
         $formattedCategories[$category->slug] = array(
             'name' => $category->name,
             'description' => $category->description,
             'count' => $category->count,
             'id' => $category->term_id,
         );
-    });
+    };
     return $formattedCategories;
 }
 
