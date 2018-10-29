@@ -9,14 +9,10 @@ class Category extends React.Component {
         var currentCategory = WORDPRESS.category.find((thing)=>(
             thing['slug'] == this.props.match.params['categorySlug'])
         )
-        var message = ""
-        // for (property in currentCategory) {
-        //         message += String(property)
-        // }
         return (
             <div>
-                <h1>{message}</h1>
-                <p>{stringify(currentCategory)}</p>
+                <h1>{currentCategory.name}</h1>
+                <p>{currentCategory.description}</p>
             </div>
         )
     }
