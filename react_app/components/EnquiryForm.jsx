@@ -23,26 +23,26 @@ class EnquiryForm extends React.Component {
             <form className="enquiryForm" onSubmit={this.handleSubmit} noValidate>
                 <div>
                     <div>
-                        <label for="18-field_0">
+                        <label htmlFor="18-field_0">
                             Your Details
                         </label>
                         <div className="field-row">
                             <div className="row-block one-half">
                                 <input type="text" id="18-field_0" name="first_name" placeholder="First Name" required aria-required="true" />
-                                <label for="18-field_0" className="hide">First</label>
+                                <label htmlFor="18-field_0" className="hide">First</label>
                             </div>
                             <div className="row-block one-half">
                                 <input type="text" id="18-field_0-last" name="last_name" placeholder="Last Name" required aria-required="true" />
-                                <label for="18-field_0-last" className="hide">Last</label>
+                                <label htmlFor="18-field_0-last" className="hide">Last</label>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <label className="hide" for="18-field_1">E-mail</label>
+                        <label className="hide" htmlFor="18-field_1">E-mail</label>
                         <input type="email" id="18-field_1" name="email" placeholder="Email address" required aria-required="true"/>
                     </div>
                     <div>
-                        <label for="wpforms-18-field_2">Message</label>
+                        <label htmlFor="wpforms-18-field_2">Message</label>
                         <textarea id="wpforms-18-field_2" name="message" placeholder="Looking forward to hearing from you." required aria-required="true"></textarea>
                     </div>
                 </div>

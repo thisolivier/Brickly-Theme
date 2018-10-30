@@ -40,14 +40,15 @@ function getPosts() {
     $formattedPosts = array();
     foreach ( $wordpressPosts as $post ) : 
         if ( ! empty($post) && is_a($post, 'WP_Post') ) {
-            $ID = get_the_ID();
-            $formattedPosts[(string) $ID] = array(
+            $postId = get_the_ID();
+            $postTags = get_the_tags('', '', '');
+            $formattedPosts[(string) $postId] = array(
                 'title' => $post->post_title,
-                'byLine' => get_post_meta($ID, 'intro', true),
-                'tags' => get_the_tags('', '', ''),
-                'categories' => wp_get_post_categories($ID, ['slug']),
-                'repo' => get_post_meta($ID, 'repo', true),
-                'liveSite' => get_post_meta($ID, 'site', true),
+                'byLine' => get_post_meta($postId, 'intro', true),
+                'tags' => $postTags ? array_map(function($tag){ return $tag->name; }, $postTags) : [],
+                'categories' => array_values(wp_get_post_categories($postId, array('fields' => 'id=>slug'))),
+                'repo' => get_post_meta($postId, 'repo', true),
+                'liveSite' => get_post_meta($postId, 'site', true),
                 'content' => $post->post_content,
                 'image' => wp_get_attachment_link(),
                 'date' => $post->post_date

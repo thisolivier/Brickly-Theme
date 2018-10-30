@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
 import GenericSidebar from './components/GenericSidebar'
-import Post from './components/Post'
+import Post from './components/LegacyPost'
 import Category from './components/Category'
 
 require('./style.scss');
