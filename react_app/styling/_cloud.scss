@@ -41,15 +41,18 @@
   
       #cloudLink {
         display: block;
+        font-weight: 300;
         z-index: 30;
         color: black;
-        text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.2);
+        text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
         position: relative;
         top: -0.1em;
         left: -0.1em;
+        font-size: 1.5em;
+        margin-bottom: -0.4em;
         transition: top .5s, left .5s, text-shadow .5s;
         @include huge{
-          font-size: 1.32em;
+          font-size: 1.7em;
         };
         &:hover{
           top:0em;
