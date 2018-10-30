@@ -7,10 +7,9 @@ import Footer from './components/Footer';
 import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
 import GenericSidebar from './components/GenericSidebar'
-import Post from './components/LegacyPost'
 import Category from './components/Category'
 
-require('./style.scss');
+require('./index.scss');
 
 
 class App extends Component {
@@ -18,16 +17,17 @@ class App extends Component {
     render() {
         return(
             <div id="page-inner">
-                <HeaderCloud />
-                <Route path="/" componet={GenericSidebar} />
-                <div>
+                <div className="headerContainer">
+                    <HeaderCloud />
+                    <Route path="/" component={GenericSidebar} />
+                </div>
+                {/* <div>
                     <Switch>
                         <Route path="/c/:categorySlug" component={Category} />
-                        <Route path="/post/:id" component={Post} />
                         <Route path="/" component={TowerOfBricks} />
                     </Switch>
                 </div>
-                <Footer />
+                <Footer /> */}
                 <Background />
             </div>
         )
