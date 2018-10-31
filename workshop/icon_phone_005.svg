@@ -1,0 +1,13 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480.84 480.84">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>icon_phone_005</title>
+  <circle id="whiteBackgorund" class="cls-1" cx="240.42" cy="240.42" r="240.42"/>
+  <circle id="blackBackground" cx="239.41" cy="241.09" r="203.66"/>
+  <path id="whiteShape" class="cls-1" d="M383,139.72l-54.19-12.51a12.59,12.59,0,0,0-14.33,7.24l-25,58.36a12.47,12.47,0,0,0,3.6,14.59l31.58,25.85a193.13,193.13,0,0,1-92.34,92.34L206.48,294a12.49,12.49,0,0,0-14.59-3.6l-58.36,25a12.66,12.66,0,0,0-7.3,14.38L138.74,384a12.5,12.5,0,0,0,12.19,9.69c133.45,0,241.79-108.13,241.79-241.79A12.49,12.49,0,0,0,383,139.72Z" transform="translate(-9.1 -9.1)"/>
+</svg>
