@@ -9,8 +9,8 @@ class GenericSidebar extends Component {
             <div>
                 <div className="aboutOlivier">
                     <h2>{WORDPRESS.author.title}</h2>
-                    <span>{WORDPRESS.author.telephone}</span><span>{WORDPRESS.author.email}</span>
-                    <p>{WORDPRESS.author.content}</p>
+                    <p className="subheading"><span>{WORDPRESS.author.telephone}</span><span>{WORDPRESS.author.email}</span></p>
+                    {WORDPRESS.author.content}
                 </div>
                 <EnquiryForm />
                 <OutLinks />

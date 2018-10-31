@@ -13,6 +13,18 @@ html, body{
     display: none;
 }
 
+.h2 {
+    font-size: 1.75em;
+    font-weight: 700;
+}
+
+.subheading {
+    font-style: italic;
+    font-family: branding,Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 1.3em;
+}
+
 .xdebug-error{
   position:fixed;
   top:0;
