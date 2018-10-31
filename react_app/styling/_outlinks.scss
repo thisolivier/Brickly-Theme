@@ -1,0 +1,23 @@
+.outlinks {
+    a {
+        display: inline-block;
+        width: 2.5em;
+        height: 2.5em;
+        background-color: aquamarine;
+        margin-right: 0.7em;
+        background-size: cover;
+        color: transparent;
+        &#Github {
+            background: url(./graphics/icon_github_001.svg);
+        }
+        &#LinkedIn {
+            background: url(./graphics/icon_linkedin_001.svg);
+        }
+        &#Email {
+            background: url(./graphics/icon_email_001.svg);
+        }
+        &#Telephone {
+            background: url(./graphics/icon_phone_001.svg);
+        }
+    }
+}

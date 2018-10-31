@@ -9,11 +9,11 @@ class GenericSidebar extends Component {
             <div>
                 <div className="aboutOlivier">
                     <h2>{WORDPRESS.author.title}</h2>
-                    <p className="subheading"><span>{WORDPRESS.author.telephone}</span><span>{WORDPRESS.author.email}</span></p>
-                    {WORDPRESS.author.content}
-                </div>
-                <EnquiryForm />
-                <OutLinks />
+                    {WORDPRESS.author.content.split('/').map(string=>(
+                        <p>{string}</p>
+                    ))}
+                    <OutLinks />
+                </div>                
             </div>
         )
     }
