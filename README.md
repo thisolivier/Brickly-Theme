@@ -10,9 +10,11 @@ This is a Wordpress theme that does not rely on the Wordpress templating engine 
 4. You can now build and preview the theme. Run `$ npm run build` for a one-off, or `$ npm run watch` to track changes. If you go to your Wordpress site in a browser now, you should see a react app, your react app. Good luck!
 
 ## Where to start changing things
-Data is injected into the react app as specified in `./functions.php`. This file also tweaks Wordpress so redundant scripts aren't served, and opens up custom API endpoints.
-The `./react_app` directory contains all the pre-built files that make up the react app. Exactly how these files are processed is configured using webpack's `./webpack.config.js`
-You shouldn't need to touch `index.php`, but it's worth mentioning. It is the page Wordpress actually serves to a client visiting your site. For those unfamiliar with `PHP`, the file is parsed on the server every time someone requests it, and the server turns it into HTML (while injecting content from your database, for example). It is this initial page where your React app's script and css are linked to. Once the client receives them, the contents of the page is replaced with your app.
+Data is injected into the react app as specified in `./functions.php`. We also tell Wordpress we want to inject a CSS and JS file into any pages it serves- these files make up React app and are built when you run `$ npm run build`. This file also tweaks Wordpress so redundant scripts aren't served, and opens up custom API endpoints.
+
+The `./react_app` directory contains all the files that make up the react app before they are stiched together. Exactly how these files are processed is configured for seving using webpack's `./webpack.config.js`. To see the processed files, look in `./react_app_built`, but remeber that this directory is replaced every time you build, you should *never ever* need to edit stuff in it directly.
+
+You likely won't need to touch `index.php`, but it's worth mentioning. It is the page Wordpress actually serves to a client visiting your site. For those unfamiliar with `PHP`, the file is parsed on the server every time someone requests it, and the server turns it into HTML (while injecting content from your database, for example). It is this initial page where your React app's script and css are linked to, as we requested in `./functions.php`. Once the client receives them, the contents of the page is replaced with your app by React.
 
 
 ## ToDo
