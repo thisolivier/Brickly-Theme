@@ -1,4 +1,5 @@
-Olivier Empire 2 ToDo
+*Olivier Empire 2* 
+**ToDo**
 1. Implement dynamic routing/coorinator flow, see react-router (done)
     - [x] Implement MVP routing 
     - [x] Add links and check navigation between MVP
