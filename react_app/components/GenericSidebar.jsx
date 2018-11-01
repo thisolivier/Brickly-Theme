@@ -6,11 +6,11 @@ class GenericSidebar extends Component {
 
     render() {
         return(
-            <div class="sidebar">
+            <div className="sidebar">
                 <div className="aboutOlivier">
                     <h2>{WORDPRESS.author.title}</h2>
-                    {WORDPRESS.author.content.split('/').map(string=>(
-                        <p>{string}</p>
+                    {WORDPRESS.author.content.split('/').map((string, key)=>(
+                        <p key={key}>{string}</p>
                     ))}
                     <OutLinks />
                 </div>                

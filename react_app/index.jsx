@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -12,15 +12,28 @@ import Category from './components/Category'
 require('./index.scss');
 
 
-class App extends Component {
+class App extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+          settingUp: true,
+        }
+    }
+    
+    handleSetupComplete() {
+        this.setState({settingUp: false})
+    }
+
+    componentDidMount() {
+        setInterval(() => this.handleSetupComplete(), 1400);
+    }
 
     render() {
+        var pageClassName = this.state.settingUp ? 'intro' : 'home'
         return(
-            <div id="page-inner">
-                <div className="headerContainer">
-                    <HeaderCloud />
-                    <Route path="/" component={GenericSidebar} />
-                </div>
+            <div id="page-inner" className={pageClassName}>
+                <this.Header settingUp= {this.state.settingUp} />
                 {/* <div>
                     <Switch>
                         <Route path="/c/:categorySlug" component={Category} />
@@ -29,6 +42,25 @@ class App extends Component {
                 </div>
                 <Footer /> */}
                 <Background />
+            </div>
+        )
+    }
+
+    // Helper functions
+
+    Header(props) {
+        const showsSidebar = props.settingUp ? false : true
+        if (showsSidebar) {
+            return (
+                <div className="headerContainer">
+                    <HeaderCloud />
+                    <Route path="/" component={GenericSidebar} />
+                </div>
+            )
+        }
+        return (
+            <div className="headerContainer">
+                <HeaderCloud />
             </div>
         )
     }

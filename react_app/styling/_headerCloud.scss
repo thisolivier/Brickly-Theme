@@ -2,8 +2,9 @@
 
 .headerContainer {
     // Width is designed to collapse to full screen on iPhone SE
-    width: 25vw;
-    min-width: 320pt;
+    width: 50vw;
+    max-width: 400pt;
+    min-width: 250pt;
     position: absolute;
     display: flex;
     flex-direction: column;

@@ -39,12 +39,20 @@ module.exports = {
                ]
            },
            { test:
-               /\.(woff2?|svg)$/,
-               loader: 'url-loader?limit=10000&name=fonts/[name].[ext]'
-           },
-           {
-               test: /\.(ttf|eot)$/,
-               loader: 'file-loader?name=fonts/[name].[ext]'
+                /\.(woff2?|ttf|eot)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/',
+                        publicPath: 'fonts/'
+                    }
+                }]
+                
+            },
+           { test:
+               /\.svg$/,
+               loader: 'url-loader?limit=10000&name=images/[name].[ext]'
            }
        ]
    },

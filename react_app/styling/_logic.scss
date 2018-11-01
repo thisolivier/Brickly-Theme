@@ -1,6 +1,7 @@
 // This file should not refrence any variables directly
 
 // Pass a unitless base percentage, and what percentage of that you want.
+// Returns value in pixels
 @function relate ($base, $toFix) {
   @return ($toFix * $base * 0.01vw);
 }

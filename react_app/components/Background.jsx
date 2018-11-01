@@ -8,10 +8,10 @@ class Background extends Component {
         return(
             <div className="siteBackground">
                 <canvas id="backgroundPost" aria-hidden="true"></canvas>
-                <div className="backgroundLanscape hidden" aria-hidden="true">
+                {/* <div className="backgroundLanscape hidden" aria-hidden="true">
                     <img src="./sky-holding.png" alt="" className="sky"/>
                     <img src="/react_app_built/images/city-holding.gif" alt="" className="land"/>
-                </div>
+                </div> */}
             </div>
         )
     }

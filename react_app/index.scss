@@ -3,7 +3,11 @@
 @import "styling/variables";
 @import "styling/global";
 
+
 // React Components
-@import "styling/cloud";
-@import "styling/outlinks";
+
+// these relate to the cloud/sidebar
+// think of it as a header, always containing the cloud, and sometimes a sidebar
+@import "styling/headerCloud";
 @import "styling/sidebar";
+@import "styling/outlinks";
