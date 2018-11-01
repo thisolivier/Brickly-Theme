@@ -5,3 +5,5 @@ react_app_built
 
 .DS_Store
 .Trashes
+.log
+logs/*
