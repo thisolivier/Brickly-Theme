@@ -1,5 +1,21 @@
-*Olivier Empire 2* 
-**ToDo**
+# Olivier Empire 2
+
+## Premis
+This is a Wordpress theme that does not rely on the Wordpress templating engine for building pages. It serves a ReactJS app, allowing the designer to build truly flexible UI's. It can query the Wordpress RESTful API, or have Wordpress inject data when serving the app. 
+
+## Get Started
+1. Setup Wordpress (I recommend using [Trellis from Roots.io](https://roots.io/trellis/)), and [clone this repository](https://help.github.com/articles/cloning-a-repository/) into the themes directory.
+2. Install Node v6+ (I recommend using [NVM](https://github.com/creationix/nvm).
+3. Run `$ npm install` from inside the theme directory. This will make Node's package manager install the packages needed for you to get started.
+4. You can now build and preview the theme. Run `$ npm run build` for a one-off, or `$ npm run watch` to track changes. If you go to your Wordpress site in a browser now, you should see a react app, your react app. Good luck!
+
+## Where to start changing things
+Data is injected into the react app as specified in `./functions.php`. This file also tweaks Wordpress so redundant scripts aren't served, and opens up custom API endpoints.
+The `./react_app` directory contains all the pre-built files that make up the react app. Exactly how these files are processed is configured using webpack's `./webpack.config.js`
+You shouldn't need to touch `index.php`, but it's worth mentioning. It is the page Wordpress actually serves to a client visiting your site. For those unfamiliar with `PHP`, the file is parsed on the server every time someone requests it, and the server turns it into HTML (while injecting content from your database, for example). It is this initial page where your React app's script and css are linked to. Once the client receives them, the contents of the page is replaced with your app.
+
+
+## ToDo
 1. Implement dynamic routing/coorinator flow, see react-router (done)
     - [x] Implement MVP routing 
     - [x] Add links and check navigation between MVP
