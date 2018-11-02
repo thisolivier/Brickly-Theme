@@ -10,6 +10,16 @@
     flex-direction: column;
     top: 10vw;
     left: 2em;
+    transition: all 1.4s;
+}
+.home {
+  top: 2em;
+}
+
+.intro {
+  left: 25vw;
+  top: 4em;
+  transform: scale(0.5);
 }
 
 #theCloud {

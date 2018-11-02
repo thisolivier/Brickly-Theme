@@ -13,7 +13,7 @@ class GenericSidebar extends Component {
                         <p key={key}>{string}</p>
                     ))}
                     <OutLinks />
-                </div>                
+                </div>
             </div>
         )
     }
