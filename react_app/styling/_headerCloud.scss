@@ -8,18 +8,23 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 10vw;
-    left: 2em;
-    transition: all 1.4s;
 }
 .home {
-  top: 2em;
+  .headerContainer {
+    left: 2em;
+    top: 10vw;
+    transform: scale(1);
+    transition: all 1.4s;
+  }
 }
 
 .intro {
-  left: 25vw;
-  top: 4em;
-  transform: scale(0.5);
+  .headerContainer {
+    left: 25vw;
+    top: 4em;
+    transform: scale(0.5);
+    transition: all 1.4s;
+  }
 }
 
 #theCloud {
@@ -52,7 +57,7 @@
   
       #cloudLink {
         display: block;
-        font-weight: 300;
+        font-weight: 200;
         z-index: 30;
         color: black;
         text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);

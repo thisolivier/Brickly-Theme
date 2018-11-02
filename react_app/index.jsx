@@ -19,29 +19,25 @@ class App extends React.Component {
         this.state = {
           settingUp: true,
         }
+        this.handleSetupComplete = this.handleSetupComplete.bind(this)
     }
     
     handleSetupComplete() {
         this.setState({settingUp: false})
     }
 
-    componentDidMount() {
-        setInterval(() => this.handleSetupComplete(), 1400);
-    }
-
     render() {
         var pageClassName = this.state.settingUp ? 'intro' : 'home'
         return(
             <div id="page-inner" className={pageClassName}>
+                <button onClick={this.handleSetupComplete}>End setup</button>
                 <this.Header settingUp= {this.state.settingUp} />
-                {/* <div>
+                <div>
                     <Switch>
                         <Route path="/c/:categorySlug" component={Category} />
                         <Route path="/" component={TowerOfBricks} />
                     </Switch>
                 </div>
-                <Footer /> */}
-                <Background />
             </div>
         )
     }
@@ -52,6 +48,7 @@ class App extends React.Component {
         const showsSidebar = props.settingUp ? false : true
         if (showsSidebar) {
             return (
+                // TODO: When this is re-rendered, the CSS animation glitches
                 <div className="headerContainer">
                     <HeaderCloud />
                     <Route path="/" component={GenericSidebar} />
