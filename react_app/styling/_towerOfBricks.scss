@@ -1,0 +1,29 @@
+.towerOfBricksContainer {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 25vw;
+    flex-wrap: wrap;
+
+    .brick{
+        width: 5em;
+        height: 4em;
+        margin: 1em;
+        border-radius: 1em;
+        background-color: black;
+        color: white;
+    }
+}
+
+.intro .towerOfBricksContainer {
+    .brick a{
+        color: transparent;
+    }
+}
+
+.home .towerOfBricksContainer{
+    .brick a{
+        color: white;
+    }
+}

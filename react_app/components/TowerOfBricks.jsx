@@ -5,21 +5,26 @@ class TowerOfBricks extends Component {
 
     constructor(props){
         super(props)
-        console.log(props)
         this.state = {
-            content: props.content,
-            settingUp: props.settingUp
+            contentCount: props.content.count,
+            totalBricksRequired: 10
         }
     }
 
     render() {
+        let bricksToRender = Object.keys(this.props.content).map((slug, index) => 
+            <div className="brick real" key={index}>
+                <h2><Link to={"/c/"+slug}>{this.props.content[slug].name}</Link></h2>
+            </div>
+        )
+        for (let index=bricksToRender.length - 1; index <= this.state.totalBricksRequired; index+=1) {
+           bricksToRender.push(
+            <div className="brick" key={index}></div>
+           )
+        }
         return(
-            <div>
-                {Object.keys(this.state.content).map((slug, index) => 
-                <div className="brick" key={index}>
-                    <h2><Link to={"/c/"+slug}>{this.state.content[slug].name}</Link></h2>
-                </div>
-                )}
+            <div class="towerOfBricksContainer">
+                {bricksToRender}
             </div>
         )
     }
