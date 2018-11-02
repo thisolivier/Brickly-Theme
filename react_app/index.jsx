@@ -2,8 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Background from './components/Background';
-import Footer from './components/Footer';
 import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
 import GenericSidebar from './components/GenericSidebar'
@@ -27,37 +25,23 @@ class App extends React.Component {
     }
 
     render() {
-        var pageClassName = this.state.settingUp ? 'intro' : 'home'
+        const pageClassName = this.state.settingUp ? 'intro' : 'home'
+        const showsSidebar = this.state.settingUp ? false : true
         return(
             <div id="page-inner" className={pageClassName}>
                 <button onClick={this.handleSetupComplete}>End setup</button>
-                <this.Header settingUp= {this.state.settingUp} />
+                <div className="headerContainer">
+                    <HeaderCloud />
+                    {showsSidebar ? (<Route path="/" component={GenericSidebar} />) : null}
+                </div>
                 <div>
                     <Switch>
                         <Route path="/c/:categorySlug" component={Category} />
-                        <Route path="/" component={TowerOfBricks} />
+                        <Route path="/" render={(routeParams) => (
+                            <TowerOfBricks settingUp={this.state.settingUp} content={WORDPRESS.category}/>
+                        )} />
                     </Switch>
                 </div>
-            </div>
-        )
-    }
-
-    // Helper functions
-
-    Header(props) {
-        const showsSidebar = props.settingUp ? false : true
-        if (showsSidebar) {
-            return (
-                // TODO: When this is re-rendered, the CSS animation glitches
-                <div className="headerContainer">
-                    <HeaderCloud />
-                    <Route path="/" component={GenericSidebar} />
-                </div>
-            )
-        }
-        return (
-            <div className="headerContainer">
-                <HeaderCloud />
             </div>
         )
     }

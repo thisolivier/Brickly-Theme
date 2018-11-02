@@ -4,6 +4,9 @@ function getCategories() {
     $wordpressCategories = get_categories();
     $formattedCategories = array();
     foreach ($wordpressCategories as $category) {
+        if ($category->slug == 'uncategorized') {
+            continue;
+        }
         $formattedCategories[$category->slug] = array(
             'name' => $category->name,
             'description' => $category->description,
