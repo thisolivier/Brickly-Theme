@@ -8,24 +8,23 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-}
-.home {
-  .headerContainer {
-    left: 2em;
-    top: 10vw;
-    transform: scale(1);
     transition: all 1.4s;
-  }
+    z-index: 100;
+}
+.home .headerContainer {
+  left: 2em;
+  top: 10vw;
+  transform: scale(1);
+  transition: all 1.4s;
 }
 
-.intro {
-  .headerContainer {
-    left: 25vw;
-    top: 4em;
-    transform: scale(0.5);
-    transition: all 1.4s;
-  }
+.intro .headerContainer {
+  left: 50vw;
+  top: 4em;
+  transform: translateX(-50%) scale(0.5);
+  transition: all 1.4s;
 }
+
 
 #theCloud {
     display: inline-block;
@@ -39,21 +38,11 @@
     position: relative;
     z-index: 120;
     transform-origin: left top;
-    // .single-post &{
-    //   transform: scale(0.8);
-    //   transform-origin: 0 0;
-    // }
   
     .brand {
       display:inline-block;
       margin:0 0.3em 0.1em 0.1em;
       font-size: 2.5em;
-    
-  
-    //   .single-post &{
-    //     font-size: 2.9em;
-    //     margin: 0 0.2em 0.1em 0.1em;
-    //   }
   
       #cloudLink {
         display: block;

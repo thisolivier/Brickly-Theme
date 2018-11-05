@@ -1,29 +1,76 @@
+$mortarWidth: 5%;
+
 .towerOfBricksContainer {
     display: flex;
     position: absolute;
-    right: 0;
-    top: 0;
+    top: 2.5em;
     width: 25vw;
+    height: 30em;
     flex-wrap: wrap;
+    transition: all 1.4s;
+    z-index: 50;
+    overflow: hidden;
+
+    .real.brick {
+        display: block;
+        overflow: hidden;
+    }
 
     .brick{
-        width: 5em;
-        height: 4em;
-        margin: 1em;
-        border-radius: 1em;
+        width: 33% - $mortarWidth;
+        height: (1/6)*100%;
+        margin: 0 $mortarWidth $mortarWidth 0;
+        border-radius: 0.9em;
         background-color: black;
         color: white;
+        
+
+        @for $i from 1 to 15 {
+            &:nth-child(#{$i}) { animation-delay: (15-$i) * 0.1s; }
+            animation-name: dropIn#{$i};
+            animation-duration: 0.4s;
+            animation-timing-function: linear;
+            animation-fill-mode: both;
+
+            @keyframes dropIn#{$i} {
+                0% {
+                    transform: translateY(-200% * ($i/5));
+                    opacity: 0;
+                }
+                
+                100% {
+                    transform: translateY(0%);
+                    opacity: 1;
+                }
+            }
+        }
+
+
+
+        &:nth-child(4n), &:nth-child(4n+1) {
+            width: 67% - $mortarWidth;
+        }
     }
+
+   
 }
 
 .intro .towerOfBricksContainer {
     .brick a{
         color: transparent;
     }
+    left: 50vw;
+    right: 25vw;
+    transform: translateX(-50%) scale(0.5);
+    transition: all 1.4s;
 }
 
 .home .towerOfBricksContainer{
     .brick a{
         color: white;
     }
+    right: 0vw;
+    left: 75vw;
+    transform: translateX(0%) scale(1);
+    transition: all 1.4s;
 }
