@@ -41,6 +41,9 @@ class App extends React.Component {
         } else if (props.location.pathname.startsWith('/c')) {
             pageClassName = 'category'
         }
+        if (this.state.constrainedWidth) {
+            pageClassName = pageClassName + ' compactWidth'
+        }
         return(
             <div id="page-inner" className={pageClassName}>
                 <div className="headerContainer">
