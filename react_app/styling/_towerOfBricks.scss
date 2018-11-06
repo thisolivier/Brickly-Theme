@@ -12,6 +12,7 @@ $mortarWidth: 5%;
     transition: all 1.4s;
     z-index: 50;
     overflow: hidden;
+    transform-origin: bottom center;
 
     .real.brick {
         display: block;
@@ -25,7 +26,6 @@ $mortarWidth: 5%;
         border-radius: 0.9em;
         background-color: black;
         color: white;
-        
 
         @for $i from 1 to 15 {
             &:nth-child(#{$i}) { 
@@ -49,8 +49,6 @@ $mortarWidth: 5%;
             }
         }
 
-
-
         &:nth-child(4n), &:nth-child(4n+1) {
             width: 67% - $mortarWidth;
         }
@@ -64,17 +62,18 @@ $mortarWidth: 5%;
         color: transparent;
     }
     left: 50vw;
-    right: 25vw;
     transform: translateX(-50%) scale(0.5);
     transition: all 1.4s;
 }
 
 .home .towerOfBricksContainer{
-    .brick a{
-        color: white;
+    .brick {
+        a {
+            color: white;
+        }
     }
-    right: 0vw;
-    left: 75vw;
-    transform: translateX(0%) scale(1);
+    left: 100vw;
+    transform: translateX(-120%) scale(1);
+    transform-origin: top left;
     transition: all 1.4s;
 }

@@ -19,10 +19,13 @@ class TowerOfBricks extends Component {
         )
         let brickIndex = bricksToRender.length
         if (!this.props.constrainedWidth) {
-            const length = bricksToRender.length
-            for (let index=1; index < length; index+=1, brickIndex+=1) {
-                let fakeBrick = <div className="brick fake" key={brickIndex}></div>
-                bricksToRender.splice((index + index - 1), 0, fakeBrick)
+            const length = bricksToRender.length * 2
+            for (var index=1; index < length; index+=1, brickIndex+=1) {
+                let fakeBrick = <div className="brick fake spacer" key={brickIndex}></div>
+                bricksToRender.splice((index), 0, fakeBrick)
+                if (index % 2 == 0) {
+                    index += 2
+                }
             }
         }
         for (let index=bricksToRender.length - 1; index <= this.state.totalBricksRequired; index+=1, brickIndex+=1) {
