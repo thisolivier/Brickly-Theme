@@ -9,6 +9,9 @@ html, body{
   -moz-osx-font-smoothing: grayscale;
   background-color: cornsilk;
 }
+img{
+    max-width: 100%;
+}
 
 .hidden, .hide {
     display: none;

@@ -1,3 +1,5 @@
+@import "./logic";
+
 .categoryContainer {
     margin-top: 8em;
     text-align: center;
@@ -14,8 +16,39 @@
 .postsContainer {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
-    img {
-        max-width: 100%;
+    .post {
+        position: relative;
+
+        .backgroundImage {
+            position: absolute;
+            z-index: 30;
+            top:0;
+            left:0;
+            right:0;
+        }
+
+        h2, section {
+            z-index: 150;
+            position: relative;
+        }
+
+        .tags {
+            list-style-type: none;
+            padding: 0;
+            line-height: 1.8;
+            text-align: center;
+            width: 100%;
+            margin: 1em .3em;
+            li {
+                font-weight: 700;
+                color: #fff;
+                background-color: #000;
+                border-color: #000;
+                @include inlineButton();
+            }
+        }
     }
+
 }
