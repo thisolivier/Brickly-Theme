@@ -12,7 +12,7 @@ $mortarWidth: 5%;
     transition: all 1.4s;
     z-index: 50;
     overflow: hidden;
-    transform-origin: bottom center;
+    transform-origin: top center;
 
     .real.brick {
         display: block;
@@ -95,5 +95,26 @@ $mortarWidth: 5%;
     }
     @media screen and (max-width: 780px) {
         transform: translateX(-100%) scale(1);
+    }
+}
+
+.home.compactWidth .towerOfBricksContainer {
+    position: relative;
+    top: auto;
+    left: 0;
+    right: 0;
+    transform: scale(1.2);
+    padding-left: $mortarWidth/2;
+    overflow-x: hidden;
+    transform-origin: top center;
+    margin: auto;
+
+    @media screen and (max-width: 500px) {
+        transform: scale(1.1);
+        margin-top: 2em;
+    }
+    @media screen and (max-width: 400px) {
+        transform: scale(1);
+        margin-top: 1em;
     }
 }
