@@ -108,13 +108,12 @@ $mortarWidth: 5%;
     overflow-x: hidden;
     transform-origin: top center;
     margin: auto;
+    margin-top: 2em;
 
     @media screen and (max-width: 500px) {
         transform: scale(1.1);
-        margin-top: 2em;
     }
     @media screen and (max-width: 400px) {
         transform: scale(1);
-        margin-top: 1em;
     }
 }
