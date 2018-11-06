@@ -13,11 +13,11 @@ class Category extends React.Component {
             <div className="categoryContainer">
                 <h1>{currentCategory.name}</h1>
                 <p>{currentCategory.description}</p>
-                <ol>
+                <div className="postsContainer">
                     {categoriesPosts.map((postId)=>
                         <Post postId={postId} key={postId}/>
                     )}
-                </ol>
+                </div>
             </div>
         )
     }

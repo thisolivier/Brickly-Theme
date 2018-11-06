@@ -68,7 +68,7 @@ class App extends React.Component {
     }
 
     handleResize() {
-        this.setState({constrainedWidth: (window.innerWidth < 600)})
+        this.setState({constrainedWidth: (window.innerWidth < 680)})
     }
 
 }

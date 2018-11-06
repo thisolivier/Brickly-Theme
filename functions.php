@@ -53,7 +53,7 @@ function getPosts() {
                 'repo' => get_post_meta($postId, 'repo', true),
                 'liveSite' => get_post_meta($postId, 'site', true),
                 'content' => $post->post_content,
-                'image' => wp_get_attachment_link(),
+                'image' => wp_get_attachment_url(get_post_thumbnail_id( $postId )),
                 'date' => $post->post_date
             );
         }
@@ -123,6 +123,7 @@ add_action( 'rest_api_init', function () {
 } );
 
 add_theme_support( 'menus' );
+add_theme_support( 'post-thumbnails' ); 
 
 add_action( 'init', function () {
     register_nav_menu('outlinks', 'Links to other sites');

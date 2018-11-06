@@ -5,7 +5,7 @@ $mortarWidth: 5%;
 .towerOfBricksContainer {
     display: flex;
     position: absolute;
-    top: 2.5em;
+    top: 3.5em;
     width: $towerWidth;
     height: 30em;
     flex-wrap: wrap;
@@ -88,4 +88,12 @@ $mortarWidth: 5%;
     transform: translateX(-120%) scale(1);
     transform-origin: top left;
     transition: all 1.4s;
+
+    @media screen and (max-width: 900px) {
+        transform: translateX(-115%) scale(1);
+        top: 4em;
+    }
+    @media screen and (max-width: 780px) {
+        transform: translateX(-100%) scale(1);
+    }
 }
