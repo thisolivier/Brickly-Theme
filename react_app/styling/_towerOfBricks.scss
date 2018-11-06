@@ -1,10 +1,12 @@
+
+$towerWidth: 20em;
 $mortarWidth: 5%;
 
 .towerOfBricksContainer {
     display: flex;
     position: absolute;
     top: 2.5em;
-    width: 25vw;
+    width: $towerWidth;
     height: 30em;
     flex-wrap: wrap;
     transition: all 1.4s;
@@ -26,7 +28,9 @@ $mortarWidth: 5%;
         
 
         @for $i from 1 to 15 {
-            &:nth-child(#{$i}) { animation-delay: (15-$i) * 0.1s; }
+            &:nth-child(#{$i}) { 
+                animation-delay: (15-$i) * 0.1s; 
+            }
             animation-name: dropIn#{$i};
             animation-duration: 0.4s;
             animation-timing-function: linear;

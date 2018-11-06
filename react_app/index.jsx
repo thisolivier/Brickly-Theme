@@ -15,13 +15,20 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          settingUp: true,
+            settingUp: true,
+            constrainedWidth: undefined
         }
         this.handleSetupComplete = this.handleSetupComplete.bind(this)
+        this.handleResize = this.handleResize.bind(this)
+    }
+
+    componentDidMount() {
+        this.handleResize()
+        window.addEventListener('resize', this.handleResize)
     }
     
-    handleSetupComplete() {
-        this.setState({settingUp: false})
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
     }
 
     render() {
@@ -38,12 +45,24 @@ class App extends React.Component {
                     <Switch>
                         <Route path="/c/:categorySlug" component={Category} />
                         <Route path="/" render={(routeParams) => (
-                            <TowerOfBricks settingUp={this.state.settingUp} content={WORDPRESS.category}/>
+                            <TowerOfBricks 
+                            settingUp={this.state.settingUp}
+                            constrainedWidth={this.state.constrainedWidth} 
+                            content={WORDPRESS.category} 
+                            />
                         )} />
                     </Switch>
                 </div>
             </div>
         )
+    }
+
+    handleSetupComplete() {
+        this.setState({settingUp: false})
+    }
+
+    handleResize() {
+        this.setState({constrainedWidth: (window.innerWidth < 600)})
     }
 
 }

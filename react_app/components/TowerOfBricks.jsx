@@ -13,17 +13,25 @@ class TowerOfBricks extends Component {
 
     render() {
         let bricksToRender = Object.keys(this.props.content).map((slug, index) => 
-            <div className="brick real" key={index}>
+            <section className="brick real" key={index}>
                 <h2><Link to={"/c/"+slug}>{this.props.content[slug].name}</Link></h2>
-            </div>
+            </section>
         )
-        for (let index=bricksToRender.length - 1; index <= this.state.totalBricksRequired; index+=1) {
-           bricksToRender.push(
-            <div className="brick" key={index}></div>
-           )
+        let brickIndex = bricksToRender.length
+        if (!this.props.constrainedWidth) {
+            const length = bricksToRender.length
+            for (let index=1; index < length; index+=1, brickIndex+=1) {
+                let fakeBrick = <div className="brick fake" key={brickIndex}></div>
+                bricksToRender.splice((index + index - 1), 0, fakeBrick)
+            }
+        }
+        for (let index=bricksToRender.length - 1; index <= this.state.totalBricksRequired; index+=1, brickIndex+=1) {
+            bricksToRender.push(
+                <div className="brick fake" key={brickIndex}></div>
+            )
         }
         return(
-            <div class="towerOfBricksContainer">
+            <div className="towerOfBricksContainer">
                 {bricksToRender}
             </div>
         )
