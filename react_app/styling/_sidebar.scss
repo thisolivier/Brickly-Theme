@@ -1,9 +1,21 @@
 .sidebar {
     margin: 1em 2em;
+    transform-origin: right top;
+    transition: all 1s;
+    transition-delay: 0.4s;
+    opacity: 1;
+    max-height: 50em;
+    height: auto;
 
     .outlinks {
         margin-top: 2em;
     }
+}
+
+.intro .sidebar{
+    opacity: 0;
+    transform: scale(0.6);
+    max-height: 0em;
 }
 
 .compactWidth .sidebar {

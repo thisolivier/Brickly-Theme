@@ -34,10 +34,8 @@ class App extends React.Component {
     // Excuse this fugly signature, I wanted access to the route
     render() {return(<Route render={(props) => {
         let pageClassName = undefined
-        let showsSidebar = false
         if (props.location.pathname === '/') {
             pageClassName = this.state.settingUp ? 'intro' : 'home'
-            showsSidebar = !this.state.settingUp
         } else if (props.location.pathname.startsWith('/c')) {
             pageClassName = 'category'
         }
@@ -48,7 +46,7 @@ class App extends React.Component {
             <div id="page-inner" className={pageClassName}>
                 <div className="headerContainer">
                     <HeaderCloud />
-                    {showsSidebar ? (<Route exact path="/" component={GenericSidebar} />) : null}
+                    <Route exact path="/" component={GenericSidebar} />
                 </div>
                 <div>
                     <Switch>

@@ -6,15 +6,23 @@
   max-width: 400pt;
   min-width: 250pt;
   position: absolute;
-  top:0;
   display: flex;
   flex-direction: column;
   transition: all 1.4s;
   z-index: 100;
 }
+
+.intro .headerContainer {
+  left: 50vw;
+  top: 0vw;
+  margin-top: 4em;
+  transform: translateX(-50%) scale(0.5);
+}
+
 .home .headerContainer {
   left: 2em;
   top: 10vw;
+  margin-top: 0em;
   transform: scale(1);
 }
 
@@ -29,12 +37,6 @@
   @media screen and (max-width: 400px) {
     margin: 5em 2vw 0 2vw;
   }
-}
-
-.intro .headerContainer {
-  left: 50vw;
-  top: 4em;
-  transform: translateX(-50%) scale(0.5);
 }
 
 .category .headerContainer {

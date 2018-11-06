@@ -1,5 +1,6 @@
 
 $towerWidth: 20em;
+$towerHeight: 30em;
 $mortarWidth: 5%;
 
 .towerOfBricksContainer {
@@ -7,11 +8,11 @@ $mortarWidth: 5%;
     position: absolute;
     top: 3.5em;
     width: $towerWidth;
-    height: 30em;
+    height: $towerHeight;
     flex-wrap: wrap;
     transition: all 1.4s;
     z-index: 50;
-    overflow: hidden;
+    clip: rect(-8em,$towerWidth,$towerHeight,0px);
     transform-origin: top center;
 
     .real.brick {
@@ -28,6 +29,10 @@ $mortarWidth: 5%;
             top: 50%;
             transform: translateY(-50%);
             margin:0;
+            a {
+                transition: all 1s;
+                transition-delay: 0.6s;
+            }
         }
 
         position: relative;
@@ -40,10 +45,10 @@ $mortarWidth: 5%;
 
         @for $i from 1 to 15 {
             &:nth-child(#{$i}) { 
-                animation-delay: (15-$i) * 0.1s; 
+                animation-delay: (15-$i) * 0.09s; 
             }
             animation-name: dropIn#{$i};
-            animation-duration: 0.4s;
+            animation-duration: 0.25s;
             animation-timing-function: linear;
             animation-fill-mode: both;
 
@@ -70,9 +75,11 @@ $mortarWidth: 5%;
 
 .intro .towerOfBricksContainer {
     .brick a{
-        color: transparent;
+        color: #000;
+        opacity: 0;
     }
     left: 50vw;
+    top: 12em;
     transform: translateX(-50%) scale(0.5);
     transition: all 1.4s;
 }
@@ -80,7 +87,8 @@ $mortarWidth: 5%;
 .home .towerOfBricksContainer{
     .brick {
         a {
-            color: white;
+            color: #fff;
+            opacity: 1;
             text-decoration: none;
         }
     }
