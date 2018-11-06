@@ -6,6 +6,7 @@
     max-width: 400pt;
     min-width: 250pt;
     position: absolute;
+    top:0;
     display: flex;
     flex-direction: column;
     transition: all 1.4s;
@@ -15,14 +16,17 @@
   left: 2em;
   top: 10vw;
   transform: scale(1);
-  transition: all 1.4s;
 }
 
 .intro .headerContainer {
   left: 50vw;
   top: 4em;
   transform: translateX(-50%) scale(0.5);
-  transition: all 1.4s;
+}
+
+.category .headerContainer {
+  transform: scale(0.5);
+  top: 2em;
 }
 
 

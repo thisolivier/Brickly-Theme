@@ -20,6 +20,17 @@ $mortarWidth: 5%;
     }
 
     .brick{
+
+        h2 {
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            margin:0;
+        }
+
+        position: relative;
         width: 33% - $mortarWidth;
         height: (1/6)*100%;
         margin: 0 $mortarWidth $mortarWidth 0;
@@ -70,6 +81,7 @@ $mortarWidth: 5%;
     .brick {
         a {
             color: white;
+            text-decoration: none;
         }
     }
     left: 100vw;

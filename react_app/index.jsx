@@ -9,7 +9,6 @@ import Category from './components/Category'
 
 require('./index.scss');
 
-
 class App extends React.Component {
 
     constructor(props) {
@@ -25,21 +24,28 @@ class App extends React.Component {
     componentDidMount() {
         this.handleResize()
         window.addEventListener('resize', this.handleResize)
+        setTimeout(this.handleSetupComplete, 1600)
     }
     
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize)
     }
 
-    render() {
-        const pageClassName = this.state.settingUp ? 'intro' : 'home'
-        const showsSidebar = this.state.settingUp ? false : true
+    // Excuse this fugly signature, I wanted access to the route
+    render() {return(<Route render={(props) => {
+        let pageClassName = undefined
+        let showsSidebar = false
+        if (props.location.pathname === '/') {
+            pageClassName = this.state.settingUp ? 'intro' : 'home'
+            showsSidebar = !this.state.settingUp
+        } else if (props.location.pathname.startsWith('/c')) {
+            pageClassName = 'category'
+        }
         return(
             <div id="page-inner" className={pageClassName}>
-                <button onClick={this.handleSetupComplete}>End setup</button>
                 <div className="headerContainer">
                     <HeaderCloud />
-                    {showsSidebar ? (<Route path="/" component={GenericSidebar} />) : null}
+                    {showsSidebar ? (<Route exact path="/" component={GenericSidebar} />) : null}
                 </div>
                 <div>
                     <Switch>
@@ -55,7 +61,7 @@ class App extends React.Component {
                 </div>
             </div>
         )
-    }
+    }}/>)}
 
     handleSetupComplete() {
         this.setState({settingUp: false})

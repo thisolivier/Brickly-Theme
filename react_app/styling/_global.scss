@@ -1,7 +1,8 @@
 html, body{
   height: 100%;
   width: 100%;
-  position: relative;
+  margin: 0;
+  position: absolute;
   scroll-behavior: smooth;
   font-family: branding, sans-serif;
   -webkit-font-smoothing: antialiased;
