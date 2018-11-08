@@ -17,21 +17,27 @@
 .postsContainer {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    background: rgb(249,92,144);
+    background: -moz-linear-gradient(left, rgb(249,92,144) 0%, rgb(247,152,56) 18%, rgb(247,237,49) 41%, rgb(200,255,142) 64%, rgb(87,249,155) 80%, rgb(117,250,255) 100%);
+    background: -webkit-linear-gradient(left, rgb(249,92,144) 0%,rgb(247,152,56) 18%,rgb(247,237,49) 41%,rgb(200,255,142) 64%,rgb(87,249,155) 80%,rgb(117,250,255) 100%);
+    background: linear-gradient(to right, rgb(249,92,144) 0%,rgb(247,152,56) 18%,rgb(247,237,49) 41%,rgb(200,255,142) 64%,rgb(87,249,155) 80%,rgb(117,250,255) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f95c90', endColorstr='#75faff',GradientType=1 );
 
     .singlePostContainer {
         position: relative;
         background-size: cover;
         padding: 10em 0;
+        overflow: hidden;
     }
 
     .singlePostContent{
         text-align: left;
-        background-color: #fff;
-        max-width: 25em;
+        max-width: 29em;
         overflow: visible;
         position: relative;
         display: inline-block;
+        background-color: white;
+        padding: 0 2em 2em 2em;
 
         h2, section {
             z-index: 150;
@@ -40,12 +46,20 @@
 
         h2 {
             font-weight: 700;
-            font-size: 2em;
+            font-size: 2.2em;
+        }
+
+        .byLine {
+            font-weight: 600;
+
         }
 
         .postLinks {
             a {
                 @include inlineLink();
+                border-width: 0.5px;
+                text-transform: uppercase;
+                font-size: 1.1em;
             }
         }
 
@@ -73,13 +87,15 @@
         &:after {
             content: " ";
             position: absolute;
-            top: -50%;
             left: -15%;
+            top:50%;
+            margin-top: -59%;
             width: 130%;
             height: auto;
             padding-top: 130%;
             border-radius: 50%;
             background: #fff;
+            opacity: 0;
         }
     }
 

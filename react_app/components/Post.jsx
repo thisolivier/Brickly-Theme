@@ -10,7 +10,7 @@ class Post extends React.Component {
                 <div className="singlePostContent">
                     <h2>{post.title}</h2>
                     <section className="info">
-                        <p>{ReactHtmlParser(post.byLine)}</p>
+                        <p className="byLine">{ReactHtmlParser(post.byLine)}</p>
                         <nav className="postLinks">
                             <a href={post.liveSite}>Live Site</a>
                             <a href={post.repo}>Repository</a>
