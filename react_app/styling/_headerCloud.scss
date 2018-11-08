@@ -40,8 +40,10 @@
 }
 
 .category .headerContainer {
+  transform-origin: top left;
   transform: scale(0.5);
-  top: 2em;
+  top: 3.5em;
+  left: 8vw;
 }
 
 

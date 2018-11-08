@@ -12,7 +12,7 @@ class Category extends React.Component {
         return (
             <div className="categoryContainer">
                 <h1>{currentCategory.name}</h1>
-                <p>{currentCategory.description}</p>
+                <p className="categoryDescription">{currentCategory.description}</p>
                 <div className="postsContainer">
                     {categoriesPosts.map((postId)=>
                         <Post postId={postId} key={postId}/>

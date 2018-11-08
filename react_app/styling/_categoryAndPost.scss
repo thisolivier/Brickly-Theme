@@ -7,9 +7,10 @@
     h1{
         font-size: 4em;
     }
-    p {
+    p.categoryDescription {
         max-width: 30em;
         display: inline-block;
+        margin-bottom: 4em;
     }
 }
 
@@ -18,29 +19,44 @@
     flex-direction: column;
     overflow: hidden;
 
-    .post {
+    .singlePostContainer {
         position: relative;
+        background-size: cover;
+        padding: 10em 0;
+    }
 
-        .backgroundImage {
-            position: absolute;
-            z-index: 30;
-            top:0;
-            left:0;
-            right:0;
-        }
+    .singlePostContent{
+        text-align: left;
+        background-color: #fff;
+        max-width: 25em;
+        overflow: visible;
+        position: relative;
+        display: inline-block;
 
         h2, section {
             z-index: 150;
             position: relative;
         }
 
+        h2 {
+            font-weight: 700;
+            font-size: 2em;
+        }
+
+        .postLinks {
+            a {
+                @include inlineLink();
+            }
+        }
+
         .tags {
+            font-size: 0.8em;
             list-style-type: none;
             padding: 0;
             line-height: 1.8;
-            text-align: center;
+            text-align: left;
             width: 100%;
-            margin: 1em .3em;
+            margin: 0;
             li {
                 font-weight: 700;
                 color: #fff;
@@ -48,6 +64,22 @@
                 border-color: #000;
                 @include inlineButton();
             }
+        }
+
+        .postDescription {
+            display: none;
+        }
+
+        &:after {
+            content: " ";
+            position: absolute;
+            top: -50%;
+            left: -15%;
+            width: 130%;
+            height: auto;
+            padding-top: 130%;
+            border-radius: 50%;
+            background: #fff;
         }
     }
 
