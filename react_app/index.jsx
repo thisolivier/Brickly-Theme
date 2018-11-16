@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
@@ -19,6 +20,7 @@ class App extends React.Component {
         }
         this.handleSetupComplete = this.handleSetupComplete.bind(this)
         this.handleResize = this.handleResize.bind(this)
+        this.getIndexClassName = this.getIndexClassName.bind(this)
     }
 
     componentDidMount() {
@@ -31,23 +33,28 @@ class App extends React.Component {
         window.removeEventListener('resize', this.handleResize)
     }
 
-    // Excuse this fugly signature, I wanted access to the route
-    render() {return(<Route render={(props) => {
-        let pageClassName = undefined
-        if (props.location.pathname === '/') {
-            pageClassName = this.state.settingUp ? 'intro' : 'home'
-        } else if (props.location.pathname.startsWith('/c')) {
-            pageClassName = 'category'
-        }
-        if (this.state.constrainedWidth) {
-            pageClassName = pageClassName + ' compactWidth'
-        }
-        return(
-            <div id="page-inner" className={pageClassName}>
+    handleSetupComplete() {
+        this.setState({settingUp: false})
+    }
+
+    handleResize() {
+        this.setState({constrainedWidth: (window.innerWidth < 680)})
+    }
+
+    render() {return(
+        <Route path="/" render={(props) => (
+            <div id="page-inner" className={this.getIndexClassName(props)}>
                 <div className="headerContainer">
-                    <HeaderCloud />
+                    <CSSTransition 
+                        timeout={{enter: 200, exit: 150}}
+                        classNames="theCloud"
+                        in={this.state.constrainedWidth}
+                        >
+                        <HeaderCloud />
+                    </CSSTransition>
                     <Route exact path="/" component={GenericSidebar} />
                 </div>
+
                 <div>
                     <Switch>
                         <Route path="/c/:categorySlug" component={Category} />
@@ -61,15 +68,20 @@ class App extends React.Component {
                     </Switch>
                 </div>
             </div>
-        )
-    }}/>)}
+        )} />
+    )}
 
-    handleSetupComplete() {
-        this.setState({settingUp: false})
-    }
-
-    handleResize() {
-        this.setState({constrainedWidth: (window.innerWidth < 680)})
+    getIndexClassName(props) {
+        let pageClassName = undefined
+        if (props.location.pathname === '/') {
+            pageClassName = 'home'
+        } else if (props.location.pathname.startsWith('/c')) {
+            pageClassName = 'category'
+        }
+        if (this.state.constrainedWidth) {
+            pageClassName = pageClassName + ' compactWidth'
+        }
+        return pageClassName
     }
 
 }
