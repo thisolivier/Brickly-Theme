@@ -18,7 +18,8 @@ class App extends React.Component {
             contentShouldAppear: false,
             setupBegun: false,
             setupEnded: false,
-            constrainedWidth: undefined
+            constrainedWidth: undefined,
+            oLocation: false,
         }
         this.handleSetupComplete = this.handleSetupComplete.bind(this)
         this.handleResize = this.handleResize.bind(this)
@@ -44,32 +45,24 @@ class App extends React.Component {
     }
 
     render() {return(
-        <Route path="/" render={(props) => (
-                    <CSSTransition 
-                    timeout={{enter: 1000, exit: 150}}
-                    classNames="siteAppearence"
-                    in={this.state.contentShouldAppear}
-                    >
-                    <div id="page-inner" className={this.getIndexClassName(props)}>
-                        <div className="headerContainer">
-                            <HeaderCloud />
-                            <Route exact path="/" component={GenericSidebar} />
-                        </div>
-                        <div>
-                            <Switch>
-                                <Route path="/c/:categorySlug" component={Category} />
-                                <Route path="/" render={(routeParams) => (
-                                    <TowerOfBricks 
-                                    settingUp={this.state.settingUp}
-                                    constrainedWidth={this.state.constrainedWidth} 
-                                    content={WORDPRESS.category} 
-                                    />
-                                )} />
-                            </Switch>
-                        </div>
-                    </div>
-                </CSSTransition>
-        )} />
+        <div id="page-inner" className={this.isSiteCompact()}>
+            <div className="headerContainer">
+                <HeaderCloud />
+                <Route exact path="/" component={GenericSidebar} />
+            </div>
+            <div>
+                <Switch>
+                    <Route path="/c/:categorySlug" component={Category} />
+                    <Route path="/" render={(routeParams) => (
+                        <TowerOfBricks 
+                        settingUp={this.state.settingUp}
+                        constrainedWidth={this.state.constrainedWidth} 
+                        content={WORDPRESS.category} 
+                        />
+                    )} />
+                </Switch>
+            </div>
+        </div>
     )}
 
     getIndexClassName(props) {
@@ -79,17 +72,21 @@ class App extends React.Component {
         } else if (props.location.pathname.startsWith('/c')) {
             pageClassName = 'category'
         }
-        if (this.state.constrainedWidth) {
-            pageClassName = pageClassName + ' compactWidth'
-        }
-        return pageClassName
+    }
+
+    isSiteCompact() {
+        return this.state.constrainedWidth ? "compactWidth" : ""
+    }
+
+    startPageTransitionTimers() {
+
     }
 
 }
 
 render(
     <BrowserRouter>
-      <App />
+        <Route path="/" component={App} />
     </BrowserRouter>,
     document.getElementById('page')
 );
