@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import HeaderCloud from './components/HeaderCloud';
 import TowerOfBricks from './components/TowerOfBricks';
@@ -14,38 +13,38 @@ class App extends React.Component {
 
     constructor(props) {
         super(props)
+        this.latestChangeId = 0
         this.state = {
-            contentShouldAppear: false,
             setupBegun: false,
             setupEnded: false,
-            constrainedWidth: undefined,
-            oLocation: false,
+            layoutBegun: false,
+            layoutEnded: false,
+            constrainedWidth: window.innerWidth < 680,
         }
-        this.handleSetupComplete = this.handleSetupComplete.bind(this)
-        this.handleResize = this.handleResize.bind(this)
-        this.getIndexClassName = this.getIndexClassName.bind(this)
+        window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
+        // Binding functions to this
+        this.newChangeInitiated = this.newChangeInitiated.bind(this)
     }
 
     componentDidMount() {
-        this.handleResize()
-        window.addEventListener('resize', this.handleResize)
-        this.setState({contentShouldAppear: true})
-    }
-    
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize)
-    }
-
-    handleSetupComplete() {
-        this.setState({settingEnded: false})
-    }
-
-    handleResize() {
-        this.setState({constrainedWidth: (window.innerWidth < 680)})
+        this.setState({setupBegun: true})
+        let changeId = this.newChangeInitiated()
+        setTimeout(() => {
+                if (this.state.changeId == changeId) {
+                    this.setState({setupEnded: true, layoutBegun: true})
+                    setTimeout(() => {
+                        if (this.state.changeId == changeId) {
+                            this.setState({layoutEnded: true})
+                        }
+                    }, 1400)
+                } else {
+                    this.setState({setupEnded: true})
+                }
+        }, 1400)
     }
 
     render() {return(
-        <div id="page-inner" className={this.isSiteCompact()}>
+        <div id="page-inner" className={this.getIndexClassName(this.state, this.props.location)}>
             <div className="headerContainer">
                 <HeaderCloud />
                 <Route exact path="/" component={GenericSidebar} />
@@ -65,21 +64,27 @@ class App extends React.Component {
         </div>
     )}
 
-    getIndexClassName(props) {
+    getIndexClassName(state, location) {
         let pageClassName = undefined
-        if (props.location.pathname === '/') {
+        if (location.pathname === '/') {
             pageClassName = 'home'
-        } else if (props.location.pathname.startsWith('/c')) {
+        } else if (location.pathname.startsWith('/c')) {
             pageClassName = 'category'
         }
+        return pageClassName
     }
 
     isSiteCompact() {
         return this.state.constrainedWidth ? "compactWidth" : ""
     }
 
-    startPageTransitionTimers() {
-
+    newChangeInitiated() {
+        // using new change flags, we can safely track the appearence 
+        // and dissapearence of components over time, even if they 
+        // are interupted or overlap
+        let changeId = this.latestChangeId + 1
+        this.latestChangeId = changeId
+        return changeId
     }
 
 }
