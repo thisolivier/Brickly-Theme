@@ -14,6 +14,7 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.latestChangeId = 0
+        this.newChangeInitiated = this.newChangeInitiated.bind(this)
         this.state = {
             setupBegun: false,
             setupEnded: false,
@@ -22,25 +23,24 @@ class App extends React.Component {
             constrainedWidth: window.innerWidth < 680,
         }
         window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
-        // Binding functions to this
-        this.newChangeInitiated = this.newChangeInitiated.bind(this)
     }
 
     componentDidMount() {
         this.setState({setupBegun: true})
         let changeId = this.newChangeInitiated()
+        // Less efficient to run the in parallel, but keeps it readable
         setTimeout(() => {
-                if (this.state.changeId == changeId) {
+                if (this.latestChangeId == changeId) {
                     this.setState({setupEnded: true, layoutBegun: true})
-                    setTimeout(() => {
-                        if (this.state.changeId == changeId) {
-                            this.setState({layoutEnded: true})
-                        }
-                    }, 1400)
                 } else {
                     this.setState({setupEnded: true})
                 }
         }, 1400)
+        setTimeout(() => {
+            if (this.latestChangeId == changeId) {
+                this.setState({layoutEnded: true})
+            }
+        }, 1400 + 1400)
     }
 
     render() {return(
@@ -66,10 +66,35 @@ class App extends React.Component {
 
     getIndexClassName(state, location) {
         let pageClassName = undefined
+        //     setupBegun: false,
+        //     setupEnded: false,
+        //     layoutBegun: false,
+        //     layoutEnded: false,
+        let transitionState = (()=>{
+            if (location.pathname === "/"){
+                if (!state.setupBegun) {
+                    return " settingUpNotBegun"
+                } else if (state.setupBegun && !state.setupEnded) {
+                    return " settingUp"
+                } else if (!(state.setupBegun && state.setupEnded && (state.layoutBegun || state.layoutEnded))) {
+                    return " setupEndedLayoutAbsent"
+                }
+            }
+            if (!state.layoutBegun) {
+                return " layoutNotBegun"
+            } else if (state.layoutBegun && !state.layoutEnded) {
+                return " layoutBegun"
+            } else if (state.layoutBegun && state.layoutEnded) {
+                return " layoutDone"
+            } else {
+                return " madness"
+            }
+            
+        })()
         if (location.pathname === '/') {
-            pageClassName = 'home'
+            pageClassName = 'home'+transitionState
         } else if (location.pathname.startsWith('/c')) {
-            pageClassName = 'category'
+            pageClassName = 'category'+transitionState
         }
         return pageClassName
     }
