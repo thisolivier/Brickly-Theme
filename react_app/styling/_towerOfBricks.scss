@@ -40,8 +40,8 @@ $mortarWidth: 5%;
         height: (1/6)*100%;
         margin: 0 $mortarWidth $mortarWidth 0;
         border-radius: 0.9em;
-        background-color: black;
-        color: white;
+        background-color: white;
+        color: black;
 
         @for $i from 1 to 15 {
             &:nth-child(#{$i}) { 
@@ -75,7 +75,7 @@ $mortarWidth: 5%;
 
 .intro .towerOfBricksContainer {
     .brick a{
-        color: #000;
+        color: #fff;
         opacity: 0;
     }
     left: 50vw;
@@ -87,7 +87,7 @@ $mortarWidth: 5%;
 .home .towerOfBricksContainer{
     .brick {
         a {
-            color: #fff;
+            color: #000;
             opacity: 1;
             text-decoration: none;
         }
