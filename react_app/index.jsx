@@ -15,7 +15,9 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            settingUp: true,
+            contentShouldAppear: false,
+            setupBegun: false,
+            setupEnded: false,
             constrainedWidth: undefined
         }
         this.handleSetupComplete = this.handleSetupComplete.bind(this)
@@ -26,7 +28,7 @@ class App extends React.Component {
     componentDidMount() {
         this.handleResize()
         window.addEventListener('resize', this.handleResize)
-        setTimeout(this.handleSetupComplete, 1600)
+        this.setState({contentShouldAppear: true})
     }
     
     componentWillUnmount() {
@@ -34,7 +36,7 @@ class App extends React.Component {
     }
 
     handleSetupComplete() {
-        this.setState({settingUp: false})
+        this.setState({settingEnded: false})
     }
 
     handleResize() {
@@ -43,31 +45,30 @@ class App extends React.Component {
 
     render() {return(
         <Route path="/" render={(props) => (
-            <div id="page-inner" className={this.getIndexClassName(props)}>
-                <div className="headerContainer">
                     <CSSTransition 
-                        timeout={{enter: 200, exit: 150}}
-                        classNames="theCloud"
-                        in={this.state.constrainedWidth}
-                        >
-                        <HeaderCloud />
-                    </CSSTransition>
-                    <Route exact path="/" component={GenericSidebar} />
-                </div>
-
-                <div>
-                    <Switch>
-                        <Route path="/c/:categorySlug" component={Category} />
-                        <Route path="/" render={(routeParams) => (
-                            <TowerOfBricks 
-                            settingUp={this.state.settingUp}
-                            constrainedWidth={this.state.constrainedWidth} 
-                            content={WORDPRESS.category} 
-                            />
-                        )} />
-                    </Switch>
-                </div>
-            </div>
+                    timeout={{enter: 1000, exit: 150}}
+                    classNames="siteAppearence"
+                    in={this.state.contentShouldAppear}
+                    >
+                    <div id="page-inner" className={this.getIndexClassName(props)}>
+                        <div className="headerContainer">
+                            <HeaderCloud />
+                            <Route exact path="/" component={GenericSidebar} />
+                        </div>
+                        <div>
+                            <Switch>
+                                <Route path="/c/:categorySlug" component={Category} />
+                                <Route path="/" render={(routeParams) => (
+                                    <TowerOfBricks 
+                                    settingUp={this.state.settingUp}
+                                    constrainedWidth={this.state.constrainedWidth} 
+                                    content={WORDPRESS.category} 
+                                    />
+                                )} />
+                            </Switch>
+                        </div>
+                    </div>
+                </CSSTransition>
         )} />
     )}
 
