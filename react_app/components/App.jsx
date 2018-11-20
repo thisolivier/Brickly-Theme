@@ -33,15 +33,15 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.startWelcomeAnimationTimeline(this.props.location.pathname === "/")
+        setTimeout(this.startWelcomeAnimationTimeline, 100, [this.props.location.pathname === "/"])
     }
 
     render() {
         let pageInnerClassName = this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? "compactWidth" : "")
         return(
             <div id="page-inner" className={pageInnerClassName}>
-                <div className="headerContainer">
-                    <HeaderCloud layoutClassName={this.getHomeLayoutClassName(this.state)}/>
+                <div className={"headerContainer " + this.getHomeLayoutClassName(this.state)}>
+                    <HeaderCloud />
                     <Route exact path="/" component={GenericSidebar} />
                 </div>
                 <TransitionGroup>
@@ -69,9 +69,7 @@ class App extends React.Component {
         const isRoot = routeIsRoot
         if (isRoot) {
             this.setState({setupBegun: true})
-            setTimeout(() => {
-                this.setState({setupEnded: true, layoutBegun: true})
-            }, setupDelay)
+            setTimeout(() => { this.setState({setupEnded: true, layoutBegun: true}) }, setupDelay)
         } else { // The site has been loaded not at the root, so don't do the initial animation
             setupDelay = 0
             this.setState({setupBegun: true, setupEnded: true, layoutBegun: true})
@@ -81,9 +79,9 @@ class App extends React.Component {
 
     getHomeLayoutClassName(state) { 
         if (!state.setupBegun) {
-            return "homeSettingUpNotBegun"
+            return "homeSetupNotBegun"
         } else if (!state.setupEnded) {
-            return "homeSettingUp"
+            return "homeSetupBegun"
         } else if (!state.layoutBegun) {
             return "homeSetupComplete homeLayoutNotBegun"
         } else if (!state.layoutEnded) {

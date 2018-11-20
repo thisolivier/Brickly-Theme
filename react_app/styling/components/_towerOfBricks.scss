@@ -42,6 +42,10 @@ $mortarWidth: 5%;
         background-color: white;
         color: black;
 
+        &:nth-child(4n), &:nth-child(4n+1) {
+            width: 67% - $mortarWidth;
+        }
+
         @for $i from 1 to 15 {
             &:nth-child(#{$i}) { 
                 animation-delay: (15-$i) * 0.09s; 
@@ -63,16 +67,8 @@ $mortarWidth: 5%;
                 }
             }
         }
-
-        &:nth-child(4n), &:nth-child(4n+1) {
-            width: 67% - $mortarWidth;
-        }
     }
 
-   
-}
-
-.intro .towerOfBricksContainer {
     .brick a{
         color: #fff;
         opacity: 0;
@@ -81,28 +77,42 @@ $mortarWidth: 5%;
     top: 12em;
     transform: translateX(-50%) scale(0.5);
     transition: all 1.4s;
-}
 
-.home .towerOfBricksContainer{
-    .brick {
-        a {
-            color: #000;
-            opacity: 1;
-            text-decoration: none;
+
+    &.homeSetupNotBegun {
+        opacity: 0;
+    }
+
+    &.homeSetupBegun {
+        opacity: 1;
+    }
+
+    &.homeLayoutBegun {
+        opacity: 1;
+    }
+
+    &.homeLayoutComplete {
+        .brick {
+            a {
+                color: #000;
+                opacity: 1;
+                text-decoration: none;
+            }
+        }
+        left: 100vw;
+        transform: translateX(-120%) scale(1);
+        transform-origin: top left;
+        transition: all 1.4s;
+    
+        @media screen and (max-width: 900px) {
+            transform: translateX(-115%) scale(1);
+            top: 4em;
+        }
+        @media screen and (max-width: 780px) {
+            transform: translateX(-100%) scale(1);
         }
     }
-    left: 100vw;
-    transform: translateX(-120%) scale(1);
-    transform-origin: top left;
-    transition: all 1.4s;
-
-    @media screen and (max-width: 900px) {
-        transform: translateX(-115%) scale(1);
-        top: 4em;
-    }
-    @media screen and (max-width: 780px) {
-        transform: translateX(-100%) scale(1);
-    }
+   
 }
 
 .home.compactWidth .towerOfBricksContainer {
