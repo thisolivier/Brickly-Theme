@@ -26,6 +26,8 @@ class App extends React.Component {
         super(props)
         this.latestChangeId = 0
         this.newChangeInitiated = this.newChangeInitiated.bind(this)
+        this.getSiteWidthClassName = this.getSiteWidthClassName.bind(this)
+        this.startWelcomeAnimationTimeline = this.startWelcomeAnimationTimeline.bind(this)
         this.state = {
             setupBegun: false,
             setupEnded: false,
@@ -37,34 +39,20 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({setupBegun: true})
-        let changeId = this.newChangeInitiated()
-        // Less efficient to run the in parallel, but keeps it readable
-        setTimeout(() => {
-                if (this.latestChangeId == changeId) {
-                    this.setState({setupEnded: true, layoutBegun: true})
-                } else {
-                    this.setState({setupEnded: true})
-                }
-        }, 1400)
-        setTimeout(() => {
-            if (this.latestChangeId == changeId) {
-                this.setState({layoutEnded: true})
-            }
-        }, 1400 + 1400)
+        this.startWelcomeAnimationTimeline(this.props.location === "/")
     }
 
     render() {return(
-        <div id="page-inner" className={this.getIndexClassName()}>
+        <div id="page-inner" className={this.getSiteWidthClassName() + " " + getLocationClassName(this.props.location)}>
             <div className="headerContainer">
-                <HeaderCloud />
+                <HeaderCloud layoutClassName={this.getHomeLayoutClassName(this.state)}/>
                 <Route exact path="/" component={GenericSidebar} />
             </div>
             <TransitionGroup>
                 <TransitionComponent key={this.props.location.pathname}>
                     <div>
                         <Switch>
-                            <Route path="/c/:categorySlug" component={Category} />
+                            <Route path="/cat/:categorySlug" component={Category} />
                             <Route path="/" render={(routeParams) => (
                                 <TowerOfBricks 
                                 settingUp={this.state.settingUp}
@@ -79,48 +67,54 @@ class App extends React.Component {
         </div>
     )}
 
-    // This function gives a top level transition state to whether the layout of the page
-    // is transitioning (usually due to route changes). It returns a classnames that give
-    // CSS the capacity to make transitions very rich and adaptive. It provides:
-    // 1) is the window a constrained width 
-    // 2) which page layout are we in, or moving to (Advice: couple css dissapearences to particular page layouts i.e. if we have "#page-inner .category, #page-inner .layoutBegun" as the parent to ".towerOfBricks", we know we should apply styles to move it away, with optional overrides appropriate to what's there now. This provides rending for adaptive routing, and specific static routes to be optimised for)
-    // 3) how far along the transition to a page are we
-    // It is should be passed the app 
-    // component's state, and the routing information (usually this.props.location)
+    // TODO: Prevent interaction during the root specific animation timeperiod
+    startWelcomeAnimationTimeline(routeIsRoot) {
+        let setupDelay = 1400
+        if (routeIsRoot) {
+            this.setState({setupBegun: true})
+            setTimeout(() => {
+                this.setState({setupEnded: true, layoutBegun: true})
+            }, setupDelay)
+        } else {
+            // The site has been loaded not at the root, so don't do the initial animation
+            setupDelay = 0
+            this.setState({setupBegun: true, setupEnded: true, layoutBegun: true})
+        }
 
-    // You can trigger transitions to new pages by using newChangeInitiated() and the same 
-    // method used in componentDidMount()
-
-    getIndexClassName(state, isRoot) {
-        let transitionState = (()=>{
-            if (isRoot){
-                if (!state.setupBegun) {
-                    return " settingUpNotBegun"
-                } else if (state.setupBegun && !state.setupEnded) {
-                    return " settingUp"
-                } else if (!(state.setupBegun && state.setupEnded && (state.layoutBegun || state.layoutEnded))) {
-                    return " setupEndedLayoutAbsent"
-                }
-                return "error"
+        setTimeout(() => {
+            if (this.latestChangeId == changeId) {
+                this.setState({layoutEnded: true})
             }
+        }, 1400 + setupDelay)
+    }
+
+    getHomeLayoutClassName(state) {
+        if (!state.setupBegun) {
+            return " homeSettingUpNotBegun"
+        } else if (state.setupBegun && !state.setupEnded) {
+            return " homeSettingUp"
+        } else if (!(state.setupBegun && state.setupEnded && (state.layoutBegun || state.layoutEnded))) {
+            return " homeSetupEndedLayoutAbsent"
+        } else {
             return ""
-        })()
+        }
+    }
         
+    getLocationClassName(location) {    
         if (location.pathname === '/') {
             return 'home ' + transitionState
         } else if (location.pathname.startsWith('/c')) {
             return 'category ' + transitionState
+        } else {
+            return ""
         }
     }
 
-    isSiteCompact() {
+    getSiteWidthClassName() {
         return this.state.constrainedWidth ? "compactWidth" : ""
     }
 
     newChangeInitiated() {
-        // using new change flags, we can safely track the appearence 
-        // and dissapearence of components over time, even if they 
-        // are interupted or overlap
         let changeId = this.latestChangeId + 1
         this.latestChangeId = changeId
         return changeId
