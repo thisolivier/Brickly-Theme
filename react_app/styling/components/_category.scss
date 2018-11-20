@@ -1,0 +1,13 @@
+.categoryContainer {
+    margin-top: 8em;
+    text-align: center;
+
+    h1{
+        font-size: 4em;
+    }
+    p.categoryDescription {
+        max-width: 30em;
+        display: inline-block;
+        margin-bottom: 4em;
+    }
+}

@@ -3,18 +3,11 @@
 @import "styling/variables";
 @import "styling/global";
 
-
-// React Components
-
-// Index
-.compactWidth{
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-@import "styling/headerCloud";
-@import "styling/sidebar";
-@import "styling/outlinks";
-@import "styling/towerOfBricks";
-@import "styling/categoryAndPost";
+// Components
+@import "styling/components/app";
+@import "styling/components/headerCloud";
+@import "styling/components/genericSidebar";
+@import "styling/components/outlinks";
+@import "styling/components/towerOfBricks";
+@import "styling/components/category";
+@import "styling/components/post";
