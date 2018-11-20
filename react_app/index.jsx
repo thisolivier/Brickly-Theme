@@ -36,38 +36,35 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.location)
-        this.startWelcomeAnimationTimeline(this.props.location.pathname == "/")
+        this.startWelcomeAnimationTimeline(this.props.location.pathname === "/")
     }
 
     render() {
-        let pageInnerClassName = this.getLocationClassName(this.props.location)
-        if (this.state.constrainedWidth) {
-            pageInnerClassName += "compactWidth"
-        }
+        let pageInnerClassName = this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? "compactWidth" : "")
         return(
-        <div id="page-inner" className={pageInnerClassName}>
-            <div className="headerContainer">
-                <HeaderCloud layoutClassName={this.getHomeLayoutClassName(this.state)}/>
-                <Route exact path="/" component={GenericSidebar} />
+            <div id="page-inner" className={pageInnerClassName}>
+                <div className="headerContainer">
+                    <HeaderCloud layoutClassName={this.getHomeLayoutClassName(this.state)}/>
+                    <Route exact path="/" component={GenericSidebar} />
+                </div>
+                <TransitionGroup>
+                    <TransitionComponent key={this.props.location.pathname}>
+                        <div>
+                            <Switch>
+                                <Route path="/cat/:categorySlug" component={Category} />
+                                <Route path="/" render={(routeParams) => (
+                                    <TowerOfBricks 
+                                    layoutClassName={this.getHomeLayoutClassName(this.state)}
+                                    content={WORDPRESS.category} 
+                                    />
+                                )} />
+                            </Switch>
+                        </div>
+                    </TransitionComponent>
+                </TransitionGroup>
             </div>
-            <TransitionGroup>
-                <TransitionComponent key={this.props.location.pathname}>
-                    <div>
-                        <Switch>
-                            <Route path="/cat/:categorySlug" component={Category} />
-                            <Route path="/" render={(routeParams) => (
-                                <TowerOfBricks 
-                                layoutClassName={this.getHomeLayoutClassName(this.state)}
-                                content={WORDPRESS.category} 
-                                />
-                            )} />
-                        </Switch>
-                    </div>
-                </TransitionComponent>
-            </TransitionGroup>
-        </div>
-    )}
+        )
+    }
 
     // TODO: Prevent interaction during the root specific animation timeperiod
     startWelcomeAnimationTimeline(routeIsRoot) {

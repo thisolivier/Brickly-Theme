@@ -2,7 +2,7 @@ import React from 'react';
 
 const HeaderCloud = (props) => (
 
-    <div className={"theCloud" + props.layoutClassName} id="theCloud">
+    <div className={"theCloud " + props.layoutClassName} id="theCloud">
         <h1 className="brand">
             <span id="cloudLink">
                 {WORDPRESS.site.name}
