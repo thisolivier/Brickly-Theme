@@ -24,9 +24,6 @@ class App extends React.Component {
 
     constructor(props) {
         super(props)
-        this.latestChangeId = 0
-        this.newChangeInitiated = this.newChangeInitiated.bind(this)
-        this.getSiteWidthClassName = this.getSiteWidthClassName.bind(this)
         this.startWelcomeAnimationTimeline = this.startWelcomeAnimationTimeline.bind(this)
         this.state = {
             setupBegun: false,
@@ -39,11 +36,17 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.startWelcomeAnimationTimeline(this.props.location === "/")
+        console.log(this.props.location)
+        this.startWelcomeAnimationTimeline(this.props.location.pathname == "/")
     }
 
-    render() {return(
-        <div id="page-inner" className={this.getSiteWidthClassName() + " " + getLocationClassName(this.props.location)}>
+    render() {
+        let pageInnerClassName = this.getLocationClassName(this.props.location)
+        if (this.state.constrainedWidth) {
+            pageInnerClassName += "compactWidth"
+        }
+        return(
+        <div id="page-inner" className={pageInnerClassName}>
             <div className="headerContainer">
                 <HeaderCloud layoutClassName={this.getHomeLayoutClassName(this.state)}/>
                 <Route exact path="/" component={GenericSidebar} />
@@ -55,8 +58,7 @@ class App extends React.Component {
                             <Route path="/cat/:categorySlug" component={Category} />
                             <Route path="/" render={(routeParams) => (
                                 <TowerOfBricks 
-                                settingUp={this.state.settingUp}
-                                constrainedWidth={this.state.constrainedWidth} 
+                                layoutClassName={this.getHomeLayoutClassName(this.state)}
                                 content={WORDPRESS.category} 
                                 />
                             )} />
@@ -70,54 +72,41 @@ class App extends React.Component {
     // TODO: Prevent interaction during the root specific animation timeperiod
     startWelcomeAnimationTimeline(routeIsRoot) {
         let setupDelay = 1400
-        if (routeIsRoot) {
+        const isRoot = routeIsRoot
+        if (isRoot) {
             this.setState({setupBegun: true})
             setTimeout(() => {
                 this.setState({setupEnded: true, layoutBegun: true})
             }, setupDelay)
-        } else {
-            // The site has been loaded not at the root, so don't do the initial animation
+        } else { // The site has been loaded not at the root, so don't do the initial animation
             setupDelay = 0
             this.setState({setupBegun: true, setupEnded: true, layoutBegun: true})
         }
-
-        setTimeout(() => {
-            if (this.latestChangeId == changeId) {
-                this.setState({layoutEnded: true})
-            }
-        }, 1400 + setupDelay)
+        setTimeout(() => {this.setState({layoutEnded: true})}, 1400 + setupDelay)
     }
 
-    getHomeLayoutClassName(state) {
+    getHomeLayoutClassName(state) { 
         if (!state.setupBegun) {
-            return " homeSettingUpNotBegun"
-        } else if (state.setupBegun && !state.setupEnded) {
-            return " homeSettingUp"
-        } else if (!(state.setupBegun && state.setupEnded && (state.layoutBegun || state.layoutEnded))) {
-            return " homeSetupEndedLayoutAbsent"
+            return "homeSettingUpNotBegun"
+        } else if (!state.setupEnded) {
+            return "homeSettingUp"
+        } else if (!state.layoutBegun) {
+            return "homeSetupComplete homeLayoutNotBegun"
+        } else if (!state.layoutEnded) {
+            return "homeSetupComplete homeLayoutBegun"
         } else {
-            return ""
+            return "homeSetupComplete homeLayoutComplete"
         }
     }
         
     getLocationClassName(location) {    
         if (location.pathname === '/') {
-            return 'home ' + transitionState
-        } else if (location.pathname.startsWith('/c')) {
-            return 'category ' + transitionState
+            return "home "
+        } else if (location.pathname.startsWith('/cat')) {
+            return "category "
         } else {
             return ""
         }
-    }
-
-    getSiteWidthClassName() {
-        return this.state.constrainedWidth ? "compactWidth" : ""
-    }
-
-    newChangeInitiated() {
-        let changeId = this.latestChangeId + 1
-        this.latestChangeId = changeId
-        return changeId
     }
 
 }
