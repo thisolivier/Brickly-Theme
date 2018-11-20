@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import EnquiryForm from './EnquiryForm';
 import OutLinks from './OutLinks'
 
 class GenericSidebar extends Component {
