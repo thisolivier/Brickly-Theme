@@ -1,11 +1,7 @@
 .postsContainer {
     display: flex;
     flex-direction: column;
-    background: rgb(249,92,144);
-    background: -moz-linear-gradient(left, rgb(249,92,144) 0%, rgb(247,152,56) 18%, rgb(247,237,49) 41%, rgb(200,255,142) 64%, rgb(87,249,155) 80%, rgb(117,250,255) 100%);
-    background: -webkit-linear-gradient(left, rgb(249,92,144) 0%,rgb(247,152,56) 18%,rgb(247,237,49) 41%,rgb(200,255,142) 64%,rgb(87,249,155) 80%,rgb(117,250,255) 100%);
-    background: linear-gradient(to right, rgb(249,92,144) 0%,rgb(247,152,56) 18%,rgb(247,237,49) 41%,rgb(200,255,142) 64%,rgb(87,249,155) 80%,rgb(117,250,255) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f95c90', endColorstr='#75faff',GradientType=1 );
+    @include colourfulBackgroundGradient;
 
     .singlePostContainer {
         position: relative;
