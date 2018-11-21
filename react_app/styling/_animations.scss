@@ -1,0 +1,39 @@
+@keyframes homeAppearence {
+    0% {
+      opacity: 0;
+      left: 50vw;
+      top: 15vh;
+      transform: translateX(-50%) scale(0.7);
+    }
+
+    20%, 50% {
+      opacity: 1;
+      left: 50vw;
+      top: 15vh;
+      transform: translateX(-50%) scale(0.7);
+    }
+
+    100% {
+      opacity: 1;
+      left: 2em;
+      top: 14vh;
+    }
+  }
+
+  @keyframes sidebarDropdown {
+    0% {
+      bottom: 0;
+      opacity: 0;
+      transform: translateY(0)
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+      bottom: 0;
+      opacity: 1;
+      transform: translateY(100%)
+    }
+  }

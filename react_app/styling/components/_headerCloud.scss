@@ -11,31 +11,11 @@
   transform-origin: top center;
   
   .home & {
-    animation: homeAppearence 1.5s backwards;
+    animation: homeAppearence 1.5s both;
     animation-delay: 0.5s;
   }
 
-  @keyframes homeAppearence {
-    0% {
-      opacity: 0;
-      left: 50vw;
-      top: 15vh;
-      transform: translateX(-50%) scale(0.7);
-    }
 
-    20%, 50% {
-      opacity: 1;
-      left: 50vw;
-      top: 15vh;
-      transform: translateX(-50%) scale(0.7);
-    }
-
-    100% {
-      opacity: 1;
-      left: 2em;
-      top: 14vh;
-    }
-  }
 
   .compactWidth.home & {
     position: relative;

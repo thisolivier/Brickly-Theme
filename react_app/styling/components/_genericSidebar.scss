@@ -1,11 +1,11 @@
 .sidebar {
-    margin: 1em 2em;
-    transform-origin: right top;
-    transition: all 1s;
-    transition-delay: 0.4s;
-    opacity: 1;
+    position: absolute;
+    padding-top: 1em;
+    margin: 0 2em;
     max-height: 50em;
     height: auto;
+    animation: sidebarDropdown 0.5s both;
+    animation-delay: 1.7s;
 
     .outlinks {
         margin-top: 2em;
