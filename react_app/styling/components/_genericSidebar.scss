@@ -8,7 +8,9 @@
     animation-delay: 1.7s;
 
     .outlinks {
-        margin-top: 2em;
+        margin-top: 0em;
+        animation: sidebarDropdown 0.5s both;
+        animation-delay: 2s;
     }
 }
 
