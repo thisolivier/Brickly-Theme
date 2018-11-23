@@ -1,57 +1,5 @@
-// Grid settings
-$enable-flex:           true;
-$main-sm-columns:       12;
-$sidebar-sm-columns:    4;
-
 // Breakpoints
 $tiny-width: 27em;
 $small-width: 38em;
 $medium-width: 58em;
 $large-width: 75em;
-
-// Colors
-$brand-primary:         rgba(255, 255, 255, 1);
-$brand-secondary:       rgba(0, 0, 0, 1);
-$link-1: rgb(62, 160, 183); // blue
-$link-2: rgb(0, 196, 150); // green
-$link-3: rgb(232, 176, 7); // yellow
-$link-4: rgb(230, 103, 61); // red
-$link-primary: $link-4;
-$black: $brand-secondary;
-$white: $brand-primary;
-
-// Padding Variables
-$footer-padding: 2em;
-
-// Header Variables
-$header-percent: 50%;
-
-// Chimney Variables
-$chim-percent: 40;
-$brick-big: 66;
-$brick-small: 31;
-$brick-gap: 100 - ($brick-big + $brick-small);
-$brick-height: 0.35 * $brick-big;
-$main-padding-top: 15vw;
-$brick-radius: 1vw;
-
-// Bootstrap Overrides
-  // Options
-  $enable-shadows: false;
-  $enable-transitions: true;
-
-  // Fonts
-  $headings-font-family: 'branding', Helvetica, Arial, sans-serif;
-  $headings-font-weight: bold;
-  $headings-line-height: 1;
-
-  // Buttons
-  $btn-primary-color: black;
-  $btn-primary-bg: white;
-  $btn-padding-x: 0.1em;
-  $btn-padding-y: 0;
-  $btn-border-radius: 0.3em;
-
-  .btn-primary {
-    margin-right: 0.5em;
-  }

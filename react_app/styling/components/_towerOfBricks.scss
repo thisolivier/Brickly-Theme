@@ -47,24 +47,15 @@ $mortarWidth: 5%;
         }
 
         @for $i from 1 to 15 {
-            &:nth-child(#{$i}) { 
-                animation-delay: (15-$i) * 0.09s; 
-            }
-            animation-name: dropIn#{$i};
+            animation-name: brickDropInAnimation#{$i};
             animation-duration: 0.25s;
             animation-timing-function: linear;
             animation-fill-mode: both;
 
-            @keyframes dropIn#{$i} {
-                0% {
-                    transform: translateY(-200% * ($i/5));
-                    opacity: 0;
-                }
-                
-                100% {
-                    transform: translateY(0%);
-                    opacity: 1;
-                }
+            @include brickDropInAnimation($i);
+
+            &:nth-child(#{$i}) { 
+                animation-delay: (15-$i) * 0.09s; 
             }
         }
     }

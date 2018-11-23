@@ -37,3 +37,23 @@
       transform: translateY(100%)
     }
   }
+
+  @keyframes towerOfBricksLocation {
+    0% {
+
+    }
+  }
+
+  @mixin brickDropInAnimation($brickNumber) {
+    @keyframes brickDropInAnimation#{$brickNumber} {
+      0% {
+          transform: translateY(-200% * ($brickNumber/5));
+          opacity: 0;
+      }
+      
+      100% {
+          transform: translateY(0%);
+          opacity: 1;
+      }
+    }
+  }
