@@ -11,7 +11,9 @@
   transform-origin: top center;
   
   .home & {
-    animation: homeAppearence 1.5s both;
+    animation-name: homeAppearence;
+    animation-duration: $brickfall-animation-duration - 0.2s;
+    animation-fill-mode: both;
     animation-delay: 0.2s;
   }
 
