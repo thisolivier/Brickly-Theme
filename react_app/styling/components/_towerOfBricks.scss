@@ -49,7 +49,7 @@ $mortarWidth: 5%;
         $bricksTotal: 12;
         $rowsTotal: 6;
         @for $brickNum from 1 to $bricksTotal {
-            $brickRow: 6 - floor(($bricksTotal - $brickNum)/2);
+            $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
             // brick 1 ends up with row 12 - 1 = 11, 11/2 = 5.5, floor(5.5) = 5, 6 - 5 = 1
             // brick 2 ends up with row 12 - 2 = 10, 10/2 = 5, floor(5) = 5, 6 - 5 = 1
             // ...
@@ -57,12 +57,12 @@ $mortarWidth: 5%;
             // brick 12 ends up with row 12 - 12 = 0, 0/2 = 0, floor(0) = 0, 6 - 0 = 6
 
             &:nth-child(#{$brickNum}) {
-                animation-name: brickDropInAnimation#{$brickNum};
-                animation-delay: (($bricksTotal - $brickNum) * 10.19s) - 90s; 
-                animation-duration: (($rowsTotal - $brickRow) * ($rowsTotal - $brickRow) * 0.1s);
-                animation-timing-function: ease-in;
+                animation-name: brickDropInAnimation#{$brickRow};
+                animation-delay: ($bricksTotal - $brickNum) * 190ms; 
+                animation-duration: (($rowsTotal - $brickRow) * 3ms) + 140ms;
+                animation-timing-function: linear;
                 animation-fill-mode: both;
-                @include brickDropInAnimation($brickNum, $brickRow);
+                @include brickDropInAnimation($brickRow, $rowsTotal);
             }
         }
     }
