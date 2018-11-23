@@ -44,10 +44,10 @@
     }
   }
 
-  @mixin brickDropInAnimation($brickNumber) {
+  @mixin brickDropInAnimation($brickNumber, $brickRow) {
     @keyframes brickDropInAnimation#{$brickNumber} {
       0% {
-          transform: translateY(-200% * ($brickNumber/5));
+          transform: translateY(-800% + (($brickRow / 1.5) * 100%));
           opacity: 0;
       }
       
