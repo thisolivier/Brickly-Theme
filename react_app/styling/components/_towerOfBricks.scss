@@ -16,7 +16,8 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
     z-index: 50;
     clip: rect(-8em,$towerWidth,$towerHeight,0px);
     transform-origin: top center;
-    animation: towerOfBricksLocation 1s ease $totalDropTime both;
+    animation-delay: 0.45s;
+    animation: towerOfBricksLocation 1.4s ease $totalDropTime both;
     right: 50vw;
     top: 12em;
     transform: translateX(50%) scale(0.5);
@@ -69,33 +70,11 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
     .brick a{
         color: #fff;
         opacity: 0;
-    }
-
-    &.homeSetupNotBegun {
-        opacity: 0;
-    }
-
-    &.homeSetupBegun {
-        opacity: 1;
-    }
-
-    &.homeLayoutBegun {
-        opacity: 1;
+        text-decoration: none;
+        animation: brickTextAppears 1.2s ease 1.5s forwards;
     }
 
     &.homeLayoutComplete {
-        .brick {
-            a {
-                color: #000;
-                opacity: 1;
-                text-decoration: none;
-            }
-        }
-        left: 100vw;
-        transform: translateX(-120%) scale(1);
-        transform-origin: top left;
-        transition: all 1.4s;
-    
         @media screen and (max-width: 900px) {
             transform: translateX(-115%) scale(1);
             top: 4em;

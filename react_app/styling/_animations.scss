@@ -11,12 +11,14 @@
       left: 50vw;
       top: 15vh;
       transform: translateX(-50%) scale(0.7);
+      margin-top: 0em;
     }
 
     100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
       opacity: 1;
       left: 2em;
-      top: 13vh;
+      top: 0vh;
+      margin-top: $cloudDistanceFromTopAfterAnimation;
     }
   }
 
@@ -26,7 +28,7 @@
       transform: translateY(-100%)
     }
 
-    60% {
+    65% {
       opacity: 0;
     }
 
@@ -43,10 +45,22 @@
     }
 
     100% {
-      top: 14vh;
-      margin-top: $cloudHeight + 2rem;
+      top: $cloudDistanceFromTopAfterAnimation;
+      margin-top: $cloudHeight + 4rem;
       right: 2vw;
       transform: initial;
+    }
+  }
+
+  @keyframes brickTextAppears {
+    from {
+      color: #fff;
+      opacity: 0;
+    }
+
+    to {
+      color: #000;
+      opacity: 1;
     }
   }
 
