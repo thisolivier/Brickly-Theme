@@ -25,7 +25,7 @@ class App extends React.Component {
             showHome: false,
         }
         window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
-        setTimeout(()=>{this.setState({showHome:true})}, 00)
+        setTimeout(()=>{this.setState({showHome:true})}, 800)
     }
 
     render() { return(
@@ -37,8 +37,11 @@ class App extends React.Component {
                 </div>
             </TransitionComponent>
             <TransitionGroup>
-                <TransitionComponent key={this.props.location.pathname} timeout={1000} in={this.state.showHome}>
-                    <Route path="/cat/:categorySlug" component={Category} />   
+                <TransitionComponent timeout={1000} in={this.state.showHome}>
+                    <Switch>
+                        <Route path="/cat/:categorySlug" component={Category} /> 
+                        <Route exact path="/" render={(routeParams) => ( <TowerOfBricks content={WORDPRESS.category} /> )} />  
+                    </Switch>
                 </TransitionComponent>
             </TransitionGroup>
         </div>
