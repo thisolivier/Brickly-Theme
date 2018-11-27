@@ -18,31 +18,52 @@ You likely won't need to touch `index.php`, but it's worth mentioning. It is the
 
 
 ## ToDo
-1. Implement dynamic routing/coorinator flow, see react-router (done)
+- [x] Implement dynamic routing/coorinator flow, see react-router (done)
     - [x] Implement MVP routing 
     - [x] Add links and check navigation between MVP
-2. Build interface with Wordpress
-    - [x] MVP storing info
+- [x] Build interface with Wordpress
+    - [x] MVP storing info (done)
     - [x] Need to add menu locations to allow menus to work again
     - [x] Create stores for meta info and components for rendering
     - [x] Create stores for categories and components for rendering
     - [x] Create stores for posts and components for rendering
-3. Add fonts (done)
-4. Write css for sidebar (done)
+- [x] Add fonts (done)
+- [x] Write css for sidebar (done)
     - [x] Add backgrounds
     - [x] Set font sizing
     - [x] Set column width
     - [x] Add decorations
-5. Write css for main page animation
-    - [ ] On mount, the body should have a loading class, which will set scaling and position of cloud & tower
-    - [ ] Tower will fill 5 brick high template, each brick is added on a delayed loop, with react-transition group handling the appearance.
-    - [ ] Once the final brick’s been animated in, remove loading class, and the rest will transition.
-    - [ ] Finally, inject the DOM for the brick titles and sidebar content.
-6. Make the background work
-7. Build UI 
-    - [ ] Make the tower build 
-    - [ ] Make the tower zoom into place 
-    - [ ] Make a category build 
-    - [ ] Make a tower brick go to a category 
-    - [ ] Make back button work
-8. Make post bricks rich
+- [x] Write css for main page animation
+    - [x] On mount, the body should have a loading class, which will set scaling and position of cloud & tower
+    - [x] First, what is the flow about for the tower? How many elements are we adding?
+    - [x] Once the final brick’s been animated in, remove loading class, and the rest will transition.
+    - [x] Finally, inject the DOM for the brick titles and sidebar content.
+- [ ] Make the background work (void?)
+- [x] Build UI 
+    - [x] Make the tower build 
+    - [x] Make the tower zoom into place 
+    - [x] Make a category build 
+    - [x] Make a tower brick go to a category 
+    - [x] Make back button work
+- [x] Make post bricks rich
+- [x] Plan the final stages
+- [x] finish implementing your triggers for appear appearing appeared, disappear, disappearing, disappeared. 
+    - [x] Find out how to add a pre-appear animation, or possibly, arbitrary VERB VERBing VERDed
+    - [x] Ensure components rendered by the root hang about as they dismount.
+    - [x] Add transitions with simple text or background colour css response and ensure all components are targeted as needed. You only need the parents targeted.
+    - [x] Add transition states to cloud
+    - [x] Make the link to the categories work
+- [ ] Get the tower to move into position
+- [ ] Write animations for the transition classes between home and category
+    - [ ] Tower off to the left and shrinks, moved up slightly
+    - [ ] Cloud sidebar pulls up and opacity lowers
+    - [ ] Cloud scales and rises SLOWER than the tower
+    - [ ] Posts and text come up from bottom fastest, but after posts have almost moved off screen
+- [ ] Refine the post layout
+- [ ] Split mobile from desktop, figure out a mobile css framework for positioning that you can leverage transition groups with. (Should be easy now)
+    - [x] Desktop, do the same
+- [ ] Tweak positioning and choose colours (blue, or pink)
+- [ ] Go through each item in your skills, ensure it’s well filled in
+    - [ ] Add in some iOS stuff.
+
+
