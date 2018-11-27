@@ -6,15 +6,16 @@ class TowerOfBricks extends Component {
     constructor(props){
         super(props)
         this.state = {
-            contentCount: props.content.count,
+            content: WORDPRESS.category,
+            contentCount: WORDPRESS.category.count,
             totalBricksRequired: 10
         }
     }
 
     render() {
-        let bricksToRender = Object.keys(this.props.content).map((slug, index) => 
+        let bricksToRender = Object.keys(this.state.content).map((slug, index) => 
             <section className="brick real" key={index}>
-                <h2><Link to={"/cat/"+slug}>{this.props.content[slug].name}</Link></h2>
+                <h2><Link to={"/cat/"+slug}>{this.state.content[slug].name}</Link></h2>
             </section>
         )
         let brickIndex = bricksToRender.length

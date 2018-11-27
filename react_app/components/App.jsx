@@ -28,24 +28,32 @@ class App extends React.Component {
         setTimeout(()=>{this.setState({showHome:true})}, 800)
     }
 
-    render() { return(
-        <div id="page-inner" className={this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? "compactWidth" : "")}>
-            <TransitionComponent timeout={200} in={this.state.showHome}>
+    render() { 
+        if (this.state.showHome){ return(
+            <div id="page-inner" className={this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? "compactWidth" : "")}>
                 <div className="headerContainer">
                     <HeaderCloud />
-                    <Route exact path="/" component={GenericSidebar} />
+                    <TransitionGroup>
+                        <CSSTransition timeout={200} classNames="sidebar" key={this.props.location.key}>
+                            <Switch location={this.props.location}>
+                                <Route exact path="/" component={GenericSidebar} />
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>
                 </div>
-            </TransitionComponent>
-            <TransitionGroup>
-                <TransitionComponent timeout={1000} in={this.state.showHome}>
-                    <Switch>
-                        <Route path="/cat/:categorySlug" component={Category} /> 
-                        <Route exact path="/" render={(routeParams) => ( <TowerOfBricks content={WORDPRESS.category} /> )} />  
-                    </Switch>
-                </TransitionComponent>
-            </TransitionGroup>
-        </div>
-    )}
+                <TransitionGroup>
+                    <CSSTransition timeout={400} key={this.props.location.key} classNames="router">
+                        <Switch location={this.props.location}>
+                            <Route exact path="/" component={TowerOfBricks} />
+                            <Route path="/cat/:categorySlug" component={Category} />   
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
+        )} else {
+            return <div id="page-inner" className="splashy"></div>
+        }
+    }
         
     getLocationClassName(location) {    
         if (location.pathname === '/') {
