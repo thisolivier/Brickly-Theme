@@ -42,6 +42,12 @@
     0% {
 
     }
+
+    100% {
+      top: 0em;
+      right: 0vw;
+      transform: initial;
+    }
   }
 
   @mixin brickDropInAnimation($brickRow, $rowsTotal) {

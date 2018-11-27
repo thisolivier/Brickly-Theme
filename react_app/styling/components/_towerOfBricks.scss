@@ -1,6 +1,9 @@
 $towerWidth: 20em;
 $towerHeight: 30em;
 $mortarWidth: 5%;
+$bricksTotal: 12;
+$rowsTotal: 6;
+$totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
 
 .towerOfBricksContainer {
     display: flex;
@@ -13,6 +16,10 @@ $mortarWidth: 5%;
     z-index: 50;
     clip: rect(-8em,$towerWidth,$towerHeight,0px);
     transform-origin: bottom center;
+    animation: towerOfBricksLocation 1s ease $totalDropTime both;
+    right: 50vw;
+    top: 12em;
+    transform: translateX(50%) scale(0.5);
 
     .real.brick {
         display: block;
@@ -46,13 +53,11 @@ $mortarWidth: 5%;
             width: 67% - $mortarWidth;
         }
 
-        $bricksTotal: 12;
-        $rowsTotal: 6;
         @for $brickNum from 1 to $bricksTotal {
             $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
             &:nth-child(#{$brickNum}) {
                 animation-name: brickDropInAnimation#{$brickRow};
-                animation-delay: (($bricksTotal - $brickNum) * 90ms) + 250ms; 
+                animation-delay: (($bricksTotal - $brickNum) * 90ms); 
                 animation-duration: ($brickRow * 35ms) + 50ms;
                 animation-timing-function: cubic-bezier(.46,-0.07,.32,.56);
                 animation-fill-mode: both;
@@ -65,11 +70,6 @@ $mortarWidth: 5%;
         color: #fff;
         opacity: 0;
     }
-    left: 50vw;
-    top: 12em;
-    transform: translateX(-50%) scale(0.5);
-    transition: all 1.4s;
-
 
     &.homeSetupNotBegun {
         opacity: 0;

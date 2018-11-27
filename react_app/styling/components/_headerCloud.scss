@@ -7,14 +7,12 @@
   display: flex;
   flex-direction: column;
   z-index: 100;
-  opacity: 0;
   transform-origin: top center;
   
   .home & {
     animation-name: homeAppearence;
-    animation-duration: $brickfall-animation-duration - 0.3s;
+    animation-duration: $brickfall-animation-duration;
     animation-fill-mode: both;
-    animation-delay: 0.3s;
   }
 
 

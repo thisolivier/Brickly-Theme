@@ -4,14 +4,14 @@
     margin: 0 2em;
     max-height: 50em;
     height: auto;
-    animation: sidebarDropdown 0.5s both;
-    animation-delay: $brickfall-animation-duration;
+    animation: sidebarDropdown 0.7s both;
+    animation-delay: $brickfall-animation-duration - 1s;
     animation-timing-function: cubic-bezier(.46,-0.07,.23,.54);
 
     .outlinks {
         margin-top: 0em;
         animation: sidebarDropdown 0.5s both;
-        animation-delay: $brickfall-animation-duration + 0.3s;
+        animation-delay: $brickfall-animation-duration - 0.45s;
         animation-timing-function: cubic-bezier(.46,-0.07,.23,.54);
     }
 }
