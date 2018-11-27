@@ -1,9 +1,10 @@
 .sidebar {
-    position: absolute;
+    position: relative;
     padding-top: 1em;
     margin: 0 2em;
     max-height: 50em;
     height: auto;
+    transform-origin: top center;
     animation: sidebarDropdown 0.7s both;
     animation-delay: $brickfall-animation-duration - 1s;
     animation-timing-function: cubic-bezier(.46,-0.07,.23,.54);

@@ -41,21 +41,17 @@
 }
 
 .theCloud {
-  display: inline-block;
-  box-sizing: border-box;
-  text-align: center;
-  width: 100%;
-  background-color: white;
-  padding: 1.6em;
-  border-radius: 9999px;
   position: relative;
-  z-index: 120;
   transform-origin: left top;
+  text-align: center;
+  background-color: white;
+  padding: $cloudPadding;
+  border-radius: 9999px;
 
   .brand {
     display:inline-block;
     margin:0 0.3em 0.1em 0.1em;
-    font-size: 2.5em;
+    font-size: $cloudTextSize;
 
     #cloudLink {
       display: block;

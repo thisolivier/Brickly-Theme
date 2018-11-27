@@ -15,7 +15,7 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
     transition: all 1.4s;
     z-index: 50;
     clip: rect(-8em,$towerWidth,$towerHeight,0px);
-    transform-origin: bottom center;
+    transform-origin: top center;
     animation: towerOfBricksLocation 1s ease $totalDropTime both;
     right: 50vw;
     top: 12em;

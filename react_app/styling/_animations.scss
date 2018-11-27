@@ -16,36 +16,36 @@
     100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
       opacity: 1;
       left: 2em;
-      top: 14vh;
+      top: 13vh;
     }
   }
 
   @keyframes sidebarDropdown {
     0% {
-      bottom: 0;
       opacity: 0;
-      transform: translateY(0)
+      transform: translateY(-100%)
     }
 
-    50% {
-        opacity: 0;
+    60% {
+      opacity: 0;
     }
 
     100% {
-      bottom: 0;
       opacity: 1;
-      transform: translateY(100%)
+      transform: translateY(0%)
     }
   }
 
   @keyframes towerOfBricksLocation {
     0% {
-
+      top: 15vh;
+      margin-top: $cloudHeight + 6rem;
     }
 
     100% {
-      top: 0em;
-      right: 0vw;
+      top: 14vh;
+      margin-top: $cloudHeight + 2rem;
+      right: 2vw;
       transform: initial;
     }
   }
