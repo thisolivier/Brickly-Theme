@@ -43,88 +43,88 @@
 }
 
 .theCloud {
-    display: inline-block;
-    box-sizing: border-box;
-    text-align: center;
-    width: 100%;
-    background-color: white;
-    padding: 1.6em;
-    border-radius: 9999px;
-    position: relative;
-    z-index: 120;
-    transform-origin: left top;
-  
-    .brand {
-      display:inline-block;
-      margin:0 0.3em 0.1em 0.1em;
-      font-size: 2.5em;
-  
-      #cloudLink {
-        display: block;
-        font-weight: 200;
-        z-index: 30;
-        color: black;
-        text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
-        position: relative;
-        top: -0.1em;
-        left: -0.1em;
-        font-size: 1.5em;
-        margin-bottom: -0.4em;
-        transition: top .5s, left .5s, text-shadow .5s;
-        @include huge{
-          font-size: 1.7em;
-        };
-        &:hover{
-          top:0em;
-          left:0em;
-          text-shadow: 0em 0em rgba(0, 0, 0, 1);
-          text-decoration: none;
-          color:black;
-        }
-      }
-    }
-    
-    .backgroundCloud {
-      .ball{
-        display:block;
-        position:absolute;
-        top: -0.6em;
-        right:0;
-        width:100%;
-        min-width: 1em;
-        pointer-events: none;
-  
-        &:first-child{ max-width: 1.45em; }
-        &:nth-child(2){ max-width: 16rem; }
-        &:nth-child(3){ max-width: 23rem; }
-        &:nth-child(4){
-          max-width: 43rem;
-          margin-right: -0.2em;
-        }
-  
-        &.big {
-          font-size: 10em;
-          top: -0.7em;
-        }
-        &.medium {
-          font-size: 7.8em;
-        }
-        &.small {
-          font-size: 6em;
-        }
-  
-        &:after{
-          position: absolute;
-          left: 0.25em;
-          bottom: 0;
-          display: block;
-          width: 1em;
-          height: 1em;
-          background-color: white;
-          border-radius: 9999px;
-          content: " ";
-        }
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  background-color: white;
+  padding: 1.6em;
+  border-radius: 9999px;
+  position: relative;
+  z-index: 120;
+  transform-origin: left top;
+
+  .brand {
+    display:inline-block;
+    margin:0 0.3em 0.1em 0.1em;
+    font-size: 2.5em;
+
+    #cloudLink {
+      display: block;
+      font-weight: 200;
+      z-index: 30;
+      color: black;
+      text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
+      position: relative;
+      top: -0.1em;
+      left: -0.1em;
+      font-size: 1.5em;
+      margin-bottom: -0.4em;
+      transition: top .5s, left .5s, text-shadow .5s;
+      @include huge{
+        font-size: 1.7em;
+      };
+      &:hover{
+        top:0em;
+        left:0em;
+        text-shadow: 0em 0em rgba(0, 0, 0, 1);
+        text-decoration: none;
+        color:black;
       }
     }
   }
+  
+  .backgroundCloud {
+    .ball{
+      display:block;
+      position:absolute;
+      top: -0.6em;
+      right:0;
+      width:100%;
+      min-width: 1em;
+      pointer-events: none;
+
+      &:first-child{ max-width: 1.45em; }
+      &:nth-child(2){ max-width: 16rem; }
+      &:nth-child(3){ max-width: 23rem; }
+      &:nth-child(4){
+        max-width: 43rem;
+        margin-right: -0.2em;
+      }
+
+      &.big {
+        font-size: 10em;
+        top: -0.7em;
+      }
+      &.medium {
+        font-size: 7.8em;
+      }
+      &.small {
+        font-size: 6em;
+      }
+
+      &:after{
+        position: absolute;
+        left: 0.25em;
+        bottom: 0;
+        display: block;
+        width: 1em;
+        height: 1em;
+        background-color: white;
+        border-radius: 9999px;
+        content: " ";
+      }
+    }
+  }
+}
 
