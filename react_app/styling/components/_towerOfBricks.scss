@@ -52,9 +52,9 @@ $mortarWidth: 5%;
             $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
             &:nth-child(#{$brickNum}) {
                 animation-name: brickDropInAnimation#{$brickRow};
-                animation-delay: ($bricksTotal - $brickNum) * 150ms; 
-                animation-duration: ($brickRow * 20ms) + 100ms;
-                animation-timing-function: cubic-bezier(.46,-0.07,.41,.57);
+                animation-delay: (($bricksTotal - $brickNum) * 90ms) + 250ms; 
+                animation-duration: ($brickRow * 35ms) + 50ms;
+                animation-timing-function: cubic-bezier(.46,-0.07,.32,.56);
                 animation-fill-mode: both;
                 @include brickDropInAnimation($brickRow, $rowsTotal);
             }

@@ -12,9 +12,9 @@
   
   .home & {
     animation-name: homeAppearence;
-    animation-duration: $brickfall-animation-duration - 0.2s;
+    animation-duration: $brickfall-animation-duration - 0.3s;
     animation-fill-mode: both;
-    animation-delay: 0.2s;
+    animation-delay: 0.3s;
   }
 
 

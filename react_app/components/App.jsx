@@ -9,10 +9,10 @@ import Category from './Category'
 
 const TransitionComponent = (props) => (
     <CSSTransition 
-      {...props}
-      timeout={1000}
-      mountOnEnter={true}
-      unmountOnExit={true}
+        {...props}
+        classNames={"launch"}
+        mountOnEnter={true}
+        unmountOnExit={true}
     />
 )
 
@@ -22,24 +22,23 @@ class App extends React.Component {
         super(props)
         this.state = {
             constrainedWidth: window.innerWidth < 680,
+            showHome: false,
         }
         window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
+        setTimeout(()=>{this.setState({showHome:true})}, 00)
     }
 
     render() { return(
         <div id="page-inner" className={this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? "compactWidth" : "")}>
-            <div className="headerContainer">
-                <HeaderCloud />
-                <Route exact path="/" component={GenericSidebar} />
-            </div>
+            <TransitionComponent timeout={200} in={this.state.showHome}>
+                <div className="headerContainer">
+                    <HeaderCloud />
+                    <Route exact path="/" component={GenericSidebar} />
+                </div>
+            </TransitionComponent>
             <TransitionGroup>
-                <TransitionComponent key={this.props.location.pathname}>
-                    <div>
-                        <Switch>
-                            <Route exact path="/" render={(routeParams) => ( <TowerOfBricks content={WORDPRESS.category} /> )} />
-                            <Route path="/cat/:categorySlug" component={Category} />   
-                        </Switch>
-                    </div>
+                <TransitionComponent key={this.props.location.pathname} timeout={1000} in={this.state.showHome}>
+                    <Route path="/cat/:categorySlug" component={Category} />   
                 </TransitionComponent>
             </TransitionGroup>
         </div>

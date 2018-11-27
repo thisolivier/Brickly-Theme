@@ -33,7 +33,7 @@ class TowerOfBricks extends Component {
             )
         }
         return(
-            <div className={"towerOfBricksContainer " + this.props.layoutClassName}>
+            <div className={"towerOfBricksContainer"}>
                 {bricksToRender}
             </div>
         )

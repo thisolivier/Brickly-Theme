@@ -13,7 +13,7 @@
       transform: translateX(-50%) scale(0.7);
     }
 
-    100% {
+    100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
       opacity: 1;
       left: 2em;
       top: 14vh;
