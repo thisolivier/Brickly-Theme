@@ -39,7 +39,7 @@ class App extends React.Component {
     render() { 
     if (this.state.showHome){ 
         return(
-            <div id="page-inner">
+            <div id="page-inner" className={this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? "compactWidth" : "")}>
                 <div className="headerContainer">
                     <HeaderCloud />
                     <TransitionGroup className="sidebar">
