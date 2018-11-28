@@ -37,7 +37,7 @@ class App extends React.Component {
     }
 
     render() { 
-        // if (this.state.showHome){ 
+    if (this.state.showHome){ 
         return(
             <div id="page-inner">
                 <div className="headerContainer">
@@ -61,9 +61,9 @@ class App extends React.Component {
                 </TransitionGroup>
             </div>
         )
-        // } else {
-        //     return <div id="page-inner" className="splashy"></div>
-        // }
+        } else {
+            return <div id="page-inner" className="splashy"></div>
+        }
     }
         
     getLocationClassName(location) {    
