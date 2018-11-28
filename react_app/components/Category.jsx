@@ -1,7 +1,5 @@
 import React from 'react';
 import Post from './Post';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { stringify } from 'querystring';
 
 class Category extends React.Component {
 
