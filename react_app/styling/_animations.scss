@@ -1,80 +1,96 @@
 @keyframes homeAppearence {
-    0% {
-      opacity: 0;
-      left: 50vw;
-      top: 20vh;
-      transform: translateX(-50%) scale(0.7);
-    }
-
-    20%, 50% {
-      opacity: 1;
-      left: 50vw;
-      top: 20vh;
-      transform: translateX(-50%) scale(0.7);
-      margin-top: 0em;
-    }
-
-    100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
-      opacity: 1;
-      left: 2em;
-      top: 0vh;
-      margin-top: $cloudDistanceFromTopAfterAnimation;
-    }
+  0% {
+    opacity: 0;
+    left: 50vw;
+    top: 20vh;
+    transform: translateX(-50%) scale(0.7);
   }
 
-  @keyframes sidebarDropdown {
-    0% {
-      opacity: 0;
-      transform: translateY(-100%)
-    }
-
-    65% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0%)
-    }
+  20%, 50% {
+    opacity: 1;
+    left: 50vw;
+    top: 20vh;
+    transform: translateX(-50%) scale(0.7);
+    margin-top: 0em;
   }
 
-  @keyframes towerOfBricksLocation {
-    0% {
-      top: 10vh;
-      margin-top: $cloudHeight + 6rem;
-      transform: translateX(50%) scale(0.4);
-    }
-
-    100% {
-      top: $cloudDistanceFromTopAfterAnimation;
-      margin-top: $cloudHeight + 6rem;
-      right: 8vw;
-      transform: initial;
-    }
+  100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
+    opacity: 1;
+    left: 2em;
+    top: 0vh;
+    margin-top: $cloudDistanceFromTopAfterAnimation;
   }
+}
+
+@keyframes sidebarDropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%)
+  }
+
+  65% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%)
+  }
+}
+
+@keyframes towerOfBricksLocationAfterDrop {
+  from {
+    top: 10vh;
+    margin-top: $cloudHeight + 6rem;
+    transform: translateX(50%) scale(0.4);
+  }
+
+  to {
+    top: $cloudDistanceFromTopAfterAnimation;
+    margin-top: $cloudHeight + 6rem;
+    right: 8vw;
+    transform: initial;
+  }
+}
+
+@keyframes towerOfBricksMoveOffScreen {
+  0% {
+    opacity: 1;
+    transform: initial
+  }
+
+  50% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(800%) scale(0.4);
+  }
+}
 
   @keyframes brickTextAppears {
-    from {
-      color: #fff;
-      opacity: 0;
-    }
-
-    to {
-      color: #000;
-      opacity: 1;
-    }
+  from {
+    color: #fff;
+    opacity: 0;
   }
+
+  to {
+    color: #000;
+    opacity: 1;
+  }
+}
 
   @mixin brickDropInAnimation($brickRow, $rowsTotal) {
     @keyframes brickDropInAnimation#{$brickRow} {
-      0% {
-          transform: translateY( -600% / ($rowsTotal - $brickRow) );
-          opacity: 0;
+      from {
+        transform: translateY( -600% / ($rowsTotal - $brickRow) );
+        opacity: 0;
       }
       
-      100% {
-          transform: translateY(0%);
-          opacity: 1;
+      to {
+        transform: translateY(0%);
+        opacity: 1;
       }
     }
   }

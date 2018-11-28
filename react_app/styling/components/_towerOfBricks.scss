@@ -15,10 +15,17 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
     height: $towerHeight;
     overflow: hidden;
     clip: rect(-8em,$towerWidth,$towerHeight,0px);
-    transform-origin: top center;
-    transform: translateX(50%) scale(0.5);
-    animation-delay: 0.45s;
-    animation: towerOfBricksLocation 1.4s ease $totalDropTime both;
+
+    .home & {
+        transform-origin: top center;
+        animation-delay: 0.45s;
+        animation: towerOfBricksLocationAfterDrop 1.4s ease $totalDropTime both;
+    }
+
+    .category & {
+        transform-origin: bottom center;
+        animation: towerOfBricksMoveOffScreen 0.6s ease forward;
+    }
 
     .real.brick {
         display: block;

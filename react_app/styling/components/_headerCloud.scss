@@ -9,12 +9,11 @@
   z-index: 100;
   transform-origin: top center;
   
-  .home & {
-    animation-timing-function: ease;
-    animation-name: homeAppearence;
-    animation-duration: $brickfall-animation-duration;
-    animation-fill-mode: both;
-  }
+  animation-timing-function: ease;
+  animation-name: homeAppearence;
+  animation-duration: $brickfall-animation-duration;
+  animation-fill-mode: both;
+  
 
 
 
