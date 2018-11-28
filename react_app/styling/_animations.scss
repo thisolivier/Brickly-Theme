@@ -2,14 +2,14 @@
     0% {
       opacity: 0;
       left: 50vw;
-      top: 15vh;
+      top: 20vh;
       transform: translateX(-50%) scale(0.7);
     }
 
     20%, 50% {
       opacity: 1;
       left: 50vw;
-      top: 15vh;
+      top: 20vh;
       transform: translateX(-50%) scale(0.7);
       margin-top: 0em;
     }
@@ -40,14 +40,15 @@
 
   @keyframes towerOfBricksLocation {
     0% {
-      top: 15vh;
+      top: 10vh;
       margin-top: $cloudHeight + 6rem;
+      transform: translateX(50%) scale(0.4);
     }
 
     100% {
       top: $cloudDistanceFromTopAfterAnimation;
-      margin-top: $cloudHeight + 4rem;
-      right: 2vw;
+      margin-top: $cloudHeight + 6rem;
+      right: 8vw;
       transform: initial;
     }
   }

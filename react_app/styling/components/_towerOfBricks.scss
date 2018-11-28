@@ -7,20 +7,18 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
 
 .towerOfBricksContainer {
     display: flex;
+    flex-wrap: wrap;
     position: absolute;
-    top: 3.5em;
+    top: 12em;
+    right: 50vw;
     width: $towerWidth;
     height: $towerHeight;
-    flex-wrap: wrap;
-    transition: all 1.4s;
-    z-index: 50;
+    overflow: hidden;
     clip: rect(-8em,$towerWidth,$towerHeight,0px);
     transform-origin: top center;
+    transform: translateX(50%) scale(0.5);
     animation-delay: 0.45s;
     animation: towerOfBricksLocation 1.4s ease $totalDropTime both;
-    right: 50vw;
-    top: 12em;
-    transform: translateX(50%) scale(0.5);
 
     .real.brick {
         display: block;
