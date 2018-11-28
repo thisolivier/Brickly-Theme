@@ -52,12 +52,12 @@ class App extends React.Component {
                     </TransitionGroup>
                 </div>
                 <TransitionGroup>
-                    <CSSTransition timeout={{enter:400, exit:400}} key={this.props.location.key} classNames="router">
-                        <Switch>
+                    <FadeTransition timeout={{enter:400, exit:400}} key={this.props.location.key} classNames="router">
+                        <Switch location={this.props.location}>
                             <Route exact path="/" component={TowerOfBricks} />
                             <Route path="/cat/:categorySlug" component={Category} />   
                         </Switch>
-                    </CSSTransition>
+                    </FadeTransition>
                 </TransitionGroup>
             </div>
         )
