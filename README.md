@@ -1,4 +1,4 @@
-# Olivier Empire 2
+# Brickly 2 (alpha dev)
 
 ## Premis
 This is a Wordpress theme that does not rely on the Wordpress templating engine for building pages. It serves a ReactJS app, allowing the designer to build truly flexible UI's. It can query the Wordpress RESTful API, or have Wordpress inject data when serving the app. 
@@ -27,6 +27,7 @@ The `./react_app` directory contains all the files that make up the react app be
 
 
 ## ToDo
+Olivier Empire 2 ToDo
 - [x] Implement dynamic routing/coorinator flow, see react-router (done)
     - [x] Implement MVP routing 
     - [x] Add links and check navigation between MVP
@@ -47,7 +48,7 @@ The `./react_app` directory contains all the files that make up the react app be
     - [x] First, what is the flow about for the tower? How many elements are we adding?
     - [x] Once the final brick’s been animated in, remove loading class, and the rest will transition.
     - [x] Finally, inject the DOM for the brick titles and sidebar content.
-- [ ] Make the background work (void?)
+- [ ] Make the background work
 - [x] Build UI 
     - [x] Make the tower build 
     - [x] Make the tower zoom into place 
@@ -62,18 +63,21 @@ The `./react_app` directory contains all the files that make up the react app be
     - [x] Add transitions with simple text or background colour css response and ensure all components are targeted as needed. You only need the parents targeted.
     - [x] Add transition states to cloud
     - [x] Make the link to the categories work
-- [ ] Get the tower to move into position
+- [x] Get the tower to move into position
+- [x] Make back button work (Jesus Christ)
 - [ ] Write animations for the transition classes between home and category
-    - [ ] Tower off to the left and shrinks, moved up slightly
-    - [ ] Cloud sidebar pulls up and opacity lowers
-    - [ ] Cloud scales and rises SLOWER than the tower
+    - [x] Tower off to the left and shrinks, moved up slightly
+    - [x] Cloud sidebar pulls up and opacity lowers
+    - [x] Cloud scales and rises SLOWER than the tower (can’t do slower, the total time has to be the same and distance is same)
     - [ ] Posts and text come up from bottom fastest, but after posts have almost moved off screen
+- [ ] Optional - try moving the origin point for your brick fall to top left quarter of the screen, it should allow you to do better tower and cloud transitions
+    - [ ] Move tower offscreen my revering the locationAfterDrop animation
 - [ ] Refine the post layout
-- [ ] Split mobile from desktop, figure out a mobile css framework for positioning that you can leverage transition groups with. (Should be easy now)
+    - [ ] Get the image in position with content below it
+    - [ ] 
+- [ ] Split mobile from desktop, figure out a mobile css framework for positioning that you can leverage transition groups with.
     - [x] Desktop, do the same
 - [ ] Tweak positioning and choose colours (blue, or pink)
 - [ ] Go through each item in your skills, ensure it’s well filled in
     - [ ] Add in some iOS stuff.
 - [ ] Add a dummy database/sample content for WordPress to this repo
-
-
