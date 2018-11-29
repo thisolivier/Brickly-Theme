@@ -59,6 +59,7 @@ The `./react_app` directory contains all the files that make up the react app be
     - [x] Make a tower brick go to a category 
     - [x] Make back button work
 - [x] Make post bricks rich
+￼
 - [x] Plan the final stages
 - [x] finish implementing your triggers for appear appearing appeared, disappear, disappearing, disappeared. 
     - [x] Find out how to add a pre-appear animation, or possibly, arbitrary VERB VERBing VERDed
@@ -68,20 +69,25 @@ The `./react_app` directory contains all the files that make up the react app be
     - [x] Make the link to the categories work
 - [x] Get the tower to move into position
 - [x] Make back button work (Jesus Christ)
-- [ ] Write animations for the transition classes between home and category
+- [x] Write animations for the transition classes between home and category
     - [x] Tower off to the left and shrinks, moved up slightly
     - [x] Cloud sidebar pulls up and opacity lowers
     - [x] Cloud scales and rises SLOWER than the tower (can’t do slower, the total time has to be the same and distance is same)
-    - [ ] Posts and text come up from bottom fastest, but after posts have almost moved off screen
+    - [x] Posts and text come up from bottom fastest, but after posts have almost moved off screen
+- [ ] Add missing animation classes so 
+    - [ ] launching from various pages is smooth 
+    - [ ] back button always causes good animations.
 - [ ] Optional - try moving the origin point for your brick fall to top left quarter of the screen, it should allow you to do better tower and cloud transitions
     - [ ] Move tower offscreen my revering the locationAfterDrop animation
 - [ ] Refine the post layout
     - [ ] Get the image in position with content below it
-    - [ ] 
+    - [ ] Arrange header
+    - [ ] Insert body/copy
 - [ ] Split mobile from desktop, figure out a mobile css framework for positioning that you can leverage transition groups with.
     - [x] Desktop, do the same
 - [ ] Tweak positioning and choose colours (blue, or pink)
 - [ ] Go through each item in your skills, ensure it’s well filled in
     - [ ] Add in some iOS stuff.
 - [ ] Add a dummy database/sample content for WordPress to this repo
-- [ ] Add some docs about how this app in particular is structured, maybe fork to a simpler version?
+- [ ] Add some docs about how this app in particular is structured (optional)
+    - [ ] maybe fork to a simpler version?
