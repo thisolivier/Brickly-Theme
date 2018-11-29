@@ -10,24 +10,28 @@ A bit, if I'm honest. You should know what Wordpress is and how themes are diffe
 1. Setup Wordpress (I recommend using [Trellis from Roots.io](https://roots.io/trellis/)), and [clone this repository](https://help.github.com/articles/cloning-a-repository/) into the themes directory.
 2. Install Node v6+ (I recommend using [NVM](https://github.com/creationix/nvm).
 3. Run `$ npm install` from inside the theme directory. This will make Node's package manager install the packages needed for you to get started.
-4. You can now build and preview the theme. Run `$ npm run build` for a one-off, or `$ npm run watch` to track changes. If you go to your Wordpress site in a browser now, you should see a react app, your react app. Good luck!
+4. You can now build and preview the theme. Run `$ npm run build` for a one-off, or `$ npm run watch` to track changes. If you go to your Wordpress site and set this as the theme, your site will now serve the react app!
+5. You can copy the theme files to any Wordpress site and it should work. But don't do that - at least delete the `./eact_app` directory, keep the `./react_app_built` (read on for more).
 
 ## How is this working anyway?
-I'll start with `./functions.php`, this file the required heart of any Wordpress theme. We use it for three main things:
-1. We tell Wordpress we want to inject a CSS and a JS file into any pages it serves- these files make up our React app and are built when you run `$ npm run build`. 
-2. Data is injected into the ReactJS app by Wordpress as the page is seved, meaning that few if any async GET requests are needed down the line (trust me, it's a joy).
-3. There are also tweaks to Wordpress so redundant scripts aren't served, and we can add custom API endpoints for forms and other dynamic content.
+One basic thing to get straight is that in our theme, the page is only served once, then React takes over. As the client navigates around, it's React that's building the new pages from inside the client's browser. This is normal for a single page app (SPA), but very different from how engines like Wordpress and Django normally work, serving new pages when links are clicked. It's important to note then, that the only Wordpress stuff we need to do is serve our React script and CSS, no matter what page the client visits, and to get data into the app. 
 
-The other Wordpress-y file is `index.php` which you probably won't touch, but I'll explain what it does. It is the page Wordpress actually serves to a client visiting your site as `HTML`. For those unfamiliar with `PHP`, the file is parsed on the server every time someone requests it, and the server turns it into `HTML` (while injecting content from your database, for example). It is this initial page where our React script and css are injected, as we setup in `./functions.php`. Once the client receives them, React takes over and replaces the page content with reactive magic. 
+In this dinky theme, it all comes down to `./functions.php`. This file is the required heart of any Wordpress theme, and tells Wordpress what we want done, and what our theme is capable of. We are essentially only doing 3 things in `functions.php`:
+1. We tell Wordpress we want to inject a CSS and a JavaScript file into any pages it serves- these files make up our React app and are built when you run `$ npm run build`. 
+2. Data from the Wordpress installation, like your posts and pages, is injected into the ReactJS app as the page is seved, meaning that few if any async GET requests are needed down the line (trust me, it's a joy, but you can use [Wordpress' API](https://developer.wordpress.org/rest-api/) to dynamically request content should you wish. Also, don't inject sensitive data this way, it's very visible!).
+3. There are also tweaks to Wordpress so redundant scripts aren't served (not perfect, but works). 
+In `functions.php` we could add custom API endpoints for forms and other dynamic content, which your React app can then query through GET or POST (and all the HTTP) requests. Or we can do complex server side calculations. Just remember, the idea is to use Wordpress as the flexible content management tool, and consume its output with ReactJS- we don't want to waste any energy building some clunky tool linking the two, so, building out an API seems good if you need dynamic content (and maybe I'll include some of my stubs soon), but apart from that, get your data and get out quick.
+
+The other Wordpress-y file is `index.php` which you probably won't touch, but I'll explain what it does. It is the page Wordpress actually serves to a client visiting your site as `HTML`. For those unfamiliar with `PHP`, the file is parsed on the server every time someone requests it, and the server turns it into `HTML`. It is this initial page where our React script and css are injected, as we setup in `./functions.php`. Once the client receives them, React takes over and replaces the page content with reactive magic. 
 
 That's all the special magic needed to understand how this Wordpress theme is serving a React app, and frankly it's not tricky to setup if you don't like my style.
 
 ## So, React you say?
 The `./react_app` directory contains all the files that make up the react app before they are stiched together. Exactly how these files are processed is configured for seving using webpack's `./webpack.config.js`. To see the processed files, look in `./react_app_built`, but remeber that this directory is replaced every time you build, you should *never ever* need to edit stuff in it directly.
 
+I'm assuming you're a React developer, and know your ES6, and so this doc won't go into a lot of how the app is built. Also I'm still building it, and also, React is super simple to grasp and has great docs, read a goddam [guide](https://reacttraining.com/react-router/web/example/animated-transitions).
 
 ## ToDo
-Olivier Empire 2 ToDo
 - [x] Implement dynamic routing/coorinator flow, see react-router (done)
     - [x] Implement MVP routing 
     - [x] Add links and check navigation between MVP
