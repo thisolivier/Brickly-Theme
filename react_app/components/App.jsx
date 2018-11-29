@@ -47,7 +47,7 @@ class App extends React.Component {
                 <div id="page-inner" className={this.lastPage + " " + this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? " compactWidth" : "")}>
                     <div className="headerContainer">
                         <HeaderCloud />
-                        <TransitionGroup className="sidebar">
+                        <TransitionGroup>
                             <FadeTransition timeout={{enter:20000, exit:500}} classNames="sidebar" key={this.props.location.key + 1000}>
                                 <Switch location={this.props.location}>
                                     <Route path="/cat" component={EmptyComponent}/>
@@ -57,7 +57,7 @@ class App extends React.Component {
                         </TransitionGroup>
                     </div>
                     <TransitionGroup>
-                        <FadeTransition timeout={{enter:2500, exit:1000}} key={this.props.location.key} classNames="router">
+                        <FadeTransition timeout={{enter:2500, exit:400}} key={this.props.location.key} classNames="router">
                             <Switch location={this.props.location}>
                                 <Route exact path="/" component={TowerOfBricks} />
                                 <Route path="/cat/:categorySlug" component={Category} />   

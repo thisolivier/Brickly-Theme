@@ -5,15 +5,41 @@
     max-height: 50em;
     height: auto;
     transform-origin: top center;
-    animation: sidebarDropdown 0.7s both;
-    animation-delay: $brickfall-animation-duration - 1s;
+    
     animation-timing-function: cubic-bezier(.46,-0.07,.23,.54);
 
     .outlinks {
         margin-top: 2em;
-        animation: sidebarDropdown 0.5s both;
-        animation-delay: $brickfall-animation-duration - 0.45s;
         animation-timing-function: cubic-bezier(.46,-0.07,.23,.54);
+    }
+
+    &.sidebar-appear-active {
+        animation: sidebarDropdown 0.7s both;
+        animation-delay: $brickfall-animation-duration - 1s;
+
+        .outlinks{
+            animation: sidebarDropdown 0.5s both;
+            animation-delay: $brickfall-animation-duration - 0.45s;
+        }
+    }
+
+    &.sidebar-enter-active {
+        animation: sidebarDropdown 0.7s both;
+        animation-delay: 0.5s;
+
+        .outlinks{
+            animation: sidebarDropdown 0.5s both;
+            animation-delay: 0.75s;
+        }
+    }
+
+    &.sidebar-exit-active {
+        animation: sidebarDropdown 0.7s alternate-reverse both;
+        animation-delay: 0.25s;
+
+        .outlinks{
+            animation: sidebarDropdown 0.5s alternate-reverse both;
+        }
     }
 }
 
