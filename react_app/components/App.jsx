@@ -44,7 +44,7 @@ class App extends React.Component {
         }
         if (this.state.showHome){ 
             return(
-                <div id="page-inner" className={this.lastPage + " " + this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? " compactWidth" : "")}>
+                <div id="page-inner" className={this.lastPage + currentPage + " " + currentPage + (this.state.constrainedWidth ? " compactWidth" : "")}>
                     <div className="headerContainer">
                         <HeaderCloud />
                         <TransitionGroup>

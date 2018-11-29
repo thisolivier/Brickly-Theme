@@ -19,19 +19,19 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
 
 
     // Entering the page animations
-    .empty.home &.router-appear-active {
+    .emptyhome &.router-appear-active {
         animation-delay: 0.45s;
         animation: towerOfBricksLocationAfterDrop 1.4s ease $totalDropTime backwards;
     }
 
-    .category.home &.router-enter {
+    .categoryhome &.router-enter {
         animation-delay: 0s;
         animation: towerOfBricksMoveOffScreen 0.4s ease-in alternate-reverse backwards;
     }
 
     // Exiting
-    .home.category &.router-exit-active {
-        transform-origin: center center;
+    .homecategory &.router-exit-active {
+        transform-origin: top;
         animation: towerOfBricksMoveOffScreen 0.4s ease-in both;
     }
 
@@ -69,7 +69,7 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
             width: 67% - $mortarWidth;
         }
 
-        .empty.home & {
+        .emptyhome & {
             @for $brickNum from 1 to $bricksTotal {
                 $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
                 &:nth-child(#{$brickNum}) {

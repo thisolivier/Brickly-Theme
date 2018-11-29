@@ -13,7 +13,7 @@
         animation-timing-function: cubic-bezier(.46,-0.07,.23,.54);
     }
 
-    .empty.home &.sidebar-appear-active {
+    .emptyhome &.sidebar-appear-active {
         animation: sidebarDropdown 0.7s both;
         animation-delay: $brickfall-animation-duration - 1s;
 

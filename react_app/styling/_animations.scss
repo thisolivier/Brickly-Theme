@@ -1,4 +1,4 @@
-@keyframes homeAppearence {
+@keyframes cloudHomeAppearence {
   0% {
     opacity: 0;
     left: 50vw;
@@ -15,10 +15,24 @@
   }
 
   100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
-    opacity: 1;
     left: 2em;
+    transform: translateX(0) scale(1);
     top: 0vh;
     margin-top: $cloudDistanceFromTopAfterAnimation;
+  }
+}
+
+@keyframes cloudPositionCategoryAppears {
+  from {
+    transform: scale(1);
+    left: 2em;
+    top: 0em;
+  }
+
+  to {
+    transform: scale(0.5);
+    top: 3.5em;
+    left: 8vw;
   }
 }
 
@@ -40,7 +54,7 @@
 
 @keyframes towerOfBricksLocationAfterDrop {
   from {
-    top: 10vh;
+    top: 0vh; // TODO: Fix this, your transform origin may be wrong
     right: 50vw;
     margin-top: $cloudHeight + 6rem;
     transform: translateX(50%) scale(0.4);
@@ -66,7 +80,7 @@
 
   100% {
     opacity: 0;
-    transform: translateX(25em);
+    transform: translateX(25em) scale(0.8);
   }
 }
 
@@ -94,4 +108,8 @@
         opacity: 1;
       }
     }
+  }
+
+  @keyframes categoryPageAppears {
+
   }
