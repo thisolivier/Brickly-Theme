@@ -8,36 +8,28 @@
   flex-direction: column;
   z-index: 100;
   transform-origin: top center;
-  
-  .emptyhome & {
-    animation-timing-function: ease;
-    animation-name: cloudHomeAppearence;
-    animation-duration: $brickfall-animation-duration;
-    animation-fill-mode: both;
+
+  .home & {
+    left: 2em;
+    top: 0vh;
+    margin-top: $cloudDistanceFromTopAfterAnimation;
   }
 
-  .category & {
-    top: 3.5em;
-    left: 8vw;
-    transform: scale(0.5);
+  .emptyhome & {
+    animation: cloudHomeAppearence $brickfall-animation-duration ease backwards;
   }
 
   .homecategory & {
-    animation: cloudPositionCategoryAppears 0.6s ease both;
-  }  
-
-  .emptycategory & {
     transform-origin: top left;
-    animation: cloudDropdownCategoryAppear 1s ease-out;
-
+    animation: cloudPositionCategoryAppears 0.6s ease;
   }
 
   .categoryhome & {
     transform-origin: top left;
-    animation: cloudPositionCategoryAppears 0.6s ease both;
+    animation: cloudPositionCategoryAppears 0.6s ease reverse;
   }
 
-  .compactWidth.home & {
+  .compactWidth & {
     position: relative;
     top: 0vw;
     left: 0;
@@ -47,6 +39,21 @@
   
     @media screen and (max-width: 400px) {
       margin: 5em 2vw 0 2vw;
+    }
+  }
+
+  .category & {
+    top: 3.5em;
+    left: 8vw;
+    transform: scale(0.5);
+
+    .homecategory & {
+      animation: cloudPositionCategoryAppears 0.6s ease both;
+    }  
+  
+    .emptycategory & {
+      transform-origin: top left;
+      animation: cloudDropdownCategoryAppear 1s ease-out;
     }
   }
 
