@@ -9,23 +9,33 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
     display: flex;
     flex-wrap: wrap;
     position: absolute;
-    top: 12em;
-    right: 50vw;
+    top: $cloudDistanceFromTopAfterAnimation;
+    right: 8vw;
+    margin-top: $cloudHeight + 6rem;
     width: $towerWidth;
     height: $towerHeight;
     overflow: hidden;
     clip: rect(-8em,$towerWidth,$towerHeight,0px);
 
-    .home & {
-        transform-origin: top center;
+
+    // Entering the page animations
+    .empty.home &.router-appear-active {
         animation-delay: 0.45s;
-        animation: towerOfBricksLocationAfterDrop 1.4s ease $totalDropTime both;
+        animation: towerOfBricksLocationAfterDrop 1.4s ease $totalDropTime backwards;
     }
 
-    .category & {
-        transform-origin: bottom center;
-        animation: towerOfBricksMoveOffScreen 0.6s ease forward;
+    .category.home &.router-enter {
+        animation-delay: 0s;
+        animation: towerOfBricksMoveOffScreen 0.6s ease-in alternate-reverse backwards;
     }
+
+    // Exiting
+    .home.category &.router-exit-active {
+        transform-origin: center center;
+        animation: towerOfBricksMoveOffScreen 0.6s ease-in both;
+    }
+
+    // Decendants
 
     .real.brick {
         display: block;
@@ -59,15 +69,17 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
             width: 67% - $mortarWidth;
         }
 
-        @for $brickNum from 1 to $bricksTotal {
-            $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
-            &:nth-child(#{$brickNum}) {
-                animation-name: brickDropInAnimation#{$brickRow};
-                animation-delay: (($bricksTotal - $brickNum) * 90ms); 
-                animation-duration: ($brickRow * 35ms) + 50ms;
-                animation-timing-function: cubic-bezier(.46,-0.07,.32,.56);
-                animation-fill-mode: both;
-                @include brickDropInAnimation($brickRow, $rowsTotal);
+        .empty.home & {
+            @for $brickNum from 1 to $bricksTotal {
+                $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
+                &:nth-child(#{$brickNum}) {
+                    animation-name: brickDropInAnimation#{$brickRow};
+                    animation-delay: (($bricksTotal - $brickNum) * 90ms); 
+                    animation-duration: ($brickRow * 35ms) + 50ms;
+                    animation-timing-function: cubic-bezier(.46,-0.07,.32,.56);
+                    animation-fill-mode: backwards;
+                    @include brickDropInAnimation($brickRow, $rowsTotal);
+                }
             }
         }
     }

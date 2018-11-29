@@ -41,6 +41,7 @@
 @keyframes towerOfBricksLocationAfterDrop {
   from {
     top: 10vh;
+    right: 50vw;
     margin-top: $cloudHeight + 6rem;
     transform: translateX(50%) scale(0.4);
   }
@@ -65,7 +66,7 @@
 
   100% {
     opacity: 0;
-    transform: translateY(800%) scale(0.4);
+    transform: translateX(25em);
   }
 }
 
