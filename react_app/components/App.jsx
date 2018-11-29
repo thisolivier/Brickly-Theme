@@ -31,49 +31,60 @@ class App extends React.Component {
         this.state = {
             constrainedWidth: window.innerWidth < 680,
             showHome: false,
-        }
+        }   
         window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
+    }
+
+    componentDidMount(){
+        this.lastPage = "empty"
+        this.currentPage = this.getLocationClassName(this.props.location)
         setTimeout(()=>{this.setState({showHome:true})}, 800)
     }
 
     render() { 
-    if (this.state.showHome){ 
-        return(
-            <div id="page-inner" className={this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? "compactWidth" : "")}>
-                <div className="headerContainer">
-                    <HeaderCloud />
-                    <TransitionGroup className="sidebar">
-                        <FadeTransition timeout={{enter:500, exit:500}} classNames="sidebar" key={this.props.location.key + 1000}>
+        const currentPage = this.getLocationClassName(this.props.location)
+        if (this.currentPage != currentPage ) {
+            console.log("mismatch between old : new, ", this.currentPage, " : ", currentPage)
+            this.lastPage = this.currentPage
+            this.currentPage = currentPage
+        }
+        if (this.state.showHome){ 
+            return(
+                <div id="page-inner" className={this.lastPage + " " + this.getLocationClassName(this.props.location) + (this.state.constrainedWidth ? " compactWidth" : "")}>
+                    <div className="headerContainer">
+                        <HeaderCloud />
+                        <TransitionGroup className="sidebar">
+                            <FadeTransition timeout={{enter:500, exit:500}} classNames="sidebar" key={this.props.location.key + 1000}>
+                                <Switch location={this.props.location}>
+                                    <Route path="/cat" component={EmptyComponent}/>
+                                    <Route path="/" exact component={GenericSidebar} />
+                                </Switch>
+                            </FadeTransition>
+                        </TransitionGroup>
+                    </div>
+                    <TransitionGroup>
+                        <FadeTransition timeout={{enter:400, exit:400}} key={this.props.location.key} classNames="router">
                             <Switch location={this.props.location}>
-                                <Route path="/cat" component={EmptyComponent}/>
-                                <Route path="/" exact component={GenericSidebar} />
+                                <Route exact path="/" component={TowerOfBricks} />
+                                <Route path="/cat/:categorySlug" component={Category} />   
                             </Switch>
                         </FadeTransition>
                     </TransitionGroup>
                 </div>
-                <TransitionGroup>
-                    <FadeTransition timeout={{enter:400, exit:400}} key={this.props.location.key} classNames="router">
-                        <Switch location={this.props.location}>
-                            <Route exact path="/" component={TowerOfBricks} />
-                            <Route path="/cat/:categorySlug" component={Category} />   
-                        </Switch>
-                    </FadeTransition>
-                </TransitionGroup>
-            </div>
-        )
+            )
         } else {
             return <div id="page-inner" className="splashy"></div>
         }
     }
         
     getLocationClassName(location) {    
+        var className = ""
         if (location.pathname === '/') {
-            return "home "
+            className += "home"
         } else if (location.pathname.startsWith('/cat')) {
-            return "category "
-        } else {
-            return ""
+            className += "category"
         }
+        return className
     }
 
 }
