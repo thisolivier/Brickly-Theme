@@ -6,6 +6,10 @@
         animation: categoryPageAppears 0.6s ease-out backwards;
     }
 
+    &.router-exit-active {
+        animation: categoryPageAppears 0.6s ease-out alternate-reverse backwards;
+    }
+
     h1{
         font-size: 4em;
     }
