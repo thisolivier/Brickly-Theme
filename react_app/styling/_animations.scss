@@ -39,7 +39,7 @@
 @keyframes sidebarDropdown {
   0% {
     opacity: 0;
-    transform: translateY(-100%)
+    transform: translateY(-100%);
   }
 
   65% {
@@ -48,7 +48,23 @@
 
   100% {
     opacity: 1;
-    transform: translateY(0%)
+    transform: translateY(0%);
+  }
+}
+
+@keyframes cloudDropdownCategoryAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.5);
+  }
+
+  65% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%) scale(0.5);
   }
 }
 
@@ -117,7 +133,19 @@
     }
     
     to {
-      transform: translateY(0%);
+      transform: translateY(0vh);
+      opacity: 1;
+    }
+  }
+
+  @keyframes opacityIn {
+    from {
+      transform: translateY(-5vh);
+      opacity: 0;
+    }
+    
+    to {
+      transform: translateY(0vh);
       opacity: 1;
     }
   }

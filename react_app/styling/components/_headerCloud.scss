@@ -16,11 +16,21 @@
     animation-fill-mode: both;
   }
 
-  .category &, .emptycategory &, .homecategory & {
-    transform-origin: top left;
-    animation: cloudPositionCategoryAppears 0.6s ease both;
+  .category & {
+    top: 3.5em;
+    left: 8vw;
+    transform: scale(0.5);
+  }
 
+  .homecategory & {
+    animation: cloudPositionCategoryAppears 0.6s ease both;
   }  
+
+  .emptycategory & {
+    transform-origin: top left;
+    animation: cloudDropdownCategoryAppear 1s ease-out;
+
+  }
 
   .categoryhome & {
     transform-origin: top left;
