@@ -36,11 +36,6 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
 
     // Decendants
 
-    .real.brick {
-        display: block;
-        overflow: hidden;
-    }
-
     .brick{
 
         position: relative;
@@ -57,8 +52,21 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
             transition: transform 0.3s;
         }
 
+        &:active{
+
+        }
+
         &:nth-child(4n), &:nth-child(4n+1) {
             width: 67% - $mortarWidth;
+        }
+
+        &.real {
+            display: block;
+            overflow: hidden;
+    
+            &:hover {
+                transform: scale(1.07);
+            }
         }
 
         .emptyhome & {
@@ -89,6 +97,11 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
             animation: brickTextAppears 1.2s ease 0.25s backwards;
             .emptyhome & {
                 animation: brickTextAppears 1s ease ($brickfall-animation-duration + 0.2s) backwards;
+            }
+
+            .category & {
+                transition: color 0.2s;
+                color: #ffffff
             }
         }
     }
