@@ -4,24 +4,23 @@
 
     .singlePostContainer {
         position: relative;
-        padding: 10em 0;
         overflow: hidden;
         @include colourfulBackgroundGradient;
+        margin: 4vh 5vw;
+        border-radius: 3vw;
     }
 
     .image {
         height: 28vw;
-        background-size: conver;
-        background-position: center;
+        background-size: cover;
+        background-position: center bottom;
     }
 
     .singlePostContent{
         text-align: left;
-        max-width: 29em;
         overflow: visible;
-        display: inline-block;
         background-color: white;
-        padding: 0 2em 2em 2em;
+        padding: 1px 2em 2em 2em;
 
         h2, section {
             z-index: 150;
@@ -69,20 +68,6 @@
 
         .postDescription {
             display: none;
-        }
-
-        &:after {
-            content: " ";
-            position: absolute;
-            left: -15%;
-            top:50%;
-            margin-top: -59%;
-            width: 130%;
-            height: auto;
-            padding-top: 130%;
-            border-radius: 50%;
-            background: #fff;
-            opacity: 0;
         }
     }
 
