@@ -14,9 +14,9 @@ class TowerOfBricks extends Component {
 
     render() {
         let bricksToRender = Object.keys(this.state.content).map((slug, index) => 
-            <section className="brick real" key={index}>
-                <h2><Link to={"/cat/"+slug}>{this.state.content[slug].name}</Link></h2>
-            </section>
+            <Link to={"/cat/"+slug} className="brick real" key={index}>
+                <h2>{this.state.content[slug].name}</h2>
+            </Link>
         )
         let brickIndex = bricksToRender.length
         const length = bricksToRender.length * 2
