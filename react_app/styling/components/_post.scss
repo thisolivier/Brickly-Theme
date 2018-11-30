@@ -1,20 +1,24 @@
 .postsContainer {
     display: flex;
     flex-direction: column;
-    @include colourfulBackgroundGradient;
 
     .singlePostContainer {
         position: relative;
-        background-size: cover;
         padding: 10em 0;
         overflow: hidden;
+        @include colourfulBackgroundGradient;
+    }
+
+    .image {
+        height: 28vw;
+        background-size: conver;
+        background-position: center;
     }
 
     .singlePostContent{
         text-align: left;
         max-width: 29em;
         overflow: visible;
-        position: relative;
         display: inline-block;
         background-color: white;
         padding: 0 2em 2em 2em;
