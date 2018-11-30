@@ -5,7 +5,8 @@ class Post extends React.Component {
     render() {
         var post = WORDPRESS.posts[this.props.postId]
         return (
-            <div className="singlePostContainer" style={{backgroundImage: "url(" + post.image + ")"}}>
+            <div className="singlePostContainer">
+                <div className="image" style={{backgroundImage: "url(" + post.image + ")"}}></div>
                 <div className="singlePostContent">
                     <h2>{post.title}</h2>
                     <section className="info">

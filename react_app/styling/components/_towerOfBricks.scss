@@ -85,22 +85,14 @@ $totalDropTime: (($bricksTotal - 1) * 90ms) + (35ms + 50ms);
     }
 
     .brick a{
-        color: #fff;
-        opacity: 0;
+        color: #000000;
         text-decoration: none;
-        animation: brickTextAppears 1.2s ease 1.5s forwards;
-    }
-
-    &.homeLayoutComplete {
-        @media screen and (max-width: 900px) {
-            transform: translateX(-115%) scale(1);
-            top: 4em;
-        }
-        @media screen and (max-width: 780px) {
-            transform: translateX(-100%) scale(1);
+        animation: brickTextAppears 1.2s ease 0.25s backwards;
+        .emptyhome & {
+            animation: brickTextAppears 1s ease ($brickfall-animation-duration + 0.2s) backwards;
         }
     }
-   
+    
 }
 
 .home.compactWidth .towerOfBricksContainer {
