@@ -13,6 +13,10 @@ img{
     max-width: 100%;
 }
 
+.disable {
+    pointer-events: none;
+}
+
 .hidden, .hide {
     display: none;
 }

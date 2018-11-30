@@ -46,7 +46,7 @@ class App extends React.Component {
             return(
                 <div id="page-inner" className={this.lastPage + currentPage + " " + currentPage + (this.state.constrainedWidth ? " compactWidth" : "")}>
                     <div className="headerContainer">
-                        <HeaderCloud />
+                        <HeaderCloud routingAtIndex={currentPage == "home"}/>
                         <TransitionGroup>
                             <FadeTransition timeout={{enter:20000, exit:500}} classNames="sidebar" key={this.props.location.key + 1000}>
                                 <Switch location={this.props.location}>
