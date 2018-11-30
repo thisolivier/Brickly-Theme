@@ -1,6 +1,7 @@
 .categoryContainer {
     margin-top: 8em;
     text-align: center;
+    z-index: 500;
 
     .category &.router-enter-active, .category &.router-appear-active {
         animation: categoryPageAppears 0.6s ease-out backwards;

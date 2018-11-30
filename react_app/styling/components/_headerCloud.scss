@@ -1,5 +1,7 @@
 .headerContainer {
   // Width is designed to collapse to full screen on iPhone SE
+  left: 2em;
+  top: 0vh;
   width: 50vw;
   max-width: 400pt;
   min-width: 250pt;
@@ -7,11 +9,8 @@
   display: flex;
   flex-direction: column;
   z-index: 100;
-  transform-origin: top center;
 
   .home & {
-    left: 2em;
-    top: 0vh;
     margin-top: $cloudDistanceFromTopAfterAnimation;
   }
 
@@ -20,12 +19,10 @@
   }
 
   .homecategory & {
-    transform-origin: top left;
     animation: cloudPositionCategoryAppears 0.6s ease;
   }
 
   .categoryhome & {
-    transform-origin: top left;
     animation: cloudPositionCategoryAppears 0.6s ease reverse;
   }
 
@@ -43,18 +40,11 @@
   }
 
   .category & {
-    top: 3.5em;
-    left: 8vw;
+    transform-origin: top left;
+    top: 1em;
+    left: 2em;
     transform: scale(0.5);
-
-    .homecategory & {
-      animation: cloudPositionCategoryAppears 0.6s ease both;
-    }  
-  
-    .emptycategory & {
-      transform-origin: top left;
-      animation: cloudDropdownCategoryAppear 1s ease-out;
-    }
+    margin-top: 0;
   }
 
 }
