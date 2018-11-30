@@ -22,6 +22,19 @@
     margin-top: $cloudDistanceFromTopAfterAnimation;
   }
 }
+// With the cloud, use the appearing to handle the stationary part, then trigger the movement on appeared
+// Appeared maybe shouldn't have a from, only a to? Is that possible?
+@keyframes cloudTextAppear {
+  from {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+
+  to {
+    margin-left: 0em;
+    margin-right: 0em;
+  }
+}
 
 @keyframes cloudPositionCategoryAppears {
   from {

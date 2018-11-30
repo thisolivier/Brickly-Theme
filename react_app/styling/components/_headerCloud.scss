@@ -21,11 +21,6 @@
   .homecategory & {
     animation: cloudPositionCategoryAppears 0.6s ease;
   }
-
-  .categoryhome & {
-    animation: cloudPositionCategoryAppears 0.6s ease reverse;
-  }
-
   .compactWidth & {
     position: relative;
     top: 0vw;
@@ -43,8 +38,8 @@
     transform-origin: top left;
     top: 1em;
     left: 2em;
+    margin-top: $cloudDistanceFromTopAfterAnimation / 2;
     transform: scale(0.5);
-    margin-top: 0;
   }
 
 }
@@ -56,6 +51,10 @@
   background-color: white;
   padding: $cloudPadding;
   border-radius: 9999px;
+
+  .emptyhome & {
+    animation: cloudTextAppear ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
+  }
 
   .brand {
     display:inline-block;

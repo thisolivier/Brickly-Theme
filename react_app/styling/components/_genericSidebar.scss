@@ -35,7 +35,6 @@
 
     &.sidebar-exit-active {
         animation: sidebarDropdown 0.7s alternate-reverse both;
-        animation-delay: 0.25s;
 
         .outlinks{
             animation: sidebarDropdown 0.5s alternate-reverse both;
