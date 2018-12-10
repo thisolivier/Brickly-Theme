@@ -17,27 +17,44 @@
     }
 
     .singlePostContent{
+        display: flex;
+        flex-direction: row;
         text-align: left;
         overflow: visible;
         background-color: white;
         padding: 1px 2em 2em 2em;
 
-        h2, section {
-            z-index: 150;
-            position: relative;
-        }
-
-        h2 {
-            font-weight: 700;
-            font-size: 2.2em;
-        }
-
-        .byLine {
-            font-weight: 600;
-
+        .info{
+            flex: 0 0 38em;
+            h2 {
+                font-weight: 700;
+                font-size: 2.2em;
+            }
+    
+            .byLine {
+                font-weight: 600;
+            }
+    
+            .tags {
+                font-size: 0.8em;
+                list-style-type: none;
+                padding: 0;
+                line-height: 1.8;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                li {
+                    font-weight: 700;
+                    color: #fff;
+                    background-color: #000;
+                    border-color: #000;
+                    @include inlineButton();
+                }
+            }
         }
 
         .postLinks {
+            flex: 1 1 66%;
             margin: 0.5em 0 0.7em 0;
             a {
                 @include inlineLink();
@@ -49,22 +66,7 @@
             }
         }
 
-        .tags {
-            font-size: 0.8em;
-            list-style-type: none;
-            padding: 0;
-            line-height: 1.8;
-            text-align: left;
-            width: 100%;
-            margin: 0;
-            li {
-                font-weight: 700;
-                color: #fff;
-                background-color: #000;
-                border-color: #000;
-                @include inlineButton();
-            }
-        }
+
     }
 
 }
