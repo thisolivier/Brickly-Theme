@@ -4,6 +4,7 @@ import Post from './Post';
 class Category extends React.Component {
 
     render(){
+        console.log('rendering category')
         let categorySlug = this.props.match.params['categorySlug']
         var currentCategory = WORDPRESS.category[categorySlug]
         var categoriesPosts = Object.keys(WORDPRESS.posts).filter(postId => WORDPRESS.posts[postId.toString()].categories.includes(categorySlug))

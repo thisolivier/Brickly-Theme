@@ -38,7 +38,6 @@ class App extends React.Component {
     render() { 
         const currentPage = this.getLocationClassName(this.props.location)
         if (this.currentPage != currentPage ) {
-            console.log("mismatch between old : new, ", this.currentPage, " : ", currentPage)
             this.lastPage = this.currentPage
             this.currentPage = currentPage
         }
@@ -72,15 +71,13 @@ class App extends React.Component {
     }
         
     getLocationClassName(location) {    
-        var className = ""
         if (location.pathname === '/') {
-            className += "home"
+            return "home"
         } else if (location.pathname.startsWith('/cat')) {
-            className += "category"
+            return "category"
         }
-        return className
     }
 
 }
 
-export default withRouter(App)
+export default App

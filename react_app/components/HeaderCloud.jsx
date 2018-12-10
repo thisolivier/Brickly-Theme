@@ -5,7 +5,7 @@ const HeaderCloud = (props) => (
     <div className="theCloud">
         <h1 className="brand">
             <span id="cloudLink">
-                {props.routingAtIndex ? WORDPRESS.site.name :  <Link to={'/'} activeClassName="disable">{WORDPRESS.site.name}</Link>}
+                {props.routingAtIndex ? WORDPRESS.site.name :  <Link to={'/'}>{WORDPRESS.site.name}</Link>}
             </span>
         </h1>
         <div className="backgroundCloud" aria-hidden="true">

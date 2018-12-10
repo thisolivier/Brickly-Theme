@@ -14,7 +14,7 @@ class TowerOfBricks extends Component {
 
     render() {
         let bricksToRender = Object.keys(this.state.content).map((slug, index) => 
-            <Link key={index} to={"/cat/"+slug} className="brick real" activeClassName="active">
+            <Link key={index} to={"/cat/"+slug} className="brick real">
                 <h2>{this.state.content[slug].name}</h2>
             </Link>
         )

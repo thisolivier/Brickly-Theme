@@ -19,7 +19,7 @@ class GenericSidebar extends Component {
                 <div className="aboutOlivier">
                     <h2>{WORDPRESS.author.title}</h2>
                     {WORDPRESS.author.content.split('/').map((string, key)=>(
-                        <p key={key}>{string}</p>
+                        <p key={key}>{String(string)}</p>
                     ))}
                     <OutLinks />
                 </div>

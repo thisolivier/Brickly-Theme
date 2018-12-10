@@ -1,29 +1,45 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
+import {CSSTransition} from 'react-transition-group'
 
 class Post extends React.Component {
+
+    constructor(props){
+        super(props)
+        let post = WORDPRESS.posts[this.props.postId]
+        this.state = {
+            showCopy: false,
+        }
+        this.post = post
+        this.byline = ReactHtmlParser(post.byLine),
+        this.content = ReactHtmlParser(post.content)
+    }
+
     render() {
-        var post = WORDPRESS.posts[this.props.postId]
+        var readMoreHandler = ()=>{this.setState({showCopy: !this.state.showCopy})}
         return (
             <div className="singlePostContainer">
-                <div className="image" style={{backgroundImage: "url(" + post.image + ")"}}></div>
                 <div className="singlePostContent">
-                    <h2>{post.title}</h2>
+                    <h2>{this.post.title}</h2>
                     <section className="info">
-                        <p className="byLine">{ReactHtmlParser(post.byLine)}</p>
+                        <p className="byLine">{this.state.byline}</p>
                         <nav className="postLinks">
-                            <a href={post.liveSite}>Live Site</a>
-                            <a href={post.repo}>Repository</a>
+                            <a href={this.post.liveSite}>Live Site</a>
+                            <a href={this.post.repo}>Repository</a>
+                            <a onClick={readMoreHandler}>Read More</a>
                         </nav>
                         <ul className="tags">
-                            {post.tags.map((tag, index)=><li key={index}>{tag}</li>)}
+                            {this.post.tags.map((tag, index)=><li key={index}>{tag}</li>)}
                         </ul>
                     </section>
-                    <section className="postDescription">
-                        {/* TODO: Use MD formatting in wordpress and an MD parser with scripting disabled in react */}
-                        {ReactHtmlParser(post.content)}
-                    </section>
+                    
+                    <CSSTransition in={this.state.showCopy} mountOnEnter unmountOnExit timeout={300} classNames="toggle">
+                        <section className="postDescription">
+                            {this.content}
+                        </section>
+                    </CSSTransition>
                 </div>
+                <div className="image" style={{backgroundImage: "url(" + this.post.image + ")"}}></div>
             </div>
         )
     }
