@@ -51,6 +51,21 @@
   }
 }
 
+@keyframes cloudPositionCategoryDisappears {
+  from {
+    transform: scale(0.5);
+    left: 2em;
+    top: 1em;
+    margin-top: $cloudDistanceFromTopAfterAnimation / 2;
+  }
+  to {
+    transform: scale(1);
+    left: 2em;
+    top: 0em;
+    margin-top: $cloudDistanceFromTopAfterAnimation;
+  }
+}
+
 @keyframes sidebarDropdown {
   0% {
     opacity: 0;

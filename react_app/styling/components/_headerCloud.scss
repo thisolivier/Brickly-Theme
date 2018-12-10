@@ -21,6 +21,12 @@
   .homecategory & {
     animation: cloudPositionCategoryAppears 0.6s ease;
   }
+
+  .categoryhome & {
+    transform-origin: top left;
+    animation: cloudPositionCategoryDisappears 1s;
+  }
+
   .compactWidth & {
     position: relative;
     top: 0vw;
@@ -46,7 +52,6 @@
 
 .theCloud {
   position: relative;
-  transform-origin: left top;
   text-align: center;
   background-color: white;
   padding: $cloudPadding;
