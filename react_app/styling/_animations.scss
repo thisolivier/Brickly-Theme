@@ -179,3 +179,15 @@
       opacity: 1;
     }
   }
+
+  @keyframes heightIn {
+    from {
+      opacity: 0;
+      max-height: 0em;
+    }
+
+    to {
+      opacity: 1;
+      max-height: 50em;
+    }
+  }

@@ -74,18 +74,21 @@ The `./react_app` directory contains all the files that make up the react app be
     - [x] Cloud sidebar pulls up and opacity lowers
     - [x] Cloud scales and rises SLOWER than the tower (can’t do slower, the total time has to be the same and distance is same)
     - [x] Posts and text come up from bottom fastest, but after posts have almost moved off screen
-- [ ] Add missing animation classes so 
-    - [ ] launching from various pages is smooth 
-    - [ ] back button always causes good animations.
+- [x] Add missing animation classes so 
+    - [x] launching from various pages is smooth 
+    - [x] back button always causes good animations.
 - [ ] Optional - try moving the origin point for your brick fall to top left quarter of the screen, it should allow you to do better tower and cloud transitions
     - [ ] Move tower offscreen my revering the locationAfterDrop animation
-- [ ] Refine the post layout
-    - [ ] Get the image in position with content below it
-    - [ ] Arrange header
-    - [ ] Insert body/copy
+- [x] Refine the post layout
+    - [x] Get the image in position with content below it
+    - [x] Arrange header
+    - [x] Insert body/copy
+    - [x] Arrange content and nav links in flex row, only the central column can grow, and the internal info class should have a max width to preserve readability.
+    - [x] The read more and links should extend outward using negative margins, and the decorative background bump can be added as it is now.
+- [ ] Attempt to deploy
+- [ ] Add a cloud to the category header
 - [ ] Split mobile from desktop, figure out a mobile css framework for positioning that you can leverage transition groups with.
     - [x] Desktop, do the same
-- [ ] Tweak positioning and choose colours (blue, or pink)
 - [ ] Go through each item in your skills, ensure it’s well filled in
     - [ ] Add in some iOS stuff.
 - [ ] Add a dummy database/sample content for WordPress to this repo

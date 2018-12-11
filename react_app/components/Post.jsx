@@ -24,7 +24,6 @@ class Post extends React.Component {
                     <img className="image" src={this.post.image ? this.post.image : ""}></img>
                 </div>
                 <div className="singlePostContent">
-                    <a className="readMoreButton footerElement" onClick={readMoreHandler}>{readMoreText}</a>
                     <section className="info">
                         <div className="widthController">
                             <h2 className="postTitle">{this.post.title}</h2>
@@ -32,12 +31,13 @@ class Post extends React.Component {
                             <ul className="tags">
                                 {this.post.tags.map((tag, index)=><li key={index}>{tag}</li>)}
                             </ul>
-                            <CSSTransition in={this.state.showCopy} mountOnEnter unmountOnExit timeout={300} classNames="toggle">
+                            <CSSTransition in={this.state.showCopy} mountOnEnter unmountOnExit timeout={700} classNames="toggle">
                                 <section className="postDescription">
                                     {this.content}
                                 </section>
                             </CSSTransition>
                         </div>
+                        <a className="readMoreButton footerElement" onClick={readMoreHandler}>{readMoreText}</a>
                     </section>
                     <nav className="postLinks footerElement">
                         <a href={this.post.liveSite}>Live Site ↗</a>
