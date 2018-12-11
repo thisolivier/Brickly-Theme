@@ -23,13 +23,12 @@
         }
     }
 
-    .home &.sidebar-enter-active {
+    .categoryhome &.sidebar-enter-active {
         animation: sidebarDropdown 0.7s both;
-        animation-delay: 0.5s;
 
         .outlinks{
             animation: sidebarDropdown 0.5s both;
-            animation-delay: 0.75s;
+            animation-delay: 0.1s;
         }
     }
 
