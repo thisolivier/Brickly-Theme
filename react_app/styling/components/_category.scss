@@ -16,14 +16,76 @@
     }
 
     .categoryHeaderContainer {
-        h1{
+        position: relative;
+        left:0;
+        right: 0;
+        margin: 0 auto 2em auto;
+        max-width: 30em;
+        padding-top: 3em;
+        background-color: #fff;
+        border-radius: 25%;
+
+        h1 {
             font-size: 4em;
+            z-index: 8;
+            position: relative;
+            margin: 0 0 0.2em 0;
         }
 
-        p.categoryDescription {
-            max-width: 30em;
+        p {
             display: inline-block;
-            margin-bottom: 4em;
+            margin-bottom: 2em;
+            z-index: 8;
+            position: relative;
+        }
+
+        .categoryCloud {
+            position: absolute;
+            background-color: #fff;
+            z-index: 5;
+            border-radius: 50em;            
+
+            &.one {
+                width: 186%;
+                height: 60%;
+                left: -20%;
+                bottom: 0;
+            }
+
+            &.two {
+                width: 58%;
+                padding-top: 58%;
+                left: -30%;
+                top: -16%;
+            }
+
+            &.three {
+                width: 33%;
+                padding-top: 33%;
+                left: 15%;
+                top: -5.5%;
+            }
+
+            &.four {
+                width: 65%;
+                padding-top: 65%;
+                left: 38%;
+                top: -21.5%;
+            }
+
+            &.five {
+                width: 22%;
+                padding-top: 44%;
+                right: -18%;
+                top: 10%;
+            }
+
+            &.six {
+                width: 20%;
+                padding-top: 44%;
+                right: -32%;
+                top: 20%;
+            }
         }
     }
 

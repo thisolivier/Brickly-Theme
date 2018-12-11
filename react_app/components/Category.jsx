@@ -12,7 +12,13 @@ class Category extends React.Component {
             <div className="categoryContainer">
                 <div className="categoryHeaderContainer">
                     <h1>{currentCategory.name}</h1>
-                    <p className="categoryDescription">{currentCategory.description}</p>
+                    <p>{currentCategory.description}</p>
+                    <div className="categoryCloud one"></div>
+                    <div className="categoryCloud two"></div>
+                    <div className="categoryCloud three"></div>
+                    <div className="categoryCloud four"></div>
+                    <div className="categoryCloud five"></div>
+                    <div className="categoryCloud six"></div>
                 </div>
                 <div className="postsContainer">
                     {categoriesPosts.map((postId)=>
