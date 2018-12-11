@@ -1,0 +1,11 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>antiCorner2</title>
+  <path class="cls-1" d="M500,500V0H0C276.14,0,500,223.86,500,500Z" transform="translate(0 0)"/>
+</svg>

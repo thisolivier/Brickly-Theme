@@ -7,35 +7,43 @@
         display: flex;
         flex-direction: column;
     }
+
     .imageWrapperForGradientFallback {
         height: 28vw;
         overflow: hidden;
-        margin: 0 2em;
+        margin: 0 0.3em;
+        border-radius: 3vw 3vw 0 0;
+        margin-bottom: -1vw;
         @include colourfulBackgroundGradient;
     }
+
     .image {
         min-width: 100%;
     }
+
     .clearSymptomsOfDivitusWrapper {
         flex: 1 0 100%;
         background-color: white;
+        border-radius: 1vw;
+        text-align: center;
     }
+
     .singlePostContent{
         max-width: 60em;
-        display: inline-flex;
-        flex-direction: row;
-        text-align: left;
-        overflow: visible;
-        padding: 1em 0;
+        display: inline-block;
+        padding: 2em 0 1em 0;
+        text-align: initial;
 
         .info{
-            flex: 0 0 38em;
+            max-width: 38em;
+            margin-right: 22em;
             
             h2 {
                 margin: 0;
                 font-weight: 700;
                 font-size: 2.2em;
             }
+
             .byLine {
                 font-weight: 500;
                 margin-top: 0.5em;
@@ -43,6 +51,7 @@
                     @include inlineLink()
                 }
             }
+
             .tags {
                 font-size: 0.8em;
                 list-style-type: none;
@@ -59,20 +68,37 @@
                 }
             }
         }
+    }
 
-        .postLinks {
-            flex: 1 1 66%;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: center;
+    .postLinks {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        position: relative;
+        background-color: rgba(255,255,255,1);
+        padding: 0.5em 2em 0.5em 2em;
+        margin: 0 1.8vw;
+        border-radius: 0 0 1vw 1vw;
+        min-height: 1.8vw;
 
-            a {
-                margin: 0 0.6em;
-                text-transform: uppercase;
-                text-decoration: none;
-                color: inherit;
-            }
+        a {
+            margin: 0 0.6em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        &:before {
+            left: -1vw;
+            background-image: url(./graphics/antiCorner2.svg);
+            @include stupidInverseCorners;
+        }
+
+        &:after {
+            right: -1vw;
+            background-image: url(./graphics/antiCorner1.svg);
+            @include stupidInverseCorners;
         }
     }
 }
