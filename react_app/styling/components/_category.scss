@@ -15,12 +15,16 @@
         animation: categoryPageAppears 0.4s ease-out alternate-reverse backwards;
     }
 
-    h1{
-        font-size: 4em;
+    .categoryHeaderContainer {
+        h1{
+            font-size: 4em;
+        }
+
+        p.categoryDescription {
+            max-width: 30em;
+            display: inline-block;
+            margin-bottom: 4em;
+        }
     }
-    p.categoryDescription {
-        max-width: 30em;
-        display: inline-block;
-        margin-bottom: 4em;
-    }
+
 }
