@@ -41,6 +41,7 @@ class Post extends React.Component {
                         <a href={this.post.repo}>Repository ↗</a>
                     </nav>
                 </div>
+                <div className="decorativeFooter">Boop</div>
             </div>
         )
     }
