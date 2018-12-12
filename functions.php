@@ -1,5 +1,23 @@
 <?php
 
+// THEME CAPABILITIES
+add_theme_support( 'menus' );
+add_theme_support( 'post-thumbnails' ); 
+add_action( 'init', function () {
+    register_nav_menu('outlinks', 'Links to other sites');
+} );
+
+// REMOVE WP EMOJI
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
+// REMOVE oEmbed
+remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+add_filter( 'tiny_mce_plugins', 'disable_embeds_tiny_mce_plugin' );
+
+// SERVING REACT APP
 function getCategories() {
     $wordpressCategories = get_categories();
     $formattedCategories = array();
@@ -91,50 +109,36 @@ function brickly_scriptsAndStyles() {
         'posts' => getPosts(),
     ) ) ) );
 }
+
 add_action( 'wp_enqueue_scripts', 'brickly_scriptsAndStyles' );
 
-function handleEnquiryFormSubmission( $data ) {
-    $first_name = sanitize_text_field( trim( $data['first_name'] ) );
-    $last_name = sanitize_text_field( trim( $data['last_name'] ) );
-    $email = sanitize_email( trim( $data['email'] ) );
-    $message = sanitize_text_field( trim( $data['message'] ) );
+// ADD API ENDPOINT FOR FORM SUBMISSION (works with flamingo)
 
-    $form_post = array(
-        'post_title'    => "Enquiry form from {$first_name}",
-        'post_content'  => 'Hello this is the wordpress content field',
-        'post_status'   => 'publish',
-        'post_author'   => 1,
-        'post_type' => 'flamingo_inbound'
-    );
-      
-    $id = wp_insert_post( $form_post );
-    add_post_meta($id, '_from', "{$first_name} {$last_name}", true);
-    add_post_meta($id, '_from_email', $email, true);
-    add_post_meta($id, '_subject', $message, false);
+// function handleEnquiryFormSubmission( $data ) {
+//     $first_name = sanitize_text_field( trim( $data['first_name'] ) );
+//     $last_name = sanitize_text_field( trim( $data['last_name'] ) );
+//     $email = sanitize_email( trim( $data['email'] ) );
+//     $message = sanitize_text_field( trim( $data['message'] ) );
 
-    // You should send a response!
-  }
+//     $form_post = array(
+//         'post_title'    => "Enquiry form from {$first_name}",
+//         'post_content'  => 'Hello this is the wordpress content field',
+//         'post_status'   => 'publish',
+//         'post_author'   => 1,
+//         'post_type' => 'flamingo_inbound'
+//     );
 
-add_action( 'rest_api_init', function () {
-  register_rest_route( 'brickly/v1', '/enquiry', array(
-    'methods' => 'POST',
-    'callback' => 'handleEnquiryFormSubmission'
-  ) );
-} );
+//     $id = wp_insert_post( $form_post );
+//     add_post_meta($id, '_from', "{$first_name} {$last_name}", true);
+//     add_post_meta($id, '_from_email', $email, true);
+//     add_post_meta($id, '_subject', $message, false);
 
-add_theme_support( 'menus' );
-add_theme_support( 'post-thumbnails' ); 
+//     // You should send a response!
+//   }
 
-add_action( 'init', function () {
-    register_nav_menu('outlinks', 'Links to other sites');
-} );
-
-// REMOVE WP EMOJI
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-remove_action('wp_print_styles', 'print_emoji_styles');
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-remove_action( 'admin_print_styles', 'print_emoji_styles' );
-
-// REMOVE oEmbed
-remove_action( 'wp_head', 'wp_oembed_add_host_js' );
-add_filter( 'tiny_mce_plugins', 'disable_embeds_tiny_mce_plugin' );
+// add_action( 'rest_api_init', function () {
+//   register_rest_route( 'brickly/v1', '/enquiry', array(
+//     'methods' => 'POST',
+//     'callback' => 'handleEnquiryFormSubmission'
+//   ) );
+// } );
