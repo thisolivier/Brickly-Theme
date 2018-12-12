@@ -97,12 +97,9 @@ function brickly_scriptsAndStyles() {
                 'root' => esc_url_raw( $url ),
             ),
         ),
-        'author' => array(
+        'sidebar' => array(
             'title' => $authorPost->post_title,
-            'content' => $authorPost->post_content,
-            'name' => get_post_meta(98, 'name', true),
-            'telephone' => get_post_meta(98, 'telephone', true),
-            'email' => get_post_meta(98, 'email', true),
+            'bodyText' => $authorPost->post_content,
         ),
         'category' => getCategories(),
         'outlinks' => getMenuInfo('outlinks'),

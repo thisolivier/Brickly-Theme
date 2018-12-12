@@ -9,7 +9,7 @@
     <head>
         <meta charset="<?php bloginfo( 'charset' ); ?>">
         <meta name="viewport" content="width=device-width">
-        <title>Celestial</title>
+        <title>Olivier.uk</title>
         <?php wp_head(); ?>
     </head>
     <body>

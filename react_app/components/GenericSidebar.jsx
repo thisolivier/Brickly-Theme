@@ -17,8 +17,8 @@ class GenericSidebar extends Component {
         return(
             <div className="sidebar">
                 <div className="aboutOlivier">
-                    <h2>{WORDPRESS.author.title}</h2>
-                    {WORDPRESS.author.content.split('/').map((string, key)=>(
+                    <h2>{WORDPRESS.sidebar.title}</h2>
+                    {WORDPRESS.sidebar.bodyText.split('/').map((string, key)=>(
                         <p key={key}>{String(string)}</p>
                     ))}
                     <OutLinks />
