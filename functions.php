@@ -86,7 +86,7 @@ function brickly_scriptsAndStyles() {
 
     $url = trailingslashit( home_url() );
     $path = trailingslashit( parse_url( $url, PHP_URL_PATH ) );
-    $authorPost = get_post(98);
+    $authorPost = get_post(get_option('page_on_front'));
 
     wp_scripts()->add_data( 'react-app', 'data', sprintf( 'var WORDPRESS = %s;', wp_json_encode( array(
         'site' => array(
