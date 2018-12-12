@@ -1,6 +1,6 @@
 {
   "name": "bickly-wordpress-theme",
-  "version": "1.0.0",
+  "version": "2.0.2",
   "description": "A headless Wordpress theme with a playful touch",
   "repository": {
     "type": "git",
@@ -18,25 +18,27 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "image-webpack-loader": "^3.4.2",
+    "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.5.3",
-    "path": "^0.12.7",
-    "react-router-dom": "^4.2.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
-    "webpack": "^3.6.0",
+    "webpack": "^4.27.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.5",
+    "path": "^0.12.7",
+    "react-router-dom": "^4.2.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-html-parser": "^2.0.2",
     "react-transition-group": "^2.5.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "build": "webpack",   
-    "watch": "webpack --watch"
+    "build": "webpack --config webpack.dev.js",
+    "watch": "webpack --watch --config webpack.dev.js",
+    "produce": "webpack --config webpack.prod.js"
   },
   "keywords": [
     "wordpress",
