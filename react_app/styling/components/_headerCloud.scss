@@ -49,6 +49,7 @@
 }
 
 .theCloud {
+  z-index: 700;
   position: relative;
   text-align: center;
   background-color: white;
@@ -57,10 +58,21 @@
 
   .emptyhome & {
     animation: cloudHomeAppear ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
+    
+    .brand {
+      position: relative;
+      animation: opacityIn ($brickfall-animation-duration / 2) ($brickfall-animation-duration - 0.7s) backwards;
+    }
+  }
+
+  .compactWidth.emptyhome & {
+    animation: cloudHomeAppearMobile ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
   }
 
   .brand {
+    z-index: 800;
     display:inline-block;
+    position: relative;
     margin:0 0.3em 0.1em 0.1em;
     font-size: $cloudTextSize;
 
@@ -72,7 +84,6 @@
     #cloudLink {
       display: block;
       font-weight: 200;
-      z-index: 30;
       color: black;
       text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
       position: relative;
@@ -96,6 +107,7 @@
   
   .backgroundCloud {
     .ball{
+      z-index: 550;
       display:block;
       position:absolute;
       top: -0.6em;

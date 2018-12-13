@@ -37,6 +37,17 @@
   }
 }
 
+@keyframes cloudHomeAppearMobile {
+  from {
+    margin-left: 4em;
+    margin-right: 4em;
+  }
+  to {
+    margin-left: 0em;
+    margin-right: 0em;
+  }
+}
+
 @keyframes headerContainerPositionCategoryAppears {
   from {
     left: 2em;
@@ -108,7 +119,7 @@
     top: 0vh; // TODO: Fix this, your transform origin may be wrong
     right: 50vw;
     margin-top: $cloudHeight + 10rem;
-    transform: translateX(50%) scale(0.4);
+    transform: translateX(50%) scale(0.5);
   }
   to {
     top: $cloudDistanceFromTopAfterAnimation;
@@ -134,12 +145,15 @@
     opacity: 1;
     transform: initial
   }
-  50% {
-    opacity: 1
+  20%{
+    opacity: 0.6;
+  }
+  40%{
+    opacity: 0;
   }
   100% {
     opacity: 0;
-    transform: translateX(25em) scale(0.8);
+    transform: translateX(25em);
   }
 }
 
@@ -187,11 +201,9 @@
 
 @keyframes opacityIn {
   from {
-    transform: translateY(-5vh);
     opacity: 0;
   }
   to {
-    transform: translateY(0vh);
     opacity: 1;
   }
 }
