@@ -4,6 +4,16 @@ $small-width: 38em;
 $medium-width: 58em;
 $large-width: 75em;
 
+
+// Related to tower of bricks and home launch
+$bricksTotal: 12;
+$rowsTotal: 6;
+$towerWidth: 20em;
+$towerHeight: 30em;
+$mortarWidth: 5%;
+$minimumBrickDropTime: 50ms;
+$incrementalBrickDropTime: 35ms;
+$totalBricksDropTime: (($bricksTotal - 1) * 90ms) + $minimumBrickDropTime + $incrementalBrickDropTime;
 $brickfall-animation-duration: 2.4s;
 
 $cloudTextSize: 2.5rem;

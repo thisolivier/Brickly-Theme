@@ -130,7 +130,13 @@
   }
 }
 
-@mixin brickDropInAnimation($brickRow, $rowsTotal) {
+@mixin brickDropInAnimation($rowsTotal, $brickNum) {
+  $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
+  animation-name: brickDropInAnimation#{$brickRow};
+  animation-delay: (($bricksTotal - $brickNum) * 90ms); 
+  animation-duration: $minimumBrickDropTime + ($brickRow * $incrementalBrickDropTime);
+  animation-timing-function: cubic-bezier(.46,-0.07,.32,.56);
+  animation-fill-mode: backwards;
   @keyframes brickDropInAnimation#{$brickRow} {
     from {
       transform: translateY( -600% / ($rowsTotal - $brickRow) );
