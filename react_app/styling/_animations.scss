@@ -3,10 +3,9 @@
     opacity: 0;
     left: 50vw;
     top: 20vh;
-    transform: translateX(-50%) scale(0.7);
+    transform: translateX(-50%) scale(0.5);
     margin-top: 0em;
   }
-
   20%, 50% {
     opacity: 1;
     top: 20vh;
@@ -14,7 +13,6 @@
     transform: translateX(-50%) scale(0.7);
     margin-top: 0em;
   }
-
   100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
     left: 2em;
     top: 0vh;
@@ -29,7 +27,6 @@
     margin-left: 2em;
     margin-right: 2em;
   }
-
   to {
     margin-left: 0em;
     margin-right: 0em;
@@ -43,7 +40,6 @@
     transform: scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
   }
-
   to {
     top: 1em;
     left: 2em;
@@ -71,11 +67,9 @@
     opacity: 0;
     transform: translateY(-100%);
   }
-
   65% {
     opacity: 0;
   }
-
   100% {
     opacity: 1;
     transform: translateY(0%);
@@ -87,11 +81,9 @@
     opacity: 0;
     transform: translateY(-100%) scale(0.5);
   }
-
   65% {
     opacity: 0;
   }
-
   100% {
     opacity: 1;
     transform: translateY(0%) scale(0.5);
@@ -102,10 +94,9 @@
   from {
     top: 0vh; // TODO: Fix this, your transform origin may be wrong
     right: 50vw;
-    margin-top: $cloudHeight + 6rem;
+    margin-top: $cloudHeight + 10rem;
     transform: translateX(50%) scale(0.4);
   }
-
   to {
     top: $cloudDistanceFromTopAfterAnimation;
     margin-top: $cloudHeight + 6rem;
@@ -119,11 +110,9 @@
     opacity: 1;
     transform: initial
   }
-
   50% {
     opacity: 1
   }
-
   100% {
     opacity: 0;
     transform: translateX(25em) scale(0.8);
@@ -135,59 +124,54 @@
     color: #ffffff;
     opacity: 0.0;
   }
-
   to {
     color: #000000;
     opacity: 1.0;
   }
 }
 
-  @mixin brickDropInAnimation($brickRow, $rowsTotal) {
-    @keyframes brickDropInAnimation#{$brickRow} {
-      from {
-        transform: translateY( -600% / ($rowsTotal - $brickRow) );
-        opacity: 0;
-      }
-      
-      to {
-        transform: translateY(0%);
-        opacity: 1;
-      }
-    }
-  }
-
-  @keyframes categoryPageAppears {
+@mixin brickDropInAnimation($brickRow, $rowsTotal) {
+  @keyframes brickDropInAnimation#{$brickRow} {
     from {
-      transform: translateY(100vh);
+      transform: translateY( -600% / ($rowsTotal - $brickRow) );
       opacity: 0;
     }
-    
     to {
-      transform: translateY(0vh);
+      transform: translateY(0%);
       opacity: 1;
     }
   }
+}
 
-  @keyframes opacityIn {
-    from {
-      transform: translateY(-5vh);
-      opacity: 0;
-    }
-    
-    to {
-      transform: translateY(0vh);
-      opacity: 1;
-    }
+@keyframes categoryPageAppears {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
   }
-
-  @keyframes heightIn {
-    from {
-      opacity: 0;
-      max-height: 0em;
-    }
-
-    to {
-      opacity: 1;
-      max-height: 50em;
-    }
+  to {
+    transform: translateY(0vh);
+    opacity: 1;
   }
+}
+
+@keyframes opacityIn {
+  from {
+    transform: translateY(-5vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0vh);
+    opacity: 1;
+  }
+}
+
+@keyframes heightIn {
+  from {
+    opacity: 0;
+    max-height: 0em;
+  }
+  to {
+    opacity: 1;
+    max-height: 50em;
+  }
+}
