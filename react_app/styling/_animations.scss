@@ -1,10 +1,11 @@
-@keyframes cloudHomeAppearence {
+@keyframes headerContainerHomeAppearence {
   0% {
     opacity: 0;
     left: 50vw;
     top: 20vh;
     transform: translateX(-50%) scale(0.5);
     margin-top: 0em;
+    margin-left: 0em;
   }
   20%, 50% {
     opacity: 1;
@@ -12,34 +13,20 @@
     left: 50vw;
     transform: translateX(-50%) scale(0.7);
     margin-top: 0em;
+    margin-left: 0em;
   }
   100% { // Use css-transition-group to delay the rendering of the cloud by 0.2s, immediaqte fade in. The entry period lasts the $brickanimationduration time, and once it's gone, we move the cloud
-    left: 2em;
+    left: 0vw;
     top: 0vh;
     transform: translateX(0) scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
+    margin-left: 2em;
   }
 }
 
-// @keyframes cloudHomePostAppearence {
-//   from {
-//     opacity: 1;
-//     top: 20vh;
-//     left: 50vw;
-//     transform: translateX(-50%) scale(0.7);
-//     margin-top: 0em;
-//   }
-//   to{
-//     left: 2em;
-//     top: 0vh;
-//     transform: translateX(0) scale(1);
-//     margin-top: $cloudDistanceFromTopAfterAnimation;
-//   }
-// }
-
 // With the cloud, use the appearing to handle the stationary part, then trigger the movement on appeared
 // Appeared maybe shouldn't have a from, only a to? Is that possible?
-@keyframes cloudTextAppear {
+@keyframes cloudHomeAppear {
   from {
     margin-left: 2em;
     margin-right: 2em;
@@ -50,7 +37,7 @@
   }
 }
 
-@keyframes cloudPositionCategoryAppears {
+@keyframes headerContainerPositionCategoryAppears {
   from {
     left: 2em;
     top: 0em;
@@ -64,7 +51,7 @@
   }
 }
 
-@keyframes cloudPositionCategoryDisappears {
+@keyframes headerContainerPositionCategoryDisappears {
   from {
     transform: scale(0.5);
     left: 2em;

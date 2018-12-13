@@ -13,7 +13,6 @@ $towerHeight: 30em;
 $mortarWidth: 5%;
 $minimumBrickDropTime: 50ms;
 $incrementalBrickDropTime: 35ms;
-    // The following variable should match the CSSTransition time used by react
     // Value @ 2.0.2 == 1075ms
 $totalBricksDropTime: (($bricksTotal - 1) * 90ms) + $minimumBrickDropTime + $incrementalBrickDropTime;
 $brickfall-animation-duration: 2.4s;

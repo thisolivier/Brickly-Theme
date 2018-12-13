@@ -1,8 +1,9 @@
 .headerContainer {
   // Width is designed to collapse to full screen on iPhone SE
-  left: 2em;
-  top: 0vh;
+  left: 0;
+  top: 0;
   width: 50vw;
+  margin-left: 2em;
   max-width: 400pt;
   min-width: 250pt;
   position: absolute;
@@ -15,22 +16,23 @@
   }
 
   .emptyhome & {
-    animation: cloudHomeAppearence $brickfall-animation-duration ease backwards;
+    animation-name: headerContainerHomeAppearence;
+    animation-duration: $brickfall-animation-duration;
+    animation-timing-function: ease;
+    animation-fill-mode: backwards;
   }
 
   .homecategory & {
-    animation: cloudPositionCategoryAppears 0.6s ease;
+    animation: headerContainerPositionCategoryAppears 0.6s ease;
   }
 
   .categoryhome & {
     transform-origin: top left;
-    animation: cloudPositionCategoryDisappears 0.5s;
+    animation: headerContainerPositionCategoryDisappears 0.5s;
   }
 
   .compactWidth & {
     position: relative;
-    top: 0vw;
-    left: 0;
     min-width: 200pt;
     width: auto;
     margin: 5em 5vw 0 5vw;
@@ -58,7 +60,7 @@
   border-radius: 9999px;
 
   .emptyhome & {
-    animation: cloudTextAppear ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
+    animation: cloudHomeAppear ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
   }
 
   .brand {
