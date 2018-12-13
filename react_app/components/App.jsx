@@ -14,6 +14,7 @@ const FadeTransition = (props) => (
         enter={true}
         exit={true}
         appear={true}
+        mountOnEnter={true}
         unmountOnExit={true}
     />
 )
@@ -24,7 +25,7 @@ class App extends React.Component {
         super(props)
         this.state = {
             constrainedWidth: window.innerWidth < 680,
-            showHome: false,
+            showContent: false,
         }   
         window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
     }
@@ -32,7 +33,7 @@ class App extends React.Component {
     componentDidMount(){
         this.lastPage = "empty"
         this.currentPage = this.getLocationClassName(this.props.location)
-        setTimeout(()=>{this.setState({showHome:true})}, 800)
+        setTimeout(()=>{this.setState({showContent:true})}, 800)
     }
 
     render() { 
@@ -41,7 +42,7 @@ class App extends React.Component {
             this.lastPage = this.currentPage
             this.currentPage = currentPage
         }
-        if (this.state.showHome){ 
+        if (this.state.showContent){ 
             return(
                 <div id="page-inner" className={this.lastPage + currentPage + " " + currentPage + (this.state.constrainedWidth ? " compactWidth" : "")}>
                     <div className="headerContainer">

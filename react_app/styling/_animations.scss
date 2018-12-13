@@ -20,6 +20,23 @@
     margin-top: $cloudDistanceFromTopAfterAnimation;
   }
 }
+
+// @keyframes cloudHomePostAppearence {
+//   from {
+//     opacity: 1;
+//     top: 20vh;
+//     left: 50vw;
+//     transform: translateX(-50%) scale(0.7);
+//     margin-top: 0em;
+//   }
+//   to{
+//     left: 2em;
+//     top: 0vh;
+//     transform: translateX(0) scale(1);
+//     margin-top: $cloudDistanceFromTopAfterAnimation;
+//   }
+// }
+
 // With the cloud, use the appearing to handle the stationary part, then trigger the movement on appeared
 // Appeared maybe shouldn't have a from, only a to? Is that possible?
 @keyframes cloudTextAppear {
@@ -132,6 +149,7 @@
 
 @mixin brickDropInAnimation($rowsTotal, $brickNum) {
   $brickRow: $rowsTotal - floor(($bricksTotal - $brickNum)/2);
+
   animation-name: brickDropInAnimation#{$brickRow};
   animation-delay: (($bricksTotal - $brickNum) * 90ms); 
   animation-duration: $minimumBrickDropTime + ($brickRow * $incrementalBrickDropTime);

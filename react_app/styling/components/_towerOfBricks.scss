@@ -9,28 +9,20 @@
     height: $towerHeight;
     clip: rect(-8em,($towerWidth + 0.5em),$towerHeight,-0.5em);
 
-
-    // Entering the page animations
     .emptyhome &.router-appear-active {
         animation-delay: 0.45s;
         animation: towerOfBricksLocationAfterDrop 1.4s ease $totalBricksDropTime backwards;
     }
-
     .categoryhome &.router-enter {
         animation-delay: 0s;
         animation: towerOfBricksMoveOffScreen 0.4s ease-in alternate-reverse backwards;
     }
-
-    // Exiting
     .homecategory &.router-exit-active {
         transform-origin: top;
         animation: towerOfBricksMoveOffScreen 0.4s ease-in both;
     }
 
-    // Decendants
-
     .brick{
-
         position: relative;
         width: 33% - $mortarWidth;
         height: (1/6)*100%;
@@ -38,29 +30,6 @@
         border-radius: 0.9em;
         background-color: white;
         transition: transform 0.3s;
-
-        &:hover {
-            transform-origin: center center;
-            transform: scale(1.05);
-            transition: transform 0.3s;
-        }
-
-        &:active{
-
-        }
-
-        &:nth-child(4n), &:nth-child(4n+1) {
-            width: 67% - $mortarWidth;
-        }
-
-        &.real {
-            display: block;
-            overflow: hidden;
-    
-            &:hover {
-                transform: scale(1.07);
-            }
-        }
 
         .emptyhome & {
             @for $brickNum from 1 to $bricksTotal {
@@ -70,6 +39,22 @@
             }
         }
 
+        &:hover {
+            transform-origin: center center;
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+        &:nth-child(4n), &:nth-child(4n+1) {
+            width: 67% - $mortarWidth;
+        }        
+        &.real {
+            display: block;
+            overflow: hidden;
+            &:hover {
+                transform: scale(1.07);
+            }
+        }
+        
         h2 {
             text-align: center;
             position: absolute;
@@ -86,7 +71,6 @@
             .emptyhome & {
                 animation: brickTextAppears 1s ease ($brickfall-animation-duration + 0.2s) backwards;
             }
-
             .category & {
                 transition: color 0.2s;
                 color: #ffffff
