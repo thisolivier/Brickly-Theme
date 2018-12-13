@@ -26,6 +26,13 @@
     }
 }
 
+.compactWidth .sidebar .aboutOlivier {
+    font-size: 1.5em;
+    h2 {
+        display: none;
+    }
+}
+
 .emptyhome .sidebar{
     max-height: 5em;
     opacity: 0;

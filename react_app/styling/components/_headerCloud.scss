@@ -23,6 +23,7 @@
   }
 
   .homecategory & {
+    transform-origin: top left;
     animation: headerContainerPositionCategoryAppears 0.6s ease;
   }
 
@@ -44,6 +45,7 @@
     left: 2em;
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
     transform: scale(0.5);
+    max-width: 320pt;
   }
 
 }
@@ -75,12 +77,14 @@
     position: relative;
     margin:0 0.3em 0.1em 0.1em;
     font-size: $cloudTextSize;
+    .compactWidth & {
+      margin:0.4em 0.3em 0.6em 0.1em;
+    }
 
     a{
       color: inherit;
       text-decoration: inherit;
     }
-
     #cloudLink {
       display: block;
       font-weight: 200;
@@ -94,7 +98,8 @@
       transition: top .5s, left .5s, text-shadow .5s;
       @include huge{
         font-size: 1.7em;
-      };
+      }
+
       &:hover{
         top:0em;
         left:0em;

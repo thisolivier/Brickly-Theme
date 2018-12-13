@@ -36,6 +36,12 @@ class App extends React.Component {
         setTimeout(()=>{this.setState({showContent:true})}, 800)
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== prevProps.location) {
+            window.scrollTo(0, 0)
+        }
+    }
+
     render() { 
         const currentPage = this.getLocationClassName(this.props.location)
         if (this.currentPage != currentPage ) {

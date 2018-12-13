@@ -20,7 +20,7 @@ class Post extends React.Component {
         var readMoreText = this.state.showCopy ? "Close ↑": "Read More ↓"
         return (
             <div className="singlePostContainer">
-                <div class="imageWrapperForGradientFallback">
+                <div className="imageWrapperForGradientFallback">
                     <img className="image" src={this.post.image ? this.post.image : ""}></img>
                 </div>
                 <div className="singlePostContent">
