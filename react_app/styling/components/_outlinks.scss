@@ -1,9 +1,9 @@
 .outlinks {
     a {
         display: inline-block;
-        width: 2.2em;
-        height: 2.2em;
-        background-color: aquamarine;
+        width: $outlinksDiameter;
+        height: $outlinksDiameter;
+        background-color: white;
         margin-right: 0.6em;
         background-size: cover;
         color: transparent;

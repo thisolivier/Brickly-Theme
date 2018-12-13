@@ -65,20 +65,29 @@
     margin-top: $cloudDistanceFromTopAfterAnimation;
   }
 }
-
-@keyframes sidebarDropdown {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  65% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0%);
+@mixin sidebarDropdownAnimation($initialHeight) {
+  @keyframes sidebarDropdown#{$initialHeight} {
+    0% {
+      opacity: 0;
+      max-height: $initialHeight;
+      transform: translateY(-100%);
+    }
+    45% {
+      opacity: 0;
+    }
+    90% {
+      max-height: 20em;
+    }
+    100%{
+      opacity: 1;
+      transform: translateY(0%);
+    }
   }
 }
+
+@include sidebarDropdownAnimation(0em);
+@include sidebarDropdownAnimation(5em);
+@include sidebarDropdownAnimation($outlinksDiameter);
 
 @keyframes cloudDropdownCategoryAppear {
   0% {
@@ -106,6 +115,17 @@
     margin-top: $cloudHeight + 6rem;
     right: 8vw;
     transform: initial;
+  }
+}
+
+@keyframes towerOfBricksLocationAfterDropMobile {
+  from {
+
+    transform: scale(0.4) translateY(0%);
+  }
+  to {
+
+    transform: scale(1.4) translateY(-10%);
   }
 }
 

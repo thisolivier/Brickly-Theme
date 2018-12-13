@@ -35,11 +35,7 @@
     position: relative;
     min-width: 200pt;
     width: auto;
-    margin: 5em 5vw 0 5vw;
-  
-    @media screen and (max-width: 400px) {
-      margin: 5em 2vw 0 2vw;
-    }
+    margin: $cloudDistanceFromTopAfterAnimation 5vw 0 5vw;
   }
 
   .category & {

@@ -13,34 +13,50 @@
         animation-timing-function: cubic-bezier(.46,-0.07,.23,.54);
     }
 
-    .emptyhome &.sidebar-appear-active {
-        animation: sidebarDropdown 0.7s both;
-        animation-delay: $brickfall-animation-duration - 1s;
-
-        .outlinks{
-            animation: sidebarDropdown 0.5s both;
-            animation-delay: $brickfall-animation-duration - 0.45s;
-        }
-    }
-
-    .categoryhome &.sidebar-enter-active {
-        animation: sidebarDropdown 0.7s both;
-
-        .outlinks{
-            animation: sidebarDropdown 0.5s both;
-            animation-delay: 0.1s;
-        }
-    }
-
     &.sidebar-exit-active {
-        animation: sidebarDropdown 0.7s alternate-reverse both;
+        animation: sidebarDropdown0em 0.7s alternate-reverse both;
 
         .outlinks{
-            animation: sidebarDropdown 0.5s alternate-reverse both;
+            animation: sidebarDropdown0em 0.5s alternate-reverse both;
+        }
+    }
+
+    .compactWidth & {
+        margin: 1em;
+    }
+}
+
+.emptyhome .sidebar{
+    max-height: 5em;
+    opacity: 0;
+}
+
+.emptyhome .sidebar.sidebar-enter-done {
+    opacity: 1;
+    max-height: initial;
+    animation-name: sidebarDropdown5em;
+    animation-duration: 0.7s;
+    animation-fill-mode: backwards;
+
+    .outlinks{
+        animation: sidebarDropdown#{$outlinksDiameter} 0.5s backwards;
+        animation-delay: 0.55s; 
+        
+        .mobileWidth & {
+            animation-duration: 0.8s;
         }
     }
 }
 
-.compactWidth .sidebar {
-    margin: 1em;
+.compactWidth.emptyhome .sidebar.sidebar-enter-done {
+    animation-duration: 1.5s;
+}
+
+.categoryhome .sidebar.sidebar-enter-active {
+    animation: sidebarDropdown 0.7s both;
+
+    .outlinks{
+        animation: sidebarDropdown 0.5s both;
+        animation-delay: 0.1s;
+    }
 }
