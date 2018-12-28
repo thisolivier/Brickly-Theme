@@ -33,7 +33,7 @@
     }
 }
 
-.emptyhome .sidebar{
+.emptyhome .sidebar {
     max-height: 5em;
     opacity: 0;
 }
@@ -59,11 +59,11 @@
     animation-duration: 1.5s;
 }
 
-.categoryhome .sidebar.sidebar-enter-active {
-    animation: sidebarDropdown 0.7s both;
+.categoryhome .sidebar {
+    animation: sidebarDropdown5em 0.7s both;
 
     .outlinks{
-        animation: sidebarDropdown 0.5s both;
+        animation: sidebarDropdown#{$outlinksDiameter} 0.5s both;
         animation-delay: 0.1s;
     }
 }
