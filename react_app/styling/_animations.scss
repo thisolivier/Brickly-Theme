@@ -1,3 +1,59 @@
+/////////////////////////
+// Generic Animations  //
+/////////////////////////
+
+@keyframes opacityIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes heightIn {
+  from {
+    opacity: 0;
+    max-height: 0em;
+  }
+  to {
+    opacity: 1;
+    max-height: 50em;
+  }
+}
+
+@keyframes inFromRightWithOpacity {
+  0% {
+    opacity: 1;
+    transform: initial
+  }
+  20%{
+    opacity: 0.6;
+  }
+  40%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(25vw);
+  }
+}
+
+@keyframes upFromBottomWithOpacity {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0vh);
+    opacity: 1;
+  }
+}
+
+/////////////////////
+// Header Wrapper  //
+/////////////////////
+
 @keyframes headerContainerHomeAppearence {
   0% {
     opacity: 0;
@@ -21,30 +77,6 @@
     transform: translateX(0) scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
     margin-left: 2em;
-  }
-}
-
-// With the cloud, use the appearing to handle the stationary part, then trigger the movement on appeared
-// Appeared maybe shouldn't have a from, only a to? Is that possible?
-@keyframes cloudHomeAppear {
-  from {
-    margin-left: 2em;
-    margin-right: 2em;
-  }
-  to {
-    margin-left: 0em;
-    margin-right: 0em;
-  }
-}
-
-@keyframes cloudHomeAppearMobile {
-  from {
-    margin-left: 4em;
-    margin-right: 4em;
-  }
-  to {
-    margin-left: 0em;
-    margin-right: 0em;
   }
 }
 
@@ -81,6 +113,37 @@
     max-width: 400pt;
   }
 }
+
+//////////////
+// Cloud    //
+//////////////
+
+@keyframes cloudMarginsHomeAppear {
+  from {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+  to {
+    margin-left: 0em;
+    margin-right: 0em;
+  }
+}
+
+@keyframes cloudMarginsHomeAppearMobile {
+  from {
+    margin-left: 4em;
+    margin-right: 4em;
+  }
+  to {
+    margin-left: 0em;
+    margin-right: 0em;
+  }
+}
+
+//////////////
+// Sidebar  //
+//////////////
+
 @mixin sidebarDropdownAnimation($initialHeight) {
   @keyframes sidebarDropdown#{$initialHeight} {
     0% {
@@ -118,6 +181,9 @@
     transform: translateY(0%) scale(0.5);
   }
 }
+//////////////////////
+// Tower of Bricks  //
+//////////////////////
 
 @keyframes towerOfBricksLocationAfterDrop {
   from {
@@ -142,23 +208,6 @@
   to {
 
     transform: scale(1.4) translateY(-10%);
-  }
-}
-
-@keyframes towerOfBricksMoveOffScreen {
-  0% {
-    opacity: 1;
-    transform: initial
-  }
-  20%{
-    opacity: 0.6;
-  }
-  40%{
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(25em);
   }
 }
 
@@ -190,36 +239,5 @@
       transform: translateY(0%);
       opacity: 1;
     }
-  }
-}
-
-@keyframes categoryPageAppears {
-  from {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0vh);
-    opacity: 1;
-  }
-}
-
-@keyframes opacityIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes heightIn {
-  from {
-    opacity: 0;
-    max-height: 0em;
-  }
-  to {
-    opacity: 1;
-    max-height: 50em;
   }
 }

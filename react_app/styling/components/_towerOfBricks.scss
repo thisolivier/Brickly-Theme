@@ -16,12 +16,12 @@
     
     .categoryhome &.router-enter {
         animation-delay: 0s;
-        animation: towerOfBricksMoveOffScreen 0.4s ease-in alternate-reverse backwards;
+        animation: inFromRightWithOpacity 0.4s ease-in alternate-reverse backwards;
     }
 
     .homecategory &.router-exit-active {
         transform-origin: top;
-        animation: towerOfBricksMoveOffScreen 0.9s both;
+        animation: inFromRightWithOpacity 0.9s both;
     }
 
     .compactWidth & {
@@ -52,7 +52,7 @@
 
     .compactWidth.homecategory &.router-exit-active {
         transform-origin: top;
-        animation: towerOfBricksMoveOffScreen 0.4s ease-in both;
+        animation: inFromRightWithOpacity 0.4s ease-in both;
     }
 
     .brick{

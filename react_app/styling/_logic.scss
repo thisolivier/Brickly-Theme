@@ -35,34 +35,3 @@
   width: 1.3vw;
   background-size: cover;
 }
-
-// Responsive media queries
-@mixin tiny {
-  @media (max-width: #{$tiny-width}) {
-    @content;
-  }
-}
-
-@mixin small {
-  @media (max-width: #{$small-width}) {
-    @content;
-  }
-}
-
-@mixin medium {
-  @media (max-width: #{$medium-width}) {
-    @content;
-  }
-}
-
-@mixin large {
-  @media (min-width: #{$medium-width}) {
-    @content;
-  }
-}
-
-@mixin huge {
-  @media (min-width: #{$large-width}) {
-    @content;
-  }
-}

@@ -59,7 +59,7 @@
   border-radius: 9999px;
 
   .emptyhome & {
-    animation: cloudHomeAppear ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
+    animation: cloudMarginsHomeAppear ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
     
     .brand {
       position: relative;
@@ -68,7 +68,7 @@
   }
 
   .compactWidth.emptyhome & {
-    animation: cloudHomeAppearMobile ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
+    animation: cloudMarginsHomeAppearMobile ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
   }
 
   .brand {
@@ -96,7 +96,7 @@
       font-size: 1.5em;
       margin-bottom: -0.4em;
       transition: top .5s, left .5s, text-shadow .5s;
-      @include huge{
+      @media screen and (max-width: 72em) {
         font-size: 1.7em;
       }
 
