@@ -3,7 +3,7 @@
     flex-direction: column;
 
     .singlePostContainer {
-        margin: 4vh 0;
+        margin: 4vh 1em;
         display: flex;
         flex-direction: column;
         text-align: initial;
@@ -12,6 +12,7 @@
     .imageWrapperForGradientFallback {
         min-height: 28vw;
         margin-bottom: -0.5em;
+        border-radius: 2em 2em 0 0;
         @include colourfulBackgroundGradient;
     }
 
@@ -24,6 +25,7 @@
         flex-direction: row;
         background-color: white;
         padding: 2em 6vw 2em 6vw;
+        border-radius: 0 0 2em 2em;
 
         .footerElement {
             align-self: flex-end;
