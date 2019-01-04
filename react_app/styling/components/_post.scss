@@ -14,10 +14,11 @@
         margin-bottom: -0.5em;
         border-radius: 2em 2em 0 0;
         @include colourfulBackgroundGradient;
-    }
 
-    .image {
-        min-width: 100%;
+        .image {
+            min-width: 100%;
+            border-radius: 2em 2em 0 0;
+        }
     }
 
     .singlePostContent {
@@ -83,6 +84,24 @@
             position: relative;
         }
 
+        .postDescription {
+            display: inline-block;
+            max-height: initial;
+            line-height: 1.5;
+            overflow-y: hidden;
+
+            a {
+                @include inlineLink;
+                line-height: 1.4;
+                padding: 0 .4em .1em .4em;
+                background-color: white;
+                transition: transform 0.2s;
+                &:hover {
+                    transform: translate(-0.2em, -0.2em);
+                }
+            }
+        }
+
         .postLinks {
             display: inline-block;           
             a {
@@ -117,17 +136,60 @@
     }
 
     .postDescription {
-        display: block;
-        overflow-y: hidden;
-        max-height: initial;
-
         &.toggle-enter {
             max-height: 0em;
             animation: heightIn 0.7s ease-in both;
         }
 
+        &.toggle-enter-done {
+            overflow-y: visible;
+        }
+
         &.toggle-exit {
             animation: heightIn 0.7s ease-out forwards reverse;
+        }
+    }
+}
+
+@media screen and (max-width: 72em) {
+    .postsContainer {
+        margin-top: 4em;
+
+        .singlePostContainer{
+            margin-top: 4em;
+        }
+        .singlePostContent {
+            display: block;
+            border-radius: 0;
+            padding-bottom: 0.2em;
+            .info {
+                padding-left: 0;
+            }
+            .footerElement{
+                bottom: initial;
+            }
+            .postLinks {
+                float: right;
+                margin-top: -2.5em;
+            }
+
+            .postDescription {
+                margin-bottom: 2em;
+            }
+        }
+        .decorativeFooter {
+            background-color: rgba(255,255,255,1);
+            padding: 0.5em 0 0.5em 0;
+            margin: 0;
+            border-radius: 0 0 2vw 2vw;
+            min-height: 2.8vw;
+            position: relative;
+            z-index: 10;
+    
+            &:before, &:after {
+                background-image: none;
+                display: none;
+            }
         }
     }
 }

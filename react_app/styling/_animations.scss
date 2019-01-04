@@ -15,10 +15,12 @@
   from {
     opacity: 0;
     max-height: 0em;
+    overflow: hidden;
   }
   to {
     opacity: 1;
     max-height: 50em;
+    overflow: visible;
   }
 }
 

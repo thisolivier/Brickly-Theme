@@ -9,13 +9,15 @@
 }
 
 @mixin inlineLink {
+  @include inlineButton();
   background-color: transparent;
-  border-color: #000;
+  border-color: rgba(0,0,0,0.8);
   border-width: 1px;
   border-style: solid;
   text-decoration: none;
   color: inherit;
-  @include inlineButton();
+  margin-bottom: 0em;
+  margin-right: 0.1em;
 }
 
 @mixin colourfulBackgroundGradient {
