@@ -168,7 +168,7 @@
 
 @include sidebarDropdownAnimation(0em);
 @include sidebarDropdownAnimation(5em);
-@include sidebarDropdownAnimation($outlinksDiameter);
+@include sidebarDropdownAnimation(10em);
 
 @keyframes cloudDropdownCategoryAppear {
   0% {

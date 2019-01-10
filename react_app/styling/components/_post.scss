@@ -3,7 +3,7 @@
     flex-direction: column;
 
     .singlePostContainer {
-        margin: 4vh 1em;
+        margin: 4vh 4em;
         display: flex;
         flex-direction: column;
         text-align: initial;
@@ -154,9 +154,10 @@
 @media screen and (max-width: 72em) {
     .postsContainer {
         margin-top: 4em;
+        
 
         .singlePostContainer{
-            margin-top: 4em;
+            margin: 4em 2em 4em 2em;
         }
         .singlePostContent {
             display: block;
@@ -170,7 +171,7 @@
             }
             .postLinks {
                 float: right;
-                margin-top: -2.5em;
+                margin-top: -1.25em;
             }
 
             .postDescription {
