@@ -34,8 +34,8 @@
 }
 
 .emptyhome .sidebar.sidebar-enter-done .outlinks {
-    animation: sidebarDropdown#{$outlinksDiameter} 0.5s backwards;
-    animation-delay: 0.55s; 
+    // animation: sidebarDropdown#{$outlinksDiameter} 0.5s backwards;
+    // animation-delay: 0.55s; 
 }
 
 .sidebar-exit-active .outlinks{

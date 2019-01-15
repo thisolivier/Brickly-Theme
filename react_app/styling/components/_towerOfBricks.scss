@@ -24,7 +24,7 @@
         animation: inFromRightWithOpacity 0.9s both;
     }
 
-    .compactWidth & {
+    .home.compactWidth & {
         transform-origin: top;
         animation: none;
         left: 0;

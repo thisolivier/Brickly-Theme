@@ -9,15 +9,21 @@
 }
 
 @mixin inlineLink {
-  @include inlineButton();
-  background-color: transparent;
+  display: inline-block;
+  border-radius: .4em;
+  line-height: inherit;
+  color: inherit;
+  text-decoration: none;
+  margin-bottom: -0.4em; // Accounts for a margin on the t, border t&b, and padding on the b
+  padding: 0 .4em .1em .4em;
+  background-color: white;
   border-color: rgba(0,0,0,0.8);
   border-width: 1px;
   border-style: solid;
-  text-decoration: none;
-  color: inherit;
-  margin-bottom: 0em;
-  margin-right: 0.1em;
+  transition: transform 0.2s;
+  &:hover {
+      transform: translate(-0.1em, -0.1em);
+  }
 }
 
 @mixin colourfulBackgroundGradient {
@@ -35,5 +41,15 @@
   position: absolute;
   height: 1.3vw;
   width: 1.3vw;
+  background-size: cover;
+}
+
+@mixin mobileStupidInverseCornersForImage {
+  content: "";
+  display: block;
+  position: absolute;
+  top:-2em;
+  height: 2em;
+  width: 2em;
   background-size: cover;
 }

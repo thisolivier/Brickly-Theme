@@ -1,196 +1,233 @@
 .postsContainer {
     display: flex;
     flex-direction: column;
+}
 
-    .singlePostContainer {
-        margin: 4vh 4em;
-        display: flex;
-        flex-direction: column;
-        text-align: initial;
-    }
+.singlePostContainer {
+    margin: 4vh 4em;
+    display: flex;
+    flex-direction: column;
+    text-align: initial;
+}
 
-    .imageWrapperForGradientFallback {
-        min-height: 28vw;
-        margin-bottom: -0.5em;
+.imageWrapperForGradientFallback {
+    min-height: 28vw;
+    margin-bottom: -0.5em;
+    border-radius: 2em 2em 0 0;
+    @include colourfulBackgroundGradient;
+
+    .image {
+        min-width: 100%;
         border-radius: 2em 2em 0 0;
-        @include colourfulBackgroundGradient;
+    }
+}
 
-        .image {
-            min-width: 100%;
-            border-radius: 2em 2em 0 0;
+.singlePostContent {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 2em 6vw 2em 6vw;
+    border-radius: 0 0 2em 2em;
+
+    .footerElement {
+        align-self: flex-end;
+        position: relative;
+        bottom: -4.2em;
+        z-index: 25;
+    }
+
+    .info {
+        flex: 1 1 38em;
+        padding-left: 3em;
+
+        .widthController {
+            max-width: 38em;
+            display: inline-block;
+            text-align: initial;
+        }
+
+        h2.postTitle {
+            margin: 1em 0 0 0;
+            font-weight: 700;
+            font-size: 2.2em;
+        }
+
+        .byLine {
+            font-weight: 500;
+            margin-top: 0.5em;
+            a {
+                @include inlineLink()
+            }
+        }
+
+        .tags {
+            font-size: 0.8em;
+            list-style-type: none;
+            padding: 0;
+            line-height: 1.8;
+            text-align: left;
+            width: 100%;
+            margin-bottom: 2em;
+
+            li {
+                font-weight: 700;
+                color: #fff;
+                background-color: #000;
+                border-color: #000;
+                @include inlineButton();
+            }
         }
     }
 
+    .readMoreButton {
+        display: block;
+        text-transform: uppercase;
+        position: relative;
+    }
+
+    .postDescription {
+        display: inline-block;
+        max-height: initial;
+        line-height: 1.5;
+        overflow-y: hidden;
+
+        a {
+            @include inlineLink;
+        }
+    }
+}
+
+.postLinks {
+    display: inline-block;           
+    a {
+        margin: 0 1.2em 0 0;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.decorativeFooter {
+    background-color: rgba(255,255,255,1);
+    padding: 0.5em 2em 0.5em 2em;
+    margin: 0 4.5vw 0 5vw;
+    border-radius: 0 0 2vw 2vw;
+    min-height: 2.8vw;
+    position: relative;
+    z-index: 10;
+
+    &:before {
+        @include stupidInverseCorners;
+        left: -1.3vw;
+        background-image: url(./graphics/antiCorner2.svg);
+    }
+
+    &:after {
+        @include stupidInverseCorners;
+        right: -1.3vw;
+        background-image: url(./graphics/antiCorner1.svg);
+    }
+}
+
+.postDescription {
+    &.toggle-enter {
+        max-height: 0em;
+        animation: heightIn 0.7s ease-in both;
+    }
+
+    &.toggle-enter-done {
+        overflow-y: visible;
+    }
+
+    &.toggle-exit {
+        animation: heightIn 0.7s ease-out forwards reverse;
+    }
+}
+
+
+@media screen and (max-width: 72em) {
+    .postsContainer {
+        margin-top: 4em;
+    }
+
+    .singlePostContainer{
+        margin: 4em 2em 4em 2em;
+
+        .imageWrapperForGradientFallback {
+            border-radius: 8em 8em 0 0;
+            position: relative;
+            .image {
+                border-radius: 8em 8em 0 0;
+            }
+        }
+    }
     .singlePostContent {
-        display: flex;
-        flex-direction: row;
-        background-color: white;
-        padding: 2em 6vw 2em 6vw;
-        border-radius: 0 0 2em 2em;
-
-        .footerElement {
-            align-self: flex-end;
-            position: relative;
-            bottom: -4.2em;
-            z-index: 25;
-        }
-
+        display: block;
+        position: relative;
+        border-radius: 0;
+        padding-bottom: 0.2em;
+        padding-top: 0.1em;
         .info {
-            flex: 1 1 38em;
-            padding-left: 3em;
-
-            .widthController {
-                max-width: 38em;
-                display: inline-block;
-                text-align: initial;
-            }
-
-            h2.postTitle {
-                margin: 1em 0 0 0;
-                font-weight: 700;
-                font-size: 2.2em;
-            }
-
-            .byLine {
-                font-weight: 500;
-                margin-top: 0.5em;
-                a {
-                    @include inlineLink()
-                }
-            }
-
-            .tags {
-                font-size: 0.8em;
-                list-style-type: none;
-                padding: 0;
-                line-height: 1.8;
-                text-align: left;
-                width: 100%;
-                margin-bottom: 2em;
-
-                li {
-                    font-weight: 700;
-                    color: #fff;
-                    background-color: #000;
-                    border-color: #000;
-                    @include inlineButton();
-                }
-            }
+            padding-left: 0;
         }
-
-        .readMoreButton {
-            display: block;
-            text-transform: uppercase;
-            position: relative;
+        .footerElement{
+            bottom: initial;
+        }
+        .postLinks {
+            float: right;
+            margin-top: -1.25em;
         }
 
         .postDescription {
-            display: inline-block;
-            max-height: initial;
-            line-height: 1.5;
-            overflow-y: hidden;
-
-            a {
-                @include inlineLink;
-                line-height: 1.4;
-                padding: 0 .4em .1em .4em;
-                background-color: white;
-                transition: transform 0.2s;
-                &:hover {
-                    transform: translate(-0.2em, -0.2em);
-                }
-            }
-        }
-
-        .postLinks {
-            display: inline-block;           
-            a {
-                margin: 0 1.2em 0 0;
-                text-transform: uppercase;
-                text-decoration: none;
-                color: inherit;
-            }
+            margin-bottom: 2em;
         }
     }
-
     .decorativeFooter {
         background-color: rgba(255,255,255,1);
-        padding: 0.5em 2em 0.5em 2em;
-        margin: 0 4.5vw 0 5vw;
+        padding: 0.5em 0 0.5em 0;
+        margin: 0;
         border-radius: 0 0 2vw 2vw;
         min-height: 2.8vw;
         position: relative;
         z-index: 10;
 
-        &:before {
-            @include stupidInverseCorners;
-            left: -1.3vw;
-            background-image: url(./graphics/antiCorner2.svg);
-        }
-
-        &:after {
-            @include stupidInverseCorners;
-            right: -1.3vw;
-            background-image: url(./graphics/antiCorner1.svg);
-        }
-    }
-
-    .postDescription {
-        &.toggle-enter {
-            max-height: 0em;
-            animation: heightIn 0.7s ease-in both;
-        }
-
-        &.toggle-enter-done {
-            overflow-y: visible;
-        }
-
-        &.toggle-exit {
-            animation: heightIn 0.7s ease-out forwards reverse;
+        &:before, &:after {
+            background-image: none;
+            display: none;
         }
     }
 }
 
-@media screen and (max-width: 72em) {
-    .postsContainer {
-        margin-top: 4em;
-        
-
-        .singlePostContainer{
-            margin: 4em 2em 4em 2em;
-        }
-        .singlePostContent {
-            display: block;
+@media screen and (max-width:34em) { 
+    .singlePostContainer {
+        margin:0;
+        font-size: 1.2em;
+        .imageWrapperForGradientFallback{
             border-radius: 0;
-            padding-bottom: 0.2em;
-            .info {
-                padding-left: 0;
-            }
-            .footerElement{
-                bottom: initial;
-            }
-            .postLinks {
-                float: right;
-                margin-top: -1.25em;
-            }
-
-            .postDescription {
-                margin-bottom: 2em;
+            .image{
+                border-radius: 0;
             }
         }
         .decorativeFooter {
-            background-color: rgba(255,255,255,1);
-            padding: 0.5em 0 0.5em 0;
-            margin: 0;
-            border-radius: 0 0 2vw 2vw;
-            min-height: 2.8vw;
-            position: relative;
-            z-index: 10;
-    
-            &:before, &:after {
-                background-image: none;
+            border-radius: 0;
+        }
+
+        .info h2.postTitle {
+            margin: 1.2em 0 0.5em 0;
+        }
+
+        .singlePostContent .info .byLine {
+            margin: 0.5em 0 1.5em 0;
+        }
+
+        .postLinks {
+            .linkIcon {
+                display: inline-block;
+            }
+            .linkText {
                 display: none;
             }
         }
     }
+    
 }

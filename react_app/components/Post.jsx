@@ -11,8 +11,14 @@ class Post extends React.Component {
             showCopy: false,
         }
         this.post = post
-        this.byline = ReactHtmlParser(post.byLine),
+        this.byline = ReactHtmlParser(post.byLine)
         this.content = ReactHtmlParser(post.content)
+        var arrayOfLinks = [[this.post.liveSite, "Live Site ↗", "images/icon_github_002.svg"],
+        [this.post.repo, "Repository ↗", "./images/icon_github_002.svg"]]
+        console.log("the links are", arrayOfLinks)
+        this.links = arrayOfLinks.filter((linkTuple)=> (linkTuple[0])).map((linkTuple, indexOfLink)=>{
+            return(<a href={linkTuple[0]} key={indexOfLink}><span className="linkText">{linkTuple[1]}</span><img className="linkIcon" src={linkTuple[2]}/></a>)
+        })
     }
 
     render() {
@@ -40,8 +46,7 @@ class Post extends React.Component {
                         <a className="readMoreButton footerElement" onClick={readMoreHandler}>{readMoreText}</a>
                     </section>
                     <nav className="postLinks footerElement">
-                        <a href={this.post.liveSite}>Live Site ↗</a>
-                        <a href={this.post.repo}>Repository ↗</a>
+                        { this.links.map((value)=> value) }
                     </nav>
                 </div>
                 <div className="decorativeFooter"></div>

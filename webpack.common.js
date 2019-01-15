@@ -32,7 +32,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpe?g|png|gif)$/i,
+                test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
                     'file-loader?name=[name].[ext]&outputPath=images/&publicPath=http://olivier.test/app/themes/empty_theme/react_app_built/images',
                     'image-webpack-loader'

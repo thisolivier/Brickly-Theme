@@ -157,10 +157,10 @@
       opacity: 0;
     }
     90% {
-      max-height: 20em;
+      opacity: 1;
     }
     100%{
-      opacity: 1;
+      max-height: 27em;
       transform: translateY(0%);
     }
   }
