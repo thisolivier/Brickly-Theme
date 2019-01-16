@@ -39,16 +39,7 @@ class App extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
-            this.previouslyVisited = prevProps.location
-            var cleverGirl = () => {};
-            cleverGirl = () => {
-                const c = document.documentElement.scrollTop || document.body.scrollTop;
-                if (c > 0) {
-                    window.requestAnimationFrame(cleverGirl);
-                    window.scrollTo(0, c - c / 20);
-                }
-            }
-            window.requestAnimationFrame(cleverGirl);
+            console.log("Normally I'd scroll to the top, but we stopped doong that 🤷 (ツ)_/¯")
         }
     }
     

@@ -35,7 +35,8 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-html-parser": "^2.0.2",
-    "react-transition-group": "^2.5.0"
+    "react-transition-group": "^2.5.0",
+    "react-scroll": "^1.7.10"
   },
   "scripts": {
     "build": "webpack --config webpack.dev.js",

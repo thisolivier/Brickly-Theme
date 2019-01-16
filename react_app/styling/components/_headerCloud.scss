@@ -34,7 +34,7 @@
 
   .compactWidth & {
     position: relative;
-    min-width: 200pt;
+    min-width: 23em;
     width: auto;
     margin: $cloudDistanceFromTopAfterAnimation 5vw 0 5vw;
   }
@@ -42,7 +42,7 @@
   .category & {
     transform-origin: top left;
     top: 1em;
-    left: 2em;
+    left: 0em;
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
     transform: scale(0.5);
     max-width: 320pt;

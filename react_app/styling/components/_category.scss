@@ -165,7 +165,11 @@
 }
 
 @media screen and (max-width:34em) {
-    .categoryContainer .categoryHeaderContainer{
+    .categoryContainer {
+        margin-top: 0em;
+    }
+    
+    .categoryHeaderContainer{
         margin: 9em 1.5em 0em 1.5em;
         text-align: left;
 

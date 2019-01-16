@@ -130,13 +130,11 @@
 }
 
 .postDescription {
+    overflow: hidden;
+
     &.toggle-enter {
         max-height: 0em;
-        animation: heightIn 0.7s ease-in both;
-    }
-
-    &.toggle-enter-done {
-        overflow-y: visible;
+        animation: heightIn 0.7s ease-in backwards;
     }
 
     &.toggle-exit {
