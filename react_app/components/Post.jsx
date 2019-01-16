@@ -10,43 +10,58 @@ class Post extends React.Component {
         this.state = {
             showCopy: false,
         }
-        this.post = post
-        this.byline = ReactHtmlParser(post.byLine)
-        this.content = ReactHtmlParser(post.content)
-        var arrayOfLinks = [[this.post.liveSite, "Live Site ↗", "images/icon_github_002.svg"],
-        [this.post.repo, "Repository ↗", "./images/icon_github_002.svg"]]
+        this.readMoreHandler = this.readMoreHandler.bind(this)
+        this.postTitle = post.title
+        this.postTags = post.tags.map((tag, index)=><li key={index}>{tag}</li>)
+        this.postByline = ReactHtmlParser(post.byLine)
+        this.postContent = ReactHtmlParser(post.content)
+        var arrayOfLinks = [[post.liveSite, "Live Site ↗", "liveSite"],[post.repo, "Repository ↗", "repository"]]
         console.log("the links are", arrayOfLinks)
-        this.links = arrayOfLinks.filter((linkTuple)=> (linkTuple[0])).map((linkTuple, indexOfLink)=>{
-            return(<a href={linkTuple[0]} key={indexOfLink}><span className="linkText">{linkTuple[1]}</span><img className="linkIcon" src={linkTuple[2]}/></a>)
+        this.postLinks = arrayOfLinks.filter((linkTuple)=> (linkTuple[0])).map((linkTuple, indexOfLink)=>{
+            return(<a href={linkTuple[0]} key={indexOfLink} className={linkTuple[2]}><span className="linkText">{linkTuple[1]}</span></a>)
         })
+        this.backgroundImageStyle = post.image ? {backgroundImage: "url(" + post.image + ")"} : {}
+    }
+
+    readMoreHandler(event) {
+        if (this.state.showCopy) {
+            let newTop = document.getElementById("post" + this.props.postId).getBoundingClientRect().height + 150
+            var cleverGirl = () => {
+                window.scrollBy({
+                    top: newTop * -1,
+                    left: 0,
+                    behavior: "smooth"
+                })
+            };           
+            window.requestAnimationFrame(cleverGirl);
+            console.log(this.props.postId, document.getElementById("post" + this.props.postId).getBoundingClientRect())
+        }
+        this.setState({showCopy: !this.state.showCopy})
     }
 
     render() {
-        var readMoreHandler = ()=>{this.setState({showCopy: !this.state.showCopy})}
         var readMoreText = this.state.showCopy ? "Close ↑": "Read More ↓"
         return (
             <div className="singlePostContainer">
-                <div className="imageWrapperForGradientFallback">
-                    <img className="image" src={this.post.image ? this.post.image : ""}></img>
-                </div>
+                <div className="imageAndGradientFallback" style={this.backgroundImageStyle}></div>
                 <div className="singlePostContent">
                     <section className="info">
                         <div className="widthController">
-                            <h2 className="postTitle">{this.post.title}</h2>
-                            <p className="byLine">{this.byline}</p>
+                            <h2 className="postTitle">{this.postTitle}</h2>
+                            <p className="byLine">{this.postByline}</p>
                             <ul className="tags">
-                                {this.post.tags.map((tag, index)=><li key={index}>{tag}</li>)}
+                                {this.postTags}
                             </ul>
                             <CSSTransition in={this.state.showCopy} mountOnEnter unmountOnExit timeout={700} classNames="toggle">
-                                <section className="postDescription">
-                                    {this.content}
+                                <section className="postDescription" id={"post" + this.props.postId}>
+                                    {this.postContent}
                                 </section>
                             </CSSTransition>
                         </div>
-                        <a className="readMoreButton footerElement" onClick={readMoreHandler}>{readMoreText}</a>
+                        <a className="readMoreButton footerElement" onClick={this.readMoreHandler}>{readMoreText}</a>
                     </section>
                     <nav className="postLinks footerElement">
-                        { this.links.map((value)=> value) }
+                        { this.postLinks.map((value)=> value) }
                     </nav>
                 </div>
                 <div className="decorativeFooter"></div>

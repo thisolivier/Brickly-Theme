@@ -33,11 +33,10 @@
     animation-delay: 0.1s;
 }
 
-.emptyhome .sidebar.sidebar-enter-done .outlinks {
-    // animation: sidebarDropdown#{$outlinksDiameter} 0.5s backwards;
-    // animation-delay: 0.55s; 
+.sidebar-exit-active .outlinks {
+    animation: sidebarDropdown0em 0.5s alternate-reverse both;
 }
 
-.sidebar-exit-active .outlinks{
-    animation: sidebarDropdown0em 0.5s alternate-reverse both;
+.compactWidth .outlinks {
+    text-align: center;
 }

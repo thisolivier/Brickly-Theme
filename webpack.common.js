@@ -32,14 +32,14 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
+                test: /\.(jpe?g|png|gif)$/i,
                 use: [
                     'file-loader?name=[name].[ext]&outputPath=images/&publicPath=http://olivier.test/app/themes/empty_theme/react_app_built/images',
                     'image-webpack-loader'
                 ]
             },
-            { test:
-                /\.(woff2?|ttf|eot)$/,
+            { 
+                test: /\.(woff2?|ttf|eot)$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
@@ -50,8 +50,8 @@ module.exports = {
                 }]
                 
             },
-            { test:
-                /\.svg$/,
+            { 
+                test: /\.svg$/,
                 loader: 'url-loader?limit=10000&name=images/[name].[ext]'
             }
         ]

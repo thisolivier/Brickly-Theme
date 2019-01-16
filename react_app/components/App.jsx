@@ -26,7 +26,8 @@ class App extends React.Component {
         this.state = {
             constrainedWidth: window.innerWidth < 680,
             showContent: false,
-        }   
+        }
+        this.previouslyVisited = ""
         window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
     }
 
@@ -38,9 +39,19 @@ class App extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {
-            window.scrollTo(0, 0)
+            this.previouslyVisited = prevProps.location
+            var cleverGirl = () => {};
+            cleverGirl = () => {
+                const c = document.documentElement.scrollTop || document.body.scrollTop;
+                if (c > 0) {
+                    window.requestAnimationFrame(cleverGirl);
+                    window.scrollTo(0, c - c / 20);
+                }
+            }
+            window.requestAnimationFrame(cleverGirl);
         }
     }
+    
 
     render() { 
         const currentPage = this.getLocationClassName(this.props.location)
