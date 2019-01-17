@@ -8,7 +8,6 @@
     width: $towerWidth;
     height: $towerHeight;
     clip: rect(-8em,($towerWidth + 0.5em),$towerHeight,-0.5em);
-
     .emptyhome &.router-appear-active {
         animation-delay: 0.45s;
         animation: towerOfBricksLocationAfterDrop 1.4s ease $totalBricksDropTime backwards;
@@ -25,16 +24,17 @@
     }
 
     .home.compactWidth & {
-        transform-origin: top;
-        animation: none;
+        position: relative;
+        margin: 0 auto;
         left: 0;
         right: 0;
-        position: relative;
+        top: 0;
+        animation: none;
+        transform: scale(1.4);
+        padding-left: $mortarWidth/2;
+        transform-origin: top center;
         max-height: $towerHeight;
         overflow-y: hidden;
-        transform: scale(1.4) translateY(-10%);
-        padding-left: $mortarWidth/2;
-        margin: auto;
         padding-top: 2em;
     
         @media screen and (max-width: 500px) {
