@@ -81,19 +81,34 @@
         text-transform: uppercase;
         position: relative;
     }
+}
 
-    .postDescription {
-        display: inline-block;
+.postDescription {
+    overflow: hidden;
+    max-height: 0;
+    display: inline-block;
+    line-height: 1.5;
+    font-weight: 500;
+
+    p {
+        margin: 1em 0 1.4em 0;
+    }
+    
+    a {
+        @include inlineLink;
+    }
+
+    &.toggle-enter {
+        max-height: 0em;
+        animation: heightIn 0.7s ease-in backwards;
+    }
+
+    &.toggle-enter-done {
         max-height: initial;
-        line-height: 1.5;
-        overflow-y: hidden;
-        font-weight: 500;
-        p {
-            margin: 1em 0 1.4em 0;
-        }
-        a {
-            @include inlineLink;
-        }
+    }
+
+    &.toggle-exit {
+        animation: heightIn 0.7s ease-out forwards reverse;
     }
 }
 
@@ -129,19 +144,6 @@
     }
 }
 
-.postDescription {
-    overflow: hidden;
-
-    &.toggle-enter {
-        max-height: 0em;
-        animation: heightIn 0.7s ease-in backwards;
-    }
-
-    &.toggle-exit {
-        animation: heightIn 0.7s ease-out forwards reverse;
-    }
-}
-
 
 @media screen and (max-width: 72em) {
     .postsContainer {
@@ -172,8 +174,7 @@
             float: right;
             margin-top: -1.25em;
         }
-
-        .postDescription {
+        .postDescription section:last-child {
             margin-bottom: 2em;
         }
     }

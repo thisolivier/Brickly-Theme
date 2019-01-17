@@ -23,12 +23,13 @@ class App extends React.Component {
 
     constructor(props) {
         super(props)
+        const constrainedWidthPixels = 770
+        this.previouslyVisited = ""
         this.state = {
-            constrainedWidth: window.innerWidth < 680,
+            constrainedWidth: window.innerWidth < constrainedWidthPixels,
             showContent: false,
         }
-        this.previouslyVisited = ""
-        window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < 680}) })
+        window.addEventListener('resize', () => { this.setState({constrainedWidth: window.innerWidth < constrainedWidthPixels}) })
     }
 
     componentDidMount(){

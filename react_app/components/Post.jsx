@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import {CSSTransition} from 'react-transition-group'
-import { Link as ScrollLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import {animateScroll as scroll} from 'react-scroll'
 
 class Post extends React.Component {
 
@@ -27,16 +27,19 @@ class Post extends React.Component {
 
     readMoreToggleHandler() {
         if (this.state.showCopy) {
-            this.setState({showCopy: false})
-            let element = window.document.getElementById(this.slug)
-            let newTop = document.documentElement.scrollTop + element.getBoundingClientRect().top
-            console.log(newTop, "is our top")
-            scroll.scrollTo(newTop, {
-                smooth: true,
-                duration: 500,
-                offset: -150,
-                isDynamic: true,
-            })
+            let targetElementBoundingRect = window.document.getElementById(this.slug).getBoundingClientRect()
+            if (targetElementBoundingRect.top < 0) {
+                let newTop = (window.document.documentElement.getBoundingClientRect().top - targetElementBoundingRect.top + 200) * -1
+                scroll.scrollTo(newTop, {
+                    duration: '100ms',
+                    smooth: true,
+                })
+                window.setTimeout(()=>{
+                    this.setState({showCopy: false})
+                }, 510)
+            } else {
+                this.setState({showCopy: false})
+            }
         } else {
             this.setState({showCopy: true})
         }   
@@ -48,15 +51,15 @@ class Post extends React.Component {
         return (
             <div className="singlePostContainer">
                 <div className="imageAndGradientFallback" style={this.backgroundImageStyle}></div>
-                <div className="singlePostContent">
+                <div className="singlePostContent" id={this.slug}>
                     <section className="info">
                         <div className="widthController">
-                            <h2 className="postTitle" id={this.slug}>{this.postTitle}</h2>
+                            <h2 className="postTitle">{this.postTitle}</h2>
                             <p className="byLine">{this.postByline}</p>
                             <ul className="tags">
                                 {this.postTags}
                             </ul>
-                            <CSSTransition in={this.state.showCopy} mountOnEnter unmountOnExit timeout={700} classNames="toggle">
+                            <CSSTransition in={this.state.showCopy} timeout={700} classNames="toggle">
                                 <section className="postDescription">
                                     {this.postContent}
                                 </section>

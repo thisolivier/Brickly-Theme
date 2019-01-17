@@ -32,13 +32,6 @@
     animation: headerContainerPositionCategoryDisappears 0.5s;
   }
 
-  .compactWidth & {
-    position: relative;
-    min-width: 23em;
-    width: auto;
-    margin: $cloudDistanceFromTopAfterAnimation 5vw 0 5vw;
-  }
-
   .category & {
     transform-origin: top left;
     top: 1em;
@@ -67,46 +60,37 @@
     }
   }
 
-  .compactWidth.emptyhome & {
-    animation: cloudMarginsHomeAppearMobile ($brickfall-animation-duration / 2) ($brickfall-animation-duration / 2) backwards; 
-  }
-
   .brand {
     z-index: 800;
     display:inline-block;
     position: relative;
     margin:0 0.3em 0.1em 0.1em;
     font-size: $cloudTextSize;
-    .compactWidth & {
-      margin:0.4em 0.3em 0.6em 0.1em;
-    }
 
     a{
       color: inherit;
       text-decoration: inherit;
     }
-    #cloudLink {
-      display: block;
-      font-weight: 200;
-      color: black;
-      text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
-      position: relative;
-      top: -0.1em;
-      left: -0.1em;
-      font-size: 1.5em;
-      margin-bottom: -0.4em;
-      transition: top .5s, left .5s, text-shadow .5s;
-      @media screen and (max-width: 72em) {
-        font-size: 1.7em;
-      }
+  }
 
-      &:hover{
-        top:0em;
-        left:0em;
-        text-shadow: 0em 0em rgba(0, 0, 0, 1);
-        text-decoration: none;
-        color:black;
-      }
+  #cloudLink {
+    display: block;
+    font-weight: 200;
+    color: black;
+    text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
+    position: relative;
+    top: -0.1em;
+    left: -0.1em;
+    font-size: 1.5em;
+    margin-bottom: -0.4em;
+    transition: top .5s, left .5s, text-shadow .5s;
+
+    &:hover{
+      top:0em;
+      left:0em;
+      text-shadow: 0em 0em rgba(0, 0, 0, 1);
+      text-decoration: none;
+      color:black;
     }
   }
   
@@ -155,3 +139,64 @@
   }
 }
 
+@media screen and (max-width: 72em) {
+  .home #cloudLink {
+    font-size: 1.7em;
+  }
+}
+
+.compactWidth .headerContainer {
+  position: relative;
+  min-width: 23em;
+  width: auto;
+  margin: $cloudDistanceFromTopAfterAnimation auto 0 auto;
+  text-align: center;
+
+  .brand {
+      margin: 0.4em 0.3em 0.6em 0.1em;
+  }
+
+  #cloudLink {
+    font-size: 1.9em;
+  }
+}
+
+.emptyhome.compactWidth .headerContainer {
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  animation-name: mobileHeaderContainerHomeAppearence;
+  animation-duration: $brickfall-animation-duration;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+}
+
+@media screen and (max-width:34em) {
+  .home .headerContainer {
+    max-width: 90%;
+    min-width: initial;
+    font-size: 0.9em;
+    #cloudLink {
+      font-size: 1.5em;
+    }
+
+    .theCloud {
+      padding: 0.5em 1.6em 1.5em 1.6em;
+    }
+  }
+}
+
+  @media screen and (max-width:24em) {
+    .home .headerContainer {
+      max-width: 100%;
+      width: initial;
+      #cloudLink {
+        font-size: 1.4em;
+      }
+  
+      .theCloud {
+        padding: 0.4em 1.6em 1.5em 1.6em;
+      }
+  }
+}

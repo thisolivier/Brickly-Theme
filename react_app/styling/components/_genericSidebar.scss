@@ -43,3 +43,9 @@
 .categoryhome .sidebar {
     animation: sidebarDropdown5em 0.7s both;
 }
+
+@media screen and (max-width:24em) {
+    .home .sidebar .aboutOlivier{
+        font-size: 1.3em;
+    }
+}
