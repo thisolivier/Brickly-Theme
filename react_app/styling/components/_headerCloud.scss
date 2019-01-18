@@ -35,7 +35,7 @@
   .category & {
     transform-origin: top left;
     top: 1em;
-    left: 0em;
+    left: em;
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
     transform: scale(0.5);
     max-width: 320pt;
@@ -58,6 +58,10 @@
       position: relative;
       animation: opacityIn ($brickfall-animation-duration / 2) ($brickfall-animation-duration - 0.7s) backwards;
     }
+  }
+
+  .emptycategory & {
+    animation: opacityIn 0.7s backwards;
   }
 
   .brand {
@@ -149,8 +153,11 @@
   position: relative;
   min-width: 23em;
   width: auto;
-  margin: $cloudDistanceFromTopAfterAnimation auto 0 auto;
-  text-align: center;
+
+  &.home{
+    margin: $cloudDistanceFromTopAfterAnimation auto 0 auto;
+    text-align: center;
+  }
 
   .brand {
       margin: 0.4em 0.3em 0.6em 0.1em;
