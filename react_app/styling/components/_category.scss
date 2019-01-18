@@ -131,7 +131,7 @@
             width: 58%;
             padding-top: 58%;
             left: -30%;
-            top: -16%;
+            top: -4em;
         }
 
         &.three {
@@ -145,14 +145,14 @@
             width: 65%;
             padding-top: 65%;
             left: 38%;
-            top: -21.5%;
+            top: -2.7em;
         }
 
         &.five {
-            width: 22%;
+            width: 44%;
             padding-top: 44%;
-            right: -18%;
-            top: 10%;
+            right: -18vw;
+            top: -1em;
         }
 
         &.six {
@@ -180,5 +180,11 @@
 
     .categoryCloud.one{
         border-radius: 0;
+    }
+}
+
+@media screen and (max-width: 28em) {
+    .categoryHeaderContainer h1 {
+        font-size: 3.5em;
     }
 }
