@@ -4,50 +4,48 @@
   width: 50vw;
   margin-left: 2em;
   max-width: 400pt;
-  min-width: 250pt;
   position: absolute;
   display: flex;
   flex-direction: column;
   z-index: 100;
   transform-origin: top left;
+  border: 2px solid red;
 
   .compactWidth & {
+    width: 400pt;
     position: relative;
-    min-width: 23em;
-    width: auto;
+    text-align: center;
+    transform-origin: center center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .home & {
     margin-top: $cloudDistanceFromTopAfterAnimation;
   }
 
-  .home.compactWidth & {
-    transform-origin: center center;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+  .category & {
+    width: 320pt;
+    top: 1em;
+    margin-top: $cloudDistanceFromTopAfterAnimation / 2;
+    transform: scale(0.5);
+    transform-origin: top left;
   }
 
   .emptyhome & {
-    animation-name: headerContainerHomeAppearence;
-    animation-duration: $brickfall-animation-duration;
-    animation-timing-function: ease;
-    animation-fill-mode: backwards;
+    animation: headerContainerHomeAppearence $brickfall-animation-duration ease backwards;
   }
 
   .emptyhome.compactWidth & {
-    animation-name: mobileHeaderContainerHomeAppearence;
-    animation-duration: $brickfall-animation-duration;
-    animation-timing-function: ease;
-    animation-fill-mode: backwards;
+    animation: mobileHeaderContainerHomeAppearence $brickfall-animation-duration ease backwards;
   }
 
   .homecategory & {
     animation: headerContainerPositionCategoryAppears 0.6s ease;
   }
 
-  .compactWidth.homecategory & {
-    animation: initial;
+  .homecategory.compactWidth & {
+    animation: headerContainerPositionCategoryAppearsMobile 0.6s ease 0.5s backwards;
   }
 
   .categoryhome & {
@@ -57,14 +55,6 @@
   .compactWidth.categoryhome & {
     animation: initial;
   }
-
-  .category & {
-    top: 1em;
-    margin-top: $cloudDistanceFromTopAfterAnimation / 2;
-    transform: scale(0.5);
-    max-width: 320pt;
-  }
-
 }
 
 .theCloud {
@@ -177,16 +167,15 @@
 
 // Very large
 @media screen and (max-width: 72em) {
-  .home #cloudLink {
+  #cloudLink {
     font-size: 1.7em;
   }
 }
 
 // Smaller than compact width
 @media screen and (max-width:34em) {
-  .home .headerContainer {
+  .headerContainer {
     max-width: 90%;
-    min-width: initial;
     font-size: 0.9em;
     #cloudLink {
       font-size: 1.5em;
@@ -200,9 +189,7 @@
 
 // Very small
 @media screen and (max-width:24em) {
-  .home .headerContainer {
-    max-width: 100%;
-    width: initial;
+  .headerContainer {
     #cloudLink {
       font-size: 1.4em;
     }

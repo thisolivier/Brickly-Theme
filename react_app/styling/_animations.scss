@@ -22,7 +22,7 @@
   }
 }
 
-@keyframes inFromRightWithOpacity {
+@keyframes awayRightWithOpacity {
   0% {
     opacity: 1;
     transform: initial
@@ -36,6 +36,23 @@
   100% {
     opacity: 0;
     transform: translateX(25vw);
+  }
+}
+
+@keyframes awayLeftWithOpacity {
+  0% {
+    opacity: 1;
+    transform: initial
+  }
+  20%{
+    opacity: 0.6;
+  }
+  40%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-25vw);
   }
 }
 
@@ -108,11 +125,30 @@
     transform: scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
     max-width: 400pt;
+    width: 50vw;
   }
   to {
     top: 1em;
     transform: scale(0.5);
     max-width: 320pt;
+    width: 320pt;
+    margin-top: $cloudDistanceFromTopAfterAnimation / 2;
+  }
+}
+
+@keyframes headerContainerPositionCategoryAppearsMobile {
+  from {
+    width: 400pt;
+    transform-origin: center center;
+    top: 0em;
+    transform: scale(1);
+    margin-top: $cloudDistanceFromTopAfterAnimation;
+  }
+  to {
+    width: 320pt;
+    transform-origin: top left;
+    top: 1em;
+    transform: scale(0.5);
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
   }
 }

@@ -36,11 +36,11 @@
         animation: sidebarDropdown5em 0.7s both;
     }
 
-    .compactWidth.categoryhome & {
-        animation: initial;
+    .compactWidth.homecategory & {
+        animation: awayLeftWithOpacity 0.7s forwards;
     }
 
-    .compactWidth.homecategory & {
+    .compactWidth.categoryhome & {
         animation: initial;
     }
 }

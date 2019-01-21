@@ -8,22 +8,9 @@
     width: $towerWidth;
     height: $towerHeight;
     clip: rect(-8em,($towerWidth + 0.5em),$towerHeight,-0.5em);
-    .emptyhome &.router-appear-active {
-        animation-delay: 0.45s;
-        animation: towerOfBricksLocationAfterDrop 1.4s ease $totalBricksDropTime backwards;
-    }
-    
-    .categoryhome &.router-enter {
-        animation-delay: 0s;
-        animation: inFromRightWithOpacity 0.4s ease-in alternate-reverse backwards;
-    }
+    border: 2px yellow solid;
 
-    .homecategory &.router-exit-active {
-        transform-origin: top;
-        animation: inFromRightWithOpacity 0.9s both;
-    }
-
-    .home.compactWidth & {
+    .compactWidth & {
         position: relative;
         margin: 0 auto;
         left: 0;
@@ -45,15 +32,29 @@
         }
     }
 
-    .compactWidth.emptyhome &.router-appear-active {
+    &.router-appear-active {
+        animation-delay: 0.45s;
+        animation: towerOfBricksLocationAfterDrop 1.4s ease $totalBricksDropTime backwards;
+    }
+
+    .compactWidth &.router-appear-active {
         animation-delay: 0.45s;
         animation: towerOfBricksLocationAfterDropMobile 1.4s ease $totalBricksDropTime backwards;
     }
-
-    .compactWidth.homecategory &.router-exit-active {
-        transform-origin: top;
-        animation: inFromRightWithOpacity 0.4s ease-in both;
+    
+    &.router-enter {
+        animation-delay: 0s;
+        animation: awayRightWithOpacity 0.4s ease-in reverse backwards;
     }
+
+    &.router-exit-active {
+        transform-origin: top;
+        animation: awayRightWithOpacity 0.9s both;
+    }
+
+    // .compactWidth &.router-exit-active {
+    //     animation: awayRightWithOpacity 0.4s ease-in both;
+    // }
 
     .brick{
         position: relative;
