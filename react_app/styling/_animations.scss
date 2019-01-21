@@ -105,14 +105,12 @@
 @keyframes headerContainerPositionCategoryAppears {
   from {
     top: 0em;
-    left: 0em;
     transform: scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
     max-width: 400pt;
   }
   to {
     top: 1em;
-    left: 2em;
     transform: scale(0.5);
     max-width: 320pt;
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
@@ -122,14 +120,12 @@
 @keyframes headerContainerPositionCategoryDisappears {
   from {
     top: 1em;
-    left: 2em;
     transform: scale(0.5);
     max-width: 320pt;
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
   }
   to {
     top: 0em;
-    left: 0em;
     transform: scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
     max-width: 400pt;
