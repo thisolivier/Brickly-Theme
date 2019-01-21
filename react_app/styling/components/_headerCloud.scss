@@ -1,5 +1,4 @@
 .headerContainer {
-  // Width is designed to collapse to full screen on iPhone SE
   left: 0;
   top: 0;
   width: 50vw;
@@ -11,8 +10,20 @@
   flex-direction: column;
   z-index: 100;
 
+  .compactWidth & {
+    position: relative;
+    min-width: 23em;
+    width: auto;
+  }
+
   .home & {
     margin-top: $cloudDistanceFromTopAfterAnimation;
+  }
+
+  .home.compactWidth & {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
 
   .emptyhome & {
@@ -22,20 +33,26 @@
     animation-fill-mode: backwards;
   }
 
+  .emptyhome.compactWidth & {
+    animation-name: mobileHeaderContainerHomeAppearence;
+    animation-duration: $brickfall-animation-duration;
+    animation-timing-function: ease;
+    animation-fill-mode: backwards;
+  }
+
   .homecategory & {
     transform-origin: top left;
-    animation: headerContainerPositionCategoryAppears 0.6s ease;
+    //animation: headerContainerPositionCategoryAppears 0.6s ease;
   }
 
   .categoryhome & {
     transform-origin: top left;
-    animation: headerContainerPositionCategoryDisappears 0.5s;
+    //animation: headerContainerPositionCategoryDisappears 0.5s;
   }
 
   .category & {
     transform-origin: top left;
     top: 1em;
-    left: em;
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
     transform: scale(0.5);
     max-width: 320pt;
@@ -75,110 +92,90 @@
       color: inherit;
       text-decoration: inherit;
     }
-  }
-
-  #cloudLink {
-    display: block;
-    font-weight: 200;
-    color: black;
-    text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
-    position: relative;
-    top: -0.1em;
-    left: -0.1em;
-    font-size: 1.5em;
-    margin-bottom: -0.4em;
-    transition: top .5s, left .5s, text-shadow .5s;
-
-    &:hover{
-      top:0em;
-      left:0em;
-      text-shadow: 0em 0em rgba(0, 0, 0, 1);
-      text-decoration: none;
-      color:black;
-    }
-  }
-  
-  .backgroundCloud {
-    .ball{
-      z-index: 550;
-      display:block;
-      position:absolute;
-      top: -0.6em;
-      right:0;
-      width:100%;
-      min-width: 1em;
-      pointer-events: none;
-
-      &:first-child{ max-width: 1.45em; }
-      &:nth-child(2){ max-width: 16rem; }
-      &:nth-child(3){ max-width: 23rem; }
-      &:nth-child(4){
-        max-width: 43rem;
-        margin-right: -0.2em;
-      }
-
-      &.big {
-        font-size: 10em;
-        top: -0.7em;
-      }
-      &.medium {
-        font-size: 7.8em;
-      }
-      &.small {
-        font-size: 6em;
-      }
-
-      &:after{
-        position: absolute;
-        left: 0.25em;
-        bottom: 0;
-        display: block;
-        width: 1em;
-        height: 1em;
-        background-color: white;
-        border-radius: 9999px;
-        content: " ";
-      }
+    
+    .compactWidth & {
+      margin: 0.4em 0.3em 0.6em 0.1em;
     }
   }
 }
 
+#cloudLink {
+  display: block;
+  font-weight: 200;
+  color: black;
+  text-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.15);
+  position: relative;
+  top: -0.1em;
+  left: -0.1em;
+  font-size: 1.5em;
+  margin-bottom: -0.4em;
+  transition: top .5s, left .5s, text-shadow .5s;
+
+  &:hover{
+    top:0em;
+    left:0em;
+    text-shadow: 0em 0em rgba(0, 0, 0, 1);
+    text-decoration: none;
+    color:black;
+  }
+
+  .compactWidth & {
+    font-size: 1.9em;
+  }
+}
+
+.backgroundCloud {
+  .ball{
+    z-index: 550;
+    display:block;
+    position:absolute;
+    top: -0.6em;
+    right:0;
+    width:100%;
+    min-width: 1em;
+    pointer-events: none;
+
+    &:first-child{ max-width: 1.45em; }
+    &:nth-child(2){ max-width: 16rem; }
+    &:nth-child(3){ max-width: 23rem; }
+    &:nth-child(4){
+      max-width: 43rem;
+      margin-right: -0.2em;
+    }
+
+    &.big {
+      font-size: 10em;
+      top: -0.7em;
+    }
+    &.medium {
+      font-size: 7.8em;
+    }
+    &.small {
+      font-size: 6em;
+    }
+
+    &:after{
+      position: absolute;
+      left: 0.25em;
+      bottom: 0;
+      display: block;
+      width: 1em;
+      height: 1em;
+      background-color: white;
+      border-radius: 9999px;
+      content: " ";
+    }
+  }
+}
+
+// Very large
 @media screen and (max-width: 72em) {
   .home #cloudLink {
     font-size: 1.7em;
   }
 }
 
-.compactWidth .headerContainer {
-  position: relative;
-  min-width: 23em;
-  width: auto;
-
-  &.home{
-    margin: $cloudDistanceFromTopAfterAnimation auto 0 auto;
-    text-align: center;
-  }
-
-  .brand {
-      margin: 0.4em 0.3em 0.6em 0.1em;
-  }
-
-  #cloudLink {
-    font-size: 1.9em;
-  }
-}
-
-.emptyhome.compactWidth .headerContainer {
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  animation-name: mobileHeaderContainerHomeAppearence;
-  animation-duration: $brickfall-animation-duration;
-  animation-timing-function: ease;
-  animation-fill-mode: backwards;
-}
-
+// Smaller than compact width
 @media screen and (max-width:34em) {
   .home .headerContainer {
     max-width: 90%;
@@ -187,7 +184,6 @@
     #cloudLink {
       font-size: 1.5em;
     }
-
     .theCloud {
       animation: none;
       padding: 0.5em 1.6em 1.5em 1.6em;
@@ -195,16 +191,16 @@
   }
 }
 
-  @media screen and (max-width:24em) {
-    .home .headerContainer {
-      max-width: 100%;
-      width: initial;
-      #cloudLink {
-        font-size: 1.4em;
-      }
-  
-      .theCloud {
-        padding: 0.4em 1.6em 1.5em 1.6em;
-      }
+// Very small
+@media screen and (max-width:24em) {
+  .home .headerContainer {
+    max-width: 100%;
+    width: initial;
+    #cloudLink {
+      font-size: 1.4em;
+    }
+    .theCloud {
+      padding: 0.4em 1.6em 1.5em 1.6em;
+    }
   }
 }
