@@ -1,4 +1,4 @@
-.transitionContainer {
+.compactWidth .transitionContainer {
     position: relative;
 }
 
@@ -52,17 +52,16 @@
     }
 
     &.router-exit-active {
-        position: absolute;
-        top:0;
-        left:0;
-        background-color: brown;
         transform-origin: top;
         animation: awayRightWithOpacity 0.9s both;
     }
 
-    // .compactWidth &.router-exit-active {
-    //     animation: awayRightWithOpacity 0.4s ease-in both;
-    // }
+    .compactWidth &.router-exit-active {
+        position: absolute;
+        top:0;
+        width: 20em;
+        animation: opacityIn 0.4s ease-in reverse both;
+    }
 }
 
 .brick{
