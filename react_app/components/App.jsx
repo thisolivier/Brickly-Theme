@@ -65,7 +65,7 @@ class App extends React.Component {
                             </FadeTransition>
                         </TransitionGroup>
                     </div>
-                    <TransitionGroup>
+                    <TransitionGroup className="transitionContainer">
                         <FadeTransition timeout={{enter:2500, exit:400}} key={this.props.location.key} classNames="router">
                             <Switch location={this.props.location}>
                                 <Route exact path="/" component={TowerOfBricks} />
