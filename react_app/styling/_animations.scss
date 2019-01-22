@@ -67,6 +67,27 @@
   }
 }
 
+@keyframes upFromBottomWithOpacity2 {
+  0% {
+    max-height: 0px;
+    display: none;
+    opacity: 0;
+    transform: translateY(100vh);
+    margin: -2em 0 0 0;
+  }
+  1% {
+    margin: 1em;
+    max-height: inherit;
+    transform: translateY(100vh);
+    display: flex;
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0vh);
+    opacity: 1;
+  }
+}
+
 /////////////////////
 // Header Wrapper  //
 /////////////////////

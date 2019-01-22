@@ -50,10 +50,9 @@
         animation: awayRightWithOpacity 0.4s ease-in reverse backwards;
     }
 
-    .categoryhome.compactWidth &.router-enter {
-        position: absolute;
-        opacity: 0;
-        animation: towerOfBricksAfterCategoryMobile 0.4s ease-in 0.4s forwards;
+    .categoryhome.compactWidth & {
+        position: relative;
+        animation: upFromBottomWithOpacity2 1.5s 0.7s backwards;
     }
 
     &.router-exit-active {

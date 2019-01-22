@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import {animateScroll as scroll} from 'react-scroll'
 
 import HeaderCloud from './HeaderCloud'
 import TowerOfBricks from './TowerOfBricks'
@@ -39,7 +40,8 @@ class App extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.location !== prevProps.location) {
+        if (this.props.location !== prevProps.location && this.props.location.pathname.includes('cat')) {
+            scroll.scrollToTop({smooth: true, duration: 500})
             console.log("Normally I'd scroll to the top, but we stopped doong that 🤷 (ツ)_/¯")
         }
     }

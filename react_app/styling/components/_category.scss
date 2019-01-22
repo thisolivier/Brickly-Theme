@@ -93,7 +93,14 @@
 }
 
 .compactWidth .categoryContainer.categoryContainer.router-exit-active {
-    animation: awayRightWithOpacity 0.7s forwards;
+    animation: none;
+    .postsContainer {
+        animation: opacityIn 0.3s reverse forwards;
+    }
+    
+    .categoryHeaderContainer {
+        animation: awayRightWithOpacity 0.5s backwards;
+    }
 }
 
 @media screen and (max-width: 90em) {
