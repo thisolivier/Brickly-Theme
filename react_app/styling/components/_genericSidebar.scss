@@ -37,18 +37,18 @@
         animation: awayLeftWithOpacity 0.7s forwards;
     }
 
+    // Coming back to home from category
     .categoryhome & {
         animation: sidebarDropdown5em 0.7s both;
     }
 
-    // .compactWidth.categoryhome & {
-    //     display: none;
-    // }
-
     .compactWidth.categoryhome &.sidebar-enter {
         position: absolute;
         display: none;
-        animation: awayLeftWithOpacity 0.7s forwards 1s reverse;
+    }
+
+    .compactWidth.categoryhome &.sidebar-enter-done {
+        animation: awayLeftWithOpacity 0.7s forwards reverse;
     }
 }
 
@@ -60,7 +60,7 @@
 }
 
 @media screen and (max-width:24em) {
-    .home .aboutOlivier{
+    .compactWidth .aboutOlivier{
         font-size: 1.3em;
     }
 }
