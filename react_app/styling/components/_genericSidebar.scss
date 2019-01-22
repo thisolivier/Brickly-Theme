@@ -26,22 +26,29 @@
         animation-name: sidebarDropdown5em;
         animation-duration: 0.7s;
         animation-fill-mode: backwards;
+        animation-delay: 0.7s;
     }
 
     .compactWidth.emptyhome &.sidebar-enter-done {
         animation-duration: 1.5s;
     }
 
+    .compactWidth.homecategory &.sidebar-exit-active {
+        animation: awayLeftWithOpacity 0.7s forwards;
+    }
+
     .categoryhome & {
         animation: sidebarDropdown5em 0.7s both;
     }
 
-    .compactWidth.homecategory & {
-        animation: awayLeftWithOpacity 0.7s forwards;
-    }
+    // .compactWidth.categoryhome & {
+    //     display: none;
+    // }
 
-    .compactWidth.categoryhome & {
-        animation: initial;
+    .compactWidth.categoryhome &.sidebar-enter {
+        position: absolute;
+        display: none;
+        animation: awayLeftWithOpacity 0.7s forwards 1s reverse;
     }
 }
 

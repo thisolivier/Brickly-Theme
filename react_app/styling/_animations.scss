@@ -145,11 +145,11 @@
     margin-top: $cloudDistanceFromTopAfterAnimation;
   }
   to {
-    width: 320pt;
     transform-origin: top left;
     top: 1em;
     transform: scale(0.5);
     margin-top: $cloudDistanceFromTopAfterAnimation / 2;
+    width: 320pt;
   }
 }
 
@@ -165,6 +165,25 @@
     transform: scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
     max-width: 400pt;
+  }
+}
+
+@keyframes headerContainerPositionCategoryDissapearsMobile {
+  from {
+    transform-origin: top left;
+    top: 1em;
+    transform: scale(0.5);
+    margin-top: $cloudDistanceFromTopAfterAnimation / 2;
+    width: 320pt;
+    max-width: 90% 
+  }
+  to {
+    max-width: 90%;
+    width: 400pt;
+    transform-origin: center center;
+    top: 0em;
+    transform: scale(1);
+    margin-top: $cloudDistanceFromTopAfterAnimation;
   }
 }
 
@@ -229,7 +248,7 @@
 
 @keyframes towerOfBricksLocationAfterDrop {
   from {
-    top: 0vh; // TODO: Fix this, your transform origin may be wrong
+    top: 0vh;
     right: 50vw;
     margin-top: $cloudHeight + 10rem;
     transform: translateX(50%) scale(0.5);
@@ -248,6 +267,15 @@
     transform: scale(0.6);
   }
   to {
+  }
+}
+
+@keyframes towerOfBricksAfterCategoryMobile {
+  from {
+    position: relative;
+  }
+  to {
+    position: relative;
   }
 }
 

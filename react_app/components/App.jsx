@@ -57,7 +57,7 @@ class App extends React.Component {
                     <div className="headerContainer">
                         <HeaderCloud routingAtIndex={currentPage == "home"}/>
                         <TransitionGroup>
-                            <FadeTransition timeout={{enter:2400, exit:400}} classNames="sidebar" key={this.props.location.key + 1000}>
+                            <FadeTransition timeout={{enter:1000, exit:400}} classNames="sidebar" key={this.props.location.key + 1000}>
                                 <Switch location={this.props.location}>
                                     <Route path="/cat" component={EmptyComponent}/>
                                     <Route path="/" exact component={GenericSidebar} />
@@ -68,8 +68,8 @@ class App extends React.Component {
                     <TransitionGroup className="transitionContainer">
                         <FadeTransition timeout={{enter:2500, exit:400}} key={this.props.location.key} classNames="router">
                             <Switch location={this.props.location}>
-                                <Route exact path="/" component={TowerOfBricks} />
-                                <Route path="/cat/:categorySlug" component={Category} />   
+                                <Route path="/cat/:categorySlug" component={Category} />
+                                <Route exact path="/" component={TowerOfBricks} />   
                             </Switch>
                         </FadeTransition>
                     </TransitionGroup>

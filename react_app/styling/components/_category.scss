@@ -92,6 +92,10 @@
     animation: upFromBottomWithOpacity 0.4s ease-out alternate-reverse backwards;
 }
 
+.compactWidth .categoryContainer.categoryContainer.router-exit-active {
+    animation: awayRightWithOpacity 0.7s forwards;
+}
+
 @media screen and (max-width: 90em) {
     .categoryContainer .categoryHeaderContainer {
         margin-top: 15em;

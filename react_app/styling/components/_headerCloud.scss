@@ -9,7 +9,6 @@
   flex-direction: column;
   z-index: 100;
   transform-origin: top left;
-  border: 2px solid red;
 
   .compactWidth & {
     width: 400pt;
@@ -49,11 +48,14 @@
   }
 
   .categoryhome & {
-    animation: headerContainerPositionCategoryDisappears 0.5s;
+    animation: headerContainerPositionCategoryDisappears 0.5s backwards;
   }
 
   .compactWidth.categoryhome & {
-    animation: initial;
+    transform-origin: top left;
+    animation-delay: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation: headerContainerPositionCategoryDissapearsMobile 0.7s ease 0.5s backwards;
   }
 }
 
