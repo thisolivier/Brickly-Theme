@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactHtmlParser from 'react-html-parser'
 import OutLinks from './OutLinks'
 
 class GenericSidebar extends Component {
@@ -6,10 +7,10 @@ class GenericSidebar extends Component {
     constructor(props) {
         super(props)
         this.state = { in: true }
+        this.sidebarContent = ReactHtmlParser(WORDPRESS.sidebar.bodyText)
     }
 
     componentWillUnmount() {
-        console.log("UNMOUNTING SIDEBAR")
         this.setState({in: false})
     }
 
@@ -18,9 +19,7 @@ class GenericSidebar extends Component {
             <div className="sidebar">
                 <div className="aboutOlivier">
                     <h2>{WORDPRESS.sidebar.title}</h2>
-                    {WORDPRESS.sidebar.bodyText.split('/').map((string, key)=>(
-                        <p key={key}>{String(string)}</p>
-                    ))}
+                    {this.sidebarContent}
                     <OutLinks />
                 </div>
             </div>
