@@ -79,7 +79,6 @@ The `./react_app` directory contains all the files that make up the react app be
     - [x] Make a tower brick go to a category 
     - [x] Make back button work
 - [x] Make post bricks rich
-
 - [x] Plan the final stages
 - [x] finish implementing your triggers for appear appearing appeared, disappear, disappearing, disappeared. 
     - [x] Find out how to add a pre-appear animation, or possibly, arbitrary VERB VERBing VERDed
@@ -111,15 +110,26 @@ The `./react_app` directory contains all the files that make up the react app be
     - [x] Theme dependencies- need to build ansible tools
     - [x] Strip out dev dependencies after build
     - [x] Build a production app not dev
-- [ ] Download dummy DB from staging
 - [x] Split mobile from desktop, figure out a mobile css framework for positioning that you can leverage transition groups with.
     - [x] Desktop, do the same
-- [ ] Fix mobile jank
-    - [ ] Bricks need a custom position animation for empty home load
-    - [ ] Cloud needs to not jump up 2em after home animation
-    - [ ] On mobile, the content is coming up too fast. The cloud should come I sideways.
-    - [ ] Width going back to home on cloud is wrong
-- [ ] Go through each item in your skills, ensure it’s well filled in
-    - [ ] Add in some iOS stuff.
-- [ ] Add some docs about how this app in particular is structured (optional)
-    - [ ] maybe fork to a simpler version?
+- [x] Fix mobile jank
+    - [x] Post footer is weird
+    - [x] Bricks need a custom position animation for empty home load
+        - [x] Not ‘sidebar-enter-done’ class vanishing,
+        - [x] Check duration of the animation which moves the tower- how is it getting positioned after the brick-drop on mobile?
+    - [x] Cloud needs to not jump up 2em after home animation
+    - [x] On mobile, the content is coming up too fast. The cloud should come I sideways.
+    - [x] Width going back to home on cloud is wrong
+- [x] Go through each item in your skills, ensure it’s well filled in
+    - [x] Add Arkera to iOS
+    - [ ] Add Zap Bam Pow properly to iOS
+    - [ ] Put on Gyro Giggle
+    - [ ] Add some non-wordpress work
+    - [x] Take out static web section
+    - [ ] Make a site showing some sthing jazzy (maybe UK budget with D3)
+- [ ] Final bugs to fix
+    - [ ] Desktop jank on initial load
+    - [ ] Can you store the state of a page visa-vie going to an open section?
+    - [ ] Add medium link if you write another article
+    - [ ] Width of text in desktop mode
+    - [ ] Height of image in desktop mode (swap out component maybe)
