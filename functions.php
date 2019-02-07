@@ -52,6 +52,7 @@ function getMenuInfo($menuLocationString) {
 }
 
 function getPosts() {
+    // Note that posts are stored in a JS dict so have NO INHERANT ORDER
     global $post;
     $args = array(
         'posts_per_page' => 200, 

@@ -3,16 +3,25 @@ import Post from './Post';
 
 class Category extends React.Component {
 
+    constructor(props){
+        super(props)
+        let categorySlugString = props.match.params['categorySlug']
+        let category = WORDPRESS.category[categorySlugString]
+        let posts = Object.keys(WORDPRESS.posts).filter(postId => WORDPRESS.posts[postId.toString()].categories.includes(categorySlugString)).map((postId)=><Post postId={postId} key={postId}/>).reverse()
+        this.state = {
+            category: category,
+            posts: posts,
+        }
+        console.log(category, posts)
+    }
+
     render(){
         console.log('rendering category')
-        let categorySlug = this.props.match.params['categorySlug']
-        var currentCategory = WORDPRESS.category[categorySlug]
-        var categoriesPosts = Object.keys(WORDPRESS.posts).filter(postId => WORDPRESS.posts[postId.toString()].categories.includes(categorySlug))
         return (
             <div className="categoryContainer">
                 <div className="categoryHeaderContainer">
-                    <h1>{currentCategory.name}</h1>
-                    <p>{currentCategory.description}</p>
+                    <h1>{this.state.category.name}</h1>
+                    <p>{this.state.category.description}</p>
                     <div className="categoryCloud one"></div>
                     <div className="categoryCloud two"></div>
                     <div className="categoryCloud three"></div>
@@ -21,9 +30,7 @@ class Category extends React.Component {
                     <div className="categoryCloud six"></div>
                 </div>
                 <div className="postsContainer">
-                    {categoriesPosts.map((postId)=>
-                        <Post postId={postId} key={postId}/>
-                    )}
+                    {this.state.posts}
                 </div>
             </div>
         )

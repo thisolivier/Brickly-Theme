@@ -32,7 +32,7 @@
   }
 
   .emptyhome & {
-    animation: headerContainerHomeAppearence $brickfall-animation-duration ease backwards;
+    animation: headerContainerHomeAppearence $brickfall-animation-duration*1.2 ease backwards;
   }
 
   .emptyhome.compactWidth & {

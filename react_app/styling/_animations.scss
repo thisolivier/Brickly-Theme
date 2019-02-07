@@ -105,19 +105,18 @@
   20%, 50% {
     transform-origin: top center;
     opacity: 1;
-    top: 20vh;
     left: 50vw;
+    top: 20vh;
     transform: translateX(-50%) scale(0.7);
     margin-top: 0em;
-    margin-left: 0em;
   }
   100% { 
     transform-origin: top left;
-    left: 0vw;
+    left: 2em;
     top: 0vh;
     transform: translateX(0) scale(1);
     margin-top: $cloudDistanceFromTopAfterAnimation;
-    margin-left: 2em;
+    margin-left: 0em;
   }
 }
 
