@@ -41,9 +41,9 @@ In this dinky theme, it all comes down to `./functions.php`. This file is the re
 
 **The most relevant thing for YOU is probably point 2. This is effectively the creation of a static store of data. You'll see I have written various helper functions to gather and format the data- you will almost certainly need to think about what data YOU need in your app, and modify things accordingly.**
 
-In `functions.php` we could also add custom API endpoints for forms and other dynamic content. Or we can do complex server side calculations. Just remember, the idea is to use Wordpress as the flexible content management tool, and consume its output with ReactJS, we don't want to waste any energy building some clunky middleare. So, get your data injected and get out quick.
+In `functions.php` we could also add custom API endpoints for forms and other dynamic content. Or we can do complex server side calculations. Just remember, the idea is to use Wordpress as the flexible content management tool, and consume its output with ReactJS, we don't want to waste any energy building some clunky middleware. So, get your data injected and get out quick.
 
-The other Wordpress-y file is `index.php` which you probably won't touch, but I'll explain what it does. It is the page Wordpress actually serves to a client visiting your site. For those unfamiliar with `PHP`, the file is parsed on the server every time someone requests it, and the server turns it into `HTML`. It is while serving this that our React script and css are injected, as we defined in `./functions.php`.
+The other Wordpress-y file is `index.php`. It is the page Wordpress actually serves to a client visiting your site. It also sets fallback properties for the open graph protocol- these are often the ones used when sharing your site, so check them over. A bit of background for those unfamiliar with `PHP`: the file is parsed on the server every time someone requests it, and the server turns it into `HTML`. It is while serving this that our React script and css are injected, as we defined in `./functions.php`.
 
 That's all there is to getting our App served from a Wordpress theme. It's not tricky to setup from scratch if you're a Wordpress dev or know PHP.
 
