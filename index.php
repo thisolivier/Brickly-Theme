@@ -12,11 +12,11 @@ $url = esc_url_raw( trailingslashit( home_url() ) );
         <meta name="viewport" content="width=device-width">
         <title>Olivier.uk</title>
         <?php wp_head(); ?>
-        <meta name="og:type" content="website">
-        <meta name="og:description" content="Talented software engineer with recent good references looking for short and medium term contracts. Proficient in building Swift, Python (Flask or Django), Javascript (Node, React), and Wordpress projects." />
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="Talented software engineer with recent good references looking for short and medium term contracts. Proficient in building Swift, Python (Flask or Django), Javascript (Node, React), and Wordpress projects." />
         <meta property="og:image" content="<?php echo($url); ?>images/siteshare.png"} />
-        <meta name="og:url" content="<?php echo($url); ?>">
-        <meta name="og:title" content="<?php bloginfo( 'name', 'display' ) ?>">
+        <meta property="og:url" content="<?php echo($url); ?>">
+        <meta property="og:title" content="<?php bloginfo( 'name', 'display' ) ?>">
     </head>
     <body>
         <div id="page">
