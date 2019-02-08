@@ -24,7 +24,7 @@ class Category extends React.Component {
                 <Helmet>
                     <title>{this.state.pageTitle}</title>
                     <meta property="og:description" content={this.state.category.description} />
-                    <meta property="og:name" content = {this.state.pageTitle} />
+                    <meta property="og:title" content="Olivier's Portfolio" />
                     <meta property="og:url" content={this.state.pageURL} />
                 </Helmet>
                 <div className="categoryHeaderContainer">
