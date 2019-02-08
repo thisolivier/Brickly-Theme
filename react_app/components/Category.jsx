@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet} from 'react-helmet'
 import Post from './Post';
 
 class Category extends React.Component {
