@@ -19,6 +19,10 @@ class Category extends React.Component {
         console.log('rendering category')
         return (
             <div className="categoryContainer">
+                <Helmet>
+                    <title>{this.state.category.name + " at " + WORDPRESS.site.name}</title>
+                    <meta name="description" content={this.state.category.description} />
+                </Helmet>
                 <div className="categoryHeaderContainer">
                     <h1>{this.state.category.name}</h1>
                     <p>{this.state.category.description}</p>

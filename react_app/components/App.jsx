@@ -58,7 +58,7 @@ class App extends React.Component {
             return(
                 <div id="page-inner" className={this.lastPage + currentPage + " " + currentPage + (this.state.constrainedWidth ? " compactWidth" : "")}>
                     <Helmet>
-                        <title>Olivier.uk</title>
+                        <title>{WORDPRESS.site.name}</title>
                         <meta name="description" content="Talented software engineer with recent good references looking for short and medium term contracts. Proficient in building Swift, Python (Flask or Django), Javascript (Node, React), and Wordpress projects." />
                         <meta property="og:image" content={WORDPRESS.site.url.root + "images/siteshare.gif"} />
                     </Helmet>
