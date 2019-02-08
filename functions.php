@@ -5,17 +5,31 @@ add_theme_support( 'menus' );
 add_theme_support( 'post-thumbnails' ); 
 add_action( 'init', function () {
     register_nav_menu('outlinks', 'Links to other sites');
-} );
+});
 
-// REMOVE WP EMOJI
+// REMOVE WORDPRESS HTML HEAD JUNK
+// Emojis (WTF)
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
-
-// REMOVE oEmbed
+// REST Api
+remove_action( 'wp_head', 'rest_output_link_wp_head' );
+remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+// RSS
+remove_action( 'wp_head', 'feed_links', 2 );
+remove_action( 'wp_head', 'feed_links_extra', 3 );
+// OEmbed
 remove_action( 'wp_head', 'wp_oembed_add_host_js' );
-add_filter( 'tiny_mce_plugins', 'disable_embeds_tiny_mce_plugin' );
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+// Misc
+remove_action( 'wp_head', 'wp_resource_hints', 2 ); // DNS Prefetch
+remove_action ('wp_head', 'rsd_link'); // External Blog Editor Support
+remove_action( 'wp_head', 'wlwmanifest_link');  // Windows Live Writer editor
+add_filter( 'tiny_mce_plugins', 'disable_embeds_tiny_mce_plugin' ); // Kitchen Sink editor
+add_action('wp_print_styles', function() {
+    wp_dequeue_style( 'wp-block-library' ); // Block Layout editor
+});
 
 // SERVING REACT APP
 function getCategories() {
