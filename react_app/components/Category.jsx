@@ -12,17 +12,20 @@ class Category extends React.Component {
         this.state = {
             category: category,
             posts: posts,
+            pageTitle: category.name + " at " + WORDPRESS.site.name,
+            pageURL: window.location.host + "/" + window.location.pathname,
         }
         console.log(category, posts)
     }
 
     render(){
-        console.log('rendering category')
         return (
             <div className="categoryContainer">
                 <Helmet>
-                    <title>{this.state.category.name + " at " + WORDPRESS.site.name}</title>
-                    <meta name="description" content={this.state.category.description} />
+                    <title>{this.state.pageTitle}</title>
+                    <meta name="og:description" content={this.state.category.description} />
+                    <meta name="og:name" content = {this.state.pageTitle} />
+                    <meta name="og:url" content={this.state.pageURL} />
                 </Helmet>
                 <div className="categoryHeaderContainer">
                     <h1>{this.state.category.name}</h1>

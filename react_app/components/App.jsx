@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { animateScroll as scroll } from 'react-scroll'
-import { Helmet } from 'react-helmet'
 
 import HeaderCloud from './HeaderCloud'
 import TowerOfBricks from './TowerOfBricks'
@@ -57,11 +56,6 @@ class App extends React.Component {
         if (this.state.showContent){ 
             return(
                 <div id="page-inner" className={this.lastPage + currentPage + " " + currentPage + (this.state.constrainedWidth ? " compactWidth" : "")}>
-                    <Helmet>
-                        <title>{WORDPRESS.site.name}</title>
-                        <meta name="description" content="Talented software engineer with recent good references looking for short and medium term contracts. Proficient in building Swift, Python (Flask or Django), Javascript (Node, React), and Wordpress projects." />
-                        <meta property="og:image" content={WORDPRESS.site.url.root + "images/siteshare.gif"} />
-                    </Helmet>
                     <div className="headerContainer">
                         <HeaderCloud routingAtIndex={currentPage == "home"}/>
                         <TransitionGroup>
