@@ -26,6 +26,8 @@ remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 remove_action( 'wp_head', 'wp_resource_hints', 2 ); // DNS Prefetch
 remove_action ('wp_head', 'rsd_link'); // External Blog Editor Support
 remove_action( 'wp_head', 'wlwmanifest_link');  // Windows Live Writer editor
+remove_action( 'wp_head', 'wp_shortlink_wp_head'); // Shortlinks for e.g. pagination
+remove_action('wp_head', 'wp_generator'); // Wordpress version (huge security flaw)
 add_filter( 'tiny_mce_plugins', 'disable_embeds_tiny_mce_plugin' ); // Kitchen Sink editor
 add_action('wp_print_styles', function() {
     wp_dequeue_style( 'wp-block-library' ); // Block Layout editor
