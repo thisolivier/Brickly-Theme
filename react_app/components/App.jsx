@@ -57,10 +57,10 @@ class App extends React.Component {
             return(
                 <div id="page-inner" className={this.lastPage + currentPage + " " + currentPage + (this.state.constrainedWidth ? " compactWidth" : "")}>
                     <Helmet>
-                        <title>{WORDPRESS.site.name}</title>
-                        <meta name="og:description" content="Talented software engineer with recent good references looking for short and medium term contracts. Proficient in building Swift, Python (Flask or Django), Javascript (Node, React), and Wordpress projects." />
+                        <meta property="og:description" content="Talented software engineer with recent good references looking for short and medium term contracts. Proficient in building Swift, Python (Flask or Django), Javascript (Node, React), and Wordpress projects." />
                         <meta property="og:title" content="Olivier's Portfolio" />
                         <meta property="og:url" content={WORDPRESS.site.url.root} />
+                        <title>{WORDPRESS.site.name}</title>
                     </Helmet>
                     <div className="headerContainer">
                         <HeaderCloud routingAtIndex={currentPage == "home"}/>
